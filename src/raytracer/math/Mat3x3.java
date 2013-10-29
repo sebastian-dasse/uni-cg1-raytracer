@@ -60,7 +60,7 @@ public class Mat3x3 {
 						   v.dot(new Vector3(m31, m32, m33)));
 	}
 	
-//	TODO: Delegation ok?
+//	TODO: Delegation ok?  -  evtl. lieber nicht?
 	public Point3 mul(final Point3 p) {
 		Vector3 v = mul(new Vector3(p.x, p.y, p.z));
 		return new Point3(v.x, v.y, v.z);

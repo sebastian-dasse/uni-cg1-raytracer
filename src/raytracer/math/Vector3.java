@@ -13,10 +13,10 @@ public class Vector3 {
 		magnitude = Math.sqrt(x * x + y * y + z * z);
 	}
 	
-	// Konvertierkonstruktor
-	public Vector3(Normal3 n)  {
-		this(n.x, n.y, n.z);
-	}
+	// Konvertierkonstruktor - bisher nicht benötig!
+//	public Vector3(Normal3 n)  {
+//		this(n.x, n.y, n.z);
+//	}
 	
 	public Vector3 add(final Vector3 v) {
 		return new Vector3(x + v.x, 
@@ -26,21 +26,21 @@ public class Vector3 {
 	
 //	TODO: FRAGE: ok so?
 	public Vector3 add(final Normal3 n) {
-//		return new Vector3(x + n.x, 
-//						   y + n.y, 
-//						   z + n.z);
-		// delegiert:
+		return new Vector3(x + n.x, 
+						   y + n.y, 
+						   z + n.z);
+		// delegiert:  -  lieber nicht!
 //		return add(new Vector3(n.x, n.y, n.z));
-		return add(new Vector3(n));
+//		return add(new Vector3(n));
 	}
 	
 //	TODO: FRAGE: ok so?
 	public Vector3 sub(final Normal3 n) {
-//		return new Vector3(x - n.x, 
-//						   y - n.y, 
-//						   z - n.z);
-		// delegiert:
-		return add(new Vector3(-n.x, -n.y, -n.z));
+		return new Vector3(x - n.x, 
+						   y - n.y, 
+						   z - n.z);
+		// delegiert:  -  lieber nicht!
+//		return add(new Vector3(-n.x, -n.y, -n.z));
 	}
 	
 //	TODO

@@ -11,14 +11,14 @@ public class Point3 {
 		this.z = z;
 	}
 	
-//	TODO: kann man delegieren?
+//	TODO: kann man delegieren?  -  lieber nicht!
 	public Vector3 sub(final Point3 p) {
 		return new Vector3(x - p.x, 
 						   y - p.y, 
 						   z - p.z);
 	}
 	
-//	TODO: kann man delegieren?
+//	TODO: kann man delegieren?  -  lieber nicht!
 	public Point3 sub(final Vector3 v) {
 		return new Point3(x - v.x, 
 						  y - v.y, 
