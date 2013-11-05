@@ -1,5 +1,21 @@
 package raytracer.math;
 
+/**
+ * This immutable class represents a matrix with 3 rows and 3 columns. Thus it has 9 elements which are to be addressed 
+ * as follows: the first index specifies the row, the second indicates the column of the particular element, like that: 
+ * <blockquote><code>
+ * m11 m12 m13 <br />
+ * m21 m22 m23 <br />
+ * m31 m32 m33</code></blockquote>
+ * In addition the class <code>Mat3x3</code> has a field in which its determinant stored.
+ * <p>
+ * The class <code>Mat3x3</code> includes methods to calculate the matrix product with a <code>Vector3</code>, 
+ * a <code>Point3</code> or with another <code>Matrix3</code> object as well as methods intended to change particular 
+ * columns of the <code>Mat3x3</code> object.
+ * <p>
+ * Passing a <code>null</code> object to a method in this class will cause an <code>IllegalArgumentException</code> to be thrown.
+ * @author Sebastian Dassé
+ */
 public class Mat3x3 {
 	public final double m11;
 	public final double m12;
@@ -12,6 +28,7 @@ public class Mat3x3 {
 	public final double m33;
 	public final double determinant;
 	
+	// TODO: evtl. Parameter checken: Werte > Double.MAX_VALUE oder < -Double.MAX_VALUE oder +-Infinity oder NaN verbieten
 	public Mat3x3(final double m11, final double m12, final double m13, 
 				  final double m21, final double m22, final double m23, 
 				  final double m31, final double m32, final double m33) {
@@ -32,8 +49,10 @@ public class Mat3x3 {
 					- m33 * m21 * m12;
 	}
 	
-//	TODO: dot() die richtige Operation?
 	public Mat3x3 mul(final Mat3x3 m) {
+		if (m == null) {
+			throw new IllegalArgumentException("The parameter 'm' must not be null.");
+		}
 		return new Mat3x3(m11 * m.m11 + m12 * m.m21 + m13 * m.m31, 
 						  m11 * m.m12 + m12 * m.m22 + m13 * m.m32, 
 						  m11 * m.m13 + m12 * m.m23 + m13 * m.m33, 
@@ -45,8 +64,11 @@ public class Mat3x3 {
 						  m31 * m.m13 + m32 * m.m23 + m33 * m.m33);
 	}
 	
-//	TODO: dot() die richtige Operation? welche Version?
+//	TODO: welche Version?
 	public Vector3 mul(final Vector3 v) {
+		if (v == null) {
+			throw new IllegalArgumentException("The parameter 'v' must not be null.");
+		}
 //		return new Vector3(m11 * v.x + m12 * v.y + m13 * v.z, 
 //						   m11 * v.x + m12 * v.y + m13 * v.z, 
 //						   m11 * v.x + m12 * v.y + m13 * v.z);
@@ -55,73 +77,52 @@ public class Mat3x3 {
 //						   v.dot(new Vector3(m21, m22, m23)), 
 //						   v.dot(new Vector3(m31, m32, m33)));
 		
-		return new Vector3(v.dot(new Vector3(m11, m12, m13)), 
-						   v.dot(new Vector3(m21, m22, m23)), 
-						   v.dot(new Vector3(m31, m32, m33)));
+		return new Vector3(new Vector3(m11, m12, m13).dot(v), 
+						   new Vector3(m21, m22, m23).dot(v), 
+						   new Vector3(m31, m32, m33).dot(v));
 	}
 	
-//	TODO: Delegation ok?  -  evtl. lieber nicht?
+//	TODO: Delegation an mul(final Vector3 v) ok?  -  evtl. lieber nicht?
 	public Point3 mul(final Point3 p) {
+		if (p == null) {
+			throw new IllegalArgumentException("The parameter 'p' must not be null.");
+		}
 		Vector3 v = mul(new Vector3(p.x, p.y, p.z));
 		return new Point3(v.x, v.y, v.z);
 	}
 	
-//	TODO
 	public Mat3x3 changeCol1(final Vector3 v) {
+		if (v == null) {
+			throw new IllegalArgumentException("The parameter 'v' must not be null.");
+		}
 		return new Mat3x3(v.x, m12, m13, 
 						  v.y, m22, m23, 
 						  v.z, m32, m33);
 	}
 	
-//	TODO
 	public Mat3x3 changeCol2(final Vector3 v) {
+		if (v == null) {
+			throw new IllegalArgumentException("The parameter 'v' must not be null.");
+		}
 		return new Mat3x3(m11, v.x, m13, 
 				  		  m21, v.y, m23, 
 				  		  m31, v.z, m33);
 	}
 	
-//	TODO
 	public Mat3x3 changeCol3(final Vector3 v) {
+		if (v == null) {
+			throw new IllegalArgumentException("The parameter 'v' must not be null.");
+		}
 		return new Mat3x3(m11, m12, v.x, 
 						  m21, m22, v.y, 
 						  m31, m32, v.z);
 	}
 	
 	public String toString() {
-//		return getClass().getName() 
-//				+ "[m11 = " + m11 + ", m12 = " + m12 + ", m13 = " + m13 
-//				+ ", m21 = " + m21 + ", m22 = " + m21 + ", m23 = " + m23 
-//				+ ", m31 = " + m31 + ", m32 = " + m32 + ", m33 = " + m33 + "]";
-		
-		// als Matrix mit Nachkommastellen
-		return String.format("% 8f % 8f % 8f%n% 8f % 8f % 8f%n% 8f % 8f % 8f%n", m11, m12, m13, m21, m22, m23, m31, m32, m33);
-		
-		// als Matrix mit ohne Nachkommastellen
-//		return String.format("% 8.0f % 8.0f % 8.0f%n% 8.0f % 8.0f % 8.0f%n% 8.0f % 8.0f % 8.0f%n", m11, m12, m13, m21, m22, m23, m31, m32, m33);
-	}
-}
-
-//----
-class Test {
-	public static void main(String[] args) {
-		Mat3x3 m = new Mat3x3(1, 0, 0, 
-							  0, 1, 0,
-							  0, 0, 1);
-		System.out.println(m);
-		System.out.println(m.determinant);
-		
-		m = m.changeCol1(new Vector3(9, 9, 9));
-		System.out.println(m);
-		m = m.changeCol2(new Vector3(6, 6, 6));
-		System.out.println(m);
-		m = m.changeCol3(new Vector3(3, 3, 3));
-		System.out.println(m);
-		System.out.println(m.determinant);
-		
-		Mat3x3 m2 = new Mat3x3(0.707, -0.707, 0, 
-							   0.707,  0.707, 0, 
-							   0,	   0,	  1);
-		System.out.println(m2);
-		System.out.println(m2.determinant);
+		return getClass().getSimpleName() 
+				+ "[\tm11 = " + m11 + ", m12 = " + m12 + ", m13 = " + m13 + ",\n" 
+				+ "\tm21 = " + m21 + ", m22 = " + m21 + ", m23 = " + m23 + ",\n" 
+				+ "\tm31 = " + m31 + ", m32 = " + m32 + ", m33 = " + m33 + ", " 
+				+ "determinant = " + determinant + "]";
 	}
 }

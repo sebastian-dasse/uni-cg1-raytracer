@@ -1,11 +1,28 @@
 package raytracer.math;
 
+/**
+ * This immutable class represents a vector in three-dimensional space.
+ * <p>
+ * In addition the class <code>Vector3</code> has a field in which its magnitude is stored.
+ * <p>
+ * The class <code>Mat3x3</code> provides various methods for vector operations, which include addition and subtraction 
+ * of two vectors as well as scalar multiplication, scalar (or dot) product (which are not to be confused!) and 
+ * cross product (or vector product).
+ * <p>
+ * There is a method that calculates the vector resulting from the reflection of a vector on a plane given through its 
+ * normal. Finally there is also method a for normalization and another one for the conversion from <code>Vector3</code> 
+ * to <code>Normal3</code>.
+ * <p>
+ * Passing a <code>null</code> object to a method in this class will cause an <code>IllegalArgumentException</code> to be thrown.
+ * @author Sebastian Dassé
+ */
 public class Vector3 {
 	public final double x;
 	public final double y;
 	public final double z;
 	public final double magnitude;
 	
+	// TODO: evtl. Parameter checken: Werte > Double.MAX_VALUE oder < -Double.MAX_VALUE oder +-Infinity oder NaN verbieten
 	public Vector3(final double x, final double y, final double z) {
 		this.x = x;
 		this.y = y;
@@ -13,51 +30,52 @@ public class Vector3 {
 		magnitude = Math.sqrt(x * x + y * y + z * z);
 	}
 	
-	// Konvertierkonstruktor - bisher nicht benötig!
-//	public Vector3(Normal3 n)  {
-//		this(n.x, n.y, n.z);
-//	}
-	
 	public Vector3 add(final Vector3 v) {
+		if (v == null) {
+			throw new IllegalArgumentException("The parameter 'v' must not be null.");
+		}
 		return new Vector3(x + v.x, 
 						   y + v.y, 
 						   z + v.z);
 	}
 	
-//	TODO: FRAGE: ok so?
 	public Vector3 add(final Normal3 n) {
+		if (n == null) {
+			throw new IllegalArgumentException("The parameter 'n' must not be null.");
+		}
 		return new Vector3(x + n.x, 
 						   y + n.y, 
 						   z + n.z);
-		// delegiert:  -  lieber nicht!
-//		return add(new Vector3(n.x, n.y, n.z));
-//		return add(new Vector3(n));
 	}
 	
-//	TODO: FRAGE: ok so?
 	public Vector3 sub(final Normal3 n) {
+		if (n == null) {
+			throw new IllegalArgumentException("The parameter 'n' must not be null.");
+		}
 		return new Vector3(x - n.x, 
 						   y - n.y, 
 						   z - n.z);
-		// delegiert:  -  lieber nicht!
-//		return add(new Vector3(-n.x, -n.y, -n.z));
 	}
 	
-//	TODO
+	// TODO: evtl. Parameter checken: Werte > Double.MAX_VALUE oder < -Double.MAX_VALUE oder +-Infinity oder NaN verbieten
 	public Vector3 mul(double c) {
 		return new Vector3(x * c, 
 						   y * c, 
 						   z * c);
 	}
 	
-//	TODO: FRAGE: was soll diese Methode tun?
 	public double dot(final Vector3 v) {
-		return x * v.x + y * v.y + z * v.z; // ???
+		if (v == null) {
+			throw new IllegalArgumentException("The parameter 'v' must not be null.");
+		}
+		return x * v.x + y * v.y + z * v.z;
 	}
 	
-//	TODO: FRAGE: was soll diese Methode tun?
 	public double dot(final Normal3 n) {
-		return x * n.x + y * n.y + z * n.z; // ???
+		if (n == null) {
+			throw new IllegalArgumentException("The parameter 'n' must not be null.");
+		}
+		return x * n.x + y * n.y + z * n.z;
 	}
 	
 	public Vector3 normalized() {
@@ -66,14 +84,18 @@ public class Vector3 {
 						   z / magnitude);
 	}
 	
-//	TODO: FRAGE: sooo?
 	public Normal3 asNormal() {
 		return new Normal3(x, y, z);
 	}
 	
 //	TODO: FRAGE: was soll hier passieren?
-//	zwei Anmerkungen: Skalarprodukt benutzen; evtl. nicht magnitude^2 sondern direkt ausrechnen für höhere Genauigkeit
+//	zwei Anmerkungen: 
+//		- Skalarprodukt benutzen; 
+//		- evtl. nicht magnitude^2 sondern direkt ausrechnen für höhere Genauigkeit
 	public Vector3 reflectedOn(final Normal3 n) {
+		if (n == null) {
+			throw new IllegalArgumentException("The parameter 'n' must not be null.");
+		}
 		final double r = -(x * n.x 
 						 + y * n.y 
 						 + z * n.z) / (magnitude * magnitude); 
@@ -82,10 +104,16 @@ public class Vector3 {
 						   z + r * n.z);
 	}
 	
-//	TODO: check ob ok
 	public Vector3 x(final Vector3 v) {
+		if (v == null) {
+			throw new IllegalArgumentException("The parameter 'v' must not be null.");
+		}
 		return new Vector3(y * v.z - z * v.y, 
 						   z * v.x - x * v.z, 
 						   x * v.y - y * v.x);
+	}
+	
+	public String toString() {
+		return getClass().getSimpleName() + "[x = " + x + ", y = " + y + ", z = " + z + ", magnitude = " + magnitude + "]";
 	}
 }

@@ -1,33 +1,54 @@
 package raytracer.math;
 
+/**
+ * This immutable class represents a point in three-dimensional space.
+ * <p>
+ * The class <code>Point3</code> includes methods for certain vector operations: subtraction of another 
+ * <code>Point3</code> and subtraction and addition of a <code>Vector3</code> object.
+ * <p>
+ * Passing a <code>null</code> object to a method in this class will cause an <code>IllegalArgumentException</code> to be thrown.
+ * @author Sebastian Dassé
+ */
 public class Point3 {
 	public final double x;
 	public final double y;
 	public final double z;
 	
+	// TODO: evtl. Parameter checken: Werte > Double.MAX_VALUE oder < -Double.MAX_VALUE oder +-Infinity oder NaN verbieten
 	public Point3(final double x, final double y, final double z) {
 		this.x = x;
 		this.y = y;
 		this.z = z;
 	}
 	
-//	TODO: kann man delegieren?  -  lieber nicht!
 	public Vector3 sub(final Point3 p) {
+		if (p == null) {
+			throw new IllegalArgumentException("The parameter 'p' must not be null.");
+		}
 		return new Vector3(x - p.x, 
 						   y - p.y, 
 						   z - p.z);
 	}
 	
-//	TODO: kann man delegieren?  -  lieber nicht!
 	public Point3 sub(final Vector3 v) {
+		if (v == null) {
+			throw new IllegalArgumentException("The parameter 'v' must not be null.");
+		}
 		return new Point3(x - v.x, 
 						  y - v.y, 
 						  z - v.z);
 	}
 	
 	public Point3 add(final Vector3 v) {
+		if (v == null) {
+			throw new IllegalArgumentException("The parameter 'v' must not be null.");
+		}
 		return new Point3(x + v.x, 
 						  y + v.y, 
 						  z + v.z);
+	}
+	
+	public String toString() {
+		return getClass().getSimpleName() + "[x = " + x + ", y = " + y + ", z = " + z + "]";
 	}
 }
