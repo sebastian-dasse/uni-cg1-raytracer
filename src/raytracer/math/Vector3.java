@@ -13,7 +13,9 @@ package raytracer.math;
  * normal. Finally there is also method a for normalization and another one for the conversion from <code>Vector3</code> 
  * to <code>Normal3</code>.
  * <p>
- * Passing a <code>null</code> object to a method in this class will cause an <code>IllegalArgumentException</code> to be thrown.
+ * Passing a <code>null</code> object to a method in this class will cause an <code>IllegalArgumentException</code> 
+ * to be thrown.
+ * 
  * @author Sebastian Dassé
  */
 public class Vector3 {
@@ -111,6 +113,43 @@ public class Vector3 {
 		return new Vector3(y * v.z - z * v.y, 
 						   z * v.x - x * v.z, 
 						   x * v.y - y * v.x);
+	}
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		long temp;
+		temp = Double.doubleToLongBits(magnitude);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(x);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(y);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(z);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		return result;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Vector3 other = (Vector3) obj;
+		if (Double.doubleToLongBits(magnitude) != Double
+				.doubleToLongBits(other.magnitude))
+			return false;
+		if (Double.doubleToLongBits(x) != Double.doubleToLongBits(other.x))
+			return false;
+		if (Double.doubleToLongBits(y) != Double.doubleToLongBits(other.y))
+			return false;
+		if (Double.doubleToLongBits(z) != Double.doubleToLongBits(other.z))
+			return false;
+		return true;
 	}
 	
 	public String toString() {

@@ -13,7 +13,9 @@ package raytracer.math;
  * a <code>Point3</code> or with another <code>Matrix3</code> object as well as methods intended to change particular 
  * columns of the <code>Mat3x3</code> object.
  * <p>
- * Passing a <code>null</code> object to a method in this class will cause an <code>IllegalArgumentException</code> to be thrown.
+ * Passing a <code>null</code> object to a method in this class will cause an <code>IllegalArgumentException</code> 
+ * to be thrown.
+ * 
  * @author Sebastian Dassé
  */
 public class Mat3x3 {
@@ -118,6 +120,66 @@ public class Mat3x3 {
 						  m31, m32, v.z);
 	}
 	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		long temp;
+		temp = Double.doubleToLongBits(determinant);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(m11);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(m12);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(m13);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(m21);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(m22);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(m23);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(m31);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(m32);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(m33);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Mat3x3 other = (Mat3x3) obj;
+		if (Double.doubleToLongBits(determinant) != Double.doubleToLongBits(other.determinant))
+			return false;
+		if (Double.doubleToLongBits(m11) != Double.doubleToLongBits(other.m11))
+			return false;
+		if (Double.doubleToLongBits(m12) != Double.doubleToLongBits(other.m12))
+			return false;
+		if (Double.doubleToLongBits(m13) != Double.doubleToLongBits(other.m13))
+			return false;
+		if (Double.doubleToLongBits(m21) != Double.doubleToLongBits(other.m21))
+			return false;
+		if (Double.doubleToLongBits(m22) != Double.doubleToLongBits(other.m22))
+			return false;
+		if (Double.doubleToLongBits(m23) != Double.doubleToLongBits(other.m23))
+			return false;
+		if (Double.doubleToLongBits(m31) != Double.doubleToLongBits(other.m31))
+			return false;
+		if (Double.doubleToLongBits(m32) != Double.doubleToLongBits(other.m32))
+			return false;
+		if (Double.doubleToLongBits(m33) != Double.doubleToLongBits(other.m33))
+			return false;
+		return true;
+	}
+
 	public String toString() {
 		return getClass().getSimpleName() 
 				+ "[\tm11 = " + m11 + ", m12 = " + m12 + ", m13 = " + m13 + ",\n" 
