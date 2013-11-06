@@ -3,7 +3,7 @@ package raytracer.image;
 import java.awt.Canvas;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import java.awt.image.ComponentSampleModel;
+import java.awt.image.ColorModel;
 import java.awt.image.SampleModel;
 import java.awt.image.WritableRaster;
 
