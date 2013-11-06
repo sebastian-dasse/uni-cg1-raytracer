@@ -9,7 +9,7 @@ package raytracer.math;
  * <p>Passing a <code>null</code> object to a method in this class will cause an <code>IllegalArgumentException</code> 
  * to be thrown.
  * 
- * @author Sebastian Dassé
+ * @author Sebastian Dass&eacute;
  */
 public class Point3 {
 	/**
@@ -39,6 +39,14 @@ public class Point3 {
 		this.z = z;
 	}
 	
+	/**
+	 * Calculates the vector between two points as a result of their subtraction. More precisely the specified 
+	 * <code>Point3</code> p is subtracted from this <code>Point3</code> resulting in a <code>Vector3</code> pointing 
+	 * from the specified point towards this point.
+	 * 
+	 * @param p The other <code>Point3</code>, i.e. the starting point of the resulting vector. Must not be null.
+	 * @return	The resulting <code>Vector3</code> pointing from p to this point.
+	 */
 	public Vector3 sub(final Point3 p) {
 		if (p == null) {
 			throw new IllegalArgumentException("The parameter 'p' must not be null.");
@@ -48,6 +56,13 @@ public class Point3 {
 						   z - p.z);
 	}
 	
+	/**
+	 * Calculates the <code>Point3</code> resulting from the subtraction of the specified <code>Vector3</code> from 
+	 * this <code>Point3</code>.
+	 * 
+	 * @param v The <code>Vector3</code> subtracted from this point. Must not be null.
+	 * @return	The resulting <code>Point3</code>.
+	 */
 	public Point3 sub(final Vector3 v) {
 		if (v == null) {
 			throw new IllegalArgumentException("The parameter 'v' must not be null.");
@@ -57,6 +72,13 @@ public class Point3 {
 						  z - v.z);
 	}
 	
+	/**
+	 * Calculates the <code>Point3</code> resulting from the addition of the specified <code>Vector3</code> to this 
+	 * <code>Point3</code>.
+	 * 
+	 * @param v The <code>Vector3</code> added to this point. Must not be null.
+	 * @return	The resulting <code>Point3</code>
+	 */
 	public Point3 add(final Vector3 v) {
 		if (v == null) {
 			throw new IllegalArgumentException("The parameter 'v' must not be null.");
@@ -98,6 +120,7 @@ public class Point3 {
 		return true;
 	}
 	
+	@Override
 	public String toString() {
 		return getClass().getSimpleName() + "[x = " + x + ", y = " + y + ", z = " + z + "]";
 	}

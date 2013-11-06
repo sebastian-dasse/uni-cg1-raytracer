@@ -13,7 +13,7 @@ package raytracer.math;
  * <p>Passing a <code>null</code> object to a method in this class will cause an <code>IllegalArgumentException</code> 
  * to be thrown.
  * 
- * @author Sebastian Dassé
+ * @author Sebastian Dass&eacute;
  */
 public class Vector3 {
 	/**
@@ -48,6 +48,13 @@ public class Vector3 {
 		magnitude = Math.sqrt(x * x + y * y + z * z);
 	}
 	
+	/**
+	 * Calculates the <code>Vector3</code> resulting from the addition of this <code>Vector3</code> and the specified 
+	 * <code>Vector3</code>.
+	 * 
+	 * @param v The <code>Vector3</code> added to this vector. Must no be null.
+	 * @return	The resulting <code>Vector3</code>.
+	 */
 	public Vector3 add(final Vector3 v) {
 		if (v == null) {
 			throw new IllegalArgumentException("The parameter 'v' must not be null.");
@@ -57,6 +64,13 @@ public class Vector3 {
 						   z + v.z);
 	}
 	
+	/**
+	 * Calculates the <code>Vector3</code> resulting from the addition of this <code>Vector3</code> and the specified 
+	 * <code>Normal3</code>.
+	 * 
+	 * @param n The <code>Normal3</code> added to this vector. Must not be null.
+	 * @return	The resulting <code>Vector3</code>.
+	 */
 	public Vector3 add(final Normal3 n) {
 		if (n == null) {
 			throw new IllegalArgumentException("The parameter 'n' must not be null.");
@@ -66,6 +80,13 @@ public class Vector3 {
 						   z + n.z);
 	}
 	
+	/**
+	 * Calculates the <code>Vector3</code> resulting from the subtraction of the specified <code>Normal3</code> from 
+	 * this <code>Vector3</code>.
+	 * 
+	 * @param n The <code>Normal3</code> subtracted from this vector. Must not be null.
+	 * @return	The resulting <code>Vector3</code>.
+	 */
 	public Vector3 sub(final Normal3 n) {
 		if (n == null) {
 			throw new IllegalArgumentException("The parameter 'n' must not be null.");
@@ -76,12 +97,27 @@ public class Vector3 {
 	}
 	
 	// TODO: evtl. Parameter checken: Werte > Double.MAX_VALUE oder < -Double.MAX_VALUE oder +-Infinity oder NaN verbieten
+	/**
+	 * Calculates the scalar multiplication (not to be confused with the scalar product!) of this <code>Vector3</code> 
+	 * with the specified double value.
+	 * 
+	 * @param c The scalar with which this <code>Vector3</code> is multiplied. Must be a double value other than 
+	 * 			+-Infinity or NaN.
+	 * @return	The resulting <code>Vector3</code>.
+	 */
 	public Vector3 mul(double c) {
 		return new Vector3(x * c, 
 						   y * c, 
 						   z * c);
 	}
 	
+	/**
+	 * Calculates the scalar product (or dot product) of this <code>Vector3</code> with the specified other 
+	 * <code>Vector3</code>.
+	 * 
+	 * @param v The other vector of the scalar product. Must not be null.
+	 * @return	The resulting scalar.
+	 */
 	public double dot(final Vector3 v) {
 		if (v == null) {
 			throw new IllegalArgumentException("The parameter 'v' must not be null.");
@@ -89,6 +125,13 @@ public class Vector3 {
 		return x * v.x + y * v.y + z * v.z;
 	}
 	
+	/**
+	 * Calculates the scalar product (or dot product) of this <code>Vector3</code> with the specified 
+	 * <code>Normal3</code>.
+	 * 
+	 * @param v The other vector of the scalar product. Must not be null.
+	 * @return	The resulting scalar.
+	 */
 	public double dot(final Normal3 n) {
 		if (n == null) {
 			throw new IllegalArgumentException("The parameter 'n' must not be null.");
@@ -96,15 +139,27 @@ public class Vector3 {
 		return x * n.x + y * n.y + z * n.z;
 	}
 	
+	/**
+	 * Returns the normalized version of this vector, i.e. the vector with the same direction as this vector but with 
+	 * magnitude 1. Cannot be invoked on the null vector.
+	 * 
+	 * @return The normalized version of this vector, i.e. the vector with the same direction as this vector but with 
+	 * 		   magnitude 1.
+	 */
 	public Vector3 normalized() {
 		if (magnitude == 0) {
 			throw new ArithmeticException("Cannot normalize a vector with magnitude = 0.");
 		}
-		return new Vector3(x / magnitude, 
-						   y / magnitude, 
-						   z / magnitude);
+		return (magnitude == 1) ? this : new Vector3(x / magnitude, 
+						   							 y / magnitude, 
+						   							 z / magnitude);
 	}
 	
+	/**
+	 * Converts this <code>Vector3</code> to <code>Normal3</code>. Cannot be invoked on the null vector.
+	 * 
+	 * @return The <code>Normal3</code>.
+	 */
 	public Normal3 asNormal() {
 		if (magnitude == 0) {
 			throw new RuntimeException("The null vector (0, 0, 0) is not a meaningful normal.");
@@ -113,6 +168,13 @@ public class Vector3 {
 	}
 	
 //	Anmerkung: evtl. Methode für das Skalarprodukt benutzen
+	/**
+	 * Calculates the <code>Vector3</code> resulting from the reflection of this vector on a plane given through its 
+	 * specified <code>Normal3</code> n.
+	 * 
+	 * @param n The <code>Normal3</code> of the plane on which this vector is reflected. Must not be null.
+	 * @return	The resulting reflected <code>Vector3</code>.
+	 */
 	public Vector3 reflectedOn(final Normal3 n) {
 		if (n == null) {
 			throw new IllegalArgumentException("The parameter 'n' must not be null.");
@@ -126,6 +188,15 @@ public class Vector3 {
 		return this.add(n.mul(2 * r));
 	}
 	
+	/**
+	 * Calculates the cross product (or vector product) of this vector with the specified <code>Vector3</code>. 
+	 * The resulting <code>Vector3</code> is perpendicular to both, this vector and the specified vector and thus 
+	 * perpendicular to the plane formed by them. In other words the resulting vector is a normal vector to the plane 
+	 * that contains the two vectors. 
+	 * 
+	 * @param v The other <code>Vector3</code> with which the cross product is formed.
+	 * @return	The resulting <code>Vector3</code>, perpendicular to both, this and the specified vector.
+	 */
 	public Vector3 x(final Vector3 v) {
 		if (v == null) {
 			throw new IllegalArgumentException("The parameter 'v' must not be null.");
@@ -172,14 +243,8 @@ public class Vector3 {
 		return true;
 	}
 	
+	@Override
 	public String toString() {
 		return getClass().getSimpleName() + "[x = " + x + ", y = " + y + ", z = " + z + ", magnitude = " + magnitude + "]";
-	}
-	
-	public static void main(String[] args) {
-		Vector3 v = new Vector3(0, 0, 0);
-		System.out.println(v.magnitude);
-//		System.out.println(v.normalized());
-		System.out.println(v.asNormal());
 	}
 }

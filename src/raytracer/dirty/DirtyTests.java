@@ -28,5 +28,10 @@ public class DirtyTests {
 		System.out.println(new Normal3(1, 2, 3));
 		System.out.println(new Point3(1, 2, 3));
 		System.out.println(new Vector3(Math.sqrt(3)/3, Math.sqrt(3)/3, Math.sqrt(3)/3));
+		
+		Vector3 v = new Vector3(0, 0, 0);
+		System.out.println(v.magnitude);
+//		System.out.println(v.normalized());
+//		System.out.println(v.asNormal());
 	}
 }

@@ -17,7 +17,7 @@ package raytracer.math;
  * <p>Passing a <code>null</code> object to a method in this class will cause an <code>IllegalArgumentException</code> 
  * to be thrown.
  * 
- * @author Sebastian Dassé
+ * @author Sebastian Dass&eacute;
  */
 public class Mat3x3 {
 	/**
@@ -98,7 +98,7 @@ public class Mat3x3 {
 	/**
 	 * Calculates the matrix product of this matrix with the specified <code>Mat3x3</code>.
 	 * 
-	 * @param m The other matrix, with which this matrix is to be multiplied. Must not be null.
+	 * @param m The other matrix with which this matrix is multiplied. Must not be null.
 	 * @return	The resulting <code>Mat3x3</code>.
 	 */
 	public Mat3x3 mul(final Mat3x3 m) {
@@ -119,6 +119,12 @@ public class Mat3x3 {
 	}
 	
 //	TODO: welche Version?
+	/**
+	 * Calculates the matrix product of this matrix with the specified <code>Vector3</code>.
+	 * 
+	 * @param v The <code>Vector3</code> with which	this matrix is multiplied. Must not be null.
+	 * @return	The resulting <code>Vector3</code>.
+	 */
 	public Vector3 mul(final Vector3 v) {
 		if (v == null) {
 			throw new IllegalArgumentException("The parameter 'v' must not be null.");
@@ -137,6 +143,12 @@ public class Mat3x3 {
 	}
 	
 //	TODO: Delegation an mul(final Vector3 v) ok?  -  evtl. lieber nicht?
+	/**
+	 * Calculates the matrix product of this matrix with the specified <code>Point3</code>.
+	 * 
+	 * @param p The <code>Point3</code> with which this matrix is multiplied. Must not be null.
+	 * @return	The resulting <code>Point3</code>;
+	 */
 	public Point3 mul(final Point3 p) {
 		if (p == null) {
 			throw new IllegalArgumentException("The parameter 'p' must not be null.");
@@ -145,6 +157,12 @@ public class Mat3x3 {
 		return new Point3(v.x, v.y, v.z);
 	}
 	
+	/**
+	 * Replaces the first column of this matrix by the specified <code>Vector3</code>.
+	 * 
+	 * @param v The replacement <code>Vector3</code> for the first column. Must not be null.
+	 * @return	The resulting <code>Mat3x3</code>.
+	 */
 	public Mat3x3 changeCol1(final Vector3 v) {
 		if (v == null) {
 			throw new IllegalArgumentException("The parameter 'v' must not be null.");
@@ -154,6 +172,12 @@ public class Mat3x3 {
 						  v.z, m32, m33);
 	}
 	
+	/**
+	 * Replaces the second column of this matrix by the specified <code>Vector3</code>.
+	 * 
+	 * @param v The replacement <code>Vector3</code> for the second column. Must not be null.
+	 * @return	The resulting <code>Mat3x3</code>.
+	 */
 	public Mat3x3 changeCol2(final Vector3 v) {
 		if (v == null) {
 			throw new IllegalArgumentException("The parameter 'v' must not be null.");
@@ -163,6 +187,12 @@ public class Mat3x3 {
 				  		  m31, v.z, m33);
 	}
 	
+	/**
+	 * Replaces the third column of this matrix by the specified <code>Vector3</code>.
+	 * 
+	 * @param v The replacement <code>Vector3</code> for the third column. Must not be null.
+	 * @return	The resulting <code>Mat3x3</code>.
+	 */
 	public Mat3x3 changeCol3(final Vector3 v) {
 		if (v == null) {
 			throw new IllegalArgumentException("The parameter 'v' must not be null.");
@@ -231,7 +261,8 @@ public class Mat3x3 {
 			return false;
 		return true;
 	}
-
+	
+	@Override
 	public String toString() {
 		return getClass().getSimpleName() 
 				+ "[\tm11 = " + m11 + ", m12 = " + m12 + ", m13 = " + m13 + ",\n" 

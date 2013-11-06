@@ -4,7 +4,7 @@ package raytracer.math;
  * This class holds just one main method, which is meant to demonstrate that the classes in the package 
  * <code>raytracer.math</code> meet the acceptance criteria specified in the given task.
  *  
- * @author Sebastian Dassé
+ * @author Sebastian Dass&eacute;
  */
 public class Main {
 	/**

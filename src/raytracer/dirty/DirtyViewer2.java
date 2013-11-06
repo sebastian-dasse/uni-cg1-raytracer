@@ -12,7 +12,7 @@ import javax.swing.JLabel;
 
 /**
  * 
- * @author Sebastian Dassé
+ * @author Sebastian Dass&eacute;
  *
  */
 public class DirtyViewer2 {
