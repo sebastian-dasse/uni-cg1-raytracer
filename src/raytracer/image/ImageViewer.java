@@ -1,41 +1,43 @@
 package raytracer.image;
 
-import java.awt.Container;
-import java.awt.GridLayout;
+import java.awt.Canvas;
+import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-
 
 public class ImageViewer {
-	public static void main(String[] args) throws IOException{
-		 /*
-		  * Max: Open Dialog + Buffered Image
-		  */
-		 JFileChooser chooser = new JFileChooser();
-		 if (chooser.showOpenDialog(null) != JFileChooser.APPROVE_OPTION) {
-			 System.exit(0);
-		 }
-//		 File file = new File(chooser.getSelectedFile().getPath()); // <- SEB: gibt es einen guten Grund dafür? sonst lieber:
-		 File file = chooser.getSelectedFile();
-		 BufferedImage image = ImageIO.read(file);
-		 JLabel label = new JLabel(new ImageIcon(image));
-		 /*
-		  * -- SIM
-		  */
-		JFrame frame = new JFrame("Image Viewer");
-		frame.add(label);
-		Container container = frame.getContentPane();
-		container.setLayout(new GridLayout());
-		container.add(new ImageCanvas());
+	public static final File promptForImagefile() throws IOException {
+		JFileChooser chooser = new JFileChooser();
+		if (chooser.showOpenDialog(null) != JFileChooser.APPROVE_OPTION) {
+			System.exit(0);
+		}
+		return chooser.getSelectedFile();
+	}
+
+	public static void main(String[] args) throws IOException {
+		final BufferedImage image = ImageIO.read(promptForImagefile());
+		JFrame frame = new JFrame();
+		frame.setSize(image.getHeight(), image.getWidth());
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(550, 100);
-		frame.setVisible(true);	
+		/*
+		 * Using canvas and anonymous paint method, since paint
+		 * method body to short to justify a new class.
+		 * Using canvas because that way we 
+		 * use the same object that will be applied in the ImageSaver
+		 * and code is easier to generalize in case it is desiiiiiired!
+		 */
+		final Canvas c = new Canvas() {
+			private static final long serialVersionUID = 1L;
+			public void paint(final Graphics g) {
+				super.paint(g);
+				g.drawImage(image, 0, 0, null);
+			}
+		};
+		frame.getContentPane().add(c);
+		frame.setVisible(true);
 	}
 }
