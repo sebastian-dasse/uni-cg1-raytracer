@@ -1,19 +1,16 @@
 package raytracer.math;
 
 /**
- * This immutable class represents a vector in three-dimensional space.
- * <p>
- * In addition the class <code>Vector3</code> has a field in which its magnitude is stored.
- * <p>
- * The class <code>Mat3x3</code> provides various methods for vector operations, which include addition and subtraction 
- * of two vectors as well as scalar multiplication, scalar (or dot) product (which are not to be confused!) and 
- * cross product (or vector product).
- * <p>
- * There is a method that calculates the vector resulting from the reflection of a vector on a plane given through its 
- * normal. Finally there is also method a for normalization and another one for the conversion from <code>Vector3</code> 
- * to <code>Normal3</code>.
- * <p>
- * Passing a <code>null</code> object to a method in this class will cause an <code>IllegalArgumentException</code> 
+ * This immutable class represents a vector in three-dimensional space. Thus it has fields for its three components and 
+ * an additional field in which its magnitude is stored.
+ * 
+ * <p>The class <code>Vector3</code> provides various methods for vector operations, which include addition and 
+ * subtraction of two vectors as well as scalar multiplication, scalar (or dot) product (which are not to be confused!) 
+ * and cross product (or vector product). There is a method that calculates the vector resulting from the reflection of 
+ * a vector on a plane given through its normal. Finally there is also method a for normalization and another one for 
+ * the conversion from <code>Vector3</code> to <code>Normal3</code>.
+ * 
+ * <p>Passing a <code>null</code> object to a method in this class will cause an <code>IllegalArgumentException</code> 
  * to be thrown.
  * 
  * @author Sebastian Dassé
@@ -91,19 +88,18 @@ public class Vector3 {
 	}
 	
 //	TODO: FRAGE: was soll hier passieren?
-//	zwei Anmerkungen: 
-//		- Skalarprodukt benutzen; 
-//		- evtl. nicht magnitude^2 sondern direkt ausrechnen für höhere Genauigkeit
+//	Anmerkung: evtl. Methode für das Skalarprodukt benutzen
 	public Vector3 reflectedOn(final Normal3 n) {
 		if (n == null) {
 			throw new IllegalArgumentException("The parameter 'n' must not be null.");
 		}
-		final double r = -(x * n.x 
-						 + y * n.y 
-						 + z * n.z) / (magnitude * magnitude); 
-		return new Vector3(x + r * n.x, 
-						   y + r * n.y, 
-						   z + r * n.z);
+		// Ebene		<x - u, q> mit u = 0 und q := n
+		// Gerade		g(r) = a + rq mit a := this. Die Gerade durch a und den Lotfußpunkt von a auf der Ebene
+		// Parameter	r = -<a - u, q> /|q|², d.h. für den Nenner wird a in die negative Ebenengleichung eingesetzt
+		// Spiegelpunkt	a' = g(2rp)
+		final double r = -(x * n.x + y * n.y + z * n.z) 
+						/ (n.x * n.x + n.y * n.y + n.z * n.z);
+		return this.add(n.mul(2 * r));
 	}
 	
 	public Vector3 x(final Vector3 v) {

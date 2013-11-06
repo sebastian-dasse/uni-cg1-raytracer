@@ -11,7 +11,7 @@ public class Main {
 	 * This main method contains the calculations demanded in the task.
 	 * 
 	 * @param args would hold any arguments that might be passed to this method; however <code>args</code> is not 
-	 * 		being evaluated.
+	 * 		  being evaluated.
 	 */
 	public static void main(final String[] args) {
 		System.out.println(new Normal3(1, 2, 3).mul(0.5));
@@ -29,5 +29,13 @@ public class Main {
 		System.out.println(new Point3(1, 1, 1).add(new Vector3(4, 3, 2)));
 		
 		System.out.println(new Vector3(1, 1, 1).magnitude == Math.sqrt(3));
+		
+		System.out.println(new Vector3(1, 1, 1).add(new Normal3(4, 3, 2)));
+		
+		System.out.println(new Vector3(1, 1, 1).add(new Vector3(4, 3, 2)));
+		
+		System.out.println(new Vector3(1, 1, 1).sub(new Normal3(4, 3, 2)));
+		
+		System.out.println(new Vector3(-0.707, 0.707, 0).reflectedOn(new Normal3(1, 0, 0)));
 	}
 }
