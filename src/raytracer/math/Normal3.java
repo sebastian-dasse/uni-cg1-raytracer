@@ -1,13 +1,14 @@
 package raytracer.math;
 
 /**
- * This immutable class represents a normal - i.e. a perpendicular vector - on a surface vector in three-dimensional space.
- * <p>
- * The class <code>Normal3</code> includes methods for certain vector operations: scalar multiplication with a double 
+ * This immutable class represents a normal - i.e. a perpendicular vector - on a surface vector in three-dimensional 
+ * space. Thus it has fields for its three components.
+ * 
+ * <p>The class <code>Normal3</code> includes methods for certain vector operations: scalar multiplication with a double 
  * value (not to be confused with the scalar product!), addition of another <code>Normal3</code> and scalar product 
  * (also known as dot product) with a <code>Vector3</code>.
- * <p>
- * Passing a <code>null</code> object to a method in this class will cause an <code>IllegalArgumentException</code> 
+ * 
+ * <p>Passing a <code>null</code> object to a method in this class will cause an <code>IllegalArgumentException</code> 
  * to be thrown.
  * 
  * @author Sebastian Dassé

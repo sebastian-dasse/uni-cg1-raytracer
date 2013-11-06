@@ -1,19 +1,20 @@
 package raytracer.math;
 
 /**
- * This immutable class represents a matrix with 3 rows and 3 columns. Thus it has 9 elements which are to be addressed 
- * as follows: the first index specifies the row, the second indicates the column of the particular element, like that: 
+ * This immutable class represents a matrix with three rows and three columns. Thus it has fields for its nine 
+ * components, which are to be addressed as follows: the first index specifies the row, the second indicates the column 
+ * of the particular element, like that: 
  * <blockquote><code>
  * m11 m12 m13 <br />
  * m21 m22 m23 <br />
  * m31 m32 m33</code></blockquote>
  * In addition the class <code>Mat3x3</code> has a field in which its determinant stored.
- * <p>
- * The class <code>Mat3x3</code> includes methods to calculate the matrix product with a <code>Vector3</code>, 
+ * 
+ * <p>The class <code>Mat3x3</code> includes methods to calculate the matrix product with a <code>Vector3</code>, 
  * a <code>Point3</code> or with another <code>Matrix3</code> object as well as methods intended to change particular 
  * columns of the <code>Mat3x3</code> object.
- * <p>
- * Passing a <code>null</code> object to a method in this class will cause an <code>IllegalArgumentException</code> 
+ * 
+ * <p>Passing a <code>null</code> object to a method in this class will cause an <code>IllegalArgumentException</code> 
  * to be thrown.
  * 
  * @author Sebastian Dassé

@@ -1,12 +1,12 @@
 package raytracer.math;
 
 /**
- * This immutable class represents a point in three-dimensional space.
- * <p>
- * The class <code>Point3</code> includes methods for certain vector operations: subtraction of another 
+ * This immutable class represents a point in three-dimensional space. Thus it has fields for its three components.
+ * 
+ * <p>The class <code>Point3</code> includes methods for certain vector operations: subtraction of another 
  * <code>Point3</code> and subtraction and addition of a <code>Vector3</code> object.
- * <p>
- * Passing a <code>null</code> object to a method in this class will cause an <code>IllegalArgumentException</code> 
+ * 
+ * <p>Passing a <code>null</code> object to a method in this class will cause an <code>IllegalArgumentException</code> 
  * to be thrown.
  * 
  * @author Sebastian Dassé
