@@ -1,4 +1,6 @@
-package raytracer.math;
+package raytracer.dirty;
+
+import raytracer.math.*;
 
 public class DirtyTests {
 	public static void main(String[] args) {
