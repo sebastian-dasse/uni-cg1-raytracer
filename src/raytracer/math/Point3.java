@@ -12,11 +12,27 @@ package raytracer.math;
  * @author Sebastian Dassé
  */
 public class Point3 {
+	/**
+	 * The x coordinate of this <code>Point3</code>.
+	 */
 	public final double x;
+	/**
+	 * The y coordinate of this <code>Point3</code>.
+	 */
 	public final double y;
+	/**
+	 * The z coordinate of this <code>Point3</code>.
+	 */
 	public final double z;
 	
 	// TODO: evtl. Parameter checken: Werte > Double.MAX_VALUE oder < -Double.MAX_VALUE oder +-Infinity oder NaN verbieten
+	/**
+	 * Constructs a new <code>Point3</code> based on the three specified coordinates.
+	 * 
+	 * @param x The x coordinate. Must be a double value other than +-Infinity or NaN.
+	 * @param y The y coordinate. Must be a double value other than +-Infinity or NaN.
+	 * @param z The z coordinate. Must be a double value other than +-Infinity or NaN.
+	 */
 	public Point3(final double x, final double y, final double z) {
 		this.x = x;
 		this.y = y;

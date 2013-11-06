@@ -20,18 +20,61 @@ package raytracer.math;
  * @author Sebastian Dassé
  */
 public class Mat3x3 {
+	/**
+	 * The m11 component of this <code>Mat3x3</code>.
+	 */
 	public final double m11;
+	/**
+	 * The m12 component of this <code>Mat3x3</code>.
+	 */
 	public final double m12;
+	/**
+	 * The m13 component of this <code>Mat3x3</code>.
+	 */
 	public final double m13;
+	/**
+	 * The m21 component of this <code>Mat3x3</code>.
+	 */
 	public final double m21;
+	/**
+	 * The m22 component of this <code>Mat3x3</code>.
+	 */
 	public final double m22;
+	/**
+	 * The m23 component of this <code>Mat3x3</code>.
+	 */
 	public final double m23;
+	/**
+	 * The m31 component of this <code>Mat3x3</code>.
+	 */
 	public final double m31;
+	/**
+	 * The m32 component of this <code>Mat3x3</code>.
+	 */
 	public final double m32;
+	/**
+	 * The m33 component of this <code>Mat3x3</code>.
+	 */
 	public final double m33;
+	/**
+	 * The determinant of this <code>Mat3x3</code>.
+	 */
 	public final double determinant;
 	
 	// TODO: evtl. Parameter checken: Werte > Double.MAX_VALUE oder < -Double.MAX_VALUE oder +-Infinity oder NaN verbieten
+	/**
+	 * Constructs a new <code>Mat3x3</code> based on the nine specified components.
+	 * 
+	 * @param m11 The m11 component. Must be a double value other than +-Infinity or NaN.
+	 * @param m12 The m12 component. Must be a double value other than +-Infinity or NaN.
+	 * @param m13 The m13 component. Must be a double value other than +-Infinity or NaN.
+	 * @param m21 The m21 component. Must be a double value other than +-Infinity or NaN.
+	 * @param m22 The m22 component. Must be a double value other than +-Infinity or NaN.
+	 * @param m23 The m23 component. Must be a double value other than +-Infinity or NaN.
+	 * @param m31 The m31 component. Must be a double value other than +-Infinity or NaN.
+	 * @param m32 The m32 component. Must be a double value other than +-Infinity or NaN.
+	 * @param m33 The m33 component. Must be a double value other than +-Infinity or NaN.
+	 */
 	public Mat3x3(final double m11, final double m12, final double m13, 
 				  final double m21, final double m22, final double m23, 
 				  final double m31, final double m32, final double m33) {
@@ -52,6 +95,12 @@ public class Mat3x3 {
 					- m33 * m21 * m12;
 	}
 	
+	/**
+	 * Calculates the matrix product of this matrix with the specified <code>Mat3x3</code>.
+	 * 
+	 * @param m The other matrix, with which this matrix is to be multiplied. Must not be null.
+	 * @return	The resulting <code>Mat3x3</code>.
+	 */
 	public Mat3x3 mul(final Mat3x3 m) {
 		if (m == null) {
 			throw new IllegalArgumentException("The parameter 'm' must not be null.");

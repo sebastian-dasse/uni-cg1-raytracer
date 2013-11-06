@@ -22,7 +22,8 @@ public class ImageViewer {
 		 if (chooser.showOpenDialog(null) != JFileChooser.APPROVE_OPTION) {
 			 System.exit(0);
 		 }
-		 File file = new File(chooser.getSelectedFile().getPath());
+//		 File file = new File(chooser.getSelectedFile().getPath()); // <- SEB: gibt es einen guten Grund dafür? sonst lieber:
+		 File file = chooser.getSelectedFile();
 		 BufferedImage image = ImageIO.read(file);
 		 JLabel label = new JLabel(new ImageIcon(image));
 		 /*
