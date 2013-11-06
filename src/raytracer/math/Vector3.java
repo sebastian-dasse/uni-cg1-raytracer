@@ -78,16 +78,21 @@ public class Vector3 {
 	}
 	
 	public Vector3 normalized() {
+		if (magnitude == 0) {
+			throw new ArithmeticException("Cannot normalize a vector with magnitude = 0.");
+		}
 		return new Vector3(x / magnitude, 
 						   y / magnitude, 
 						   z / magnitude);
 	}
 	
 	public Normal3 asNormal() {
+		if (magnitude == 0) {
+			throw new RuntimeException("The null vector (0, 0, 0) is not a meaningful normal.");
+		}
 		return new Normal3(x, y, z);
 	}
 	
-//	TODO: FRAGE: was soll hier passieren?
 //	Anmerkung: evtl. Methode für das Skalarprodukt benutzen
 	public Vector3 reflectedOn(final Normal3 n) {
 		if (n == null) {
@@ -150,5 +155,12 @@ public class Vector3 {
 	
 	public String toString() {
 		return getClass().getSimpleName() + "[x = " + x + ", y = " + y + ", z = " + z + ", magnitude = " + magnitude + "]";
+	}
+	
+	public static void main(String[] args) {
+		Vector3 v = new Vector3(0, 0, 0);
+		System.out.println(v.magnitude);
+//		System.out.println(v.normalized());
+		System.out.println(v.asNormal());
 	}
 }

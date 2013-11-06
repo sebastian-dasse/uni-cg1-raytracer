@@ -58,10 +58,12 @@ public class Mat3x3 {
 		}
 		return new Mat3x3(m11 * m.m11 + m12 * m.m21 + m13 * m.m31, 
 						  m11 * m.m12 + m12 * m.m22 + m13 * m.m32, 
-						  m11 * m.m13 + m12 * m.m23 + m13 * m.m33, 
+						  m11 * m.m13 + m12 * m.m23 + m13 * m.m33,
+						  
 						  m21 * m.m11 + m22 * m.m21 + m23 * m.m31,  
 						  m21 * m.m12 + m22 * m.m22 + m23 * m.m32, 
-						  m21 * m.m13 + m22 * m.m23 + m23 * m.m33, 
+						  m21 * m.m13 + m22 * m.m23 + m23 * m.m33,
+						  
 						  m31 * m.m11 + m32 * m.m21 + m33 * m.m31, 
 						  m31 * m.m12 + m32 * m.m22 + m33 * m.m32, 
 						  m31 * m.m13 + m32 * m.m23 + m33 * m.m33);
@@ -184,7 +186,7 @@ public class Mat3x3 {
 	public String toString() {
 		return getClass().getSimpleName() 
 				+ "[\tm11 = " + m11 + ", m12 = " + m12 + ", m13 = " + m13 + ",\n" 
-				+ "\tm21 = " + m21 + ", m22 = " + m21 + ", m23 = " + m23 + ",\n" 
+				+ "\tm21 = " + m21 + ", m22 = " + m22 + ", m23 = " + m23 + ",\n" 
 				+ "\tm31 = " + m31 + ", m32 = " + m32 + ", m33 = " + m33 + ", " 
 				+ "determinant = " + determinant + "]";
 	}

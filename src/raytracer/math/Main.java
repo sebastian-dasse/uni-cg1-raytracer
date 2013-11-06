@@ -37,5 +37,26 @@ public class Main {
 		System.out.println(new Vector3(1, 1, 1).sub(new Normal3(4, 3, 2)));
 		
 		System.out.println(new Vector3(-0.707, 0.707, 0).reflectedOn(new Normal3(1, 0, 0)));
+		
+		System.out.println(new Mat3x3(1, 0, 0, 
+				 					  0, 1, 0, 
+				 					  0, 0, 1).mul(new Point3(3, 2, 1)));
+		
+		System.out.println(new Mat3x3(1, 0, 0, 
+				 					  0, 1, 0, 
+				 					  0, 0, 1).mul(new Vector3(3, 2, 1)));
+		
+		System.out.println(new Mat3x3(1, 2, 3, 
+									  4, 5, 6, 
+									  7, 8, 9).mul(new Mat3x3(1, 0, 0, 
+												 			  0, 1, 0, 
+												 			  0, 0, 1)));
+		System.out.println(new Mat3x3(1, 2, 3, 
+									  4, 5, 6, 
+									  7, 8, 9).mul(new Mat3x3(0, 0, 1, 
+											  				  0, 1, 0, 
+											  				  1, 0, 0)));
+		
+		System.out.println();
 	}
 }
