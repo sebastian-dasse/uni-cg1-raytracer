@@ -1,9 +1,15 @@
 package raytracer.math;
 
 import java.awt.Desktop;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 public class DirtyViewer {
 
@@ -20,10 +26,15 @@ public class DirtyViewer {
 //			System.out.println("Die zu öffnende Datei ist: "
 //					+ chooser.getSelectedFile().getPath());
 		}
-
-		File f = new File(chooser.getSelectedFile().getPath());
-		Desktop dt = Desktop.getDesktop();
-		dt.open(f);
+		File file = new File(chooser.getSelectedFile().getPath());
+		BufferedImage image = ImageIO.read(file);
+        JLabel label = new JLabel(new ImageIcon(image));
+        JFrame f = new JFrame();
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        f.getContentPane().add(label);
+        f.pack();
+        f.setLocation(200,200);
+        f.setVisible(true);
 
 	}
 
