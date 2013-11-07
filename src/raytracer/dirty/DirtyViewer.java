@@ -1,4 +1,4 @@
-package raytracer.math;
+package raytracer.dirty;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
