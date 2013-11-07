@@ -24,7 +24,10 @@ public class DirtyViewer {
 //			System.out.println("Die zu öffnende Datei ist: "
 //					+ chooser.getSelectedFile().getPath());
 		}
+		
+		
 		File file = new File(chooser.getSelectedFile().getPath());
+		
 		BufferedImage image = ImageIO.read(file);
         JLabel label = new JLabel(new ImageIcon(image));
         JFrame f = new JFrame();
