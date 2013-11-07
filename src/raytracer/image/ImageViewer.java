@@ -3,23 +3,16 @@ package raytracer.image;
 import java.awt.Canvas;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
+
 import javax.imageio.ImageIO;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import raytracer.ui.*;
 
 public class ImageViewer {
-	public static final File promptForImagefile() throws IOException {
-		JFileChooser chooser = new JFileChooser();
-		if (chooser.showOpenDialog(null) != JFileChooser.APPROVE_OPTION) {
-			System.exit(0);
-		}
-		return chooser.getSelectedFile();
-	}
-
+	
 	public static void main(String[] args) throws IOException {
-		final BufferedImage image = ImageIO.read(promptForImagefile());
+		final BufferedImage image = ImageIO.read(FileDialog.open());
 		JFrame frame = new JFrame();
 		frame.setSize(image.getHeight(), image.getWidth());
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
