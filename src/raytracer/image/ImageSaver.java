@@ -15,7 +15,6 @@ import javax.swing.JMenuItem;
 
 import raytracer.ui.FileDialog;
 
-
 public class ImageSaver {
 	public static void main(String[] args) throws IOException {
 		final BufferedImage image = new BufferedImage(100, 50,
@@ -38,7 +37,7 @@ public class ImageSaver {
 				try {
 					ImageIO.write(image, "jpg", FileDialog.save());
 				}
-				catch (IOException ie) {
+				catch (IOException ie) { // SEB: mit catch wird die throws-Dekl. im Header von main überflüssig oder umgekehrt 
 					
 				}
 			}
@@ -59,10 +58,6 @@ public class ImageSaver {
         	}
         });
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);	
-        
+        frame.setVisible(true);    
 	}
-
-
-
 }

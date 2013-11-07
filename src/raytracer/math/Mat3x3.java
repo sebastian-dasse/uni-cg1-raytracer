@@ -78,6 +78,11 @@ public class Mat3x3 {
 	public Mat3x3(final double m11, final double m12, final double m13, 
 				  final double m21, final double m22, final double m23, 
 				  final double m31, final double m32, final double m33) {
+		if (isNotValid(m11) || isNotValid(m12) || isNotValid(m13) || 
+				isNotValid(m21) || isNotValid(m22) || isNotValid(m23) || 
+				isNotValid(m31) || isNotValid(m32) || isNotValid(m33)) {
+			throw new IllegalArgumentException("Only double values other than +-Infinity or NaN allowed.");
+		}
 		this.m11 = m11;
 		this.m12 = m12;
 		this.m13 = m13;
@@ -118,7 +123,6 @@ public class Mat3x3 {
 						  m31 * m.m13 + m32 * m.m23 + m33 * m.m33);
 	}
 	
-//	TODO: welche Version?
 	/**
 	 * Calculates the matrix product of this matrix with the specified <code>Vector3</code>.
 	 * 
@@ -129,20 +133,21 @@ public class Mat3x3 {
 		if (v == null) {
 			throw new IllegalArgumentException("The parameter 'v' must not be null.");
 		}
-//		return new Vector3(m11 * v.x + m12 * v.y + m13 * v.z, 
-//						   m11 * v.x + m12 * v.y + m13 * v.z, 
-//						   m11 * v.x + m12 * v.y + m13 * v.z);
+		return new Vector3(m11 * v.x + m12 * v.y + m13 * v.z, 
+						   m21 * v.x + m22 * v.y + m23 * v.z, 
+						   m31 * v.x + m32 * v.y + m33 * v.z);
 		
+		// Alternative 1: delegieren  -  TODO: FRAGE: lieber delegieren? oder relevanter Performanceverlust?
 //		return new Vector3(v.dot(new Vector3(m11, m12, m13)), 
 //						   v.dot(new Vector3(m21, m22, m23)), 
 //						   v.dot(new Vector3(m31, m32, m33)));
 		
-		return new Vector3(new Vector3(m11, m12, m13).dot(v), 
-						   new Vector3(m21, m22, m23).dot(v), 
-						   new Vector3(m31, m32, m33).dot(v));
+		// Alternative 2: delegieren  -  TODO: FRAGE: lieber delegieren? oder relevanter Performanceverlust?
+//		return new Vector3(new Vector3(m11, m12, m13).dot(v), 
+//						   new Vector3(m21, m22, m23).dot(v), 
+//						   new Vector3(m31, m32, m33).dot(v));
 	}
 	
-//	TODO: Delegation an mul(final Vector3 v) ok?  -  evtl. lieber nicht?
 	/**
 	 * Calculates the matrix product of this matrix with the specified <code>Point3</code>.
 	 * 
@@ -153,8 +158,13 @@ public class Mat3x3 {
 		if (p == null) {
 			throw new IllegalArgumentException("The parameter 'p' must not be null.");
 		}
-		Vector3 v = mul(new Vector3(p.x, p.y, p.z));
-		return new Point3(v.x, v.y, v.z);
+		return new Point3(m11 * p.x + m12 * p.y + m13 * p.z, 
+						  m21 * p.x + m22 * p.y + m23 * p.z, 
+						  m31 * p.x + m32 * p.y + m33 * p.z);
+		
+		// Alternative: delegieren  -  TODO: FRAGE: lieber delegieren? oder relevanter Performanceverlust? 
+//		final Vector3 v = mul(new Vector3(p.x, p.y, p.z));
+//		return new Point3(v.x, v.y, v.z);
 	}
 	
 	/**
@@ -231,7 +241,7 @@ public class Mat3x3 {
 	}
 
 	@Override
-	public boolean equals(Object obj) {
+	public boolean equals(final Object obj) {
 		if (this == obj)
 			return true;
 		if (obj == null)
@@ -269,5 +279,15 @@ public class Mat3x3 {
 				+ "\tm21 = " + m21 + ", m22 = " + m22 + ", m23 = " + m23 + ",\n" 
 				+ "\tm31 = " + m31 + ", m32 = " + m32 + ", m33 = " + m33 + ", " 
 				+ "determinant = " + determinant + "]";
+	}
+	
+	/**
+	 * Checks if the specified double is NaN or infinite and therefore not a valid input. Returns true in this case. 
+	 * 
+	 * @param d The double value to be checked for validity.
+	 * @return	True if not valid, otherwise false.
+	 */
+	private boolean isNotValid(final double d) {
+		return Double.isNaN(d) || Double.isInfinite(d);
 	}
 }

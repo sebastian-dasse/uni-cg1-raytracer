@@ -34,6 +34,9 @@ public class Point3 {
 	 * @param z The z coordinate. Must be a double value other than +-Infinity or NaN.
 	 */
 	public Point3(final double x, final double y, final double z) {
+		if (isNotValid(x) || isNotValid(y) || isNotValid(z)) {
+			throw new IllegalArgumentException("Only double values other than +-Infinity or NaN allowed.");
+		}
 		this.x = x;
 		this.y = y;
 		this.z = z;
@@ -103,7 +106,7 @@ public class Point3 {
 	}
 	
 	@Override
-	public boolean equals(Object obj) {
+	public boolean equals(final Object obj) {
 		if (this == obj)
 			return true;
 		if (obj == null)
@@ -123,5 +126,15 @@ public class Point3 {
 	@Override
 	public String toString() {
 		return getClass().getSimpleName() + "[x = " + x + ", y = " + y + ", z = " + z + "]";
+	}
+	
+	/**
+	 * Checks if the specified double is NaN or infinite and therefore not a valid input. Returns true in this case. 
+	 * 
+	 * @param d The double value to be checked for validity.
+	 * @return	True if not valid, otherwise false.
+	 */
+	private boolean isNotValid(final double d) {
+		return Double.isNaN(d) || Double.isInfinite(d);
 	}
 }

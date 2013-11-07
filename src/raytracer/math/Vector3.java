@@ -42,6 +42,9 @@ public class Vector3 implements Comparable<Vector3> {
 	 * @param z The z coordinate. Must be a double value other than +-Infinity or NaN.
 	 */
 	public Vector3(final double x, final double y, final double z) {
+		if (isNotValid(x) || isNotValid(y) || isNotValid(z)) {
+			throw new IllegalArgumentException("Only double values other than +-Infinity or NaN allowed.");
+		}
 		this.x = x;
 		this.y = y;
 		this.z = z;
@@ -105,7 +108,10 @@ public class Vector3 implements Comparable<Vector3> {
 	 * 			+-Infinity or NaN.
 	 * @return	The resulting <code>Vector3</code>.
 	 */
-	public Vector3 mul(double c) {
+	public Vector3 mul(final double c) {
+		if (isNotValid(c)) {
+			throw new IllegalArgumentException("Only double values other than +-Infinity or NaN allowed.");
+		}
 		return new Vector3(x * c, 
 						   y * c, 
 						   z * c);
@@ -223,7 +229,7 @@ public class Vector3 implements Comparable<Vector3> {
 	}
 	
 	@Override
-	public boolean equals(Object obj) {
+	public boolean equals(final Object obj) {
 		if (this == obj)
 			return true;
 		if (obj == null)
@@ -254,7 +260,17 @@ public class Vector3 implements Comparable<Vector3> {
 	 * Compares this <code>Vector3</code> to another <code>Vector3</code> solely by their magnitude.
 	 * @Note 
 	 */
-	public int compareTo(Vector3 o) {
-		return Double.compare(magnitude, o.magnitude);
+	public int compareTo(final Vector3 other) {
+		return Double.compare(magnitude, other.magnitude);
+	}
+	
+	/**
+	 * Checks if the specified double is NaN or infinite and therefore not a valid input. Returns true in this case. 
+	 * 
+	 * @param d The double value to be checked for validity.
+	 * @return	True if not valid, otherwise false.
+	 */
+	private boolean isNotValid(final double d) {
+		return Double.isNaN(d) || Double.isInfinite(d);
 	}
 }

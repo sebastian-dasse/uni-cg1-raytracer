@@ -38,7 +38,10 @@ public class Normal3 {
 	 */
 	public Normal3(final double x, final double y, final double z) {
 		if (x == 0 && y == 0 && z == 0) {
-			throw new RuntimeException("The null vector (0, 0, 0) is not a meaningful normal.");
+			throw new IllegalArgumentException("The null vector (0, 0, 0) is not a meaningful normal.");
+		}
+		if (isNotValid(x) || isNotValid(y) || isNotValid(z)) {
+			throw new IllegalArgumentException("Only double values other than +-Infinity or NaN allowed.");
 		}
 		this.x = x;
 		this.y = y;
@@ -55,6 +58,9 @@ public class Normal3 {
 	 * @return	The resulting <code>Normal3</code>.
 	 */
 	public Normal3 mul(final double c) {
+		if (isNotValid(c)) {
+			throw new IllegalArgumentException("Only double values other than +-Infinity or NaN allowed.");
+		}
 		return new Normal3(x * c, 
 						   y * c, 
 						   z * c);
@@ -104,7 +110,7 @@ public class Normal3 {
 	}
 	
 	@Override
-	public boolean equals(Object obj) {
+	public boolean equals(final Object obj) {
 		if (this == obj)
 			return true;
 		if (obj == null)
@@ -124,5 +130,15 @@ public class Normal3 {
 	@Override
 	public String toString() {
 		return getClass().getSimpleName() + "[x = " + x + ", y = " + y + ", z = " + z + "]";
+	}
+	
+	/**
+	 * Checks if the specified double is NaN or infinite and therefore not a valid input. Returns true in this case. 
+	 * 
+	 * @param d The double value to be checked for validity.
+	 * @return	True if not valid, otherwise false.
+	 */
+	private boolean isNotValid(final double d) {
+		return Double.isNaN(d) || Double.isInfinite(d);
 	}
 }
