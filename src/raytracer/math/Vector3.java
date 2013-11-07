@@ -15,7 +15,7 @@ package raytracer.math;
  * 
  * @author Sebastian Dass&eacute;
  */
-public class Vector3 {
+public class Vector3 implements Comparable<Vector3> {
 	/**
 	 * The x coordinate of this <code>Vector3</code>.
 	 */
@@ -246,5 +246,15 @@ public class Vector3 {
 	@Override
 	public String toString() {
 		return getClass().getSimpleName() + "[x = " + x + ", y = " + y + ", z = " + z + ", magnitude = " + magnitude + "]";
+	}
+
+	// TODO: Not consistent with the equals method of this class! Is this a problem?????????
+	@Override
+	/**
+	 * Compares this <code>Vector3</code> to another <code>Vector3</code> solely by their magnitude.
+	 * @Note 
+	 */
+	public int compareTo(Vector3 o) {
+		return Double.compare(magnitude, o.magnitude);
 	}
 }
