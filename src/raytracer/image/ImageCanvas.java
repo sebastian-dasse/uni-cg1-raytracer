@@ -23,7 +23,6 @@ public class ImageCanvas extends Canvas {
 	
 	public void paint(final Graphics g) {
 		super.paint(g);
-		image = new BufferedImage(size.width,size.height,BufferedImage.TYPE_INT_ARGB);
 	    final WritableRaster raster = image.getRaster();
 	    final ColorModel model = image.getColorModel();
 	    Object colorData = model.getDataElements(Color.blue.getRGB(), null);

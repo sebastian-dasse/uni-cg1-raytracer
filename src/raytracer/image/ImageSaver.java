@@ -1,5 +1,6 @@
 package raytracer.image;
 
+import java.awt.Canvas;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
@@ -44,7 +45,7 @@ public class ImageSaver {
         });
         
         frame.setSize(640, 480);
-        final ImageCanvas drawing = new ImageCanvas(image);
+        final Canvas drawing = new ImageCanvas(image);
         frame.getContentPane().add(drawing);
         
         /*
