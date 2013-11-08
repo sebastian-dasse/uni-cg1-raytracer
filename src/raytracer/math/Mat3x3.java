@@ -136,16 +136,6 @@ public class Mat3x3 {
 		return new Vector3(m11 * v.x + m12 * v.y + m13 * v.z, 
 						   m21 * v.x + m22 * v.y + m23 * v.z, 
 						   m31 * v.x + m32 * v.y + m33 * v.z);
-		
-		// Alternative 1: delegieren  -  TODO: FRAGE: lieber delegieren? oder relevanter Performanceverlust?
-//		return new Vector3(v.dot(new Vector3(m11, m12, m13)), 
-//						   v.dot(new Vector3(m21, m22, m23)), 
-//						   v.dot(new Vector3(m31, m32, m33)));
-		
-		// Alternative 2: delegieren  -  TODO: FRAGE: lieber delegieren? oder relevanter Performanceverlust?
-//		return new Vector3(new Vector3(m11, m12, m13).dot(v), 
-//						   new Vector3(m21, m22, m23).dot(v), 
-//						   new Vector3(m31, m32, m33).dot(v));
 	}
 	
 	/**
@@ -161,10 +151,6 @@ public class Mat3x3 {
 		return new Point3(m11 * p.x + m12 * p.y + m13 * p.z, 
 						  m21 * p.x + m22 * p.y + m23 * p.z, 
 						  m31 * p.x + m32 * p.y + m33 * p.z);
-		
-		// Alternative: delegieren  -  TODO: FRAGE: lieber delegieren? oder relevanter Performanceverlust? 
-//		final Vector3 v = mul(new Vector3(p.x, p.y, p.z));
-//		return new Point3(v.x, v.y, v.z);
 	}
 	
 	/**
