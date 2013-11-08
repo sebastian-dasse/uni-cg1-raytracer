@@ -21,5 +21,4 @@ public class FileDialog {
 		}
 		return chooser.getSelectedFile();
 	}
-
 }

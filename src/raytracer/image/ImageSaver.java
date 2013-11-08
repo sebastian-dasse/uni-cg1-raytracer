@@ -17,7 +17,7 @@ import raytracer.ui.FileDialog;
 
 public class ImageSaver {
 	public static void main(String[] args) throws IOException {
-		final BufferedImage image = new BufferedImage(100, 50,
+		final BufferedImage image = new BufferedImage(640, 480,
                 BufferedImage.TYPE_INT_ARGB);
         final JFrame frame = new JFrame();
         
