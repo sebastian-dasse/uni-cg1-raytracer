@@ -1,32 +1,35 @@
 package raytracer.image;
 
 import java.awt.Canvas;
-import java.awt.Container;
-import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
+
 import raytracer.ui.FileDialog;
 
 public class ImageViewer {
 	public static void main(String[] args) throws IOException {
 		final BufferedImage image = ImageIO.read(FileDialog.open());
-		JFrame frame = new JFrame();
-		try{
-			frame.setSize(image.getHeight(), image.getWidth());
-		} catch (NullPointerException e) { 
-			frame.setSize(250, 100);
-			frame.setTitle("Fehlermeldung");
-			Container container = frame.getContentPane();
-			container.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 20));
-			container.add(new JLabel("Falsche Datei"));
-			frame.setVisible(true);
-		}
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		final Canvas c = new Canvas() {
+		final JFrame frame = new JFrame();
+		
+		//---- SEB: NullPointException fangen finde ich eine schlechte Idee!
+		// mit meiner Verbesserung (?) von FileDialog.open() sollte es aber auch 
+		// keine NullPointerExceptions mehr geben
+		
+//		try{
+//			frame.setSize(image.getHeight(), image.getWidth());
+//		} catch (NullPointerException e) { 
+//			frame.setSize(250, 100);
+//			frame.setTitle("Fehlermeldung");
+//			Container container = frame.getContentPane();
+//			container.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 20));
+//			container.add(new JLabel("Falsche Datei"));
+//			frame.setVisible(true);
+//		}
+		final Canvas canvas = new Canvas() {
 			private static final long serialVersionUID = 1L;
 
 			public void paint(final Graphics g) {
@@ -34,7 +37,10 @@ public class ImageViewer {
 				g.drawImage(image, 0, 0, null);
 			}
 		};
-		frame.getContentPane().add(c);
+		frame.getContentPane().add(canvas);
+		
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setSize(image.getHeight(), image.getWidth());
 		frame.setVisible(true);
 	}
 }
