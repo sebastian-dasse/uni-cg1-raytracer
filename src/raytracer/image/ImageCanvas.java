@@ -10,26 +10,26 @@ import java.awt.image.WritableRaster;
 
 public final class ImageCanvas extends Canvas {
 	private Dimension size;
-	private BufferedImage imageCopy;
+	private BufferedImage image;
 
 	public ImageCanvas(Dimension size) {
 		this.size = size;
-		imageCopy = new BufferedImage((int)size.getWidth(), (int)size.getHeight(),
+		image = new BufferedImage((int)size.getWidth(), (int)size.getHeight(),
 				BufferedImage.TYPE_INT_ARGB);
 	}
 
 	public BufferedImage getImage() {
-		return imageCopy;
+		return image;
 	}
 	
 	public void setSize(Dimension size) {
 		this.size = size;
+		image = new BufferedImage((int)size.getWidth(), (int)size.getHeight(),
+				BufferedImage.TYPE_INT_ARGB);
 	}
 
 	public void paint(final Graphics g) {
 		super.paint(g);
-		final BufferedImage image = new BufferedImage((int)size.getWidth(), (int)size.getHeight(),
-				BufferedImage.TYPE_INT_ARGB);
 		final WritableRaster raster = image.getRaster();
 		final ColorModel colorModel = image.getColorModel();
 		Object dataRed = colorModel.getDataElements(Color.red.getRGB(), null);

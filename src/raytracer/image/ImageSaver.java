@@ -35,7 +35,7 @@ public class ImageSaver {
 		saveItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					ImageIO.write(mainCanvas.getImage(), "jpg", FileDialog.save());
+					ImageIO.write(mainCanvas.getImage(), "png", FileDialog.save());
 				} catch (IOException ie) { // SEB: mit catch wird die
 											// throws-Dekl. im Header von main
 											// überflüssig oder umgekehrt
