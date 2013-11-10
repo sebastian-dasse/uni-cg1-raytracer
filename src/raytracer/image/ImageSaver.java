@@ -1,10 +1,10 @@
 package raytracer.image;
 
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -17,42 +17,47 @@ import raytracer.ui.FileDialog;
 
 public class ImageSaver {
 	public static void main(String[] args) throws IOException {
-		final BufferedImage image = new BufferedImage(100, 50,
-				BufferedImage.TYPE_INT_ARGB);
+		final Dimension globalSize = new Dimension (640,480);
+		final ImageCanvas mainCanvas = new ImageCanvas(globalSize);
+		/* 
+		 * View
+		 */
 		final JFrame frame = new JFrame();
+		frame.setSize(globalSize);
 		JMenuBar menubar = new JMenuBar();
 		JMenu menu = new JMenu("File");
 		JMenuItem saveItem = new JMenuItem("Save");
 		menu.add(saveItem);
 		menubar.add(menu);
 		frame.setJMenuBar(menubar);
-		/*
-		 * Doesn't work jet - saves red mini image. Mega Quick and Dirty, has to
-		 * be refactored.
-		 */
+		frame.getContentPane().add(mainCanvas);
+		
 		saveItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					ImageIO.write(image, "jpg", FileDialog.save());
+					ImageIO.write(mainCanvas.getImage(), "jpg", FileDialog.save());
 				} catch (IOException ie) { // SEB: mit catch wird die
 											// throws-Dekl. im Header von main
 											// überflüssig oder umgekehrt
 				}
 			}
 		});
-		frame.setSize(640, 480);
-		final ImageCanvas drawing = new ImageCanvas(image);
-		frame.getContentPane().add(drawing);
+		
+		
 		/*
 		 * Listener could be refactored too - look for intelligent solution for
 		 * ListenerClasses.
 		 */
 		frame.addComponentListener(new ComponentAdapter() {
 			public void componentResized(ComponentEvent e) {
-				drawing.setSize(frame.getSize());
+				mainCanvas.setSize(frame.getSize());
 				frame.repaint();
 			}
 		});
+		
+		/*
+		 * Show view
+		 */
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 	}
