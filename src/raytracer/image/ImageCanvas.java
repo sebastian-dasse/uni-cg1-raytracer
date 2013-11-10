@@ -15,7 +15,7 @@ public final class ImageCanvas extends Canvas {
 	public ImageCanvas(Dimension size) {
 		this.size = size;
 		image = new BufferedImage((int)size.getWidth(), (int)size.getHeight(),
-				BufferedImage.TYPE_INT_ARGB);
+				BufferedImage.TYPE_INT_RGB);
 	}
 
 	public BufferedImage getImage() {
@@ -25,7 +25,7 @@ public final class ImageCanvas extends Canvas {
 	public void setSize(Dimension size) {
 		this.size = size;
 		image = new BufferedImage((int)size.getWidth(), (int)size.getHeight(),
-				BufferedImage.TYPE_INT_ARGB);
+				BufferedImage.TYPE_INT_RGB);
 	}
 
 	public void paint(final Graphics g) {

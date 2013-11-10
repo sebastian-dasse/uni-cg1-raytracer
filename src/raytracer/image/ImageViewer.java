@@ -26,12 +26,6 @@ public class ImageViewer {
 			frame.setVisible(true);
 		}
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		/*
-		 * Using canvas and anonymous paint method, since paint method body to
-		 * short to justify a new class. Using canvas because that way we use
-		 * the same object that will be applied in the ImageSaver and code is
-		 * easier to generalize in case it is desiiiiiired!
-		 */
 		final Canvas c = new Canvas() {
 			private static final long serialVersionUID = 1L;
 

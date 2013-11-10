@@ -36,18 +36,11 @@ public class ImageSaver {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					ImageIO.write(mainCanvas.getImage(), "png", FileDialog.save());
-				} catch (IOException ie) { // SEB: mit catch wird die
-											// throws-Dekl. im Header von main
-											// überflüssig oder umgekehrt
+				} catch (IOException ie) { 
 				}
 			}
 		});
 		
-		
-		/*
-		 * Listener could be refactored too - look for intelligent solution for
-		 * ListenerClasses.
-		 */
 		frame.addComponentListener(new ComponentAdapter() {
 			public void componentResized(ComponentEvent e) {
 				mainCanvas.setSize(frame.getSize());
