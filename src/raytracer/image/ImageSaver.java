@@ -36,7 +36,8 @@ public class ImageSaver {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					ImageIO.write(mainCanvas.getImage(), "png", FileDialog.save());
-				} catch (IOException ie) { 
+				} catch (IOException ie) {
+					System.err.println("An error occured during writing.");
 				}
 			}
 		});

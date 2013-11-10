@@ -48,7 +48,12 @@ public class FileDialog {
 		if (chooser.showSaveDialog(null) != JFileChooser.APPROVE_OPTION) {
 			System.exit(0);
 		}
-		return chooser.getSelectedFile();
+		
+		//---- SEB: bisher wurde ohne Dateiendung gespeichert - das ist zumindest unter Windows ein Problem beim Öffnen
+//		return chooser.getSelectedFile();
+		
+		// sieht allerdings noch etwas noch etwas nach einem schmutzigen Trick aus - vielleicht geht es noch eleganter und sicherer?
+		return new File(chooser.getSelectedFile() + ".png");
 	}
 	
 	/**
