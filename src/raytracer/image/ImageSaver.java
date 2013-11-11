@@ -20,7 +20,6 @@ public class ImageSaver {
 	
 	public static void main(String[] args) throws IOException {
 		final ImageCanvas mainCanvas = new ImageCanvas(WIDTH, HEIGHT);
-		
 		final JFrame frame = new JFrame();
 		frame.getContentPane().add(mainCanvas);
 		frame.addComponentListener(new ComponentAdapter() {
@@ -35,7 +34,7 @@ public class ImageSaver {
 		frame.setVisible(true);
 	}
 }
-//=============================================================================
+
 class ImageSaverMenuBar extends JMenuBar {
 	public ImageSaverMenuBar(final ImageCanvas canvas) {
 		final JMenu menu = new JMenu("File");

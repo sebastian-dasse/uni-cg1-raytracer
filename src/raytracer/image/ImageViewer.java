@@ -14,21 +14,6 @@ public class ImageViewer {
 	public static void main(String[] args) throws IOException {
 		final BufferedImage image = ImageIO.read(FileDialog.open());
 		final JFrame frame = new JFrame();
-		
-		//---- SEB: NullPointException fangen finde ich eine schlechte Idee!
-		// mit meiner Verbesserung (?) von FileDialog.open() sollte es aber auch 
-		// keine NullPointerExceptions mehr geben
-		
-//		try{
-//			frame.setSize(image.getHeight(), image.getWidth());
-//		} catch (NullPointerException e) { 
-//			frame.setSize(250, 100);
-//			frame.setTitle("Fehlermeldung");
-//			Container container = frame.getContentPane();
-//			container.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 20));
-//			container.add(new JLabel("Falsche Datei"));
-//			frame.setVisible(true);
-//		}
 		final Canvas canvas = new Canvas() {
 			private static final long serialVersionUID = 1L;
 
@@ -38,7 +23,6 @@ public class ImageViewer {
 			}
 		};
 		frame.getContentPane().add(canvas);
-		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(image.getHeight(), image.getWidth());
 		frame.setVisible(true);
