@@ -13,12 +13,14 @@ import raytracer.ui.FileDialog;
 /**
  * This class shows graphical image by creating an ImageIcon from an image object, that was choosed by class FileDialog.
  * 
- * @author 
+ * @author Maxim Novichkov
  *
  */
 
 public class ImageViewer {
     /**
+     * Opens FileDialog and loads selected image into 
+     * the JFrame.
      * @args
      * @throws IOException if it is not possible to read the resulting stream by registered ImageReader.
      */

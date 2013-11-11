@@ -18,21 +18,26 @@ import raytracer.ui.FileDialog;
  * This class shows opens a 604 x 480 px windows and generates an image of the same size. The image simply shows a red 
  * diagonal line drawn from the left upper corner to the right bottom corner on black background. The program
  * 
- * @author 
+ * @author Max Novichkov
+ * @author Simon Lischka
+ * @author Sebastian Dassé
  *
  */
 public class ImageSaver {
 	/**
-	 * TODO
+	 * Width definition for generated image
 	 */
 	public static final int WIDTH = 640;
 	/**
-	 * TODO 
+	 * Height definition for generated image
 	 */
 	public static final int HEIGHT = 480;
 	
 	/**
-	 * TODO
+	 * Generates an image containing a diagonal and draw the
+	 * the applications view. 
+	 * 
+	 * Throws IOExcepztion when file cannot be saved.
 	 * 
 	 * @param args
 	 * @throws IOException
@@ -55,14 +60,17 @@ public class ImageSaver {
 }
 
 /**
- * TODO
+ * Contains the Menubar View. Writes the image to 
+ * the filename specified in the save-Dialog.
  * 
- * @author 
+ * @author Max Novichkov
+ * 
  *
  */
 class ImageSaverMenuBar extends JMenuBar {
 	/**
-	 * TODO
+	 * Builds the menu structure and opens file dialog
+	 * when Menu-Item "Save" is selected.
 	 * 
 	 * @param canvas
 	 */

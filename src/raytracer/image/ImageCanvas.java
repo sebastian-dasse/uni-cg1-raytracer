@@ -19,11 +19,11 @@ import java.awt.image.WritableRaster;
  */
 public final class ImageCanvas extends Canvas {
 	/**
-	 * TODO
+	 * Size definition, which is used to generate the BufferedImage object.
 	 */
 	private Dimension size;
 	/**
-	 * TODO
+	 *  Image object, contains generated image data.
 	 */
 	private BufferedImage image;
 	
