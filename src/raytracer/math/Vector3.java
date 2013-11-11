@@ -188,7 +188,7 @@ public class Vector3 implements Comparable<Vector3> {
 		// Ebene		<x - u, q> mit u = 0 und q := n
 		// Gerade		g(r) = a + rq mit a := this. Die Gerade durch a und den Lotfußpunkt von a auf der Ebene
 		// Parameter	r = -<a - u, q> /|q|², d.h. für den Nenner wird a in die negative Ebenengleichung eingesetzt
-		// Spiegelpunkt	a' = g(2rp)
+		// Spiegelpunkt	a' = g(2r)
 		final double r = -(x * n.x + y * n.y + z * n.z) 
 						/ (n.x * n.x + n.y * n.y + n.z * n.z);
 		return this.add(n.mul(2 * r));
