@@ -1,11 +1,10 @@
 package raytracer.image;
 /**
  * This immutable class represents the canvas for a diagonal line on black background.
- * When initalized, it generates an BufferedImage with the dimension defined in its constructor. 
+ * It is initialized with size parameters. 
  * 
  * The class includes a paint method which is called to display the generated image.
- * With the getter and setter methods the BufferedImage can be retrieved or
- * modified in its size.
+ * It also includes methods to change its size and retrieve the embedded BufferedImage object.
  * 
  * @author Simon Lischka
  */
@@ -21,10 +20,11 @@ public final class ImageCanvas extends Canvas {
 	private Dimension size;
 	private BufferedImage image;
 /**
- * Constructor, generates internal ImageBuffer with passed over size parameters, 
- * sets ColorModel to TYPE_INT_RGB.
+ * Initializes the BufferedImage object with the size parameters specified methods parameters.
+ * Sets the ColorModel to TYPE_INT_RGB.
  * 
- * @param size
+ * @param width
+ * @param height
  */
 	public ImageCanvas(Dimension size) {
 		this.size = size;
@@ -33,8 +33,8 @@ public final class ImageCanvas extends Canvas {
 	}
 
 /**
- * Constructor, generates internal ImageBuffer with passed over size parameters, 
- * sets ColorModel to TYPE_INT_RGB.
+ * Initializes the BufferedImage object with the size parameters specified methods parameters.
+ * Sets the ColorModel to TYPE_INT_RGB.
  * 
  * @param width
  * @param height
@@ -48,8 +48,8 @@ public final class ImageCanvas extends Canvas {
 	}
 
 /**
- * Reinitializes the BufferedImage with new size parameters.
- * 
+ * Changes the size of the ImageCanvas object by modifying the classes
+ * size parameter and recreating the BufferedImage-object.
  * @param size
  */
 	public void setSize(Dimension size) {
