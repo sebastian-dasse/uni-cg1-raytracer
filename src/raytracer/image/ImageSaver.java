@@ -1,6 +1,5 @@
 package raytracer.image;
 
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
@@ -16,43 +15,41 @@ import javax.swing.JMenuItem;
 import raytracer.ui.FileDialog;
 
 public class ImageSaver {
+	public static final int WIDTH = 640;
+	public static final int HEIGHT = 480;
+	
 	public static void main(String[] args) throws IOException {
-		final Dimension globalSize = new Dimension (640,480);
-		final ImageCanvas mainCanvas = new ImageCanvas(globalSize);
-		/* 
-		 * View
-		 */
+		final ImageCanvas mainCanvas = new ImageCanvas(WIDTH, HEIGHT);
+		
 		final JFrame frame = new JFrame();
-		frame.setSize(globalSize);
-		JMenuBar menubar = new JMenuBar();
-		JMenu menu = new JMenu("File");
-		JMenuItem saveItem = new JMenuItem("Save");
-		menu.add(saveItem);
-		menubar.add(menu);
-		frame.setJMenuBar(menubar);
 		frame.getContentPane().add(mainCanvas);
-		
-		saveItem.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				try {
-					ImageIO.write(mainCanvas.getImage(), "png", FileDialog.save());
-				} catch (IOException ie) {
-					System.err.println("An error occured during writing.");
-				}
-			}
-		});
-		
 		frame.addComponentListener(new ComponentAdapter() {
 			public void componentResized(ComponentEvent e) {
 				mainCanvas.setSize(frame.getSize());
 				frame.repaint();
 			}
 		});
-		
-		/*
-		 * Show view
-		 */
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setSize(WIDTH, HEIGHT);
+		frame.setJMenuBar(new ImageSaverMenuBar(mainCanvas));
 		frame.setVisible(true);
+	}
+}
+//=============================================================================
+class ImageSaverMenuBar extends JMenuBar {
+	public ImageSaverMenuBar(final ImageCanvas canvas) {
+		final JMenu menu = new JMenu("File");
+		final JMenuItem saveItem = new JMenuItem("Save");
+		saveItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					ImageIO.write(canvas.getImage(), "png", FileDialog.save());
+				} catch (IOException ie) {
+					System.err.println("An error occured during writing.");
+				}
+			}
+		});
+		menu.add(saveItem);
+		add(menu);
 	}
 }

@@ -17,6 +17,10 @@ public final class ImageCanvas extends Canvas {
 		image = new BufferedImage((int)size.getWidth(), (int)size.getHeight(),
 				BufferedImage.TYPE_INT_RGB);
 	}
+	
+	public ImageCanvas(int width, int height) {
+		this(new Dimension(width, height));
+	}
 
 	public BufferedImage getImage() {
 		return image;
