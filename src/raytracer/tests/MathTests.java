@@ -19,7 +19,7 @@ public class MathTests extends TestCase {
 	 */
 	
 	/**
-	 * Test Definitions
+	 * Test Definitions ;-)
 	 */
 	public void testVectorOperations() {
 		Assert.assertEquals(new Normal3(0.5, 1, 1.5), new Normal3(1, 2, 3).mul(0.5));
