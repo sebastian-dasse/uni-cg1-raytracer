@@ -33,7 +33,6 @@ public class Vector3 {
 	 */
 	public final double magnitude;
 	
-	// TODO: evtl. Parameter checken: Werte > Double.MAX_VALUE oder < -Double.MAX_VALUE oder +-Infinity oder NaN verbieten
 	/**
 	 * Constructs a new <code>Vector3</code> based on the three specified coordinates.
 	 * 
