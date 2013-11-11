@@ -14,65 +14,72 @@
 \begin{document}
 
 \maketitle
+
 \section{Aufgabenstellung}
-\subsection{
+\subsection{}
 Implementierung einer Klasse zum Laden und Anzeigen eines Bildes, das mit einem File-Open Dialog ge\"offnet wird.
-}
-\subsection{
-Pixelweise zeichnen einer Diagonale auf einem schwarzen Hintergrund, welches sich korrekt der Fenstergr\"o\ss{}e anpasst. Funktionalit\"at zum Speichern des Bildes als PNG-Datei.
-}
-\subsection{
+
+\subsection{}
+Pixelweises zeichnen einer Diagonale auf einem schwarzen Hintergrund, welches sich korrekt der Fenstergr\"o\ss{}e anpasst. Funktionalit\"at zum Speichern des Bildes als PNG-Datei.
+
+\subsection{}
 Generierung einer Matrizen- und Vektorenklasse, die spezifische Operationen zu 3er Matrizen, Vektoren, Punkten und Normalen anbietet.
-}
-\subsection{
-Testen der Matrizen- und Vektorenklasse durch Durchf\"Ehrung und \"Uberprüfung exemplarischer Rechnungen.
-}
+
+\subsection{}
+Testen der Matrizen- und Vektorenklasse durch Durchf\"Ehrung und \"Uberpr\"ufung exemplarischer Rechnungen.
+
 
 \section{L\"osungsstrategien}
-\subsection{
+\subsection{}
 Die grundliegende Klassenstruktur wurde zun\"achst unter Zuhilfenahme der Java API-Doc geplant. Die Klasse wurden 
-dann zun\"achst als leere Vorlagen generiert um nach dem Divide-and-Conquer Prinzip eine St\"ruckweise Erarbeitung des Programmes
+dann als leere Vorlagen generiert um nach dem Divide-and-Conquer Prinzip eine St\"uckweise Erarbeitung des Programmes
 durch die Teammitglieder zu Erm\"oglichen.
-}
-\subsection{
-Verschachtelte oder voneinander abh\"anginge Objekte wurden zun\"achst strukturell erarbeitet und getestet, damit anschlie\ss{}end 
-die korrekte Funktionsweise im Gesamtkontext hergestellt werden konnte. Fehler in dem Ausgabebild o.\"a. wurden zun\"achst in dieser
-abstrakteren Betrachtungsweise ignoriert.
-}
-\subsection{
-Teaminterne Kommunikation und Informationsaustausch um Beitr\"age aller Mitglieder zu f\"ordern wurde in regelm\"a\ss{}ige Meetings 
+
+\subsection{}
+Verschachtelte oder voneinander abh\"anginge Objekte wurden strukturell erarbeitet und getestet, damit anschlie\ss{}end 
+die korrekte Funktionsweise im Gesamtkontext hergestellt werden konnte. Fehler in dem Ausgabebild o.\"a. sind in dieser
+zu ignorieren.
+
+\subsection{}
+Teaminterne Kommunikation und Informationsaustausch um Beitr\"age aller Mitglieder zu f\"ordern wurde in regelm\"a\ss{}igen Meetings 
 vorgenommen.
-}
+
+
+\section{Besondere Probleme}
+\subsection{}
+Ein Problem entstand bei der Implementierung der ImageViewer-Klasse. Zun\"achst war es vorgesehen, das Bild
+auch auf ein Canvas zu zeichnen. Allerdings war es bis zum Abgabezeitpunkt nicht m\"glich, die Gr\"o\ss{}en 
+verschiedener Bilder bei jeder getesteten Datei korrekt auf das Canvas zu \?ubertragen.
+
+
 \section{Implementierung}
-\subsection{
-Bei der Implementierung des ImageViewers ging es darum einen m\"glichst kurzen L\"osungsweg zu finden. Aus diesem Grund
-griffen wir auf ein ImageIcon Objekt zu, welches f\"ur die korrekte Darstellung sorgt und die Gr\"o\ss{} ordnungsgem\"a\ss{} mit
-dem pack() Befehl anpasst.
-}
-\subsection{
-Um ein Bild zu generieren und zu Speichern wurde in einer ImageCanvas Klasse ein BufferedImage Objekt als Instanzvariable
-festgelegt, welche nach extrahieren des Rasters zum Zeichnen in der paint() Methode des Canvas benutzt wird.
-Mit dieser Vorgehensweise ist es m\"oglich, Klassenintern das BufferedImage Objekt auszutauschen, um die Gr\"o\ss{} des
+\subsection{}
+Bei der Implementierung des ImageViewers ging es darum, einen m\"oglichst effizienten L\"osungsweg zu finden. Aus diesem Grund
+griffen wir auf ein ImageIcon Objekt zu, welches f\"ur die korrekte Darstellung sorgt und die Gr\"o\ss{}e  mit
+dem pack() Befehl anpassen kann.
+
+\subsection{}
+Um ein Bild zu generieren und zu Speichern wurde in einer ImageCanvas Klasse ein BufferedImage
+Objekt als Instanzvariable
+festgelegt, welches nach Extrahieren des Rasters zum Zeichnen in der paint() Methode des
+Canvas benutzt wird.
+Mit dieser Vorgehensweise ist es m\"oglich, Klassenintern das BufferedImage Objekt auszutauschen, 
+um die Gr\"o\ss{}e des
 Bildes z.b. bei Ver\"anderungen der Fenstergr\"o\ss{}e anzupassen.
-}
-\subsection{
+
+\subsection{}
 Die Vektor- und Matritzenklassen wurden gem\"a\ss{} den Vorgaben implementiert und werfen IllegalArgumentExceptions, 
 wenn die \"ubergebenen Parameter falsch sind.  Dies wird vor dem Durchf\"uhren der Kalkulation gepr\?uft.
 Um ein zuverl\"assiges Testen der Funktionen zu Erm\"oglichen, wurde zudem ein getrenntes Testpackage angelegt,
 in dem die Tests mit JUnit durchgef\"uhrt werden. Diese Struktur erm\?oglicht eine problemlose Expandierung der Tests
 mit wachsendem Projektumfang.
-}
-\section{Besondere Probleme}
-\subsection{
-Ein Problem entstand bei der Implementierung der ImageViewer-Klasse, zun\?achst war es vorgesehen, das Bild
-auch auf ein Canvas zu zeichnen. Allerdings war es bis zum Abgabezeitpunkt nicht m\"glich, die Gr\"o\ss{}en 
-verschiedener Bilder bei jeder getesteten Datei korrekt auf das Canvas zu \?übertragen.
-}
+
+
 \section{Zeitbedarf}
-\subsection{
+\subsection{}
 Der Zeitbedarf wurde bei allen Teammitgliedern mit jeweils 10-15 Stunden angegeben. Dabei 
 wurde viel Zeit damit verwendet, sich auf das GIT-System einzuarbeiten und die grundliegenden
 Komponenten der Bilddarstellung nachzuvollziehen.
-}
+
 
 \end{document} 
