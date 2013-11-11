@@ -11,23 +11,16 @@ import javax.swing.JLabel;
 import raytracer.ui.FileDialog;
 
 /**
-<<<<<<< HEAD
- * TODO
+ * This class shows graphical image by creating an ImageIcon from an image object, that was choosed by class FileDialog.
  * 
  * @author 
  *
  */
-=======
- * This class shows graphical image by creating an ImageIcon from an image
-object, that was choosed by class FileDialog.
- */
 
->>>>>>> e45ac2a8989689378da9f6379de5f7c2e97c4f70
 public class ImageViewer {
     /**
      * @args
-     * @throws IOException if it is not possible to read the resulting
-stream by registered ImageReader.
+     * @throws IOException if it is not possible to read the resulting stream by registered ImageReader.
      */
     public static void main(String[] args) throws IOException {
         /**
