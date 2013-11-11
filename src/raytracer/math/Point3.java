@@ -25,7 +25,6 @@ public class Point3 {
 	 */
 	public final double z;
 	
-	// TODO: evtl. Parameter checken: Werte > Double.MAX_VALUE oder < -Double.MAX_VALUE oder +-Infinity oder NaN verbieten
 	/**
 	 * Constructs a new <code>Point3</code> based on the three specified coordinates.
 	 * 

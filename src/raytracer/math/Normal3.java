@@ -27,7 +27,6 @@ public class Normal3 {
 	 */
 	public final double z;
 	
-	// TODO: evtl. Parameter checken: Werte > Double.MAX_VALUE oder < -Double.MAX_VALUE oder +-Infinity oder NaN verbieten
 	/**
 	 * Constructs a new <code>Normal3</code> based on the three specified coordinates. The null vector (0, 0, 0) is prevented  
 	 * from being constructed as <code>Normal3</code>.
@@ -48,7 +47,6 @@ public class Normal3 {
 		this.z = z;
 	}
 	
-	// TODO: evtl. Parameter checken: Werte > Double.MAX_VALUE oder < -Double.MAX_VALUE oder +-Infinity oder NaN verbieten
 	/**
 	 * Calculates the scalar multiplication (not to be confused with the scalar product!) of this <code>Normal3</code> 
 	 * with the specified double value.

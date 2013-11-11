@@ -61,7 +61,6 @@ public class Mat3x3 {
 	 */
 	public final double determinant;
 	
-	// TODO: evtl. Parameter checken: Werte > Double.MAX_VALUE oder < -Double.MAX_VALUE oder +-Infinity oder NaN verbieten
 	/**
 	 * Constructs a new <code>Mat3x3</code> based on the nine specified components.
 	 * 
