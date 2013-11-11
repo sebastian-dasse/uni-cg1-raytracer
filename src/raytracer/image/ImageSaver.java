@@ -14,10 +14,29 @@ import javax.swing.JMenuItem;
 
 import raytracer.ui.FileDialog;
 
+/**
+ * This class shows opens a 604 x 480 px windows and generates an image of the same size. The image simply shows a red 
+ * diagonal line drawn from the left upper corner to the right bottom corner on black background. The program
+ * 
+ * @author 
+ *
+ */
 public class ImageSaver {
+	/**
+	 * TODO
+	 */
 	public static final int WIDTH = 640;
+	/**
+	 * TODO 
+	 */
 	public static final int HEIGHT = 480;
 	
+	/**
+	 * TODO
+	 * 
+	 * @param args
+	 * @throws IOException
+	 */
 	public static void main(final String[] args) throws IOException {
 		final ImageCanvas mainCanvas = new ImageCanvas(WIDTH, HEIGHT);
 		final JFrame frame = new JFrame();
@@ -35,7 +54,18 @@ public class ImageSaver {
 	}
 }
 
+/**
+ * TODO
+ * 
+ * @author 
+ *
+ */
 class ImageSaverMenuBar extends JMenuBar {
+	/**
+	 * TODO
+	 * 
+	 * @param canvas
+	 */
 	public ImageSaverMenuBar(final ImageCanvas canvas) {
 		final JMenu menu = new JMenu("File");
 		final JMenuItem saveItem = new JMenuItem("Save");

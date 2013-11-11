@@ -6,8 +6,20 @@ import java.io.IOException;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+/**
+ * TODO
+ * 
+ * @author 
+ *
+ */
 public class FileDialog {
 	
+	/**
+	 * TODO
+	 * 
+	 * @return
+	 * @throws IOException
+	 */
 	public static File open() throws IOException {
 		final JFileChooser chooser = new JFileChooser();
 		final FileNameExtensionFilter filter = new FileNameExtensionFilter(
@@ -25,6 +37,12 @@ public class FileDialog {
 		return file;
 	}
 
+	/**
+	 * TODO
+	 * 
+	 * @return
+	 * @throws IOException
+	 */
 	public static File save() throws IOException {
 		JFileChooser chooser = new JFileChooser();
 		if (chooser.showSaveDialog(null) != JFileChooser.APPROVE_OPTION) {
@@ -34,14 +52,14 @@ public class FileDialog {
 	}
 	
 	/**
-	 * Returns the extension of the given file as a lower case String.
+	 * This private method returns the extension of the given file as a lower case String.
 	 * 
 	 * @param file	The file to be checked for its extension
 	 * @return		The file extension or null if the file has no extension
 	 */
-	private static String getFileExtension(File file) {
-		String filename = file.getName();
-		int i = filename.lastIndexOf('.');
+	private static String getFileExtension(final File file) {
+		final String filename = file.getName();
+		final int i = filename.lastIndexOf('.');
 		return (i == -1) ? null : filename.substring(i + 1, filename.length()).toLowerCase();
 	}
 }

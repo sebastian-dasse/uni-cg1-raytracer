@@ -10,6 +10,12 @@ import javax.swing.JLabel;
 
 import raytracer.ui.FileDialog;
 
+/**
+ * TODO
+ * 
+ * @author 
+ *
+ */
 public class ImageViewer {
 	public static void main(final String[] args) throws IOException {
 		final BufferedImage image = ImageIO.read(FileDialog.open());

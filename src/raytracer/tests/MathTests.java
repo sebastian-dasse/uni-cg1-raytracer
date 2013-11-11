@@ -8,6 +8,8 @@ import raytracer.math.Point3;
 import raytracer.math.Vector3;
 
 /**
+ * TODO
+ * 
  * @author Sebastian Dass&eacute;
  */
 public class MathTests extends TestCase {
@@ -16,6 +18,9 @@ public class MathTests extends TestCase {
 	 * @see junit.framework.TestCase#setUp()
 	 */
 	
+	/**
+	 * TODO
+	 */
 	public void testVectorOperations() {
 		Assert.assertEquals(new Normal3(0.5, 1, 1.5), new Normal3(1, 2, 3).mul(0.5));
 		
