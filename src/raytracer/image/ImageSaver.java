@@ -18,7 +18,7 @@ public class ImageSaver {
 	public static final int WIDTH = 640;
 	public static final int HEIGHT = 480;
 	
-	public static void main(String[] args) throws IOException {
+	public static void main(final String[] args) throws IOException {
 		final ImageCanvas mainCanvas = new ImageCanvas(WIDTH, HEIGHT);
 		final JFrame frame = new JFrame();
 		frame.getContentPane().add(mainCanvas);

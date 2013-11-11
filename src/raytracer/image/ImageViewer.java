@@ -11,7 +11,7 @@ import javax.swing.JLabel;
 import raytracer.ui.FileDialog;
 
 public class ImageViewer {
-	public static void main(String[] args) throws IOException {
+	public static void main(final String[] args) throws IOException {
 		final BufferedImage image = ImageIO.read(FileDialog.open());
 		final JFrame frame = new JFrame();
 		frame.getContentPane().add(new JLabel(new ImageIcon(image)));
