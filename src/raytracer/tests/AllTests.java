@@ -4,17 +4,17 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * TODO
+ * Test runner for raytracer tests
  * 
- * @author 
+ * @author Simon Lischka
  *
  */
 public class AllTests {
 	
 	/**
-	 * TODO
+	 * Creates new test suite with MathTest-Class
 	 * 
-	 * @return
+	 * @return suite
 	 */
 	public static Test suite() {
 		TestSuite suite = new TestSuite();
@@ -23,7 +23,7 @@ public class AllTests {
 	}
 	
 	/**
-	 * TODO
+	 * Runs test suite
 	 * 
 	 * @param args
 	 */
