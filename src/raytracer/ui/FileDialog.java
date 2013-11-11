@@ -7,17 +7,20 @@ import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
- * TODO
+ * Class contains the File Dialog for opening and saving image.
  * 
- * @author 
+ * @author Max Novichkov
+ * @author Sebastian Dassé
+ * @author Simon Lischka
  *
  */
 public class FileDialog {
 	
 	/**
-	 * TODO
+	 * Open Dialog, with predifined filter for JPG and PNG images.
+	 * Prompts user for file selection until valid selection is made.
 	 * 
-	 * @return
+	 * @return File
 	 * @throws IOException
 	 */
 	public static File open() throws IOException {
@@ -38,9 +41,10 @@ public class FileDialog {
 	}
 
 	/**
-	 * TODO
+	 * Opens Save-Dialog, appends filename entry with .png ending
+	 * after user entry.
 	 * 
-	 * @return
+	 * @return File
 	 * @throws IOException
 	 */
 	public static File save() throws IOException {
