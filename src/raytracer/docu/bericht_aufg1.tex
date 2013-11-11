@@ -8,7 +8,7 @@
 \usepackage{epstopdf}
 \DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
 \title{CGI: Bericht zu Aufgabe 1, Raytracer}
-\author{von Sebastian Dassé, Max Novichkov, Simon  Lischka }
+\author{von Sebastian Dass\'{e}, Max Novichkov, Simon Lischka }
 \date{11.11.2013}    
 
 \begin{document}
@@ -26,14 +26,14 @@ Pixelweises zeichnen einer Diagonale auf einem schwarzen Hintergrund, welches si
 Generierung einer Matrizen- und Vektorenklasse, die spezifische Operationen zu 3er Matrizen, Vektoren, Punkten und Normalen anbietet.
 
 \subsection{}
-Testen der Matrizen- und Vektorenklasse durch Durchf\"Ehrung und \"Uberpr\"ufung exemplarischer Rechnungen.
+Testen der Matrizen- und Vektorenklasse durch Durchf\"uhrung und \"Uberpr\"ufung exemplarischer Rechnungen.
 
 
 \section{L\"osungsstrategien}
 \subsection{}
-Die grundliegende Klassenstruktur wurde zun\"achst unter Zuhilfenahme der Java API-Doc geplant. Die Klasse wurden 
-dann als leere Vorlagen generiert um nach dem Divide-and-Conquer Prinzip eine St\"uckweise Erarbeitung des Programmes
-durch die Teammitglieder zu Erm\"oglichen.
+Zun\"achst wurde die grundlegende Klassenstruktur unter Zuhilfenahme der Java API-Doc geplant. Die Klasse wurden 
+dann als leere Vorlagen generiert, um nach dem Divide-and-Conquer Prinzip eine st\"uckweise Erarbeitung des Programmes
+durch die Teammitglieder zu erm\"oglichen.
 
 \subsection{}
 Verschachtelte oder voneinander abh\"anginge Objekte wurden strukturell erarbeitet und getestet, damit anschlie\ss{}end 
@@ -49,7 +49,7 @@ vorgenommen.
 \subsection{}
 Ein Problem entstand bei der Implementierung der ImageViewer-Klasse. Zun\"achst war es vorgesehen, das Bild
 auch auf ein Canvas zu zeichnen. Allerdings war es bis zum Abgabezeitpunkt nicht m\"glich, die Gr\"o\ss{}en 
-verschiedener Bilder bei jeder getesteten Datei korrekt auf das Canvas zu \?ubertragen.
+verschiedener Bilder bei jeder getesteten Datei korrekt auf das Canvas zu \"ubertragen.
 
 
 \section{Implementierung}
@@ -59,26 +59,24 @@ griffen wir auf ein ImageIcon Objekt zu, welches f\"ur die korrekte Darstellung 
 dem pack() Befehl anpassen kann.
 
 \subsection{}
-Um ein Bild zu generieren und zu Speichern wurde in einer ImageCanvas Klasse ein BufferedImage
-Objekt als Instanzvariable
-festgelegt, welches nach Extrahieren des Rasters zum Zeichnen in der paint() Methode des
+Um ein Bild zu generieren und zu speichern, wurde in einer ImageCanvas-Klasse ein BufferedImage-Objekt als Instanzvariable
+festgelegt, welches nach Extrahieren des Rasters zum Zeichnen in der paint()-Methode des
 Canvas benutzt wird.
-Mit dieser Vorgehensweise ist es m\"oglich, Klassenintern das BufferedImage Objekt auszutauschen, 
-um die Gr\"o\ss{}e des
-Bildes z.b. bei Ver\"anderungen der Fenstergr\"o\ss{}e anzupassen.
+Mit dieser Vorgehensweise ist es m\"oglich, klassenintern das BufferedImage Objekt auszutauschen, 
+um die Gr\"o\ss{}e des Bildes z.b. bei Ver\"anderungen der Fenstergr\"o\ss{}e anzupassen.
 
 \subsection{}
 Die Vektor- und Matritzenklassen wurden gem\"a\ss{} den Vorgaben implementiert und werfen IllegalArgumentExceptions, 
-wenn die \"ubergebenen Parameter falsch sind.  Dies wird vor dem Durchf\"uhren der Kalkulation gepr\?uft.
+wenn die \"ubergebenen Parameter falsch sind. Dies wird vor dem Durchf\"uhren der Kalkulation gepr\"uft.
 Um ein zuverl\"assiges Testen der Funktionen zu Erm\"oglichen, wurde zudem ein getrenntes Testpackage angelegt,
-in dem die Tests mit JUnit durchgef\"uhrt werden. Diese Struktur erm\?oglicht eine problemlose Expandierung der Tests
+in dem die Tests mit JUnit durchgef\"uhrt werden. Diese Struktur erm\"oglicht eine problemlose Expandierung der Tests
 mit wachsendem Projektumfang.
 
 
 \section{Zeitbedarf}
 \subsection{}
 Der Zeitbedarf wurde bei allen Teammitgliedern mit jeweils 10-15 Stunden angegeben. Dabei 
-wurde viel Zeit damit verwendet, sich auf das GIT-System einzuarbeiten und die grundliegenden
+wurde viel Zeit damit verwendet, sich auf das GIT-System einzuarbeiten und die zugrundeliegenden
 Komponenten der Bilddarstellung nachzuvollziehen.
 
 
