@@ -1,15 +1,29 @@
 package raytracer;
 
-import raytracer.math.Point3;
+import raytracer.geometry.Hit;
 
+/**
+ * @author 
+ *
+ */
 public class World {
-	private final Color backgroundColor; 
+	/**
+	 * 
+	 */
+	public final Color backgroundColor; 
 	
-	public World(Color backgroundColor) {
+	/**
+	 * @param backgroundColor
+	 */
+	public World(final Color backgroundColor) {
 		this.backgroundColor = backgroundColor;
 	}
 	
-	public Point3 hit (Ray inputRay) {
+	/**
+	 * @param inputRay
+	 * @return
+	 */
+	public Hit hit (final Ray inputRay) {
 		return null;
 	}
 }

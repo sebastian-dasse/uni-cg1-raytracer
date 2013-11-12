@@ -1,18 +1,43 @@
 package raytracer.geometry;
 
-import java.awt.Color;
-
+import raytracer.Color;
+import raytracer.Ray;
 import raytracer.math.Point3;
 
-public class Triangle extends Color {
-	private final Point3 a;
-	private final Point3 b;
-	private final Point3 c;
+/**
+ * @author 
+ *
+ */
+public class Triangle extends Geometry {
+	/**
+	 * 
+	 */
+	public final Point3 a;
+	/**
+	 * 
+	 */
+	public final Point3 b;
+	/**
+	 * 
+	 */
+	public final Point3 c;
 	
-	public Triangle(Point3 a, Point3 b, Point3 c, Color color) {
+	/**
+	 * @param a
+	 * @param b
+	 * @param c
+	 * @param color
+	 */
+	public Triangle(final Point3 a, final Point3 b, final Point3 c, final Color color) {
 		super(color);
 		this.a = a;
 		this.b = b;
 		this.c = c;
+	}
+
+	@Override
+	public Hit hit(final Ray ray) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

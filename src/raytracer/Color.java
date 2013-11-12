@@ -1,29 +1,63 @@
 package raytracer;
 
+/**
+ * @author 
+ *
+ */
 public class Color {
-	private final double r;
-	private final double g;
-	private final double b;
+	/**
+	 * 
+	 */
+	public final double r;
+	/**
+	 * 
+	 */
+	public final double g;
+	/**
+	 * 
+	 */
+	public final double b;
 	
-	public Color(double r, double g, double b) {
+	/**
+	 * @param r
+	 * @param g
+	 * @param b
+	 */
+	public Color(final double r, final double g, final double b) {
 		this.r = r;
 		this.g = g;
 		this.b = b;
 	}
 	
-	public Color add(Color c) {
+	/**
+	 * @param c
+	 * @return
+	 */
+	public Color add(final Color c) {
 		return null;
 	}
 	
-	public Color sub(Color c) {
+	/**
+	 * @param c
+	 * @return
+	 */
+	public Color sub(final Color c) {
 		return null;
 	}
 	
-	public Color mul(Color c) {
+	/**
+	 * @param c
+	 * @return
+	 */
+	public Color mul(final Color c) {
 		return null;
 	}
 	
-	public Color mul(double v) {
+	/**
+	 * @param v
+	 * @return
+	 */
+	public Color mul(final double v) {
 		return null;
 	}
 }
