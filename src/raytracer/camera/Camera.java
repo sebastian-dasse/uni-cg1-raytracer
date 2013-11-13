@@ -12,6 +12,14 @@ public abstract class Camera {
 	public final Vector3 v;
 	public final Vector3 w;
 	
+	public Camera(final Point3 e, final Vector3 g, final Vector3 t, final Vector3 u, final Vector3 v, final Vector3 w){
+		this.e = e;
+		this.g = g;
+		this.t = t;
+		this.u = u;
+		this.v = v;
+		this.w = w;
+	}
 	
 	public abstract void Camera(final Point3 e, final Vector3 g, final Vector3 t);
 	
