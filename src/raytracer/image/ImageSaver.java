@@ -20,7 +20,7 @@ import raytracer.ui.FileDialog;
  * 
  * @author Max Novichkov
  * @author Simon Lischka
- * @author Sebastian Dassé
+ * @author Sebastian Dass&eacute;
  *
  */
 public class ImageSaver {

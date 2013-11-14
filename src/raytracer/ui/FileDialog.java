@@ -10,7 +10,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  * Class contains the File Dialog for opening and saving image.
  * 
  * @author Max Novichkov
- * @author Sebastian Dassé
+ * @author Sebastian Dass&eacute;
  * @author Simon Lischka
  *
  */

@@ -11,7 +11,7 @@ import javax.swing.JLabel;
 import raytracer.ui.FileDialog;
 
 /**
- * This class shows graphical image by creating an ImageIcon from an image object, that was choosed by class FileDialog.
+ * This class shows a graphical image by creating an ImageIcon from an image object, that was chosen by class FileDialog.
  * 
  * @author Maxim Novichkov
  *
