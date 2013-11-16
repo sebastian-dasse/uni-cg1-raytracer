@@ -67,7 +67,7 @@ public class Normal3 {
 	/**
 	 * Adds the specified <code>Normal3</code> to this <code>Normal3</code>.
 	 * 
-	 * @param n The <code>Normal3</code> to be added. Must not be null.
+	 * @param n The <code>Normal3</code> to be added. Must not be <code>null</code>.
 	 * @return	The resulting <code>Normal3</code>.
 	 */
 	public Normal3 add(final Normal3 n) {
@@ -83,7 +83,7 @@ public class Normal3 {
 	 * Calculates the scalar product (or dot product) of this <code>Normal3</code> with the specified 
 	 * <code>Vector3</code>.
 	 * 
-	 * @param v The other vector of the scalar product. Must not be null.
+	 * @param v The other vector of the scalar product. Must not be <code>null</code>.
 	 * @return	The resulting scalar.
 	 */
 	public double dot(final Vector3 v) {
@@ -91,6 +91,15 @@ public class Normal3 {
 			throw new IllegalArgumentException("The parameter 'v' must not be null.");
 		}
 		return x * v.x + y * v.y + z * v.z;
+	}
+	
+	/**
+	 * Converts this <code>Normal3</code> to <code>Vector3</code>.
+	 * 
+	 * @return The <code>Vector3</code>.
+	 */
+	public Vector3 asVector() {
+		return new Vector3(x, y, z);
 	}
 	
 	@Override

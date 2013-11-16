@@ -46,17 +46,9 @@ public class MathTests extends TestCase {
 		Assert.assertEquals(new Vector3(5, 4, 3), new Vector3(1, 1, 1).add(new Vector3(4, 3, 2)));
 		Assert.assertEquals(new Vector3(-3, -2, -1), new Vector3(1, 1, 1).sub(new Normal3(4, 3, 2)));
 		
-		// TODO
-		// erwartet laut Aufgabenlatt:
-//		Assert.assertEquals(new Vector3(0.707, 0.707, 0), new Vector3(-0.707, 0.707, 0).reflectedOn(new Normal3(0, 1, 0)));
-		// erwartet nach meinem mathematischen Verständnis:
-		Assert.assertEquals(new Vector3(-0.707, -0.707, 0), new Vector3(-0.707, 0.707, 0).reflectedOn(new Normal3(0, 1, 0)));
+		Assert.assertEquals(new Vector3(0.707, 0.707, 0), new Vector3(-0.707, 0.707, 0).reflectedOn(new Normal3(0, 1, 0)));
 		
-		// TODO
-		// erwartet laut Aufgabenblatt:
-//		Assert.assertEquals(new Vector3(0.707, -0.707, 0), new Vector3(0.707, 0.707, 0).reflectedOn(new Normal3(1, 0, 0)));
-		// erwartet nach meinem mathematischen Verständnis:
-		Assert.assertEquals(new Vector3(-0.707, 0.707, 0), new Vector3(0.707, 0.707, 0).reflectedOn(new Normal3(1, 0, 0)));
+		Assert.assertEquals(new Vector3(0.707, -0.707, 0), new Vector3(0.707, 0.707, 0).reflectedOn(new Normal3(1, 0, 0)));
 		
 		Assert.assertEquals(new Point3(3, 2, 1), new Mat3x3(1, 0, 0, 
 											   				0, 1, 0, 

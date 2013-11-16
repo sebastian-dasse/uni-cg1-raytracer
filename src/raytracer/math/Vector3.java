@@ -7,8 +7,8 @@ package raytracer.math;
  * <p>The class <code>Vector3</code> provides various methods for vector operations, which include addition and 
  * subtraction of two vectors as well as scalar multiplication, scalar (or dot) product (which are not to be confused!) 
  * and cross product (or vector product). There is a method that calculates the vector resulting from the reflection of 
- * a vector on a plane given through its normal. Finally there is also method a for normalization and another one for 
- * the conversion from <code>Vector3</code> to <code>Normal3</code>.
+ * a vector on a given normal. Finally there is also method a for normalization and another one for the conversion from 
+ * <code>Vector3</code> to <code>Normal3</code>.
  * 
  * <p>Passing a <code>null</code> object to a method in this class will cause an <code>IllegalArgumentException</code> 
  * to be thrown.
@@ -54,7 +54,7 @@ public class Vector3 implements Comparable<Vector3> {
 	 * Calculates the <code>Vector3</code> resulting from the addition of this <code>Vector3</code> and the specified 
 	 * <code>Vector3</code>.
 	 * 
-	 * @param v The <code>Vector3</code> added to this vector. Must no be null.
+	 * @param v The <code>Vector3</code> added to this vector. Must no be <code>null</code>.
 	 * @return	The resulting <code>Vector3</code>.
 	 */
 	public Vector3 add(final Vector3 v) {
@@ -70,7 +70,7 @@ public class Vector3 implements Comparable<Vector3> {
 	 * Calculates the <code>Vector3</code> resulting from the addition of this <code>Vector3</code> and the specified 
 	 * <code>Normal3</code>.
 	 * 
-	 * @param n The <code>Normal3</code> added to this vector. Must not be null.
+	 * @param n The <code>Normal3</code> added to this vector. Must not be <code>null</code>.
 	 * @return	The resulting <code>Vector3</code>.
 	 */
 	public Vector3 add(final Normal3 n) {
@@ -83,10 +83,26 @@ public class Vector3 implements Comparable<Vector3> {
 	}
 	
 	/**
+	 * Calculates the <code>Vector3</code> resulting from the subtraction of the specified <code>Vector3</code> from 
+	 * this <code>Vector3</code>.
+	 * 
+	 * @param v The <code>Vector3</code> subtracted from this vector. Must not be <code>null</code>.
+	 * @return	The resulting <code>Vector3</code>.
+	 */
+	public Vector3 sub(final Vector3 v) {
+		if (v == null) {
+			throw new IllegalArgumentException("The parameter 'v' must not be null.");
+		}
+		return new Vector3(x - v.x, 
+						   y - v.y, 
+						   z - v.z);
+	}
+	
+	/**
 	 * Calculates the <code>Vector3</code> resulting from the subtraction of the specified <code>Normal3</code> from 
 	 * this <code>Vector3</code>.
 	 * 
-	 * @param n The <code>Normal3</code> subtracted from this vector. Must not be null.
+	 * @param n The <code>Normal3</code> subtracted from this vector. Must not be <code>null</code>.
 	 * @return	The resulting <code>Vector3</code>.
 	 */
 	public Vector3 sub(final Normal3 n) {
@@ -120,7 +136,7 @@ public class Vector3 implements Comparable<Vector3> {
 	 * Calculates the scalar product (or dot product) of this <code>Vector3</code> with the specified other 
 	 * <code>Vector3</code>.
 	 * 
-	 * @param v The other vector of the scalar product. Must not be null.
+	 * @param v The other vector of the scalar product. Must not be <code>null</code>.
 	 * @return	The resulting scalar.
 	 */
 	public double dot(final Vector3 v) {
@@ -134,7 +150,7 @@ public class Vector3 implements Comparable<Vector3> {
 	 * Calculates the scalar product (or dot product) of this <code>Vector3</code> with the specified 
 	 * <code>Normal3</code>.
 	 * 
-	 * @param v The other vector of the scalar product. Must not be null.
+	 * @param v The other vector of the scalar product. Must not be <code>null</code>.
 	 * @return	The resulting scalar.
 	 */
 	public double dot(final Normal3 n) {
@@ -172,25 +188,23 @@ public class Vector3 implements Comparable<Vector3> {
 		return new Normal3(x, y, z);
 	}
 	
-//	Anmerkung: evtl. Methode für das Skalarprodukt benutzen
 	/**
-	 * Calculates the <code>Vector3</code> resulting from the reflection of this vector on a plane given through its 
-	 * specified <code>Normal3</code> n.
+	 * Calculates the <code>Vector3</code> resulting from the reflection of this vector on the specified 
+	 * <code>Normal3</code> n.
 	 * 
-	 * @param n The <code>Normal3</code> of the plane on which this vector is reflected. Must not be null.
+	 * @param n The <code>Normal3</code> of the plane on which this vector is reflected. Must not be <code>null</code>.
 	 * @return	The resulting reflected <code>Vector3</code>.
 	 */
 	public Vector3 reflectedOn(final Normal3 n) {
 		if (n == null) {
 			throw new IllegalArgumentException("The parameter 'n' must not be null.");
 		}
-		// Ebene		<x - u, q> mit u = 0 und q := n
-		// Gerade		g(r) = a + rq mit a := this. Die Gerade durch a und den Lotfußpunkt von a auf der Ebene
-		// Parameter	r = -<a - u, q> /|q|², d.h. für den Nenner wird a in die negative Ebenengleichung eingesetzt
-		// Spiegelpunkt	a' = g(2r)
-		final double r = -(x * n.x + y * n.y + z * n.z) 
+		// Gerade (def. durch geg. n)		g(r) = u + rv = 0 + rn
+		// Lotfußpunkt parametrisiert von 	r = <a - u, v> / |v|² = <a, n> / |n|²
+		// Spiegelpunkt	a' = 2p - a
+		final double r = (x * n.x + y * n.y + z * n.z) 
 						/ (n.x * n.x + n.y * n.y + n.z * n.z);
-		return this.add(n.mul(2 * r));
+		return n.mul(2 * r).asVector().sub(this);
 	}
 	
 	/**

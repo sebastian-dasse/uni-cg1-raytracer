@@ -102,7 +102,7 @@ public class Mat3x3 {
 	/**
 	 * Calculates the matrix product of this matrix with the specified <code>Mat3x3</code>.
 	 * 
-	 * @param m The other matrix with which this matrix is multiplied. Must not be null.
+	 * @param m The other matrix with which this matrix is multiplied. Must not be <code>null</code>.
 	 * @return	The resulting <code>Mat3x3</code>.
 	 */
 	public Mat3x3 mul(final Mat3x3 m) {
@@ -125,7 +125,7 @@ public class Mat3x3 {
 	/**
 	 * Calculates the matrix product of this matrix with the specified <code>Vector3</code>.
 	 * 
-	 * @param v The <code>Vector3</code> with which	this matrix is multiplied. Must not be null.
+	 * @param v The <code>Vector3</code> with which	this matrix is multiplied. Must not be <code>null</code>.
 	 * @return	The resulting <code>Vector3</code>.
 	 */
 	public Vector3 mul(final Vector3 v) {
@@ -140,7 +140,7 @@ public class Mat3x3 {
 	/**
 	 * Calculates the matrix product of this matrix with the specified <code>Point3</code>.
 	 * 
-	 * @param p The <code>Point3</code> with which this matrix is multiplied. Must not be null.
+	 * @param p The <code>Point3</code> with which this matrix is multiplied. Must not be <code>null</code>.
 	 * @return	The resulting <code>Point3</code>;
 	 */
 	public Point3 mul(final Point3 p) {
@@ -155,7 +155,7 @@ public class Mat3x3 {
 	/**
 	 * Replaces the first column of this matrix by the specified <code>Vector3</code>.
 	 * 
-	 * @param v The replacement <code>Vector3</code> for the first column. Must not be null.
+	 * @param v The replacement <code>Vector3</code> for the first column. Must not be <code>null</code>.
 	 * @return	The resulting <code>Mat3x3</code>.
 	 */
 	public Mat3x3 changeCol1(final Vector3 v) {
@@ -170,7 +170,7 @@ public class Mat3x3 {
 	/**
 	 * Replaces the second column of this matrix by the specified <code>Vector3</code>.
 	 * 
-	 * @param v The replacement <code>Vector3</code> for the second column. Must not be null.
+	 * @param v The replacement <code>Vector3</code> for the second column. Must not be <code>null</code>.
 	 * @return	The resulting <code>Mat3x3</code>.
 	 */
 	public Mat3x3 changeCol2(final Vector3 v) {
@@ -185,7 +185,7 @@ public class Mat3x3 {
 	/**
 	 * Replaces the third column of this matrix by the specified <code>Vector3</code>.
 	 * 
-	 * @param v The replacement <code>Vector3</code> for the third column. Must not be null.
+	 * @param v The replacement <code>Vector3</code> for the third column. Must not be <code>null</code>.
 	 * @return	The resulting <code>Mat3x3</code>.
 	 */
 	public Mat3x3 changeCol3(final Vector3 v) {

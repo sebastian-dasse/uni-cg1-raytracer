@@ -46,7 +46,7 @@ public class Point3 {
 	 * <code>Point3</code> p is subtracted from this <code>Point3</code> resulting in a <code>Vector3</code> pointing 
 	 * from the specified point towards this point.
 	 * 
-	 * @param p The other <code>Point3</code>, i.e. the starting point of the resulting vector. Must not be null.
+	 * @param p The other <code>Point3</code>, i.e. the starting point of the resulting vector. Must not be <code>null</code>.
 	 * @return	The resulting <code>Vector3</code> pointing from p to this point.
 	 */
 	public Vector3 sub(final Point3 p) {
@@ -62,7 +62,7 @@ public class Point3 {
 	 * Calculates the <code>Point3</code> resulting from the subtraction of the specified <code>Vector3</code> from 
 	 * this <code>Point3</code>.
 	 * 
-	 * @param v The <code>Vector3</code> subtracted from this point. Must not be null.
+	 * @param v The <code>Vector3</code> subtracted from this point. Must not be <code>null</code>.
 	 * @return	The resulting <code>Point3</code>.
 	 */
 	public Point3 sub(final Vector3 v) {
@@ -78,7 +78,7 @@ public class Point3 {
 	 * Calculates the <code>Point3</code> resulting from the addition of the specified <code>Vector3</code> to this 
 	 * <code>Point3</code>.
 	 * 
-	 * @param v The <code>Vector3</code> added to this point. Must not be null.
+	 * @param v The <code>Vector3</code> added to this point. Must not be <code>null</code>.
 	 * @return	The resulting <code>Point3</code>
 	 */
 	public Point3 add(final Vector3 v) {
