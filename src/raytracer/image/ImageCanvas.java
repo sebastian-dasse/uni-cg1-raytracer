@@ -13,13 +13,13 @@ import java.awt.image.WritableRaster;
  * It is initialized with size parameters. 
  * <p>
  * The class includes a paint method which is called to display the generated image.
- * It also includes methods to change its size and retrieve the embedded BufferedImage object.
+ * It also includes methods to change its size and retrieve the embedded <code>BufferedImage</code> object.
  * 
  * @author Simon Lischka
  */
 public final class ImageCanvas extends Canvas {
 	/**
-	 * Size definition, which is used to generate the BufferedImage object.
+	 * Size definition, which is used to generate the <code>BufferedImage</code> object.
 	 */
 	private Dimension size;
 	/**
@@ -28,10 +28,10 @@ public final class ImageCanvas extends Canvas {
 	private BufferedImage image;
 	
 	/**
-	 * Constructs a new ImageCanvas and initializes the BufferedImage object with the specified size.
-	 * Sets the ColorModel to TYPE_INT_RGB.
+	 * Constructs a new <code>ImageCanvas</code> and initializes the <code>BufferedImage</code> object with the 
+	 * specified size. Sets the <code>ColorModel</code> to <code>TYPE_INT_RGB</code>.
 	 * 
-	 * @param size
+	 * @param size	The specified size of the image in pixels.
 	 */
 	public ImageCanvas(Dimension size) {
 		this.size = size;
@@ -39,27 +39,28 @@ public final class ImageCanvas extends Canvas {
 	}
 
 	/**
-	 * Constructs a new ImageCanvas and initializes the BufferedImage object with the specified width and height.
-	 * Sets the ColorModel to TYPE_INT_RGB.
+	 * Constructs a new <code>ImageCanvas</code> and initializes the <code>BufferedImage</code> object with the 
+	 * specified width and height. Sets the <code>ColorModel</code> to <code>TYPE_INT_RGB</code>.
 	 * 
-	 * @param width
-	 * @param height
+	 * @param width		The specified width of the image in pixels.
+	 * @param height	The specified height of the image in pixels.
 	 */
 	public ImageCanvas(int width, int height) {
 		this(new Dimension(width, height));
 	}
 	
 	/**
-	 * @return	The BufferedImage of this ImageCanvas.
+	 * @return	The <code>BufferedImage</code> of this <code>ImageCanvas</code>.
 	 */
 	public BufferedImage getImage() {
 		return image;
 	}
 
 	/**
-	 * Changes the size of the ImageCanvas object by modifying the classes
-	 * size parameter and recreating the BufferedImage-object.
-	 * @param size
+	 * Changes the size of the <code>ImageCanvas</code> object by modifying the classes
+	 * size parameter and recreating the <code>BufferedImage</code> object.
+	 * 
+	 * @param size	The specified new size of the image in pixels.
 	 */
 	public void setSize(Dimension size) {
 		this.size = size;
@@ -68,11 +69,10 @@ public final class ImageCanvas extends Canvas {
 	}
 
 	/**
-	 * Generates a black background and red diagonal line. The data is 
-	 * written into the raster of the classes BufferedImage and then
-	 * painted.
+	 * Generates a black background and a red diagonal line. The data is written into the raster of the classes 
+	 * <code>BufferedImage</code> and then painted.
 	 * 
-	 * @param g
+	 * @param g	The specified Graphics context.
 	 */
 	public void paint(final Graphics g) {
 		super.paint(g);

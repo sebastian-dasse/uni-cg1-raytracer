@@ -4,7 +4,7 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * Test runner for raytracer tests
+ * Test runner for raytracer tests.
  * 
  * @author Simon Lischka
  *
@@ -12,22 +12,22 @@ import junit.framework.TestSuite;
 public class AllTests {
 	
 	/**
-	 * Creates new test suite with MathTest-Class
+	 * Creates a new test suite with the <code>MathTests</code> class.
 	 * 
-	 * @return suite
+	 * @return A <code>Test</code> suite.
 	 */
 	public static Test suite() {
-		TestSuite suite = new TestSuite();
+		final TestSuite suite = new TestSuite();
 		suite.addTestSuite(MathTests.class);
 		return suite;
 	}
 	
 	/**
-	 * Runs test suite
+	 * Runs the test suite.
 	 * 
 	 * @param args
 	 */
-	public static void main(String[] args) {
+	public static void main(final String[] args) {
 		junit.textui.TestRunner.run(suite());
 	}
 }

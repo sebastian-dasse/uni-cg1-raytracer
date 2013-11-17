@@ -15,32 +15,31 @@ import javax.swing.JMenuItem;
 import raytracer.ui.FileDialog;
 
 /**
- * This class shows opens a 604 x 480 px windows and generates an image of the same size. The image simply shows a red 
- * diagonal line drawn from the left upper corner to the right bottom corner on black background. The program
+ * This class opens a 640 x 480 px window and generates an image of the same size. The image simply shows a red 
+ * diagonal line drawn from the left upper corner to the right bottom corner on black background. The window has a menu 
+ * bar with a save option. The window frame is allowed to be resized. In this case the image will be redrawn at the new 
+ * window size.
  * 
- * @author Max Novichkov
+ * @author Maxim Novichkov
  * @author Simon Lischka
  * @author Sebastian Dass&eacute;
  *
  */
 public class ImageSaver {
 	/**
-	 * Width definition for generated image
+	 * The predefined width of the generated image.
 	 */
 	public static final int WIDTH = 640;
 	/**
-	 * Height definition for generated image
+	 * The predefined height of the generated image.
 	 */
 	public static final int HEIGHT = 480;
 	
 	/**
-	 * Generates an image containing a diagonal and draw the
-	 * the applications view. 
-	 * 
-	 * Throws IOExcepztion when file cannot be saved.
+	 * Show the image in a <code>JFrame</code> with a <code>JMenuBar</code>.
 	 * 
 	 * @param args
-	 * @throws IOException
+	 * @throws IOException	if the file could not be saved.
 	 */
 	public static void main(final String[] args) throws IOException {
 		final ImageCanvas mainCanvas = new ImageCanvas(WIDTH, HEIGHT);
@@ -60,19 +59,16 @@ public class ImageSaver {
 }
 
 /**
- * Contains the Menubar View. Writes the image to 
- * the filename specified in the save-Dialog.
+ * A menu bar for saving images. Allows to write the image to the filename specified in the save dialog.
  * 
- * @author Max Novichkov
- * 
+ * @author Maxim Novichkov
  *
  */
 class ImageSaverMenuBar extends JMenuBar {
 	/**
-	 * Builds the menu structure and opens file dialog
-	 * when Menu-Item "Save" is selected.
+	 * Builds the menu structure and opens a file dialog when the menu item "Save" is selected.
 	 * 
-	 * @param canvas
+	 * @param canvas	The <code>ImageCanvas</code> containing the image to be saved.
 	 */
 	public ImageSaverMenuBar(final ImageCanvas canvas) {
 		final JMenu menu = new JMenu("File");

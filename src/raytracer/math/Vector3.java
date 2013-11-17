@@ -276,10 +276,10 @@ public class Vector3 implements Comparable<Vector3> {
 	}
 	
 	/**
-	 * Checks if the specified double is NaN or infinite and therefore not a valid input. Returns true in this case. 
+	 * Checks if the specified double is NaN or infinite and therefore not a valid input. Returns <code>true</code> in this case. 
 	 * 
 	 * @param d The double value to be checked for validity.
-	 * @return	True if not valid, otherwise false.
+	 * @return	<code>true</code> if not valid, otherwise <code>false</code>.
 	 */
 	private boolean isNotValid(final double d) {
 		return Double.isNaN(d) || Double.isInfinite(d);
