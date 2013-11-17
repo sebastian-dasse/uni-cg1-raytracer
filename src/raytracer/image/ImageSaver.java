@@ -39,9 +39,8 @@ public class ImageSaver {
 	 * Show the image in a <code>JFrame</code> with a <code>JMenuBar</code>.
 	 * 
 	 * @param args
-	 * @throws IOException	if the file could not be saved.
 	 */
-	public static void main(final String[] args) throws IOException {
+	public static void main(final String[] args) {
 		final ImageCanvas mainCanvas = new ImageCanvas(WIDTH, HEIGHT);
 		final JFrame frame = new JFrame();
 		frame.getContentPane().add(mainCanvas);

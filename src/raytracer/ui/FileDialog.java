@@ -1,7 +1,6 @@
 package raytracer.ui;
 
 import java.io.File;
-import java.io.IOException;
 
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -21,9 +20,8 @@ public final class FileDialog {
 	 * selection until a valid selection is made or the dialog is cancelled.
 	 * 
 	 * @return The selected <code>File</code>.
-	 * @throws IOException
 	 */
-	public static File open() throws IOException {
+	public static File open() {
 		final JFileChooser chooser = new JFileChooser();
 		final FileNameExtensionFilter filter = new FileNameExtensionFilter(
 		        "JPG & PNG Images", "jpg", "jpeg", "png");
@@ -43,9 +41,8 @@ public final class FileDialog {
 	 * The .png filename extension is appended to the entered filename automatically.
 	 * 
 	 * @return The selected <code>File</code>.
-	 * @throws IOException
 	 */
-	public static File save() throws IOException {
+	public static File save() {
 		JFileChooser chooser = new JFileChooser();
 		if (chooser.showSaveDialog(null) != JFileChooser.APPROVE_OPTION) {
 			System.exit(0);
