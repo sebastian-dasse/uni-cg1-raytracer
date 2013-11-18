@@ -30,7 +30,7 @@ public class Sphere extends Geometry {
 	}
 
 	@Override
-	public Hit hit(Ray ray) {
+	public Hit hit(final Ray ray) {
 		// TODO Auto-generated method stub
 		return null;
 	}
