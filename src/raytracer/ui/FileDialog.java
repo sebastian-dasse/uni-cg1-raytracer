@@ -69,8 +69,8 @@ public final class FileDialog {
 	 * @param file	The file to be validated.
 	 * @return		<code>true</code> if the specified file is valid.
 	 */
-	private static boolean isValid(File file) {
-		String e = getFileExtension(file);
+	private static boolean isValid(final File file) {
+		final String e = getFileExtension(file);
 		return e == null || (!e.equals("jpg") && !e.equals("jpeg") && !e.equals("png"));
 	}
 }

@@ -9,8 +9,7 @@ import java.awt.image.ColorModel;
 import java.awt.image.WritableRaster;
 
 /**
- * This immutable class represents the canvas for a diagonal line on black background.
- * It is initialized with size parameters. 
+ * This class represents the canvas for a diagonal line on black background. It is initialized with size parameters. 
  * <p>
  * The class includes a paint method which is called to display the generated image.
  * It also includes methods to change its size and retrieve the embedded <code>BufferedImage</code> object.
@@ -33,7 +32,7 @@ public final class ImageCanvas extends Canvas {
 	 * 
 	 * @param size	The specified size of the image in pixels.
 	 */
-	public ImageCanvas(Dimension size) {
+	public ImageCanvas(final Dimension size) {
 		this.size = size;
 		image = new BufferedImage(size.width, size.height, BufferedImage.TYPE_INT_RGB);
 	}
@@ -45,7 +44,7 @@ public final class ImageCanvas extends Canvas {
 	 * @param width		The specified width of the image in pixels.
 	 * @param height	The specified height of the image in pixels.
 	 */
-	public ImageCanvas(int width, int height) {
+	public ImageCanvas(final int width, final int height) {
 		this(new Dimension(width, height));
 	}
 	
@@ -62,7 +61,7 @@ public final class ImageCanvas extends Canvas {
 	 * 
 	 * @param size	The specified new size of the image in pixels.
 	 */
-	public void setSize(Dimension size) {
+	public void setSize(final Dimension size) {
 		this.size = size;
 		image = new BufferedImage(size.width, size.height, 
 				BufferedImage.TYPE_INT_RGB);
