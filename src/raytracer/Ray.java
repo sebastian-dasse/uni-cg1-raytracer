@@ -20,6 +20,7 @@ public class Ray {
 	 */
 	public final Vector3 d;
 	
+	// TODO FRAGE: Nullvektor als direction verbieten? falls nicht müsste bei tOf() Div durch 0 auf anderem Weg vermieden werden
 	/**
 	 * @param o	The origin of the ray. Must not be <code>null</code>.
 	 * @param d	The direction of the ray. Must not be <code>null</code>.
@@ -27,6 +28,9 @@ public class Ray {
 	public Ray(final Point3 o, final Vector3 d) {
 		if (o == null || d == null) {
 			throw new IllegalArgumentException("The parameters must not be null.");
+		}
+		if (d.magnitude == 0) {
+			throw new IllegalArgumentException("The null vector (0, 0, 0) is not a meaningful direction d.");
 		}
 		this.o = o;
 		this.d = d;
@@ -43,15 +47,22 @@ public class Ray {
 		if (!isValid(t)) {
 			throw new IllegalArgumentException("Only a double value other than +-Infinity or NaN is allowed.");
 		}
+		// p = o + td
 		return o.add(d.mul(t));
 	}
 	
 	/**
-	 * @param p
-	 * @return
+	 * Calculates the parameter t of a given <code>Point3</code>.
+	 * 
+	 * @param p	The <code>Point3</code>.
+	 * @return	The parameter t for the given point.
 	 */
 	public double tOf(final Point3 p) {
-		return 0;
+		if (p == null) {
+			throw new IllegalArgumentException("The parameter 'p' must not be null.");
+		}
+		// p = o + td  <=>  p - o = td  =>  t = |p - o| / |d|
+		return p.sub(o).magnitude / d.magnitude;
 	}
 	
 	@Override
