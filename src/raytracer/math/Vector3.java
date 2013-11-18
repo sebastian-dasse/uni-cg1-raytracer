@@ -1,5 +1,7 @@
 package raytracer.math;
 
+import static raytracer.math.MathUtil.isValid;
+
 /**
  * This immutable class represents a vector in three-dimensional space. Thus it has fields for its three components and 
  * an additional field in which its magnitude is stored.
@@ -41,7 +43,7 @@ public class Vector3 implements Comparable<Vector3> {
 	 * @param z The z coordinate. Must be a double value other than +-Infinity or NaN.
 	 */
 	public Vector3(final double x, final double y, final double z) {
-		if (isNotValid(x) || isNotValid(y) || isNotValid(z)) {
+		if (!(isValid(x) && isValid(y) && isValid(z))) {
 			throw new IllegalArgumentException("Only double values other than +-Infinity or NaN allowed.");
 		}
 		this.x = x;
@@ -114,7 +116,6 @@ public class Vector3 implements Comparable<Vector3> {
 						   z - n.z);
 	}
 	
-	// TODO: evtl. Parameter checken: Werte > Double.MAX_VALUE oder < -Double.MAX_VALUE oder +-Infinity oder NaN verbieten
 	/**
 	 * Calculates the scalar multiplication (not to be confused with the scalar product!) of this <code>Vector3</code> 
 	 * with the specified double value.
@@ -124,7 +125,7 @@ public class Vector3 implements Comparable<Vector3> {
 	 * @return	The resulting <code>Vector3</code>.
 	 */
 	public Vector3 mul(final double c) {
-		if (isNotValid(c)) {
+		if (!isValid(c)) {
 			throw new IllegalArgumentException("Only double values other than +-Infinity or NaN allowed.");
 		}
 		return new Vector3(x * c, 
@@ -273,15 +274,5 @@ public class Vector3 implements Comparable<Vector3> {
 	 */
 	public int compareTo(final Vector3 other) {
 		return Double.compare(magnitude, other.magnitude);
-	}
-	
-	/**
-	 * Checks if the specified double is NaN or infinite and therefore not a valid input. Returns <code>true</code> in this case. 
-	 * 
-	 * @param d The double value to be checked for validity.
-	 * @return	<code>true</code> if not valid, otherwise <code>false</code>.
-	 */
-	private boolean isNotValid(final double d) {
-		return Double.isNaN(d) || Double.isInfinite(d);
 	}
 }

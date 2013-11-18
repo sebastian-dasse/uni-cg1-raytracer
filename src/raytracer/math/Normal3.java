@@ -1,5 +1,7 @@
 package raytracer.math;
 
+import static raytracer.math.MathUtil.isValid;
+
 /**
  * This immutable class represents a normal - i.e. a perpendicular vector - on a surface vector in three-dimensional 
  * space. Thus it has fields for its three components.
@@ -39,7 +41,7 @@ public class Normal3 {
 		if (x == 0 && y == 0 && z == 0) {
 			throw new IllegalArgumentException("The null vector (0, 0, 0) is not a meaningful normal.");
 		}
-		if (isNotValid(x) || isNotValid(y) || isNotValid(z)) {
+		if (!(isValid(x) && isValid(y) && isValid(z))) {
 			throw new IllegalArgumentException("Only double values other than +-Infinity or NaN allowed.");
 		}
 		this.x = x;
@@ -56,7 +58,7 @@ public class Normal3 {
 	 * @return	The resulting <code>Normal3</code>.
 	 */
 	public Normal3 mul(final double c) {
-		if (isNotValid(c)) {
+		if (!isValid(c)) {
 			throw new IllegalArgumentException("Only double values other than +-Infinity or NaN allowed.");
 		}
 		return new Normal3(x * c, 
@@ -137,15 +139,5 @@ public class Normal3 {
 	@Override
 	public String toString() {
 		return getClass().getSimpleName() + "[x = " + x + ", y = " + y + ", z = " + z + "]";
-	}
-	
-	/**
-	 * Checks if the specified double is NaN or infinite and therefore not a valid input. Returns true in this case. 
-	 * 
-	 * @param d The double value to be checked for validity.
-	 * @return	True if not valid, otherwise false.
-	 */
-	private boolean isNotValid(final double d) {
-		return Double.isNaN(d) || Double.isInfinite(d);
 	}
 }

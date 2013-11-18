@@ -1,5 +1,7 @@
 package raytracer.math;
 
+import static raytracer.math.MathUtil.isValid;
+
 /**
  * This immutable class represents a matrix with three rows and three columns. Thus it has fields for its nine 
  * components, which are to be addressed as follows: the first index specifies the row, the second indicates the column 
@@ -77,9 +79,9 @@ public class Mat3x3 {
 	public Mat3x3(final double m11, final double m12, final double m13, 
 				  final double m21, final double m22, final double m23, 
 				  final double m31, final double m32, final double m33) {
-		if (isNotValid(m11) || isNotValid(m12) || isNotValid(m13) || 
-				isNotValid(m21) || isNotValid(m22) || isNotValid(m23) || 
-				isNotValid(m31) || isNotValid(m32) || isNotValid(m33)) {
+		if (!(isValid(m11) && isValid(m12) && isValid(m13) && 
+			  isValid(m21) && isValid(m22) && isValid(m23) && 
+			  isValid(m31) && isValid(m32) && isValid(m33))) {
 			throw new IllegalArgumentException("Only double values other than +-Infinity or NaN allowed.");
 		}
 		this.m11 = m11;
@@ -264,15 +266,5 @@ public class Mat3x3 {
 				+ "\tm21 = " + m21 + ", m22 = " + m22 + ", m23 = " + m23 + ",\n" 
 				+ "\tm31 = " + m31 + ", m32 = " + m32 + ", m33 = " + m33 + ", " 
 				+ "determinant = " + determinant + "]";
-	}
-	
-	/**
-	 * Checks if the specified double is NaN or infinite and therefore not a valid input. Returns true in this case. 
-	 * 
-	 * @param d The double value to be checked for validity.
-	 * @return	True if not valid, otherwise false.
-	 */
-	private boolean isNotValid(final double d) {
-		return Double.isNaN(d) || Double.isInfinite(d);
 	}
 }
