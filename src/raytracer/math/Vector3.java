@@ -44,7 +44,7 @@ public class Vector3 implements Comparable<Vector3> {
 	 */
 	public Vector3(final double x, final double y, final double z) {
 		if (!(isValid(x) && isValid(y) && isValid(z))) {
-			throw new IllegalArgumentException("Only double values other than +-Infinity or NaN allowed.");
+			throw new IllegalArgumentException("Only double values other than +-Infinity or NaN are allowed.");
 		}
 		this.x = x;
 		this.y = y;
@@ -126,7 +126,7 @@ public class Vector3 implements Comparable<Vector3> {
 	 */
 	public Vector3 mul(final double c) {
 		if (!isValid(c)) {
-			throw new IllegalArgumentException("Only double values other than +-Infinity or NaN allowed.");
+			throw new IllegalArgumentException("Only a double value other than +-Infinity or NaN is allowed.");
 		}
 		return new Vector3(x * c, 
 						   y * c, 
@@ -250,7 +250,7 @@ public class Vector3 implements Comparable<Vector3> {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Vector3 other = (Vector3) obj;
+		final Vector3 other = (Vector3) obj;
 		if (Double.doubleToLongBits(magnitude) != Double
 				.doubleToLongBits(other.magnitude))
 			return false;

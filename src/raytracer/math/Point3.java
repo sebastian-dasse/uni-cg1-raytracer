@@ -36,7 +36,7 @@ public class Point3 {
 	 */
 	public Point3(final double x, final double y, final double z) {
 		if (!(isValid(x) && isValid(y) && isValid(z))) {
-			throw new IllegalArgumentException("Only double values other than +-Infinity or NaN allowed.");
+			throw new IllegalArgumentException("Only double values other than +-Infinity or NaN are allowed.");
 		}
 		this.x = x;
 		this.y = y;
@@ -114,7 +114,7 @@ public class Point3 {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Point3 other = (Point3) obj;
+		final Point3 other = (Point3) obj;
 		if (Double.doubleToLongBits(x) != Double.doubleToLongBits(other.x))
 			return false;
 		if (Double.doubleToLongBits(y) != Double.doubleToLongBits(other.y))

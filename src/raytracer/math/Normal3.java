@@ -42,7 +42,7 @@ public class Normal3 {
 			throw new IllegalArgumentException("The null vector (0, 0, 0) is not a meaningful normal.");
 		}
 		if (!(isValid(x) && isValid(y) && isValid(z))) {
-			throw new IllegalArgumentException("Only double values other than +-Infinity or NaN allowed.");
+			throw new IllegalArgumentException("Only double values other than +-Infinity or NaN are allowed.");
 		}
 		this.x = x;
 		this.y = y;
@@ -59,7 +59,7 @@ public class Normal3 {
 	 */
 	public Normal3 mul(final double c) {
 		if (!isValid(c)) {
-			throw new IllegalArgumentException("Only double values other than +-Infinity or NaN allowed.");
+			throw new IllegalArgumentException("Only a double value other than +-Infinity or NaN is allowed.");
 		}
 		return new Normal3(x * c, 
 						   y * c, 
@@ -126,7 +126,7 @@ public class Normal3 {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Normal3 other = (Normal3) obj;
+		final Normal3 other = (Normal3) obj;
 		if (Double.doubleToLongBits(x) != Double.doubleToLongBits(other.x))
 			return false;
 		if (Double.doubleToLongBits(y) != Double.doubleToLongBits(other.y))

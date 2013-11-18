@@ -82,7 +82,7 @@ public class Mat3x3 {
 		if (!(isValid(m11) && isValid(m12) && isValid(m13) && 
 			  isValid(m21) && isValid(m22) && isValid(m23) && 
 			  isValid(m31) && isValid(m32) && isValid(m33))) {
-			throw new IllegalArgumentException("Only double values other than +-Infinity or NaN allowed.");
+			throw new IllegalArgumentException("Only double values other than +-Infinity or NaN are allowed.");
 		}
 		this.m11 = m11;
 		this.m12 = m12;
@@ -235,7 +235,7 @@ public class Mat3x3 {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Mat3x3 other = (Mat3x3) obj;
+		final Mat3x3 other = (Mat3x3) obj;
 		if (Double.doubleToLongBits(determinant) != Double.doubleToLongBits(other.determinant))
 			return false;
 		if (Double.doubleToLongBits(m11) != Double.doubleToLongBits(other.m11))
