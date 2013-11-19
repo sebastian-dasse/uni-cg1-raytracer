@@ -28,6 +28,9 @@ public class ImageViewer {
      */
     public static void main(final String[] args) throws IOException {
         final BufferedImage image = ImageIO.read(FileDialog.open());
+        if (image == null) {
+        	throw new IOException("Error. Could not decode image from the specified file.");
+        }
         final JFrame frame = new JFrame();
         frame.getContentPane().add(new JLabel(new ImageIcon(image)));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
