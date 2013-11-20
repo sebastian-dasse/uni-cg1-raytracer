@@ -46,8 +46,9 @@ public abstract class Camera {
 		
 		// to be calculated from e, g and t: nicht elegant, aber verstaendlich
 		w = g.normalized().mul(-1.0);
-		Vector3 temp = t.x(w);
-		u = temp.normalized();
+//		Vector3 temp = t.x(w);
+//		u = temp.normalized();
+		u = t.x(w).normalized();
 		v = w.x(u);
 	}
 	
