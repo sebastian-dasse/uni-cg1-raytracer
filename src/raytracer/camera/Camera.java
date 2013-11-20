@@ -10,32 +10,32 @@ import raytracer.math.Vector3;
  */
 public abstract class Camera {
 	/**
-	 * 
+	 * This vector represents eye position.
 	 */
 	public final Point3 e;
 	/**
-	 * This vector represents eye position
+	 * This vector represents gaze-direction.
 	 */
 	public final Vector3 g;
 	/**
-	 * This vector represents gaze-direction.
+	 * This vector represents up-direction.
 	 */
 	public final Vector3 t;
 	/**
-	 * This vector represents up-direction.
+	 * This vector represents a new coordinate system and was calculated from vector t and w.
 	 */
 	public final Vector3 u;
 	/**
-	 * 
+	 * This vector represents a new coordinate system and was calculated from vector u and w.
 	 */
 	public final Vector3 v;
 	/**
-	 * 
+	 * This vector represents a new coordinate system and was calculated by normalizing of vector g and then multiplied by -1. 
 	 */
 	public final Vector3 w;
 	
 	/**
-	 * @param e
+	 * @param e 
 	 * @param g
 	 * @param t
 	 */
@@ -49,7 +49,7 @@ public abstract class Camera {
 	}
 	
 	/**
-	 * @param w
+	 * @param w 
 	 * @param h
 	 * @param x
 	 * @param y
