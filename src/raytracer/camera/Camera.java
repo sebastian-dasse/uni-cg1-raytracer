@@ -14,15 +14,15 @@ public abstract class Camera {
 	 */
 	public final Point3 e;
 	/**
-	 * 
+	 * This vector represents eye position
 	 */
 	public final Vector3 g;
 	/**
-	 * 
+	 * This vector represents gaze-direction.
 	 */
 	public final Vector3 t;
 	/**
-	 * 
+	 * This vector represents up-direction.
 	 */
 	public final Vector3 u;
 	/**
@@ -44,10 +44,11 @@ public abstract class Camera {
 		this.g = g;
 		this.t = t;
 		
-		// to be calculated from e, g and t:
-		u = null;
-		v = null;
-		w = null;
+		// to be calculated from e, g and t: nicht elegant, aber verstaendlich
+		w = g.normalized().mul(-1.0);
+		Vector3 temp = t.x(w);
+		u = temp.normalized();
+		v = w.x(u);
 	}
 	
 	/**
