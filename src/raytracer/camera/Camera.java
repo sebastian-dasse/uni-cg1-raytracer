@@ -43,7 +43,6 @@ public abstract class Camera {
 		this.e = e;
 		this.g = g;
 		this.t = t;
-		
 		w = g.normalized().mul(-1.0);
 		u = t.x(w).normalized();
 		v = w.x(u);

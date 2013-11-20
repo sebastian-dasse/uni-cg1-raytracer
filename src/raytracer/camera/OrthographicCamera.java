@@ -1,6 +1,7 @@
 package raytracer.camera;
 
 import raytracer.Ray;
+import raytracer.math.Normal3;
 import raytracer.math.Point3;
 import raytracer.math.Vector3;
 
@@ -26,8 +27,11 @@ public class OrthographicCamera extends Camera{
 	}
 	
 	@Override
-	public Ray rayFor(final int w, final int h, final int x, final int y) {
-		// TODO Auto-generated method stub
-		return null;
+	public Ray rayFor(final int width, final int height, final int x, final int y) {
+		double ratio = width/height;
+		double width_com = (x-(width-1.0)/2.0) / (width-1.0);
+		double height_com =  (x-(height-1.0)/2.0) / (height-1.0);
+		Point3 o = e.add(u.mul(width_com).mul(s).mul(ratio)).add(v.mul(s).mul(height_com));
+		return new Ray(o,w.mul(-1));
 	}
 }
