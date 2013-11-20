@@ -10,7 +10,7 @@ import raytracer.math.Vector3;
  */
 public class PerspectiveCamera extends Camera{
 	/**
-	 * 
+	 * The camera angle in radians.
 	 */
 	private double angle;
 	
@@ -18,11 +18,11 @@ public class PerspectiveCamera extends Camera{
 	 * @param e Vector of the eye position.
 	 * @param g Vector of the gaze-direction.
 	 * @param t Vector of the up-direction.
-	 * @param angle Perspective camera angle.
+	 * @param angle Perspective camera angle in degrees.
 	 */
 	public PerspectiveCamera(final Point3 e, final Vector3 g, final Vector3 t, final double angle) {
 		super(e, g, t);
-		this.angle = angle;
+		this.angle = Math.toRadians(angle);
 	}
 	
 	/**
