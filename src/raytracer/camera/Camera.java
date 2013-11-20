@@ -55,5 +55,5 @@ public abstract class Camera {
 	 * @param y
 	 * @return
 	 */
-	public abstract Ray rayFor(final int w, final int h, final int x, final int y);
+	public abstract Ray rayFor(final int width, final int height, final int x, final int y);
 }

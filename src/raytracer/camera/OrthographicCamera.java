@@ -36,11 +36,10 @@ public class OrthographicCamera extends Camera{
 	
 	//---- Test
 	public static void main(String[] args) {
-		Camera cam = new OrthographicCamera(new Point3(4, 4, 4), new Vector3(-4, -4, -4), new Vector3(0, 1, 0), 3);
-		Ray ray = cam.rayFor(1920, 1200, 1000, 800);
-		
-		Point3 o = ray.o;
-		Vector3 d = ray.d;
+		final Camera cam = new OrthographicCamera(new Point3(4, 4, 4), new Vector3(-4, -4, -4), new Vector3(0, 1, 0), 3);
+		final Ray ray = cam.rayFor(1920, 1200, 1000, 800);
+		final Point3 o = ray.o;
+		final Vector3 d = ray.d;
 		
 		System.out.println(o);
 		System.out.println(d);
