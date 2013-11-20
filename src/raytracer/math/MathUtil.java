@@ -18,4 +18,14 @@ public final class MathUtil {
 	public static boolean isValid(final double d) {
 		return !Double.isNaN(d) && !Double.isInfinite(d);
 	}
+	
+	/**
+	 * Checks if the specified number is in the range from 0 to 1 including, i.e. 0 <= d <= 1.
+	 * 
+	 * @param d	The double value to be checked.
+	 * @return	<code>true</code> if 0 <= d <= 1, otherwise <code>false</code>. 
+	 */
+	public static boolean inRange0To1(final double d) {
+		return d >= 0 && d <= 1;
+	}
 }

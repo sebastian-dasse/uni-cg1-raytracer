@@ -1,5 +1,7 @@
 package raytracer;
 
+import static raytracer.math.MathUtil.inRange0To1;
+
 /**
  * @author 
  *
@@ -24,6 +26,9 @@ public class Color {
 	 * @param b
 	 */
 	public Color(final double r, final double g, final double b) {
+		if (!(inRange0To1(r) && inRange0To1(g) && inRange0To1(b))) {
+			throw new IllegalArgumentException("Only double values between 0 and 1 (including) are allowed.");
+		}
 		this.r = r;
 		this.g = g;
 		this.b = b;
