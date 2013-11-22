@@ -22,18 +22,20 @@ public class AxisAlignedBox extends Geometry {
 	public static final Normal3 back   = new Normal3( 0,  0, -1);
 	private static final Normal3[] n = new Normal3[]{left, right, top, bottom, front, back};
 	/**
-	 * 
+	 * The low bottom far point of the <code>AxisAlignedBox</code>.
 	 */
 	public final Point3 lbf;
 	/**
-	 * 
+	 * The right upper near point of this <code>AxisAlignedBox</code>.
 	 */
 	public final Point3 run;
 	
 	/**
-	 * @param lbf	The low bottom far point of the <code>AxisAlignedBox</code>.
-	 * @param run	The right upper near point of the <code>AxisAlignedBox</code>.
-	 * @param color	The color of the <code>AxisAlignedBox</code>.
+	 * Constructs a new <code>AxisAlignedBox</code> with the specified parameters.
+	 * 
+	 * @param lbf	The low bottom far point of this <code>AxisAlignedBox</code>. Must not be <code>null</code>.
+	 * @param run	The right upper near point of this <code>AxisAlignedBox</code>. Must not be <code>null</code>.
+	 * @param color	The color of the <code>AxisAlignedBox</code>. Must not be <code>null</code>.
 	 */
 	public AxisAlignedBox(final Point3 lbf, final Point3 run, final Color color) {
 		super(color);
@@ -57,10 +59,29 @@ public class AxisAlignedBox extends Geometry {
 //			res[i] = ray.o.sub(run).dot(n[i]) > 0;
 //		}
 		
-		Collection<Normal3> n = new LinkedList<Normal3>();
-		boolean res_left = ray.o.sub(run).dot(left) > 0;
-		if (res_left) {
-			n.add(left);
+		final Collection<Normal3> normals = new LinkedList<Normal3>();
+		if (ray.o.sub(run).dot(top) > 0) {
+			normals.add(top);
+		}
+		if (ray.o.sub(run).dot(front) > 0) {
+			normals.add(front);
+		}
+		if (ray.o.sub(run).dot(right) > 0) {
+			normals.add(right);
+		}
+		if (ray.o.sub(lbf).dot(left) > 0) {
+			normals.add(left);
+		}
+		if (ray.o.sub(lbf).dot(back) > 0) {
+			normals.add(back);
+		}
+		if (ray.o.sub(lbf).dot(bottom) > 0) {
+			normals.add(bottom);
+		}
+
+		final double tMax = 0;
+		for (Normal3 normal : normals) {
+			
 		}
 		
 		
