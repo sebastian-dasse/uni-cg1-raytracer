@@ -69,6 +69,6 @@ public abstract class Geometry {
 
 	@Override
 	public String toString() {
-		return getClass().getSimpleName() + "[\tcolor = " + color + "]";
+		return getClass().getSimpleName() + "[color = " + color;
 	}
 }

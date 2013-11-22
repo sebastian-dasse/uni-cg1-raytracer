@@ -1,27 +1,36 @@
 package raytracer.camera;
 
+import static raytracer.math.MathUtil.isValid;
 import raytracer.Ray;
 import raytracer.math.Point3;
 import raytracer.math.Vector3;
 
 /**
+ * TODO DOK IT!
+ * This immutable base class ...
+ * 
  * @author 
  *
  */
 public class OrthographicCamera extends Camera{
 	/**
-	 * 
+	 * The scaling factor of this camera.
 	 */
-	private double s;
+	private final double s;
 	
 	/**
-	 * @param e
-	 * @param g
-	 * @param t
-	 * @param s
+	 * Constructs a new <code>OrthographicCamera</code> with the specified parameters.
+	 * 
+	 * @param e	The eye position. Must not be <code>null</code>.
+	 * @param g	The gaze direction. Must not be <code>null</code>.
+	 * @param t	The up vector. Must not be <code>null</code>.
+	 * @param s	The scaling factor of the camera. Must be a double value other than +-Infinity or NaN.
 	 */
 	public OrthographicCamera(final Point3 e, final Vector3 g, final Vector3 t, final double s){
 		super(e, g, t);
+		if (!isValid(s)) {
+			throw new IllegalArgumentException("Only a double value other than +-Infinity or NaN is allowed.");
+		}
 		this.s = s;
 	}
 	
@@ -32,6 +41,11 @@ public class OrthographicCamera extends Camera{
 		final double f2 =         s * (y - (height - 1.0) / 2.0) / (height - 1.0);
 		final Point3 o = e.add(u.mul(f1).add(v.mul(f2)));
 		return new Ray(o, w.mul(-1));
+	}
+	
+	@Override
+	public String toString() {
+		return super.toString() + ",\n\ts = " + s + "]";
 	}
 	
 	//---- Test
@@ -73,5 +87,8 @@ public class OrthographicCamera extends Camera{
 		final Point3 p2 = o.add(d.mul(t2));
 		System.out.println(p1);
 		System.out.println(p2);
+		
+		System.out.println();
+		System.out.println(new OrthographicCamera(new Point3(0, 0, 0), new Vector3(0, 0, -1), new Vector3(0, 1, 0), 1));
 	}
 }

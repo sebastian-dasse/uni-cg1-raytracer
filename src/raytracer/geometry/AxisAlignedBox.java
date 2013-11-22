@@ -9,28 +9,32 @@ import raytracer.math.Normal3;
 import raytracer.math.Point3;
 
 /**
- * @author 
+ * TODO HASCODE & EQUALS
+ * TODO DOK IT ALL!
+ * This immutable class represents an axis aligned box. ...
+ * 
+ * @author Sebastian Dass&eacute;
  *
  */
 public class AxisAlignedBox extends Geometry {
 	
-	public static final Normal3 LEFT   = new Normal3(-1,  0,  0);
-	public static final Normal3 RIGHT  = new Normal3( 1,  0,  0);
-	public static final Normal3 TOP    = new Normal3( 0,  1,  0);
-	public static final Normal3 BOTTOM = new Normal3( 0, -1,  0);
-	public static final Normal3 FRONT  = new Normal3( 0,  0,  1);
-	public static final Normal3 BACK   = new Normal3( 0,  0, -1);
+	private static final Normal3 LEFT   = new Normal3(-1,  0,  0);
+	private static final Normal3 RIGHT  = new Normal3( 1,  0,  0);
+	private static final Normal3 TOP    = new Normal3( 0,  1,  0);
+	private static final Normal3 BOTTOM = new Normal3( 0, -1,  0);
+	private static final Normal3 FRONT  = new Normal3( 0,  0,  1);
+	private static final Normal3 BACK   = new Normal3( 0,  0, -1);
 	// TODO not used?
 	private static final Normal3[] n = new Normal3[]{LEFT, RIGHT, TOP, BOTTOM, FRONT, BACK};
 	
-	public final Plane left_p;
-	public final Plane right_p;
-	public final Plane top_p;
-	public final Plane bottom_p;
-	public final Plane front_p;
-	public final Plane back_p;
+	private final Plane left_p;
+	private final Plane right_p;
+	private final Plane top_p;
+	private final Plane bottom_p;
+	private final Plane front_p;
+	private final Plane back_p;
 	/**
-	 * The low bottom far point of the <code>AxisAlignedBox</code>.
+	 * The low bottom far point of this <code>AxisAlignedBox</code>.
 	 */
 	public final Point3 lbf;
 	/**
@@ -41,8 +45,8 @@ public class AxisAlignedBox extends Geometry {
 	/**
 	 * Constructs a new <code>AxisAlignedBox</code> with the specified parameters.
 	 * 
-	 * @param lbf	The low bottom far point of this <code>AxisAlignedBox</code>. Must not be <code>null</code>.
-	 * @param run	The right upper near point of this <code>AxisAlignedBox</code>. Must not be <code>null</code>.
+	 * @param lbf	The low bottom far point of the <code>AxisAlignedBox</code>. Must not be <code>null</code>.
+	 * @param run	The right upper near point of the <code>AxisAlignedBox</code>. Must not be <code>null</code>.
 	 * @param color	The color of the <code>AxisAlignedBox</code>. Must not be <code>null</code>.
 	 */
 	public AxisAlignedBox(final Point3 lbf, final Point3 run, final Color color) {
@@ -106,7 +110,7 @@ public class AxisAlignedBox extends Geometry {
 			}
 		}
 		
-		// 3. check, if the found intersection point lies on the right part of the box
+		// 3. check, if the found intersection point with the plane lies in/on the box
 		// lbf <= p <= run, for all coordinates x, y, z
 //		final Plane plane = (Plane) hitMax.geo;
 //		final Point3 p = plane.a;
@@ -123,5 +127,14 @@ public class AxisAlignedBox extends Geometry {
 		}
 //		return new Hit(hitMax.t, ray, this);
 		return new Hit(tMax, ray, this);
+	}
+	
+	public String toString() {
+		return super.toString() + ",\n\tlbf = " + lbf + ",\n" 
+								+ "\trun = " + run + "]";
+	}
+	
+	public static void main(String[] args) {
+		System.out.println(new AxisAlignedBox(new Point3(0, 0, 0), new Point3(1, 1, 1), new Color(0.5, 0.5, 0.5)));
 	}
 }

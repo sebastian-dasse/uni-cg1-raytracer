@@ -14,20 +14,20 @@ import raytracer.math.Point3;
  */
 public class Plane extends Geometry {
 	/**
-	 * A point on the plane.
+	 * A point on this plane.
 	 */
 	public final Point3 a;
 	/**
-	 * The normal of the plane.
+	 * The normal of this plane.
 	 */
 	public final Normal3 n;
 	
 	/**
 	 * Constructs a new <code>Plane</code> with the specified parameters.
 	 * 
-	 * @param a		A point on this plane. Must not be <code>null</code>.
-	 * @param n		The normal of this plane. Must not be <code>null</code>.
-	 * @param color	The color of this plane. Must not be <code>null</code>.
+	 * @param a		A point on the plane. Must not be <code>null</code>.
+	 * @param n		The normal of the plane. Must not be <code>null</code>.
+	 * @param color	The color of the plane. Must not be <code>null</code>.
 	 */
 	public Plane(final Point3 a, final Normal3 n, final Color color) {
 		super(color);
@@ -83,7 +83,7 @@ public class Plane extends Geometry {
 
 	@Override
 	public String toString() {
-		return super.toString() + "\n\t[a = " + a + ",\n" 
+		return super.toString() + ",\n\t[a = " + a + ",\n" 
 								+ "\tn = " + n + "]";
 	}
 	

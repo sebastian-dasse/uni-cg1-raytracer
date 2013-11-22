@@ -16,11 +16,11 @@ import raytracer.math.Vector3;
  */
 public class Hit {
 	/**
-	 * The parameter for the hit point.
+	 * The parameter for this hit point.
 	 */
 	public final double t;
 	/**
-	 * The <code>Ray</code> that hit the <code>Geometry</code>.
+	 * The <code>Ray</code> that hit this <code>Geometry</code>.
 	 */
 	public final Ray ray;
 	/**

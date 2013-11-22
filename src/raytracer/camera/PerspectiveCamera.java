@@ -1,45 +1,52 @@
 package raytracer.camera;
 
+import static raytracer.math.MathUtil.inRange;
 import raytracer.Ray;
 import raytracer.math.Point3;
 import raytracer.math.Vector3;
 
 /**
+ * TODO DOK IT!
+ * This immutable base class ...
+ * 
  * @author 
  *
  */
 public class PerspectiveCamera extends Camera{
 	/**
-	 * The camera angle in radians.
+	 * The half opening angle of this camera in radians.
 	 */
-	private double angle;
+	private final double angle;
 	
 	/**
-	 * @param e Vector of the eye position.
-	 * @param g Vector of the gaze-direction.
-	 * @param t Vector of the up-direction.
-	 * @param angle Perspective camera angle in degrees.
+	 * Constructs a new <code>PerspectiveCamera</code> with the specified parameters.
+	 * 
+	 * @param e		The eye position of the camera. Must not be <code>null</code>.
+	 * @param g		The gaze direction of the camera. Must not be <code>null</code>.
+	 * @param t		The up vector of the camera. Must not be <code>null</code>.
+	 * @param angle	The half opening angle of the camera in degrees. Must be a double value other between 0 and 90 
+	 * 				(including).
 	 */
 	public PerspectiveCamera(final Point3 e, final Vector3 g, final Vector3 t, final double angle) {
 		super(e, g, t);
+		if (!inRange(angle, 0, 90)) {
+			throw new IllegalArgumentException("The parameter 'angle' must be between 0 and 90 (including).");
+		}
 		this.angle = Math.toRadians(angle);
 	}
 	
-	/**
-	 * 
-	 */
 	@Override
 	public Ray rayFor(final int width, final int height, final int x, final int y) {
 		final double f1 = height / (-2.0 * Math.tan(angle));
 		final double f2 = x - (width  - 1.0) / 2.0;
 		final double f3 = y - (height - 1.0) / 2.0;
-		
-		System.out.println(f1);
-		System.out.println(f2);
-		System.out.println(f3);
-		
 		final Vector3 r = w.mul(f1).add(u.mul(f2).add(v.mul(f3)));
 		return new Ray(e, r.normalized());
+	}
+	
+	@Override
+	public String toString() {
+		return super.toString() + ",\n\tangle = " + Math.toDegrees(angle) + " deg]";
 	}
 	
 	//---- Test
@@ -50,5 +57,8 @@ public class PerspectiveCamera extends Camera{
 		final Vector3 d = ray.d;
 		System.out.println(o);
 		System.out.println(d);
+		
+		System.out.println();
+		System.out.println(new PerspectiveCamera(new Point3(0, 0, 0), new Vector3(0, 0, -1), new Vector3(0, 1, 0), 45));
 	}
 }

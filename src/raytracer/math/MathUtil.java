@@ -26,6 +26,18 @@ public final class MathUtil {
 	 * @return	<code>true</code> if 0 <= d <= 1, otherwise <code>false</code>. 
 	 */
 	public static boolean inRange0To1(final double d) {
-		return d >= 0 && d <= 1;
+		return inRange(d, 0, 1);
+	}
+	
+	/**
+	 * Checks if the specified number is in the specified range, i.e. lo <= d <= hi.
+	 * 
+	 * @param d		The double value to be checked.
+	 * @param lo	The lower limit of the range.
+	 * @param hi	The upper limit of the range.
+	 * @return	<code>true</code> if 0 <= d <= 1, otherwise <code>false</code>. 
+	 */
+	public static boolean inRange(final double d, final double lo, final double hi) {
+		return lo <= d && d <= hi;
 	}
 }

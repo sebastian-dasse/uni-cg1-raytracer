@@ -128,4 +128,8 @@ public class Point3 {
 	public String toString() {
 		return getClass().getSimpleName() + "[x = " + x + ", y = " + y + ", z = " + z + "]";
 	}
+	
+	public static void main(String[] args) {
+		System.out.println(new Point3(1, 2, 3));
+	}
 }
