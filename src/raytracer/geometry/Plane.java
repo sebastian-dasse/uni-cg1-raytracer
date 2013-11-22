@@ -6,23 +6,28 @@ import raytracer.math.Normal3;
 import raytracer.math.Point3;
 
 /**
- * @author 
+ * This immutable class represents an infinitely large plane in three-dimensional space. It is defined through a 
+ * <code>Point3</code> and a <code>Normal3</code>.
+ * 
+ * @author Sebastian Dass&eacute;
  *
  */
 public class Plane extends Geometry {
 	/**
-	 * 
+	 * A point on the plane.
 	 */
 	public final Point3 a;
 	/**
-	 * 
+	 * The normal of the plane.
 	 */
 	public final Normal3 n;
 	
 	/**
-	 * @param a
-	 * @param n
-	 * @param color
+	 * Constructs a new <code>Plane</code> with the specified parameters.
+	 * 
+	 * @param a		A point on this plane. Must not be <code>null</code>.
+	 * @param n		The normal of this plane. Must not be <code>null</code>.
+	 * @param color	The color of this plane. Must not be <code>null</code>.
 	 */
 	public Plane(final Point3 a, final Normal3 n, final Color color) {
 		super(color);

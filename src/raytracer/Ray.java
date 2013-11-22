@@ -5,7 +5,13 @@ import raytracer.math.Point3;
 import raytracer.math.Vector3;
 
 /**
- * TODO DOC IT!
+ * This immutable class represents a ray. It has has an origin o and a direction d.
+ * <p> 
+ * It provides a method for calculating a specific point on a ray from a given parameter. It also has a method for 
+ * calculating a parameter with which a given point can be generated.
+ * 
+ * inverse
+ * calculation
  * 
  * @author Sebastian Dass&eacute;
  *
@@ -98,7 +104,8 @@ public class Ray {
 
 	@Override
 	public String toString() {
-		return getClass().getSimpleName() + "[\to = " + o + ", \n\td = " + d + "]";
+		return getClass().getSimpleName() + "[\to = " + o + ",\n" 
+										  + "\td = " + d + "]";
 	}
 	
 	//---- Test

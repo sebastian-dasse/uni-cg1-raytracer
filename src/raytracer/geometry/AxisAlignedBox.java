@@ -37,6 +37,9 @@ public class AxisAlignedBox extends Geometry {
 	 */
 	public AxisAlignedBox(final Point3 lbf, final Point3 run, final Color color) {
 		super(color);
+		if (lbf == null || run == null) {
+			throw new IllegalArgumentException("The parameters must not be null.");
+		}
 		this.lbf = lbf;
 		this.run = run;
 	}
