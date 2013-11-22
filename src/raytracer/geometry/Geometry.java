@@ -17,6 +17,9 @@ public abstract class Geometry {
 	 * @param color
 	 */
 	public Geometry(final Color color) {
+		if (color == null) {
+			throw new IllegalArgumentException("The parameter 'color' must not be null.");
+		}
 		this.color = color;
 	}
 	

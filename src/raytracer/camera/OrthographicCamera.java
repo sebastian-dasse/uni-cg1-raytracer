@@ -55,13 +55,13 @@ public class OrthographicCamera extends Camera{
 		System.out.println("b = " + b);
 		System.out.println("c = " + c);
 		
-		final double disriminant = b * b - 4 * a * c;
-		if (disriminant < 0) {
+		final double discriminant = b * b - 4 * a * c;
+		if (discriminant < 0) {
 			System.out.println("kein Schnittpunkt");
 			System.exit(0);
 		}
-		final double t1 = (-b - Math.sqrt(disriminant)) / (2 * a);
-		final double t2 = (-b + Math.sqrt(disriminant)) / (2 * a);
+		final double t1 = (-b - Math.sqrt(discriminant)) / (2 * a);
+		final double t2 = (-b + Math.sqrt(discriminant)) / (2 * a);
 		
 		final Point3 p1 = o.add(d.mul(t1));
 		if (t1 == t2) {

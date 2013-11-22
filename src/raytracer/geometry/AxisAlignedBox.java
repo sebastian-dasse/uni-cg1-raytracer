@@ -1,5 +1,8 @@
 package raytracer.geometry;
 
+import java.util.Collection;
+import java.util.LinkedList;
+
 import raytracer.Color;
 import raytracer.Ray;
 import raytracer.math.Normal3;
@@ -29,7 +32,7 @@ public class AxisAlignedBox extends Geometry {
 	
 	/**
 	 * @param lbf	The low bottom far point of the <code>AxisAlignedBox</code>.
-	 * @param run	The right uppper near point of the <code>AxisAlignedBox</code>.
+	 * @param run	The right upper near point of the <code>AxisAlignedBox</code>.
 	 * @param color	The color of the <code>AxisAlignedBox</code>.
 	 */
 	public AxisAlignedBox(final Point3 lbf, final Point3 run, final Color color) {
@@ -44,10 +47,21 @@ public class AxisAlignedBox extends Geometry {
 		
 		// 1. which surfaces are visible?
 		// (o - a).dot(n_i) > 0
-		final boolean[] res = new boolean[n.length];
-		for (int i= 0; i < n.length; i++) {
-			res[i] = ray.o.sub(lbf).dot(n[i]) > 0;
+//		final boolean[] res = new boolean[n.length];
+//		for (int i = 0; i < n.length; i++) {
+//			// welche von beiden Ecken?
+////			res[i] = ray.o.sub(lbf).dot(n[i]) > 0;
+//			res[i] = ray.o.sub(run).dot(n[i]) > 0;
+//		}
+		
+		Collection<Normal3> n = new LinkedList<Normal3>();
+		boolean res_left = ray.o.sub(run).dot(left) > 0;
+		if (res_left) {
+			n.add(left);
 		}
+		
+		
+		
 		
 		// 2. calculate intersection point(s) - take the greatest t, i.e. the most distant point from the camera view
 		

@@ -26,13 +26,22 @@ public class Plane extends Geometry {
 	 */
 	public Plane(final Point3 a, final Normal3 n, final Color color) {
 		super(color);
+		if (a == null || n == null) {
+			throw new IllegalArgumentException("The parameters must not be null.");
+		}
 		this.a = a;
 		this.n = n;
 	}
 
 	@Override
 	public Hit hit(final Ray ray) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		// t = (a - o).dot(n) / d.dot(n)
+		double denominator = ray.d.dot(n);
+		if (denominator == 0) {
+			return null;
+		}
+		double t = a.sub(ray.o).dot(n);
+		return new Hit(t, ray, this);
 	}
 }
