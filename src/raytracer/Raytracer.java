@@ -31,20 +31,19 @@ public class Raytracer {
 		final World world = new World(new Color(0,0,0));
 		final Camera cam = new OrthographicCamera(new Point3(4, 4, 4), new Vector3(-4, -4, -4), new Vector3(0, 1, 0), 3);
 		final Object backgroundColor = dataElementsFromColor(world.backgroundColor, colorModel);
-		
-		int y = 0;
+
 		for (int x = 0; x < image.getWidth()-1; x++) {
-			final Ray ray = cam.rayFor(1920, 1200, x, y);
-			final Hit hit = world.hit(ray);
-				
-			if (hit == null) {
-				raster.setDataElements(x,y,backgroundColor);
+			for (int y = 0; y < image.getHeight()-1;y++) {
+				final Ray ray = cam.rayFor(width, height, x, y);
+				final Hit hit = world.hit(ray);
+				if (hit == null) {
+					raster.setDataElements(x,y,backgroundColor);
+				}
+				else {
+					raster.setDataElements(x,y,dataElementsFromColor(hit.geo.color, colorModel));
+				}
 			}
-			else {
-				raster.setDataElements(x,y,dataElementsFromColor(hit.geo.color, colorModel));
-			}
-			y++;
-		}
+		}	
 		return image;
 	}
 	
