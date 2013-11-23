@@ -38,13 +38,11 @@ public class World {
 	 * @return hit
 	 */
 	public Hit hit (final Ray ray) {
-		Hit minHit = null;
-		for (Geometry element : elements) {
-			if (element.hit(ray) == null) {
-				continue;
-			}
-			if (minHit == null || element.hit(ray).t < minHit.t) {
-				minHit = element.hit(ray);
+		Hit minHit = elements.pop().hit(ray);
+		while (!elements.isEmpty()) {
+			Hit currentHit = elements.pop().hit(ray);
+			if (minHit!= null || (currentHit != null && currentHit.t < minHit.t)) {
+				minHit = currentHit;
 			}
 		}
 		return minHit;
