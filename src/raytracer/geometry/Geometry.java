@@ -37,7 +37,8 @@ public abstract class Geometry {
 	 * positive t will be returned (i.e. the t for the point that is closest to the origin of the specified ray). For 
 	 * no hit <code>null</code> is returned.
 	 * 
-	 * @param ray	The <code>Ray</code> for which the hit with this <code>Geometry</code> shall be calculated.
+	 * @param ray	The <code>Ray</code> for which the hit with this <code>Geometry</code> shall be calculated. Must 
+	 * 				not be <code>null</code>.
 	 * @return		The <code>Hit</code> or <code>null</code>.
 	 */
 	public abstract Hit hit(final Ray ray);

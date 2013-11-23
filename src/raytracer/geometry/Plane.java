@@ -45,11 +45,11 @@ public class Plane extends Geometry {
 		}
 		
 		// t = (a - o).dot(n) / d.dot(n)
-		double denominator = ray.d.dot(n);
+		final double denominator = ray.d.dot(n);
 		if (denominator == 0) { // not hit
 			return null;
 		}
-		double t = a.sub(ray.o).dot(n) / denominator;
+		final double t = a.sub(ray.o).dot(n) / denominator;
 		return (t < 0) ? null : new Hit(t, ray, this);
 	}
 	
