@@ -2,8 +2,10 @@ package raytracer;
 
 import java.util.Collection;
 import java.util.LinkedList;
+
 import raytracer.geometry.Geometry;
 import raytracer.geometry.Hit;
+import raytracer.geometry.Sphere;
 
 /**
  * @author 
@@ -14,7 +16,7 @@ public class World {
 	 * 
 	 */
 	public final Color backgroundColor; 
-	private Collection <Geometry> elements;
+	private LinkedList <Geometry> elements;
 	
 	/**
 	 * @param backgroundColor
@@ -32,11 +34,16 @@ public class World {
 	}
 	
 	/**
-	 * @param inputRay
+	 * @param ray
 	 * @return
 	 */
-	public Hit hit (final Ray inputRay) {
-		
-		return null;
+	public Hit hit (final Ray ray) {
+		Hit minHit =  elements.pop().hit(ray);
+		for (Geometry element : elements) {
+			if (element.hit(ray).t < minHit.t) {
+				minHit = element.hit(ray);
+			}
+		}
+		return minHit;
 	}
 }
