@@ -35,12 +35,15 @@ public class World {
 	
 	/**
 	 * @param ray
-	 * @return
+	 * @return hit
 	 */
 	public Hit hit (final Ray ray) {
-		Hit minHit =  elements.pop().hit(ray);
+		Hit minHit = null;
 		for (Geometry element : elements) {
-			if (element.hit(ray).t < minHit.t) {
+			if (element.hit(ray) == null) {
+				continue;
+			}
+			if (minHit == null || element.hit(ray).t < minHit.t) {
 				minHit = element.hit(ray);
 			}
 		}
