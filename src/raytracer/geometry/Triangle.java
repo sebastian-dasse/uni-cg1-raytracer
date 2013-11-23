@@ -50,14 +50,19 @@ public class Triangle extends Geometry {
 		final Vector3 dvector = a.sub(ray.o);
 		
 		final double determinanta = matrix.determinant;
+			if(determinanta == 0) {
+				throw new IllegalArgumentException("The parameter must not be null.");
+			}
+			
 		final double betta = matrix.changeCol1(dvector).determinant/determinanta;
 		final double gamma = matrix.changeCol2(dvector).determinant/determinanta;
 		final double t = matrix.changeCol3(dvector).determinant/determinanta;
 		
-		if(gamma < 0.0 || betta < 0.0 || betta + gamma < 0.0 || betta + gamma > 1.0 || gamma > 1.0 || betta > 1.0){
-
+		if(gamma < 0.0 || betta < 0.0 || betta + gamma < 0.0 || betta + gamma > 1.0 || gamma > 1.0 || betta > 1.0 || t < 0.0){
+			return null;
+		} else {
+			return new Hit(t, ray, this);
 		}
 		
-		return null;
 	}
 }
