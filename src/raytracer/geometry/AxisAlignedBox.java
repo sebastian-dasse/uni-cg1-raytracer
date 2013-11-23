@@ -1,6 +1,5 @@
 package raytracer.geometry;
 
-import java.io.File;
 import java.util.Collection;
 import java.util.LinkedList;
 
@@ -82,83 +81,55 @@ public class AxisAlignedBox extends Geometry {
 		final Vector3 toLbf = ray.o.sub(lbf);
 		final Vector3 toRun = ray.o.sub(run);
 		final Collection<Plane> planes = new LinkedList<Plane>();
-		Hit hitMax = new Hit(0, null, null); // Alternative
 		if (toRun.dot(TOP) > 0) {
-//			planes.add(new Plane(run, TOP, color));
-			hitMax = check(run, TOP, ray, hitMax);
+			planes.add(new Plane(run, TOP, color));
 		}
 		if (toRun.dot(FRONT) > 0) {
-//			planes.add(new Plane(run, FRONT, color));
-			hitMax = check(run, FRONT, ray, hitMax);
+			planes.add(new Plane(run, FRONT, color));
 		}
 		if (toRun.dot(RIGHT) > 0) {
-//			planes.add(new Plane(run, RIGHT, color));
-			hitMax = check(run, RIGHT, ray, hitMax);
+			planes.add(new Plane(run, RIGHT, color));
 		}
 		if (toLbf.dot(LEFT) > 0) {
-//			planes.add(new Plane(lbf, LEFT, color));
-			hitMax = check(run, LEFT, ray, hitMax);
+			planes.add(new Plane(lbf, LEFT, color));
 		}
 		if (toLbf.dot(BACK) > 0) {
-//			planes.add(new Plane(lbf, BACK, color));
-			hitMax = check(run, BACK, ray, hitMax);
+			planes.add(new Plane(lbf, BACK, color));
 		}
 		if (toLbf.dot(BOTTOM) > 0) {
-//			planes.add(new Plane(lbf, BOTTOM, color));
-			hitMax = check(run, BOTTOM, ray, hitMax);
+			planes.add(new Plane(lbf, BOTTOM, color));
 		}
 		
 		// 2. calculate intersection point(s) - take the greatest t, i.e. the most distant point from the camera view
 		// t_i = (a - o).dot(n_i) / d.dot(n_i)
-//		Hit hitMax = new Hit(0, ray, this); // TODO das könnte funktionieren
-//		double tMax = 0;
-//		Plane plane = null;
-//		Normal3 norm = null;
-		
-//		for (Plane pl: planes) {
-//			
-//			Hit h = pl.hit(ray);
-//			
-////			hitMax = new Hit(t, ray, pl);
-////			tMax = Math.max(tMax, t);
-////			if (tMax < t) {
-//			if (tMax < h.t) {
-//				tMax = h.t;
-////				plane = pl;
-//				norm = ((Plane) h.geo).n;
-//			}
-//		}
-		
-//		Point3 pt = ray.at(tMax);
+		Hit hitMax = new Hit(0, ray, this);
+		for (Plane pl: planes) {
+			final Hit h = pl.hit(ray);
+			if (hitMax.t < h.t) {
+				hitMax = h;
+			}
+		}
 		
 		// 3. check, if the found intersection point with the plane lies in/on the box
 		// lbf <= p <= run, for all coordinates x, y, z
-//		final Plane plane = (Plane) hitMax.geo;
-//		final Point3 p = plane.a;
+		final Plane face = (Plane) hitMax.geo;
 		// no need to check the coordinate that lies in the in the direction of the normal of the examined plane  
-//		if (plane.n.x == 0 && (p.x < lbf.x || run.x < p.x)) {
-		if (plane.n.x == 0 && (pt.x < lbf.x || run.x < pt.x)) {
+		if (face.n.x == 0 && (face.a.x < lbf.x || run.x < face.a.x)) {
 			return null;
 		}
-		if (plane.n.y == 0 && (p.y < lbf.y || run.y < p.y)) {
+		if (face.n.y == 0 && (face.a.y < lbf.y || run.y < face.a.y)) {
 			return null;
 		}
-		if (plane.n.z == 0 && (p.z < lbf.z || run.z < p.z)) {
+		if (face.n.z == 0 && (face.a.z < lbf.z || run.z < face.a.z)) {
 			return null;
 		}
-//		return new Hit(hitMax.t, ray, this);
-		return new Hit(tMax, ray, this);
+		return new Hit(hitMax.t, ray, this);
 	}
 	
 	@Override
 	public String toString() {
 		return super.toString() + ",\n\tlbf = " + lbf + ",\n" 
 								+ "\trun = " + run + "]";
-	}
-	
-	private Hit check(Point3 a, Normal3 n, Ray ray, Hit hitMax){
-		Hit hit = new Plane(a, n, color).hit(ray);
-		return (hitMax.t < hit.t) ? hit : hitMax;
 	}
 	
 	public static void main(String[] args) {
