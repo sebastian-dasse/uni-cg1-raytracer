@@ -101,10 +101,13 @@ public class AxisAlignedBox extends Geometry {
 		
 		// 2. calculate intersection point(s) - take the greatest t, i.e. the most distant point from the camera view
 		// t_i = (a - o).dot(n_i) / d.dot(n_i)
-		Hit hitMax = planes.pop().hit(ray);
+		Hit hitMax = null;
 		for (final Plane plane : planes) {
 			final Hit h = plane.hit(ray);
-			if (hitMax.t < h.t) {
+			if (h == null) {
+				continue;
+			}
+			if (hitMax == null || hitMax.t < h.t) {
 				hitMax = h;
 			}
 		}
