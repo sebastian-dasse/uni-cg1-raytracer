@@ -1,11 +1,9 @@
 package raytracer;
 
-import java.util.Collection;
 import java.util.LinkedList;
 
 import raytracer.geometry.Geometry;
 import raytracer.geometry.Hit;
-import raytracer.geometry.Sphere;
 
 /**
  * @author 
@@ -16,7 +14,10 @@ public class World {
 	 * 
 	 */
 	public final Color backgroundColor; 
-	private LinkedList <Geometry> elements;
+	/**
+	 * 
+	 */
+	private LinkedList<Geometry> elements;
 	
 	/**
 	 * @param backgroundColor
@@ -29,17 +30,33 @@ public class World {
 	/**
 	 * @param g
 	 */
-	public void addElement(Geometry g) {
+	public void addElement(final Geometry g) {
 		elements.add(g);
+	}
+	
+	/**
+	 * @param gg
+	 */
+	public void addElements(final Geometry[] gg) {
+		for (Geometry g : gg) {
+			elements.add(g);
+		}
+	}
+	
+	/**
+	 * @param g
+	 */
+	public void removeElement(final Geometry g) {
+		elements.remove(g);
 	}
 	
 	/**
 	 * @param ray
 	 * @return hit
 	 */
-	public Hit hit (final Ray ray) {
+	public Hit hit(final Ray ray) {
 		Hit minHit = null;
-		for (Geometry element : elements) {
+		for (final Geometry element : elements) {
 			if (element.hit(ray) == null) {
 				continue;
 			}
