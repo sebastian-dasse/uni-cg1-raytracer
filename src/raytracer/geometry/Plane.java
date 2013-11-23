@@ -40,14 +40,17 @@ public class Plane extends Geometry {
 
 	@Override
 	public Hit hit(final Ray ray) {
+		if (ray == null) {
+			throw new IllegalArgumentException("The parameter 'ray' must not be null.");
+		}
 		
 		// t = (a - o).dot(n) / d.dot(n)
 		double denominator = ray.d.dot(n);
-		if (denominator == 0) {
+		if (denominator == 0) { // not hit
 			return null;
 		}
-		double t = a.sub(ray.o).dot(n);
-		return new Hit(t, ray, this);
+		double t = a.sub(ray.o).dot(n) / denominator;
+		return (t < 0) ? null : new Hit(t, ray, this);
 	}
 	
 	@Override
