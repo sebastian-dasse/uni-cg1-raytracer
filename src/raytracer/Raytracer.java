@@ -15,6 +15,13 @@ import raytracer.math.Vector3;
  *
  */
 public class Raytracer {
+	private World world;
+	private Camera cam;
+	
+	public Raytracer(World world, Camera cam) {
+		this.world = world;
+		this.cam = cam;
+	}
 	
 	public static Object dataElementsFromColor(Color myColor, ColorModel colorModel) {
 		return  colorModel.getDataElements(new float[] {
@@ -24,12 +31,10 @@ public class Raytracer {
 			}, 0, null);
 	}
 	
-	public static BufferedImage traceToImage(int width, int height) {
+	public BufferedImage traceToImage(int width, int height) {
 		BufferedImage image = new BufferedImage(width,height,BufferedImage.TYPE_INT_RGB);
 		WritableRaster raster = image.getRaster();
 		final ColorModel colorModel = image.getColorModel();
-		final World world = new World(new Color(0,0,0));
-		final Camera cam = new OrthographicCamera(new Point3(4, 4, 4), new Vector3(-4, -4, -4), new Vector3(0, 1, 0), 3);
 		final Object backgroundColor = dataElementsFromColor(world.backgroundColor, colorModel);
 
 		for (int x = 0; x < image.getWidth()-1; x++) {
@@ -47,7 +52,5 @@ public class Raytracer {
 		return image;
 	}
 	
-	public static void main (String [] args) {
-		
-	}
+	
 }

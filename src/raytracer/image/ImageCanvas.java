@@ -78,7 +78,7 @@ public final class ImageCanvas extends Canvas {
 		final WritableRaster raster = image.getRaster();
 		final ColorModel colorModel = image.getColorModel();
 		
-		final Object dataRed = colorModel.getDataElements(new float[] {0f, 0.0f, 0.5f}, 0, null);
+		final Object dataRed = colorModel.getDataElements(new float[] {0f, 0.0f, 0.0f}, 0, null);
 		
 		final Object dataBlack = colorModel.getDataElements(Color.black.getRGB(),
 				null);
