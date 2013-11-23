@@ -13,7 +13,7 @@ import static raytracer.math.MathUtil.isValid;
  * @author Sebastian Dass&eacute;
  *
  */
-public class Color {
+public class Color{
 	/**
 	 * The red component of the <code>Color</code>. Must be between 0 and 1 (including).
 	 */
