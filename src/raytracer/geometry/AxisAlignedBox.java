@@ -1,6 +1,5 @@
 package raytracer.geometry;
 
-import java.util.Collection;
 import java.util.LinkedList;
 
 import raytracer.Color;
@@ -80,7 +79,7 @@ public class AxisAlignedBox extends Geometry {
 		// (o - a).dot(n_i) > 0
 		final Vector3 toLbf = ray.o.sub(lbf);
 		final Vector3 toRun = ray.o.sub(run);
-		final Collection<Plane> planes = new LinkedList<Plane>();
+		final LinkedList<Plane> planes = new LinkedList<Plane>();
 		if (toRun.dot(TOP) > 0) {
 			planes.add(new Plane(run, TOP, color));
 		}
@@ -102,9 +101,9 @@ public class AxisAlignedBox extends Geometry {
 		
 		// 2. calculate intersection point(s) - take the greatest t, i.e. the most distant point from the camera view
 		// t_i = (a - o).dot(n_i) / d.dot(n_i)
-		Hit hitMax = new Hit(0, ray, this);
-		for (Plane pl: planes) {
-			final Hit h = pl.hit(ray);
+		Hit hitMax = planes.pop().hit(ray);
+		for (final Plane plane : planes) {
+			final Hit h = plane.hit(ray);
 			if (hitMax.t < h.t) {
 				hitMax = h;
 			}

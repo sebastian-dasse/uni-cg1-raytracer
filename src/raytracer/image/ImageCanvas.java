@@ -77,8 +77,8 @@ public final class ImageCanvas extends Canvas {
 		super.paint(g);
 		final WritableRaster raster = image.getRaster();
 		final ColorModel colorModel = image.getColorModel();
-		Object dataRed = colorModel.getDataElements(Color.red.getRGB(), null);
-		Object dataBlack = colorModel.getDataElements(Color.black.getRGB(),
+		final Object dataRed = colorModel.getDataElements(Color.red.getRGB(), null);
+		final Object dataBlack = colorModel.getDataElements(Color.black.getRGB(),
 				null);
 		for (int x = 0; x < size.width; x++) {
 			for (int y = 0; y < size.height; y++) {
