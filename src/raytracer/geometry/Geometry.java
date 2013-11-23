@@ -34,8 +34,8 @@ public abstract class Geometry {
 	/**
 	 * Returns a <code>Hit</code> object for the hit of the specified <code>Ray</code> with this <code>Geometry</code>. 
 	 * If the ray hits the <code>Geometry</code> in more than one point, the <code>Hit</code> with the smallest 
-	 * positive <code>t</code> will be returned (i.e. the <code>t</code> for the point that is closest to the origin of 
-	 * the specified ray). For no hit <code>null</code> is returned.
+	 * positive t will be returned (i.e. the t for the point that is closest to the origin of the specified ray). For 
+	 * no hit <code>null</code> is returned.
 	 * 
 	 * @param ray	The <code>Ray</code> for which the hit with this <code>Geometry</code> shall be calculated.
 	 * @return		The <code>Hit</code> or <code>null</code>.

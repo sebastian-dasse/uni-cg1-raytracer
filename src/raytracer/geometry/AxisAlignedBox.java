@@ -68,6 +68,9 @@ public class AxisAlignedBox extends Geometry {
 	// TODO
 	@Override
 	public Hit hit(final Ray ray) {
+		if (ray == null) {
+			throw new IllegalArgumentException("The parameter 'ray' must not be null.");
+		}
 		
 		// 1. which surfaces are visible?
 		// (o - a).dot(n_i) > 0
