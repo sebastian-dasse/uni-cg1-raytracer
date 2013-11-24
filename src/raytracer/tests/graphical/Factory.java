@@ -12,7 +12,14 @@ import raytracer.math.Normal3;
 import raytracer.math.Point3;
 import raytracer.math.Vector3;
 
-public class Factory {
+/**
+ * TODO DOK IT ALL!
+ * This utility class ...
+ * 
+ * @author 
+ *
+ */
+public final class Factory {
 	
 	/**
 	 * Builds a new <code>World</code> with the specified parameters.

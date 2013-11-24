@@ -36,7 +36,8 @@ public class Raytracer {
 
 		for (int x = 0; x < image.getWidth()-1; x++) {
 			for (int y = 0; y < image.getHeight()-1; y++) {
-				final Ray ray = cam.rayFor(size.width, size.height, x, y);
+//				final Ray ray = cam.rayFor(size.width, size.height, x, y); // head over heels
+				final Ray ray = cam.rayFor(size.width, size.height, x, size.height - y);
 				final Hit hit = world.hit(ray);
 				if (hit == null) {
 					raster.setDataElements(x, y, backgroundColor);
