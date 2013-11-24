@@ -1,5 +1,6 @@
 package raytracer.geometry;
 
+import static raytracer.math.MathUtil.isValid;
 import raytracer.Color;
 import raytracer.Ray;
 import raytracer.math.Point3;
@@ -12,7 +13,7 @@ public class Sphere extends Geometry {
 	/**
 	 * 
 	 */
-	public final Point3 c;
+	public final Point3 center;
 	/**
 	 * 
 	 */
@@ -25,45 +26,52 @@ public class Sphere extends Geometry {
 	 */
 	public Sphere(final Point3 c, final double r, final Color color) {
 		super(color);
-		if (c == null || r == 0) {
-			throw new IllegalArgumentException("The parameters must not be null.");
+		if (c == null) {
+			throw new IllegalArgumentException("The parameter 'c' must not be null.");
 		}
-		this.c = c;
+		if (r < 0 || !isValid(r)) {
+			throw new IllegalArgumentException("The paramameter 'r' must be a positive double value other than Infinity or NaN.");
+		}
+		center = c;
 		this.r = r;
 	}
 
 	@Override
 	public Hit hit(final Ray ray) {
-		double hitMin = 0;
-		double a = ray.d.dot(ray.d);
-		if ( 2*a == 0){
-			return null;
+		if (ray == null) {
+			throw new IllegalArgumentException("The parameter 'ray' must not be null.");
 		}
 		
-		double b = ray.d.dot((ray.o.sub(c)).mul(2.0));
-		double c1 = ray.o.sub(c).dot(ray.o.sub(c)) - r*r;
-		double d = b*b - 4*a*c1;	
-		if (d < 0) {
+		// a = d.dot(d)  = d.x * d.x + d.y * d.y + d.z * d.z  <--  will never be negative!
+		// b = d.dot(o.sub(center).mul(2))
+		// c = (o.sub(c)).dot(o.sub(c)) - r*r
+		// t = -b +- sqrt(b*b -4ac) / 2a
+		final double a = ray.d.dot(ray.d);
+		if (a == 0) {
 			return null;
 		}
-		if (d == 0) {
-			double t = -b/2*a;
-			return (t < 0) ? null : new Hit(t, ray, this);
+		final double b = ray.d.dot((ray.o.sub(center)).mul(2.0));
+		final double c = ray.o.sub(center).dot(ray.o.sub(center)) - r*r;
+		final double discriminant = b * b - 4 * a * c;	
+		if (discriminant < 0) {
+			return null; // no hit
 		}
-		if (d > 0) {
-			double t1 = -b + Math.sqrt(d)/2*a;
-			double t2 = -b - Math.sqrt(d)/2*a;
-			
-			if (t1 <= 0 && t2 <= 0){
-				return null;
-			}
-			if (t1 < t2 && t1 > 0) {
-				hitMin = t1;
-			}
-			if (t2 < t1 && t2 > 0){
-				hitMin = t2;
-			}
+		if (discriminant == 0) { // one hit
+			return (b > 0) ? null : new Hit((-b / (2 * a)), ray, this);
+		} // discrimant > 0  =>  2 results => 2 hits
+		final double numerator;
+		final double n1 = -b + Math.sqrt(discriminant);
+		final double n2 = -b - Math.sqrt(discriminant);
+		if (n1 < 0 && n2 < 0){
+			return null; // no hit
+		} // t1 >= 0 || t2 >= 0
+		if (n1 < 0) {
+			numerator = n2;
+		} else if (n2 < 0) { // t1 >= 0
+			numerator = n1;
+		} else { // t1 >= 0 && t2 >= 0
+			numerator = Math.min(n1, n2);
 		}
-		return new Hit(hitMin, ray, this);
+		return new Hit((numerator / (2 * a)), ray, this);
 	}
 }
