@@ -34,10 +34,12 @@ public class Sphere extends Geometry {
 
 	@Override
 	public Hit hit(final Ray ray) {
+		double hitMin = 0;
 		double a = ray.d.dot(ray.d);
 		if ( 2*a == 0){
 			return null;
 		}
+		
 		double b = ray.d.dot((ray.o.sub(c)).mul(2.0));
 		double c1 = ray.o.sub(c).dot(ray.o.sub(c)) - r*r;
 		double d = b*b - 4*a*c1;	
@@ -46,12 +48,22 @@ public class Sphere extends Geometry {
 		}
 		if (d == 0) {
 			double t = -b/2*a;
-			return new Hit(t, ray, this);
+			return (t < 0) ? null : new Hit(t, ray, this);
 		}
 		if (d > 0) {
+			double t1 = -b + Math.sqrt(d)/2*a;
+			double t2 = -b - Math.sqrt(d)/2*a;
 			
+			if (t1 <= 0 && t2 <= 0){
+				return null;
+			}
+			if (t1 < t2 && t1 > 0) {
+				hitMin = t1;
+			}
+			if (t2 < t1 && t2 > 0){
+				hitMin = t2;
+			}
 		}
-		
-		return null;
+		return new Hit(hitMin, ray, this);
 	}
 }
