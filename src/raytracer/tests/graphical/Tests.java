@@ -86,7 +86,7 @@ public class Tests {
 	public static Raytracer testF() {
 		World world = Factory.buildWorld(new double[] { 0, 0, 0 });
 		final Camera camera = Factory.buildOrthographicCamera(new double[][] {
-				{ 0, 0, 0 }, { 0, 0, -1 }, { 0, 1, 0 }, { Math.PI / 4 } });
+				{ 0, 0, 0 }, { 0, 0, -1 }, { 0, 1, 0 }, { 3 } });
 		world.addElements(new Geometry[] {
 				Factory.buildSphere(new double[][] { { -1, 0, -3 }, { 0.5 },
 						{ 1, 0, 0 } }),
