@@ -42,7 +42,7 @@ public class Factory {
 	 * @param s	The scaling factor of the camera. Must be a double value other than +-Infinity or NaN.
 	 * 
 	 */
-	public static final OrthographicCamera buildOrtographicCamera(double [][] p) {
+	public static final OrthographicCamera buildOrthographicCamera(double [][] p) {
 		return new OrthographicCamera(new Point3(p[0][0],p[0][1],p[0][2]),
 									 new Vector3(p[1][0],p[1][1],p[1][2]),
 									 new Vector3(p[2][0],p[2][1],p[2][2]),
