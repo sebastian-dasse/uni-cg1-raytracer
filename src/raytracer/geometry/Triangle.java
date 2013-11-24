@@ -42,27 +42,29 @@ public class Triangle extends Geometry {
 
 	@Override
 	public Hit hit(final Ray ray) {
-		
-		Mat3x3 matrix = new Mat3x3(a.x - b.x, a.x - c.x, ray.d.x,
-								   a.y - b.y, a.y - c.y, ray.d.y,
-								   a.z - b.z, a.z - c.z, ray.d.z);
-		
-		final Vector3 dvector = a.sub(ray.o);
-		
-		final double determinanta = matrix.determinant;
-			if(determinanta == 0) {
-				throw new IllegalArgumentException("The parameter must not be null.");
-			}
-			
-		final double betta = matrix.changeCol1(dvector).determinant/determinanta;
-		final double gamma = matrix.changeCol2(dvector).determinant/determinanta;
-		final double t = matrix.changeCol3(dvector).determinant/determinanta;
-		
-		if(gamma < 0.0 || betta < 0.0 || betta + gamma > 1.0 || t < 0.0){
-			return null;
-		} else {
-			return new Hit(t, ray, this);
+		if (ray == null) {
+			throw new IllegalArgumentException("The parameter 'ray' must not be null.");
 		}
 		
+		// beta  = detA_1 / detA
+		// gamma = detA_2 / detA
+		// t     = detA_3 / detA
+		// 0 <= beta + gamma <= 1
+		final Mat3x3 matrix = new Mat3x3(a.x - b.x, a.x - c.x, ray.d.x,
+								   		 a.y - b.y, a.y - c.y, ray.d.y,
+								   		 a.z - b.z, a.z - c.z, ray.d.z);
+		final Vector3 dvector = a.sub(ray.o);
+		if (matrix.determinant == 0) {
+			return null; // no hit
+		}
+		final double beta  = matrix.changeCol1(dvector).determinant / matrix.determinant;
+		final double gamma = matrix.changeCol2(dvector).determinant / matrix.determinant;
+		final double t     = matrix.changeCol3(dvector).determinant / matrix.determinant;
+		
+		// TODO FRAGE: kann t < 0 werden?
+		if (gamma < 0 || beta < 0 || beta + gamma > 1 || t < 0) {
+			return null; // no hit
+		}
+		return new Hit(t, ray, this);
 	}
 }
