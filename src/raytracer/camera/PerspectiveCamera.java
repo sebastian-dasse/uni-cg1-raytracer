@@ -24,13 +24,13 @@ public class PerspectiveCamera extends Camera{
 	 * @param e		The eye position of the camera. Must not be <code>null</code>.
 	 * @param g		The gaze direction of the camera. Must not be <code>null</code>.
 	 * @param t		The up vector of the camera. Must not be <code>null</code>.
-	 * @param angle	The half opening angle of the camera in degrees. Must be a double value other between 0 and 90 
+	 * @param angle	The opening angle of the camera in radians. Must be a double value between 0 (excluding) and PI 
 	 * 				(including).
 	 */
 	public PerspectiveCamera(final Point3 e, final Vector3 g, final Vector3 t, final double angle) {
 		super(e, g, t);
-		if (!inRange(angle, 0, 90)) {
-			throw new IllegalArgumentException("The parameter 'angle' must be between 0 and 90 (including).");
+		if (angle == 0 || !inRange(angle, 0, Math.PI)) {
+			throw new IllegalArgumentException("The parameter 'angle' must be between 0 (excluding) and PI (including).");
 		}
 		this.angle = angle / 2.0;
 	}

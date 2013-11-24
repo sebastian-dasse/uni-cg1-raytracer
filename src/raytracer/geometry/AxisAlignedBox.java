@@ -118,16 +118,13 @@ public class AxisAlignedBox extends Geometry {
 		// lbf <= p <= run, for all coordinates x, y, z
 		final Plane face = (Plane) hitMax.geo;
 		final Point3 p = ray.at(hitMax.t);
-		// no need to check the coordinate that lies in the in the direction of the normal of the examined plane  
-//		if (face.n.x == 0 && (face.a.x < lbf.x || run.x < face.a.x)) {
+		// no need to check the coordinate that lies in the in the direction of the normal of the examined plane
 		if (face.n.x == 0 && (p.x < lbf.x || run.x < p.x)) {
 			return null;
 		}
-//		if (face.n.y == 0 && (face.a.y < lbf.y || run.y < face.a.y)) {
 		if (face.n.y == 0 && (p.y < lbf.y || run.y < p.y)) {
 			return null;
 		}
-//		if (face.n.z == 0 && (face.a.z < lbf.z || run.z < face.a.z)) {
 		if (face.n.z == 0 && (p.z < lbf.z || run.z < p.z)) {
 			return null;
 		}
@@ -169,10 +166,5 @@ public class AxisAlignedBox extends Geometry {
 	public String toString() {
 		return super.toString() + ",\n\tlbf = " + lbf + ",\n" 
 								+ "\trun = " + run + "]";
-	}
-	
-	//---- Test
-	public static void main(String[] args) {
-		System.out.println(new AxisAlignedBox(new Point3(0, 0, 0), new Point3(1, 1, 1), new Color(0.5, 0.5, 0.5)));
 	}
 }

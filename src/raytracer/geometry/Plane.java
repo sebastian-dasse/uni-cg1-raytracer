@@ -90,9 +90,4 @@ public class Plane extends Geometry {
 		return super.toString() + ",\n\t[a = " + a + ",\n" 
 								+ "\tn = " + n + "]";
 	}
-	
-	//---- Test
-	public static void main(String[] args) {
-		System.out.println(new Plane(new Point3(0, 0, 0), new Normal3(1, 1, 1), new Color(0.5, 0.5, 0.5)));
-	}
 }

@@ -142,39 +142,4 @@ public class Color{
 	public String toString() {
 		return getClass().getSimpleName() + "[r = " + r + ", g = " + g + ", b = " + b + "]";
 	}
-	
-	//---- Test
-	public static void main(String[] args) {
-//		Color c01 = new Color(1, 1, -1);
-//		Color c02 = new Color(1, 1, 2);
-//		Color c03 = new Color(1, 1, Double.NaN);
-//		Color c04 = new Color(1, 1, Double.POSITIVE_INFINITY);
-		Color c0 = new Color(0, 0, 0);
-		Color c1 = new Color(1, 1, 1);
-		Color c2 = new Color(0.9, 0.9, 0.9);
-		Color c3 = new Color(0.009, 0.009, 0.009);
-		
-		System.out.println(c2.add(c1));
-		System.out.println(c2.add(c3));
-		System.out.println();
-		
-		System.out.println(c2.sub(c1));
-		System.out.println(c2.sub(c3));
-		System.out.println();
-		
-		System.out.println(c0.mul(c0));
-		System.out.println(c0.mul(c1));
-		System.out.println(c1.mul(c1));
-		System.out.println(c2.mul(c1));
-		System.out.println(c2.mul(c3));
-		System.out.println();
-		
-		System.out.println(c2.mul(0));
-		System.out.println(c2.mul(1));
-		System.out.println(c2.mul(0.9));
-		System.out.println(c2.mul(1.1));
-		System.out.println(c2.mul(10000));
-		System.out.println(c2.mul(-10000));
-		System.out.println();
-	}
 }
