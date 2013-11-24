@@ -77,17 +77,13 @@ public final class ImageCanvas extends Canvas {
 		super.paint(g);
 		final WritableRaster raster = image.getRaster();
 		final ColorModel colorModel = image.getColorModel();
-		
 		final Object dataRed = colorModel.getDataElements(new float[] {0f, 0.0f, 0.0f}, 0, null);
-		
-		final Object dataBlack = colorModel.getDataElements(Color.black.getRGB(),
-				null);
+		final Object dataBlack = colorModel.getDataElements(Color.black.getRGB(), null);
 		for (int x = 0; x < size.width; x++) {
 			for (int y = 0; y < size.height; y++) {
-				raster.setDataElements(x, y, dataRed);
+				raster.setDataElements(x, y, dataBlack);
 //				raster.setPixel(x, y, 0<<16 | 255<<8 | 0 );
-				//0<<16 | 255<<8 | 0 
-				
+				//0<<16 | 255<<8 | 0 				
 			}
 		}
 		int x = 0;

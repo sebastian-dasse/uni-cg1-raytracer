@@ -13,6 +13,7 @@ import raytracer.math.Point3;
  *
  */
 public class Plane extends Geometry {
+	
 	/**
 	 * A point on this plane.
 	 */
