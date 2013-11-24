@@ -32,7 +32,7 @@ public class PerspectiveCamera extends Camera{
 		if (!inRange(angle, 0, 90)) {
 			throw new IllegalArgumentException("The parameter 'angle' must be between 0 and 90 (including).");
 		}
-		this.angle = Math.toRadians(angle);
+		this.angle = angle / 2.0;
 	}
 	
 	@Override
@@ -76,14 +76,14 @@ public class PerspectiveCamera extends Camera{
 	
 	//---- Test
 	public static void main(String[] args) {
-		PerspectiveCamera cam = new PerspectiveCamera(new Point3(4, 4, 4), new Vector3(-4, -4, -4), new Vector3(0, 1, 0), 45);
-		Ray ray = cam.rayFor(1920, 1200, 1000, 800);
-		final Point3 o = ray.o;
-		final Vector3 d = ray.d;
-		System.out.println(o);
-		System.out.println(d);
-		
-		System.out.println();
-		System.out.println(new PerspectiveCamera(new Point3(0, 0, 0), new Vector3(0, 0, -1), new Vector3(0, 1, 0), 45));
+//		PerspectiveCamera cam = new PerspectiveCamera(new Point3(4, 4, 4), new Vector3(-4, -4, -4), new Vector3(0, 1, 0), 45);
+//		Ray ray = cam.rayFor(1920, 1200, 1000, 800);
+//		final Point3 o = ray.o;
+//		final Vector3 d = ray.d;
+//		System.out.println(o);
+//		System.out.println(d);
+//		
+//		System.out.println();
+//		System.out.println(new PerspectiveCamera(new Point3(0, 0, 0), new Vector3(0, 0, -1), new Vector3(0, 1, 0), 45));
 	}
 }
