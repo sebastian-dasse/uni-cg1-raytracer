@@ -1,11 +1,7 @@
 package raytracer.geometry;
 
 import static raytracer.math.MathUtil.isValid;
-import raytracer.Color;
 import raytracer.Ray;
-import raytracer.math.Normal3;
-import raytracer.math.Point3;
-import raytracer.math.Vector3;
 
 /**
  * This immutable class represents a hit of a <code>Ray</code> with a <code>Geometry</code>. Therefore it stores the 
@@ -90,10 +86,5 @@ public class Hit {
 		return getClass().getSimpleName() + "[\tt = " + t + ",\n" 
 										  + "\tray = " + ray + ",\n"
 										  + "\tgeo = " + geo + "]";
-	}
-	
-	//---- Test
-	public static void main(String[] args) {
-		System.out.println(new Hit(1.23, new Ray(new Point3(0, 0, 0), new Vector3(1, 1, 1)), new Plane(new Point3(2, 2, 2), new Normal3(3, 2, 1), new Color(0.5, 0.5, 0.5))));
 	}
 }

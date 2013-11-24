@@ -6,7 +6,7 @@ import raytracer.geometry.Geometry;
 import raytracer.geometry.Hit;
 
 /**
- * DOK IT ALL!
+ * TODO DOK IT ALL!
  * 
  * @author 
  *

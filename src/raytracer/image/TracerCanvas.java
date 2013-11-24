@@ -1,14 +1,11 @@
 package raytracer.image;
 
 import java.awt.Canvas;
-import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import java.awt.image.ColorModel;
-import java.awt.image.WritableRaster;
 
 /**
+ * TODO UPDATE DOK!
  * This class represents the canvas for a diagonal line on black background. It is initialized with size parameters. 
  * <p>
  * The class includes a paint method which is called to display the generated image.
