@@ -9,9 +9,8 @@ import raytracer.math.Point3;
 import raytracer.math.Vector3;
 
 /**
- * TODO HASCODE & EQUALS
- * TODO DOK IT ALL!
- * This immutable class represents an axis aligned box. ...
+ * This immutable class represents an axis aligned box. It is defined through its <em>low bottom far point</em> (lbf) 
+ * and its <em>right upper near point</em> (run).
  * 
  * @author Sebastian Dass&eacute;
  *
@@ -129,11 +128,43 @@ public class AxisAlignedBox extends Geometry {
 	}
 	
 	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((lbf == null) ? 0 : lbf.hashCode());
+		result = prime * result + ((run == null) ? 0 : run.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(final Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		final AxisAlignedBox other = (AxisAlignedBox) obj;
+		if (lbf == null) {
+			if (other.lbf != null)
+				return false;
+		} else if (!lbf.equals(other.lbf))
+			return false;
+		if (run == null) {
+			if (other.run != null)
+				return false;
+		} else if (!run.equals(other.run))
+			return false;
+		return true;
+	}
+
+	@Override
 	public String toString() {
 		return super.toString() + ",\n\tlbf = " + lbf + ",\n" 
 								+ "\trun = " + run + "]";
 	}
 	
+	//---- Test
 	public static void main(String[] args) {
 		System.out.println(new AxisAlignedBox(new Point3(0, 0, 0), new Point3(1, 1, 1), new Color(0.5, 0.5, 0.5)));
 	}
