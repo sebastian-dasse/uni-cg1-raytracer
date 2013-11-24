@@ -1,4 +1,4 @@
-package raytracer.tests.dirtyGraphical;
+package raytracer.tests.graphical;
 
 import raytracer.Color;
 import raytracer.World;
