@@ -110,18 +110,25 @@ public class AxisAlignedBox extends Geometry {
 				hitMax = h;
 			}
 		}
+		if (hitMax == null) {
+			return null; // no hit
+		}
 		
 		// 3. check, if the found intersection point with the plane lies in/on the box
 		// lbf <= p <= run, for all coordinates x, y, z
 		final Plane face = (Plane) hitMax.geo;
+		final Point3 p = ray.at(hitMax.t);
 		// no need to check the coordinate that lies in the in the direction of the normal of the examined plane  
-		if (face.n.x == 0 && (face.a.x < lbf.x || run.x < face.a.x)) {
+//		if (face.n.x == 0 && (face.a.x < lbf.x || run.x < face.a.x)) {
+		if (face.n.x == 0 && (p.x < lbf.x || run.x < p.x)) {
 			return null;
 		}
-		if (face.n.y == 0 && (face.a.y < lbf.y || run.y < face.a.y)) {
+//		if (face.n.y == 0 && (face.a.y < lbf.y || run.y < face.a.y)) {
+		if (face.n.y == 0 && (p.y < lbf.y || run.y < p.y)) {
 			return null;
 		}
-		if (face.n.z == 0 && (face.a.z < lbf.z || run.z < face.a.z)) {
+//		if (face.n.z == 0 && (face.a.z < lbf.z || run.z < face.a.z)) {
+		if (face.n.z == 0 && (p.z < lbf.z || run.z < p.z)) {
 			return null;
 		}
 		return new Hit(hitMax.t, ray, this);
