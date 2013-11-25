@@ -17,19 +17,20 @@
 
 \section{Aufgabenstellung}
 \subsection{}
-Implementierung der beiden Kameras OrtographicCamera und PerspectiveCamera
+Implementierung der beiden Kameras OrtographicCamera und PerspectiveCamera.
 
 \subsection{}
-Schreiben einer Color-Klasse
+Schreiben einer Color-Klasse.
 
 \subsection{}
-Entwerfen einer abstrakten Geometrie-Superklasse Geometry und der entsprechenden Unterklassen Plane, AxisAlignedBox, Triangle und Sphere sowie eines Hit Objekts. 
+Entwerfen einer abstrakten Geometrie-Superklasse Geometry und der entsprechenden Unterklassen Plane, AxisAlignedBox, Triangle und Sphere sowie eines Hit-Objekts.
 \subsection{} 
-Entwerfen einer Welt-Klasse, die alle Objekte der Szene enthält
+Entwerfen einer Welt-Klasse, die alle Objekte der Szene enth\"alt
 \subsection{} 
-Entwerfen der Raytracer-Klasse, die über die Objekte der Welt iteriert
+Entwerfen der Raytracer-Klasse, die \"uber die Objekte der Welt iteriert.
 \subsection{}
-Testen der Geometry-Objekte durch entsprechende Beispielkonfigurationen
+Testen der Geometry-Objekte durch entsprechende Beispielkonfigurationen.
+
 
 \section{L\"osungsstrategien}
 \subsection{}
@@ -40,33 +41,33 @@ Die entsprechenden Klassen wurden zun\"achst auf Papier
 gerechnet und dann gemeinsam im linearen Zeitablauf implementiert.
 
 \subsection{}
-Die Raytracer und View Objekte wurden m\"oglichst generisch
-modularisiert.
+Raytracer und View Objekte wurden m\"oglichst generisch modularisiert.
+
 
 \section{Besondere Probleme}
 \subsection{}
-Einsetzen der Werte aus der selbsterstellten Colorklasse in 
-das WriteableRaster.
+Einsetzen der Werte aus der selbsterstellten Color-Klasse in das WriteableRaster.
 
 \subsection{}
-Implementierung der Axis-Aligned Box.
+Implementierung der AxisAlignedBox.
+
+
 \section{Implementierung}
 \subsection{}
-Die Kameras, Color-Klasse und Geometrieklassen, sowie die Hit Klasse wurden 
-anhand der im Unterricht vorgegebenen Methodik und dem 
-Buch Ray Tracing From Ground Up von Kevin Suffern
+Die Kameras, die Klassen Color und Hit sowie die Geometrie-Klassen wurden 
+anhand der im Unterricht vorgegebenen Methodik und dem Buch 
+\textit{Ray Tracing From Ground} Up von Kevin Suffern
 umgesetzt. 
 
 \subsection{}
-Der Raytracer gibt mit der trace() Methode ein BufferedImage Objekt aus, das mit der UI-Klasse ShowImage auf einem Canvas dargestellt wird.
-Zur Bequemen Erzeugung der Objekte Graphikobjekte wurde die
-Factoryklasse rayter.tests.graphical.Factory erstellt.
+Der Raytracer gibt mit der Methode trace() ein BufferedImage-Objekt aus, das mit der UI-Klasse ShowImage auf einem Canvas dargestellt wird.
+Zur Bequemen Erzeugung der Graphikobjekte wurde die Factoryklasse raytracer.tests.graphical.Factory erstellt.
 
 
 \section{Zeitbedarf}
 \subsection{}
 Der Zeitbedarf wurde bei allen Teammitgliedern mit jeweils 25 Stunden angegeben. Dabei 
-wurde viel Zeit mit mathematischen \"Uberlegungen aufgewandt.
+wurde viel Zeit f\"ur mathematische \"Uberlegungen aufgewandt.
 
 
 \end{document} 
