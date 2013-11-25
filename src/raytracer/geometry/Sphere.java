@@ -8,7 +8,7 @@ import raytracer.math.Point3;
 /**
  * This immutable class represents a sphere in three-dimensional space. It is defined trough its center point and radius.
  *  
- * @author Maxim Novichkov;
+ * @author Maxim Novichkov
  * @author Sebastian Dass&eacute;
  */
 public class Sphere extends Geometry {

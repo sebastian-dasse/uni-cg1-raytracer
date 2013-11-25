@@ -9,16 +9,33 @@ import raytracer.camera.Camera;
 import raytracer.geometry.Hit;
 
 /**
- * TODO DOK IT ALL!
+ * This class represents a ray tracer. It has a world, containing all the objects in a specific scene, a camera and a 
+ * screen size. The method <code>trace()</code> returns a <code>BufferedImage</code> of the ray tracer.
  * 
- * @author 
+ * @author Simon Lischka
  *
  */
 public class Raytracer {
+	/**
+	 * The world of this raytracer.
+	 */
 	private final World world;
+	/**
+	 * The camera of this raytracer.
+	 */
 	private final Camera cam;
+	/**
+	 * The screen size of this raytracer.
+	 */
 	private final Dimension size;
 	
+	/**
+	 * Constructs a new <code>Raytracer</code> with the specified parameters.
+	 * 
+	 * @param world	The world of this <code>Raytracer</code>.
+	 * @param cam	The camera of this <code>Raytracer</code>.
+	 * @param size	The screen size of this <code>Raytracer</code>.
+	 */
 	public Raytracer(final World world, final Camera cam, Dimension size) {
 		if (world == null || cam == null || size == null) {
 			throw new IllegalArgumentException("The parameters must not be null.");
@@ -28,6 +45,11 @@ public class Raytracer {
 		this.size = size;
 	}
 	
+	/**
+	 * Returns a <code>BufferedImage</code> of a scene as defined by this world, this camera and this size.
+	 * 
+	 * @return	A <code>BufferedImage</code> of a scene.
+	 */
 	public BufferedImage trace() {
 		final BufferedImage image = new BufferedImage(size.width, size.height, BufferedImage.TYPE_INT_RGB);
 		final WritableRaster raster = image.getRaster();
@@ -54,11 +76,12 @@ public class Raytracer {
 	}
 	
 	/**
+	 * Returns a data element array representation of a pixel in the specified <code>ColorModel</code> from the specified 
+	 * <code>raytracer.Color</code>.
 	 * 
-	 * 
-	 * @param color
-	 * @param colorModel
-	 * @return
+	 * @param color			The specified <code>raytracer.Color</code>.
+	 * @param colorModel	The specified <code>ColorModel</code>.
+	 * @return				An Object which is a primitive data array representation of a pixel.
 	 */
 	private static Object dataElementsFromColor(final Color color, final ColorModel colorModel) {
 		return colorModel.getDataElements(new float[] {

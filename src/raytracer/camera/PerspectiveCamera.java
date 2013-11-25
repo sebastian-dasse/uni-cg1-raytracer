@@ -6,10 +6,12 @@ import raytracer.math.Point3;
 import raytracer.math.Vector3;
 
 /**
- * This immutable base class represents a model of a perspective camera.
+ * This immutable class represents a perspective camera. All rays have the same origin but a different direction. The 
+ * opening angle defines how much of the scene is visible.
  * 
- * @author Maxim Novichkov;
+ * @author Maxim Novichkov
  * @author Sebastian Dass&eacute;
+ * 
  */
 public class PerspectiveCamera extends Camera{
 	/**
@@ -71,18 +73,5 @@ public class PerspectiveCamera extends Camera{
 	@Override
 	public String toString() {
 		return super.toString() + ",\n\tangle = " + Math.toDegrees(angle) + " deg]";
-	}
-	
-	//---- Test
-	public static void main(String[] args) {
-//		PerspectiveCamera cam = new PerspectiveCamera(new Point3(4, 4, 4), new Vector3(-4, -4, -4), new Vector3(0, 1, 0), 45);
-//		Ray ray = cam.rayFor(1920, 1200, 1000, 800);
-//		final Point3 o = ray.o;
-//		final Vector3 d = ray.d;
-//		System.out.println(o);
-//		System.out.println(d);
-//		
-//		System.out.println();
-//		System.out.println(new PerspectiveCamera(new Point3(0, 0, 0), new Vector3(0, 0, -1), new Vector3(0, 1, 0), 45));
 	}
 }

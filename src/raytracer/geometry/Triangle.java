@@ -10,7 +10,7 @@ import raytracer.math.Vector3;
  * This immutable class represents a flat triangle in three-dimensional space. It is defined through its three corner 
  * points (vertices).
  * 
- * @author Novichkov Maxim;
+ * @author Maxim Novichkov
  * @author Sebastian Dass&eacute;
  */
 public class Triangle extends Geometry {

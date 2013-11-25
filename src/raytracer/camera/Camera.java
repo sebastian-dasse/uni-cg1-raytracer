@@ -5,10 +5,15 @@ import raytracer.math.Point3;
 import raytracer.math.Vector3;
 
 /**
- * This immutable base class provide a basis for implementing various cameras.
+ * This immutable class is a basis for implementing various cameras for the ray tracer. Therefore it constructs 
+ * an orthonormal coordinate system with base vectors u, v, w out of the given camera vectors e, g, t.
+ * <p>
+ * Inheriting classes shall implement a method for calculating a <code>Ray</code> for a specific pixel on a screen with 
+ * a specific resolution.
  * 
  * @author Sebastian Dass&eacute;
  * @author Maxim Novichkov;
+ * 
  */
 public abstract class Camera {
 	/**
