@@ -7,30 +7,33 @@ import raytracer.math.Point3;
 import raytracer.math.Vector3;
 
 /**
- *  This immutable class represents a flat triangle with three corner points.
+ * This immutable class represents a flat triangle in three-dimensional space. It is defined through its three corner 
+ * points (vertices).
  * 
  * @author Novichkov Maxim;
  * @author Sebastian Dass&eacute;
  */
 public class Triangle extends Geometry {
 	/**
-	 *  The point of a triangle.
+	 * Vertex a of this triangle.
 	 */
 	public final Point3 a;
 	/**
-	 *  The point of a triangle.
+	 * Vertex b of this triangle.
 	 */
 	public final Point3 b;
 	/**
-	 *  The point of a triangle.
+	 * Vertex c of this triangle.
 	 */
 	public final Point3 c;
 	
 	/**
-	 * @param a  The point of a triangle. Must not be a null.
-	 * @param b  The point of a triangle. Must not be a null.
-	 * @param c  The point of a triangle. Must not be a null.
-	 * @param color  The color of this triangle.
+	 * Constructs a new <code>Triangle</code> with the specified parameters.
+	 * 
+	 * @param a		Vertex a of the triangle. Must not be <code>null</code>.
+	 * @param b		Vertex b of the triangle. Must not be <code>null</code>.
+	 * @param c		Vertex c of the triangle. Must not be <code>null</code>.
+	 * @param color	The color of the triangle. Must not be <code>null</code>.
 	 */
 	public Triangle(final Point3 a, final Point3 b, final Point3 c, final Color color) {
 		super(color);
@@ -63,7 +66,7 @@ public class Triangle extends Geometry {
 		final double gamma = matrix.changeCol2(dvector).determinant / matrix.determinant;
 		final double t     = matrix.changeCol3(dvector).determinant / matrix.determinant;
 		
-		// TODO FRAGE: kann t < 0 werden?
+		// TODO FRAGE: kann t < 0 überhaupt werden?
 		if (gamma < 0 || beta < 0 || beta + gamma > 1 || t < 0) {
 			return null; // no hit
 		}

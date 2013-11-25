@@ -9,8 +9,8 @@ import raytracer.math.Point3;
 import raytracer.math.Vector3;
 
 /**
- * This immutable class represents an axis aligned box. It is defined through its <em>low bottom far point</em> (lbf) 
- * and its <em>right upper near point</em> (run).
+ * This immutable class represents an axis aligned box in three-dimensional space. It is defined through its <em>low 
+ * bottom far point</em> (lbf) and its <em>right upper near point</em> (run).
  * 
  * @author Sebastian Dass&eacute;
  *
