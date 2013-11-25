@@ -6,7 +6,7 @@ import raytracer.math.Point3;
 import raytracer.math.Vector3;
 
 /**
- * This immutable base class represent a model of a perspective camera.
+ * This immutable base class represents a model of a perspective camera.
  * 
  * @author Maxim Novichkov;
  * @author Sebastian Dass&eacute;
