@@ -7,28 +7,30 @@ import raytracer.math.Point3;
 import raytracer.math.Vector3;
 
 /**
- * @author 
- *
+ *  This immutable class represents a flat triangle with three corner points.
+ * 
+ * @author Novichkov Maxim;
+ * @author Sebastian Dass&eacute;
  */
 public class Triangle extends Geometry {
 	/**
-	 * 
+	 *  The point of a triangle.
 	 */
 	public final Point3 a;
 	/**
-	 * 
+	 *  The point of a triangle.
 	 */
 	public final Point3 b;
 	/**
-	 * 
+	 *  The point of a triangle.
 	 */
 	public final Point3 c;
 	
 	/**
-	 * @param a
-	 * @param b
-	 * @param c
-	 * @param color
+	 * @param a  The point of a triangle. Must not be a null.
+	 * @param b  The point of a triangle. Must not be a null.
+	 * @param c  The point of a triangle. Must not be a null.
+	 * @param color  The color of this triangle.
 	 */
 	public Triangle(final Point3 a, final Point3 b, final Point3 c, final Color color) {
 		super(color);

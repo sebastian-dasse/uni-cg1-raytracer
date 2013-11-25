@@ -5,11 +5,10 @@ import raytracer.math.Point3;
 import raytracer.math.Vector3;
 
 /**
- * TODO DOK IT!
- * This immutable base class ...
+ * This immutable base class provide a basis for implementing various cameras.
  * 
- * @author 
- *
+ * @author Sebastian Dass&eacute;
+ * @author Maxim Novichkov;
  */
 public abstract class Camera {
 	/**
@@ -63,7 +62,7 @@ public abstract class Camera {
 	 * @param height	The screen width in pixels.
 	 * @param x			The x coordinate of the pixel.
 	 * @param y			The y coordinate of the pixel.
-	 * @return
+	 * @return          
 	 */
 	public abstract Ray rayFor(final int width, final int height, final int x, final int y);
 	

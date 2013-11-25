@@ -6,23 +6,25 @@ import raytracer.Ray;
 import raytracer.math.Point3;
 
 /**
- * @author 
- *
+ * This immutable class represents a sphere. It is defined trough midpoint and radius.
+ *  
+ * @author Maxim Novichkov;
+ * @author Sebastian Dass&eacute;
  */
 public class Sphere extends Geometry {
 	/**
-	 * 
+	 *  The midpoint of this sphere.
 	 */
 	public final Point3 center;
 	/**
-	 * 
+	 *  The radius of this sphere.
 	 */
 	public final double r;
 	
 	/**
-	 * @param c
-	 * @param r
-	 * @param color
+	 * @param c   The midpoint of this sphere. Must not be a null.
+	 * @param r   The radius of this sphere. Must not be a null.
+	 * @param color  The cololor of this sphere.
 	 */
 	public Sphere(final Point3 c, final double r, final Color color) {
 		super(color);
