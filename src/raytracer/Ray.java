@@ -10,9 +10,6 @@ import raytracer.math.Vector3;
  * It provides a method for calculating a specific point on a ray from a given parameter. It also has a method for 
  * calculating a parameter with which a given point can be generated.
  * 
- * inverse
- * calculation
- * 
  * @author Sebastian Dass&eacute;
  *
  */
@@ -26,10 +23,9 @@ public class Ray {
 	 */
 	public final Vector3 d;
 	
-	// TODO FRAGE: Nullvektor als direction verbieten? falls nicht müsste bei tOf() Div durch 0 auf anderem Weg vermieden werden
 	/**
 	 * @param o	The origin of the ray. Must not be <code>null</code>.
-	 * @param d	The direction of the ray. Must not be <code>null</code>.
+	 * @param d	The direction of the ray. Thus the null vector (0, 0, 0) is not allowed. Must not be <code>null</code>.
 	 */
 	public Ray(final Point3 o, final Vector3 d) {
 		if (o == null || d == null) {
@@ -42,16 +38,15 @@ public class Ray {
 		this.d = d;
 	}
 	
-	// TODO FRAGE: darf t < 0 sein?
 	/**
 	 * Calculates a point on this <code>Ray</code> as specified by the parameter t.
 	 * 
-	 * @param t	The parameter.
+	 * @param t	The parameter. Must be a positive double value other than Infinity or NaN.
 	 * @return	The <code>Point3</code> for the given t.
 	 */
 	public Point3 at(final double t) {
-		if (!isValid(t)) {
-			throw new IllegalArgumentException("Only a double value other than +-Infinity or NaN is allowed.");
+		if (t < 0 || !isValid(t)) {
+			throw new IllegalArgumentException("The paramameter 't' must be a positive double value other than Infinity or NaN.");
 		}
 		// p = o + td
 		return o.add(d.mul(t));
@@ -106,48 +101,5 @@ public class Ray {
 	public String toString() {
 		return getClass().getSimpleName() + "[\to = " + o + ",\n" 
 										  + "\td = " + d + "]";
-	}
-	
-	//---- Test
-	public static void main(String[] args) {
-		Ray ray = new Ray(new Point3(0, 0, 0), new Vector3(2, 2, 2));
-		System.out.println(ray);
-		System.out.println("ray.at(3) = " + ray.at(3));
-		// TODO what shall we do with a Rundungsfehler?
-		System.out.println("ray.tOf(new Point3(6, 6, 6) = " + ray.tOf(new Point3(6, 6, 6)));
-		System.out.println();
-		
-		ray = new Ray(new Point3(1, 2, 3), new Vector3(-1, -2, -3));
-		System.out.println(ray);
-		System.out.println("ray.at(1) = " + ray.at(1));
-		System.out.println("ray.tOf(new Point3(0, 0, 0) = " + ray.tOf(new Point3(0, 0, 0)));
-		System.out.println();
-		
-		ray = new Ray(new Point3(0, 0, 0), new Vector3(3, 4, 0));
-		System.out.println(ray);
-		System.out.println("ray.at(1) = " + ray.at(4));
-		System.out.println("ray.tOf(new Point3(12, 16, 0) = " + ray.tOf(new Point3(12, 16, 0)));
-		// TODO was ist mit Punkten, die gar nicht auf dem Strahl liegen - verbieten?
-		// Prüfung wäre: p = o + td  <=> p-o = td  =>  t eindeutig?
-		System.out.println("ray.tOf(new Point3(12, 16, 7) = " + ray.tOf(new Point3(12, 16, 7)));
-		System.out.println();
-		
-		Point3 o = new Point3(0, 0, 0);
-		Vector3 d = new Vector3(2, 3, 0);
-		ray = new Ray(o, d);
-		System.out.println(ray);
-		System.out.println("ray.at(2) = " + ray.at(2));
-		
-		Point3 p = new Point3(4, 6, 0);		// p auf ray
-//		Point3 p = new Point3(4, 6, 27);	// p nicht auf ray
-		System.out.println("ray.tOf(" + p + ") = " + ray.tOf(p));
-		
-		double t = ray.tOf(p);
-		// Prüfung: ist p auf ray?
-		// dazu: p = o + td  <=> p-o = td  =>  t eindeutig?
-		
-		System.out.println(p.x - o.x + " = " + t * d.x);
-		System.out.println(p.y - o.y + " = " + t * d.y);
-		System.out.println(p.z - o.z + " = " + t * d.z);
 	}
 }
