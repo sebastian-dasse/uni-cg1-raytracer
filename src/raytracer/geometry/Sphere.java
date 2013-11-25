@@ -24,7 +24,7 @@ public class Sphere extends Geometry {
 	/**
 	 * @param c   The midpoint of this sphere. Must not be a null.
 	 * @param r   The radius of this sphere. Must not be a null.
-	 * @param color  The cololor of this sphere.
+	 * @param color  The color of this sphere.
 	 */
 	public Sphere(final Point3 c, final double r, final Color color) {
 		super(color);
