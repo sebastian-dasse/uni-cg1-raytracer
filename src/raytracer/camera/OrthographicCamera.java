@@ -6,10 +6,10 @@ import raytracer.math.Point3;
 import raytracer.math.Vector3;
 
 /**
- * TODO DOK IT!
- * This immutable base class ...
+ * This immutable base class represents a model of a orthographic camera.
  * 
- * @author 
+ * @author Simon Lischka;
+ * @author Sebastian Dass&eacute;
  *
  */
 public class OrthographicCamera extends Camera{
