@@ -5,18 +5,18 @@ import raytracer.World;
 import raytracer.geometry.Hit;
 
 public class PhongMaterial extends Material{
-	private Color diffuse;
-	private Color specular;
-	private int exponent; 
+	private final Color diffuse;
+	private final Color specular;
+	private final int exponent; 
 	
-	public PhongMaterial(Color diffuse, Color specular, int exponent){
+	public PhongMaterial(final Color diffuse, final Color specular, final int exponent){
 		this.diffuse = diffuse;
 		this.specular = specular;
 		this.exponent = exponent;
 	}
 
 	@Override
-	Color colorFor(Hit hit, World world) {
+	public Color colorFor(final Hit hit, final World world) {
 		// TODO Auto-generated method stub
 		return null;
 	}
