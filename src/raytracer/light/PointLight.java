@@ -4,9 +4,24 @@ import raytracer.Color;
 import raytracer.math.Point3;
 import raytracer.math.Vector3;
 
+/**
+ * 
+ * 
+ * @author 
+ *
+ */
 public class PointLight extends Light {
+	/**
+	 * 
+	 */
 	public final Point3 position;
 
+	/**
+	 * 
+	 * 
+	 * @param color
+	 * @param position
+	 */
 	public PointLight(final Color color, final Point3 position) {
 		super(color);
 		this.position = position;

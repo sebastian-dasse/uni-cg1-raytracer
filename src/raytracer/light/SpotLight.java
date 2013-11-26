@@ -4,11 +4,34 @@ import raytracer.Color;
 import raytracer.math.Point3;
 import raytracer.math.Vector3;
 
+/**
+ * 
+ * 
+ * @author 
+ *
+ */
 public class SpotLight extends Light {
+	/**
+	 * 
+	 */
 	public final Point3 position;
+	/**
+	 * 
+	 */
 	public final Vector3 direction;
+	/**
+	 * 
+	 */
 	public final double halfAngle;
 	
+	/**
+	 * 
+	 * 
+	 * @param color
+	 * @param position
+	 * @param direction
+	 * @param halfAngle
+	 */
 	public SpotLight(final Color color, final Point3 position, final Vector3 direction, final double halfAngle) {
 		super(color);
 		this.position = position;
