@@ -5,13 +5,13 @@ import raytracer.World;
 import raytracer.geometry.Hit;
 
 public class LambertMaterial extends Material{
-	private Color color;
+	private final Color color;
 	
-	public LambertMaterial (Color color){
+	public LambertMaterial (final Color color){
 		this.color = color;
 	}
 	@Override
-	Color colorFor(Hit hit, World world) {
+	public Color colorFor(final Hit hit, final World world) {
 		// TODO Auto-generated method stub
 		return null;
 	}

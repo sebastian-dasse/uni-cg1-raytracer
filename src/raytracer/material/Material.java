@@ -6,5 +6,5 @@ import raytracer.geometry.Hit;
 
 public abstract class Material {
 	
-	abstract Color colorFor(Hit hit, World world);
+	abstract public Color colorFor(final Hit hit, final World world);
 }
