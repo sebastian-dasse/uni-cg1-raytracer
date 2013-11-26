@@ -1,42 +1,42 @@
 package raytracer;
 
-import static java.lang.Math.min;
 import static java.lang.Math.max;
-import static raytracer.math.MathUtil.inRange0To1;
+import static java.lang.Math.min;
 import static raytracer.math.MathUtil.isValid;
 
 /**
- * This immutable class represents a color in RGB color space. The components may have values between 0 and 1 
- * (including). A <code>Color</code> can be added to, subtracted from and multiplied with another one. Also a 
- * <code>Color</code> can be multiplied with a scalar.
+ * This immutable class represents a color in RGB color space.
+ * <p>
+ * A <code>Color</code> can be added to, subtracted from and multiplied with another one. Also a <code>Color</code> 
+ * can be multiplied with a scalar.
  * 
  * @author Sebastian Dass&eacute;
  *
  */
 public class Color{
 	/**
-	 * The red component of the <code>Color</code>. Must be between 0 and 1 (including).
+	 * The red component of the <code>Color</code>. Must be a positive double value other than Infinity or NaN.
 	 */
 	public final double r;
 	/**
-	 * The green component of the <code>Color</code>. Must be between 0 and 1 (including).
+	 * The green component of the <code>Color</code>. Must be a positive double value other than Infinity or NaN.
 	 */
 	public final double g;
 	/**
-	 * The blue component of the <code>Color</code>. Must be between 0 and 1 (including).
+	 * The blue component of the <code>Color</code>. Must be a positive double value other than Infinity or NaN.
 	 */
 	public final double b;
 	
 	/**
 	 * Constructs a new <code>Color</code> with the specified RGB components.
 	 * 
-	 * @param r	The red component. Must be between 0 and 1 (including).
-	 * @param g	The green component. Must be between 0 and 1 (including).
-	 * @param b	The blue component. Must be between 0 and 1 (including).
+	 * @param r	The red component. Must be a positive double value other than Infinity or NaN.
+	 * @param g	The green component. Must be a positive double value other than Infinity or NaN.
+	 * @param b	The blue component. Must be a positive double value other than Infinity or NaN.
 	 */
 	public Color(final double r, final double g, final double b) {
-		if (!(inRange0To1(r) && inRange0To1(g) && inRange0To1(b))) {
-			throw new IllegalArgumentException("Only double values between 0 and 1 (including) are allowed.");
+		if (r < 0 || !isValid(r) || g < 0 || !isValid(g) || b < 0 || !isValid(b)) {
+			throw new IllegalArgumentException("Only positive double values other than Infinity or NaN are allowed.");
 		}
 		this.r = r;
 		this.g = g;
