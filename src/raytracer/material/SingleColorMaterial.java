@@ -6,7 +6,7 @@ import raytracer.World;
 import raytracer.geometry.Hit;
 
 /**
- * @author Max
+ * @author
  *
  */
 public class SingleColorMaterial extends Material{
@@ -18,7 +18,6 @@ public class SingleColorMaterial extends Material{
 	
 		@Override
 		public Color colorFor(final Hit hit, final World world) {
-			// TODO Auto-generated method stub
-			return null;
+			return color;
 		}
 }
