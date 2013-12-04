@@ -85,9 +85,19 @@ public class Raytracer {
 	 */
 	private static Object dataElementsFromColor(final Color color, final ColorModel colorModel) {
 		return colorModel.getDataElements(new float[] {
-					(float) color.r,
-					(float) color.g,
-					(float) color.b
+					normalizeColorComponent(color.r),
+					normalizeColorComponent(color.g),
+					normalizeColorComponent(color.b)
 				}, 0, null);
+	}
+	
+	/**
+	 * Converts a color component from a specified double value to a normalized float value between 0 and 1 (including).
+	 * 
+	 * @param colorComponent	The double value to be normalized.
+	 * @return					The normalized float value between 0 and 1 (including).
+	 */
+	private static float normalizeColorComponent(double colorComponent) {
+		return (colorComponent > 1) ?  1 : (float) colorComponent;
 	}
 }

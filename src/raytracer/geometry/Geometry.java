@@ -7,7 +7,7 @@ import raytracer.Ray;
 /**
  * This abstract base class represents a geometric object in three-dimensional space. 
  * <p>
- * It has a color and a method <code>hit()</code>, which tests a <code>Ray</code> whether or not it hits the 
+ * It has a color and a method <code>hit(Ray ray)</code>, which tests a <code>Ray</code> whether or not it hits the 
  * <code>Geometry</code>.
  * 
  * @author Sebastian Dass&eacute;

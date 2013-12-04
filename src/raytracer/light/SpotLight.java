@@ -4,12 +4,35 @@ import raytracer.Color;
 import raytracer.math.Point3;
 import raytracer.math.Vector3;
 
+/**
+ * 
+ * 
+ * @author 
+ *
+ */
 public class SpotLight extends Light {
+	/**
+	 * 
+	 */
 	public final Point3 position;
+	/**
+	 * 
+	 */
 	public final Vector3 direction;
+	/**
+	 * 
+	 */
 	public final double halfAngle;
 	
-	public SpotLight(Color color, Point3 position, Vector3 direction, double halfAngle) {
+	/**
+	 * 
+	 * 
+	 * @param color
+	 * @param position
+	 * @param direction
+	 * @param halfAngle
+	 */
+	public SpotLight(final Color color, final Point3 position, final Vector3 direction, final double halfAngle) {
 		super(color);
 		this.position = position;
 		this.direction = direction;
@@ -17,13 +40,13 @@ public class SpotLight extends Light {
 	}
 
 	@Override
-	public boolean illuminates(Point3 point) {
+	public boolean illuminates(final Point3 point) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public Vector3 directionFrom(Point3 point) {
+	public Vector3 directionFrom(final Point3 point) {
 		// TODO Auto-generated method stub
 		return null;
 	}

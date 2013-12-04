@@ -1,4 +1,3 @@
-
 package raytracer.material;
 
 import raytracer.Color;
@@ -10,8 +9,16 @@ import raytracer.geometry.Hit;
  *
  */
 public class SingleColorMaterial extends Material{
+		/**
+		 * 
+		 */
 		private final Color color;
 		
+		/**
+		 * 
+		 * 
+		 * @param color
+		 */
 		public SingleColorMaterial (final Color color){
 			this.color = color;
 		}
