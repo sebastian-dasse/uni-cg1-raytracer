@@ -56,6 +56,6 @@ public class Hit {
 		return getClass().getSimpleName() + "[\tt = " + t + ",\n" 
 										  + "\tray = " + ray + ",\n" 
 										  + "\tgeo = " + geo + ",\n" 
-										  + "\tgeo = " + geo + "]";
+										  + "\tnormal = " + normal + "]";
 	}
 }
