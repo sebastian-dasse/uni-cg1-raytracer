@@ -4,6 +4,7 @@ import java.util.LinkedList;
 
 import raytracer.geometry.Geometry;
 import raytracer.geometry.Hit;
+import raytracer.light.Light;
 
 /**
  * This class contains all <code>Geometry</code> objects of a scene. Those objects are stored in a list and can be 
@@ -21,6 +22,10 @@ public class World {
 	 * The list of all <code>Geometry</code> objects in this world.
 	 */
 	private LinkedList<Geometry> elements;
+	/**
+	 * The list of all <code>Light</code> objects in this world.
+	 */
+	private LinkedList<Light> lights;
 	
 	/**
 	 * Creates a new <code>World</code> with the specified background color.
@@ -56,12 +61,41 @@ public class World {
 	}
 	
 	/**
-	 * Removes a <code>Geometry</code> object from this world.
+	 * Removes a <code>Light</code> object from this world.
 	 * 
-	 * @param g	The <code>Geometry</code> to be removed.
+	 * @param l	The <code>Light</code> to be removed.
 	 */
-	public void removeElement(final Geometry g) {
-		elements.remove(g);
+	public void removeElement(final Light l) {
+		elements.remove(l);
+	}
+	
+	/**
+	 * Adds a <code>Light</code> obejct to this world.
+	 * 
+	 * @param l	The <code>Light</code> to be added to this world.
+	 */
+	public void addLight(final Light l) {
+		lights.add(l);
+	}
+	
+	/**
+	 * Adds an array of <code>Light</code> objects to this world.
+	 * 
+	 * @param ll	The <code>Light</code> array to be added to this world.
+	 */
+	public void addLights(final Light[] ll) {
+		for (Light l : ll) {
+			lights.add(l);
+		}
+	}
+	
+	/**
+	 * Removes a <code>Light</code> object from this world.
+	 * 
+	 * @param l	The <code>Light</code> to be removed.
+	 */
+	public void removeLight(final Light l) {
+		lights.remove(l);
 	}
 	
 	/**
