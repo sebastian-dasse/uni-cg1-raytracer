@@ -6,9 +6,9 @@ import raytracer.math.Normal3;
 
 /**
  * This immutable class represents a hit of a <code>Ray</code> with a <code>Geometry</code>. Therefore it stores the 
- * value t, which parameterizes the hit point, the <code>Ray</code> itself and the <code>Geometry</code> that was hit. 
- * The parameter t may never be negative, because a hit of the ray with an object lies always in the direction d of 
- * the ray.
+ * value t, which parameterizes the hit point, the normal of the hit point, the <code>Ray</code> itself and the 
+ * <code>Geometry</code> that was hit. The parameter t may never be negative, because a hit of the ray with an object 
+ * lies always in the direction d of the ray.
  * 
  * @author Sebastian Dass&eacute;
  *

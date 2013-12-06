@@ -8,9 +8,12 @@ import raytracer.light.Light;
 
 /**
  * This class contains all <code>Geometry</code> objects of a scene. Those objects are stored in a list and can be 
- * added and removed. The world has a specific background color which must be set in the constructor.
+ * added and removed. The world has a specific background color and ambient light color which must be set in the 
+ * constructor. There is also a list of all lights of the scene. Lights can be added and removed to the list. Finally 
+ * it is possible to access this list.
  * 
  * @author Simon Lischka
+ * @author Sebastian Dass&eacute;
  *
  */
 public class World {
@@ -18,6 +21,10 @@ public class World {
 	 * The background color of this world.
 	 */
 	public final Color backgroundColor; 
+	/**
+	 * The color of the ambient light of this world.
+	 */
+	public final Color ambientLight;
 	/**
 	 * The list of all <code>Geometry</code> objects in this world.
 	 */
@@ -28,15 +35,17 @@ public class World {
 	private LinkedList<Light> lights;
 	
 	/**
-	 * Creates a new <code>World</code> with the specified background color.
+	 * Creates a new <code>World</code> with the specified background color and ambient light color.
 	 * 
-	 * @param backgroundColor	The background color of this world.
+	 * @param backgroundColor	The background color of the world.
+	 * @param ambientLight		The color of the ambient light of the world.
 	 */
-	public World(final Color backgroundColor) {
-		if (backgroundColor == null) {
-			throw new IllegalArgumentException("The parameter 'backgroundColor' must not be null.");
+	public World(final Color backgroundColor, final Color ambientLight) {
+		if (backgroundColor == null || ambientLight == null) {
+			throw new IllegalArgumentException("The parameters must not be null.");
 		}
 		this.backgroundColor = backgroundColor;
+		this.ambientLight = ambientLight;
 		elements = new LinkedList<Geometry>();
 		lights = new LinkedList<Light>();
 	}

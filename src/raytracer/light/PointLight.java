@@ -11,7 +11,7 @@ import raytracer.math.Vector3;
  * whether a point is illuminated by this light. 
  * Another method returns the vector between the light position and the 
  * point to be illuminated.
- * <p>
+ * 
  * @author Simon Lischka
  */
 public class PointLight extends Light {
@@ -45,6 +45,6 @@ public class PointLight extends Light {
 	 */
 	@Override
 	public Vector3 directionFrom(final Point3 point) {
-		return position.sub(point);
+		return position.sub(point).normalized(); // normalized
 	}
 }

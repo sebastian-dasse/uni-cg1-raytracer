@@ -31,15 +31,15 @@ public final class Factory {
 	
 	/**
 	 * Builds a new <code>World</code> with the specified parameters.
-	 * Expects 1-Dimensional double Array
+	 * Expects 2-Dimensional double Array
 	 * <pre>
 	 * Construct tuple by the following scheme:
-	 * {color0,color1,color2}
-	 * --> Color 
+	 * {{color0,color1,color2}, {color0,color1,color2}}
+	 * --> Color / Color
 	 * </pre>
 	 */
-	public static final World buildWorld(double [] p) {
-		return new World(new Color(p[0],p[1],p[2]));
+	public static final World buildWorld(double[][] p) {
+		return new World(new Color(p[0][0],p[0][1],p[0][2]), new Color(p[1][0],p[1][1],p[1][2]));
 	}
 	
 	/**
@@ -48,10 +48,10 @@ public final class Factory {
 	 * <pre>
 	 * Construct tuple by the following scheme:
 	 * {{e0,e1,e2},{g0,g1,g2},{t0,t1,t2},{s0}}
-	 * --> Point / Vector / Vector / double
+	 * --> Point3 / Vector3 / Vector3 / double
 	 * </pre>
 	 */
-	public static final OrthographicCamera buildOrthographicCamera(double [][] p) {
+	public static final OrthographicCamera buildOrthographicCamera(double[][] p) {
 		return new OrthographicCamera(new Point3(p[0][0],p[0][1],p[0][2]),
 									 new Vector3(p[1][0],p[1][1],p[1][2]),
 									 new Vector3(p[2][0],p[2][1],p[2][2]),
@@ -68,7 +68,7 @@ public final class Factory {
 	 * </pre>
 	 */
 	
-	public static final PerspectiveCamera buildPerspectiveCamera(double [][] p) {
+	public static final PerspectiveCamera buildPerspectiveCamera(double[][] p) {
 		return new PerspectiveCamera(new Point3(p[0][0],p[0][1],p[0][2]),
 									 new Vector3(p[1][0],p[1][1],p[1][2]),
 									 new Vector3(p[2][0],p[2][1],p[2][2]),
@@ -84,7 +84,7 @@ public final class Factory {
 	 * --> Point3 / Point3 / Material
 	 * </pre>
 	 */
-	public static final AxisAlignedBox buildAxisAlignedBox(double p[][], Material material) {
+	public static final AxisAlignedBox buildAxisAlignedBox(double[][] p, Material material) {
 		return new AxisAlignedBox(new Point3(p[0][0], p[0][1], p[0][2]),
 								  new Point3(p[1][0], p[1][1], p[1][2]),
 //								  new Color(p[2][0], p[2][1], p[2][2]));
@@ -100,7 +100,7 @@ public final class Factory {
 	 * --> Point3 / Normal3 / Material
 	 * </pre>
 	 */
-	public static final Plane buildPlane(double p [][], Material material) {
+	public static final Plane buildPlane(double[][] p, Material material) {
 		return new Plane(new Point3(p[0][0], p[0][1], p[0][2]),
 				         new Normal3(p[1][0], p[1][1], p[1][2]),
 //				         new Color(p[2][0], p[2][1], p[2][2]));
@@ -116,7 +116,7 @@ public final class Factory {
 	 * --> Point3 / double / Material
 	 * </pre>
 	 */
-	public static final Sphere buildSphere(double p[][], Material material) {
+	public static final Sphere buildSphere(double[][] p, Material material) {
 		return new Sphere(new Point3(p[0][0], p[0][1], p[0][2]),
 						  p[1][0],
 //						  new Color(p[2][0], p[2][1], p[2][2]));
@@ -132,7 +132,7 @@ public final class Factory {
 	 * --> Point3 / Point3 / Point3 / Normal3 / Normal3 / Normal3 / Material
 	 * </pre>
 	 */
-	public static final Triangle buildTriangle(double p[][], Material material) {
+	public static final Triangle buildTriangle(double[][] p, Material material) {
 		return new Triangle(new Point3(p[0][0], p[0][1], p[0][2]),
 							new Point3(p[1][0], p[1][1], p[1][2]),
 							new Point3(p[2][0], p[2][1], p[2][2]),

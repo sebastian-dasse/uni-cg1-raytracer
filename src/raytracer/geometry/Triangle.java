@@ -88,7 +88,8 @@ public class Triangle extends Geometry {
 			return null; // no hit
 		}
 		final double alpha = 1 - beta - gamma;
-		return new Hit(t, ray, this,  na.mul(alpha).add(nb.mul(beta)).add(nc.mul(gamma)).asVector().asNormal());
+		final Normal3 normal = na.mul(alpha).add(nb.mul(beta)).add(nc.mul(gamma)).asVector().normalized().asNormal(); // normalized normal
+		return new Hit(t, ray, this, normal);
 	}
 
 	@Override
@@ -98,6 +99,6 @@ public class Triangle extends Geometry {
 								+ "\tc = " + c + ",\n"
 								+ "\tna = " + na + ",\n"
 								+ "\tnb = " + nb + ",\n"
-								+ "\tnc = " + nc + ",\n]";
+								+ "\tnc = " + nc + "]";
 	}
 }
