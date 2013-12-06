@@ -51,7 +51,8 @@ public class Plane extends Geometry {
 			return null;
 		}
 		final double t = a.sub(ray.o).dot(n) / denominator;
-		return (t < 0) ? null : new Hit(t, ray, this, n.asVector().normalized().asNormal());
+		final Normal3 normal = n.asVector().normalized().asNormal(); // normalized normal
+		return (t < 0) ? null : new Hit(t, ray, this, normal);
 	}
 
 	@Override

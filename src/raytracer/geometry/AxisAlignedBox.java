@@ -128,7 +128,7 @@ public class AxisAlignedBox extends Geometry {
 		if (face.n.z == 0 && (p.z < lbf.z || run.z < p.z)) {
 			return null;
 		}
-		return new Hit(hitMax.t, ray, this);
+		return new Hit(hitMax.t, ray, this, hitMax.normal);
 	}
 
 	@Override
