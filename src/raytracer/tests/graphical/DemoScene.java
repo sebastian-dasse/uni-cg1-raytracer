@@ -16,7 +16,7 @@ public final class DemoScene {
 	
 	public static void main(String[] args) {
 		ShowImage.from(scene1());
-		ShowImage.from(scene2());
+//		ShowImage.from(scene2());
 	}
 	
 	public static Raytracer scene1() {
@@ -31,7 +31,8 @@ public final class DemoScene {
 				Factory.buildAxisAlignedBox(new double[][] { 
 						{ -1.5, 0.5, 0.5 }, { -0.5, 1.5, 1.5 } }, new SingleColorMaterial(new Color(0, 0, 1))), 
 				Factory.buildTriangle(new double[][] { 
-						{ 0, 0, -1 }, { 1, 0, -1 }, { 1, 1, -1 } }, new SingleColorMaterial(new Color(1, 1, 0)))
+						{ 0, 0, -1 }, { 1, 0, -1 }, { 1, 1, -1 }, 
+						{ 1, 1, 1 }, { 1, 1, 1 }, { 1, 1, 1 } }, new SingleColorMaterial(new Color(1, 1, 0)))
 			}
 		);
 		return new Raytracer(world, camera, size);
@@ -49,7 +50,8 @@ public final class DemoScene {
 				Factory.buildAxisAlignedBox(new double[][] { 
 						{ -1.5, 0.5, 0.5 }, { -0.5, 1.5, 1.5 } }, new LambertMaterial(new Color(0, 0, 1))), 
 				Factory.buildTriangle(new double[][] { 
-						{ 0, 0, -1 }, { 1, 0, -1 }, { 1, 1, -1 } }, new LambertMaterial(new Color(1, 1, 0)))
+						{ 0, 0, -1 }, { 1, 0, -1 }, { 1, 1, -1 }, 
+						{ 1, 1, 1 }, { 1, 1, 1 }, { 1, 1, 1 } }, new LambertMaterial(new Color(1, 1, 0)))
 			}
 		);
 		return new Raytracer(world, camera, size);

@@ -3,6 +3,7 @@ package raytracer.geometry;
 import static raytracer.math.MathUtil.isValid;
 import raytracer.Ray;
 import raytracer.material.Material;
+import raytracer.math.Normal3;
 import raytracer.math.Point3;
 
 /**
@@ -61,7 +62,12 @@ public class Sphere extends Geometry {
 			return null; // no hit
 		}
 		if (discriminant == 0) { // one hit
-			return (b > 0) ? null : new Hit((-b / (2 * a)), ray, this);
+			final double t = -b / (2.0 * a);
+			final Point3 p = ray.at(t);
+			
+			// n = p - c
+			final Normal3 normal = p.sub(center).normalized().asNormal(); // normalized normal
+			return (b > 0) ? null : new Hit(t, ray, this, normal);
 		} // discrimant > 0  =>  2 results => 2 hits
 		final double numerator;
 		final double n1 = -b + Math.sqrt(discriminant);
@@ -76,7 +82,12 @@ public class Sphere extends Geometry {
 		} else { // t1 >= 0 && t2 >= 0
 			numerator = Math.min(n1, n2);
 		}
-		return new Hit((numerator / (2 * a)), ray, this);
+		final double t = numerator / (2 * a);
+		final Point3 p = ray.at(t);
+		
+		// n = p - c
+		final Normal3 normal = p.sub(center).normalized().asNormal(); // normalized normal
+		return new Hit(t, ray, this, normal);
 	}
 
 	@Override
