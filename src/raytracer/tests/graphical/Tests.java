@@ -2,10 +2,12 @@ package raytracer.tests.graphical;
 
 import java.awt.Dimension;
 
+import raytracer.Color;
 import raytracer.Raytracer;
 import raytracer.World;
 import raytracer.camera.Camera;
 import raytracer.geometry.Geometry;
+import raytracer.material.SingleColorMaterial;
 import raytracer.ui.ShowImage;
 
 /**
@@ -27,8 +29,9 @@ public final class Tests {
 		final Camera camera = Factory.buildPerspectiveCamera(new double[][] {
 				{ 0, 0, 0 }, { 0, 0, -1 }, { 0, 1, 0 }, { Math.PI / 4 } });
 		world.addElement(
-				Factory.buildPlane(new double[][] { { 0, -1, 0 }, { 0, 1, 0 },
-						{ 0, 1, 0 } })
+				Factory.buildPlane(new double[][] { { 0, -1, 0 }, { 0, 1, 0 } },
+//						{ 0, 1, 0 } })
+						new SingleColorMaterial(new Color(0, 1, 0)))
 		);
 		return new Raytracer(world, camera, size);
 	}
@@ -43,8 +46,9 @@ public final class Tests {
 		final Camera camera = Factory.buildPerspectiveCamera(new double[][] {
 				{ 0, 0, 0 }, { 0, 0, -1 }, { 0, 1, 0 }, { Math.PI / 4 } });
 		world.addElement(
-				Factory.buildSphere(new double[][] { { 0, 0, -3 }, { 0.5 },
-						{ 1, 0, 0 } })
+				Factory.buildSphere(new double[][] { { 0, 0, -3 }, { 0.5 } },
+//						{ 1, 0, 0 } })
+						new SingleColorMaterial(new Color(1, 0, 0)))
 		);
 		return new Raytracer(world, camera, size);
 	}
@@ -59,8 +63,9 @@ public final class Tests {
 		final Camera camera = Factory.buildPerspectiveCamera(new double[][] {
 				{ 3, 3, 3 }, { -3, -3, -3 }, { 0, 1, 0 }, { Math.PI / 4 } });
 		world.addElement(
-				Factory.buildAxisAlignedBox(new double[][] { { -0.5, 0, -0.5 }, { 0.5, 1, 0.5 },
-						{ 0, 0, 1 } })
+				Factory.buildAxisAlignedBox(new double[][] { { -0.5, 0, -0.5 }, { 0.5, 1, 0.5 } },
+//						{ 0, 0, 1 } })
+						new SingleColorMaterial(new Color(0, 0, 1)))
 		);
 		return new Raytracer(world, camera, size);
 	}
@@ -75,8 +80,9 @@ public final class Tests {
 		final Camera camera = Factory.buildPerspectiveCamera(new double[][] {
 				{ 0, 0, 0 }, { 0, 0, -1 }, { 0, 1, 0 }, { Math.PI / 4 } });
 		world.addElement(
-				Factory.buildTriangle(new double[][] { { -0.5, 0.5, -3 }, { 0.5, 0.5, -3 }, { 0.5, -0.5, -3 },
-						{ 1, 0, 1 } })
+				Factory.buildTriangle(new double[][] { { -0.5, 0.5, -3 }, { 0.5, 0.5, -3 }, { 0.5, -0.5, -3 } },
+//						{ 1, 0, 1 } })
+						new SingleColorMaterial(new Color(1, 0, 1)))
 		);
 		return new Raytracer(world, camera, size);
 	}
@@ -91,10 +97,12 @@ public final class Tests {
 		final Camera camera = Factory.buildPerspectiveCamera(new double[][] {
 				{ 0, 0, 0 }, { 0, 0, -1 }, { 0, 1, 0 }, { Math.PI / 4 } });
 		world.addElements(new Geometry[] {
-				Factory.buildSphere(new double[][] { { -1, 0, -3 }, { 0.5 },
-						{ 1, 0, 0 } }),
-				Factory.buildSphere(new double[][] { { 1, 0, -6 }, { 0.5 },
-						{ 1, 0, 0 } })
+				Factory.buildSphere(new double[][] { { -1, 0, -3 }, { 0.5 } },
+//						{ 1, 0, 0 } }),
+						new SingleColorMaterial(new Color(1, 0, 0))), 
+				Factory.buildSphere(new double[][] { { 1, 0, -6 }, { 0.5 } },
+//						{ 1, 0, 0 } })
+						new SingleColorMaterial(new Color(1, 0, 0)))
 			}
 		);
 		return new Raytracer(world, camera, size);
@@ -110,10 +118,12 @@ public final class Tests {
 		final Camera camera = Factory.buildOrthographicCamera(new double[][] {
 				{ 0, 0, 0 }, { 0, 0, -1 }, { 0, 1, 0 }, { 3 } });
 		world.addElements(new Geometry[] {
-				Factory.buildSphere(new double[][] { { -1, 0, -3 }, { 0.5 },
-						{ 1, 0, 0 } }),
-				Factory.buildSphere(new double[][] { { 1, 0, -6 }, { 0.5 },
-						{ 1, 0, 0 } })
+				Factory.buildSphere(new double[][] { { -1, 0, -3 }, { 0.5 } },
+//						{ 1, 0, 0 } }),
+						new SingleColorMaterial(new Color(1, 0, 0))), 
+				Factory.buildSphere(new double[][] { { 1, 0, -6 }, { 0.5 } },
+//						{ 1, 0, 0 } })
+						new SingleColorMaterial(new Color(1, 0, 0)))
 			}
 		);
 		return new Raytracer(world, camera, size);

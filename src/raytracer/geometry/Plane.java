@@ -1,7 +1,7 @@
 package raytracer.geometry;
 
-import raytracer.Color;
 import raytracer.Ray;
+import raytracer.material.Material;
 import raytracer.math.Normal3;
 import raytracer.math.Point3;
 
@@ -26,12 +26,12 @@ public class Plane extends Geometry {
 	/**
 	 * Constructs a new <code>Plane</code> with the specified parameters.
 	 * 
-	 * @param a		A point on the plane. Must not be <code>null</code>.
-	 * @param n		The normal of the plane. Must not be <code>null</code>.
-	 * @param color	The color of the plane. Must not be <code>null</code>.
+	 * @param a			A point on the plane. Must not be <code>null</code>.
+	 * @param n			The normal of the plane. Must not be <code>null</code>.
+	 * @param material	The material of the plane. Must not be <code>null</code>.
 	 */
-	public Plane(final Point3 a, final Normal3 n, final Color color) {
-		super(color);
+	public Plane(final Point3 a, final Normal3 n, final Material material) {
+		super(material);
 		if (a == null || n == null) {
 			throw new IllegalArgumentException("The parameters must not be null.");
 		}
@@ -52,37 +52,6 @@ public class Plane extends Geometry {
 		}
 		final double t = a.sub(ray.o).dot(n) / denominator;
 		return (t < 0) ? null : new Hit(t, ray, this);
-	}
-	
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((a == null) ? 0 : a.hashCode());
-		result = prime * result + ((n == null) ? 0 : n.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(final Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		final Plane other = (Plane) obj;
-		if (a == null) {
-			if (other.a != null)
-				return false;
-		} else if (!a.equals(other.a))
-			return false;
-		if (n == null) {
-			if (other.n != null)
-				return false;
-		} else if (!n.equals(other.n))
-			return false;
-		return true;
 	}
 
 	@Override

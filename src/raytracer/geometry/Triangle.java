@@ -1,7 +1,7 @@
 package raytracer.geometry;
 
-import raytracer.Color;
 import raytracer.Ray;
+import raytracer.material.Material;
 import raytracer.math.Mat3x3;
 import raytracer.math.Point3;
 import raytracer.math.Vector3;
@@ -30,13 +30,13 @@ public class Triangle extends Geometry {
 	/**
 	 * Constructs a new <code>Triangle</code> with the specified parameters.
 	 * 
-	 * @param a		Vertex a of the triangle. Must not be <code>null</code>.
-	 * @param b		Vertex b of the triangle. Must not be <code>null</code>.
-	 * @param c		Vertex c of the triangle. Must not be <code>null</code>.
-	 * @param color	The color of the triangle. Must not be <code>null</code>.
+	 * @param a			Vertex a of the triangle. Must not be <code>null</code>.
+	 * @param b			Vertex b of the triangle. Must not be <code>null</code>.
+	 * @param c			Vertex c of the triangle. Must not be <code>null</code>.
+	 * @param material	The material of the triangle. Must not be <code>null</code>.
 	 */
-	public Triangle(final Point3 a, final Point3 b, final Point3 c, final Color color) {
-		super(color);
+	public Triangle(final Point3 a, final Point3 b, final Point3 c, final Material material) {
+		super(material);
 		if (a == null || b == null || c == null) {
 			throw new IllegalArgumentException("The parameters must not be null.");
 		}	
@@ -71,43 +71,6 @@ public class Triangle extends Geometry {
 			return null; // no hit
 		}
 		return new Hit(t, ray, this);
-	}
-	
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((a == null) ? 0 : a.hashCode());
-		result = prime * result + ((b == null) ? 0 : b.hashCode());
-		result = prime * result + ((c == null) ? 0 : c.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(final Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		final Triangle other = (Triangle) obj;
-		if (a == null) {
-			if (other.a != null)
-				return false;
-		} else if (!a.equals(other.a))
-			return false;
-		if (b == null) {
-			if (other.b != null)
-				return false;
-		} else if (!b.equals(other.b))
-			return false;
-		if (c == null) {
-			if (other.c != null)
-				return false;
-		} else if (!c.equals(other.c))
-			return false;
-		return true;
 	}
 
 	@Override

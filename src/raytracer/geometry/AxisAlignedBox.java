@@ -2,8 +2,8 @@ package raytracer.geometry;
 
 import java.util.LinkedList;
 
-import raytracer.Color;
 import raytracer.Ray;
+import raytracer.material.Material;
 import raytracer.math.Normal3;
 import raytracer.math.Point3;
 import raytracer.math.Vector3;
@@ -55,12 +55,12 @@ public class AxisAlignedBox extends Geometry {
 	/**
 	 * Constructs a new <code>AxisAlignedBox</code> with the specified parameters.
 	 * 
-	 * @param lbf	The low bottom far point of the <code>AxisAlignedBox</code>. Must not be <code>null</code>.
-	 * @param run	The right upper near point of the <code>AxisAlignedBox</code>. Must not be <code>null</code>.
-	 * @param color	The color of the <code>AxisAlignedBox</code>. Must not be <code>null</code>.
+	 * @param lbf		The low bottom far point of the <code>AxisAlignedBox</code>. Must not be <code>null</code>.
+	 * @param run		The right upper near point of the <code>AxisAlignedBox</code>. Must not be <code>null</code>.
+	 * @param material	The material of the <code>AxisAlignedBox</code>. Must not be <code>null</code>.
 	 */
-	public AxisAlignedBox(final Point3 lbf, final Point3 run, final Color color) {
-		super(color);
+	public AxisAlignedBox(final Point3 lbf, final Point3 run, final Material material) {
+		super(material);
 		if (lbf == null || run == null) {
 			throw new IllegalArgumentException("The parameters must not be null.");
 		}
@@ -80,22 +80,22 @@ public class AxisAlignedBox extends Geometry {
 		final Vector3 toRun = ray.o.sub(run);
 		final LinkedList<Plane> planes = new LinkedList<Plane>();
 		if (toRun.dot(TOP) > 0) {
-			planes.add(new Plane(run, TOP, color));
+			planes.add(new Plane(run, TOP, material));
 		}
 		if (toRun.dot(FRONT) > 0) {
-			planes.add(new Plane(run, FRONT, color));
+			planes.add(new Plane(run, FRONT, material));
 		}
 		if (toRun.dot(RIGHT) > 0) {
-			planes.add(new Plane(run, RIGHT, color));
+			planes.add(new Plane(run, RIGHT, material));
 		}
 		if (toLbf.dot(LEFT) > 0) {
-			planes.add(new Plane(lbf, LEFT, color));
+			planes.add(new Plane(lbf, LEFT, material));
 		}
 		if (toLbf.dot(BACK) > 0) {
-			planes.add(new Plane(lbf, BACK, color));
+			planes.add(new Plane(lbf, BACK, material));
 		}
 		if (toLbf.dot(BOTTOM) > 0) {
-			planes.add(new Plane(lbf, BOTTOM, color));
+			planes.add(new Plane(lbf, BOTTOM, material));
 		}
 		
 		// 2. calculate intersection point(s) - take the greatest t, i.e. the most distant point from the camera view
@@ -129,37 +129,6 @@ public class AxisAlignedBox extends Geometry {
 			return null;
 		}
 		return new Hit(hitMax.t, ray, this);
-	}
-	
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((lbf == null) ? 0 : lbf.hashCode());
-		result = prime * result + ((run == null) ? 0 : run.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(final Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		final AxisAlignedBox other = (AxisAlignedBox) obj;
-		if (lbf == null) {
-			if (other.lbf != null)
-				return false;
-		} else if (!lbf.equals(other.lbf))
-			return false;
-		if (run == null) {
-			if (other.run != null)
-				return false;
-		} else if (!run.equals(other.run))
-			return false;
-		return true;
 	}
 
 	@Override

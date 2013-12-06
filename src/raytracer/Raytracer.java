@@ -64,7 +64,8 @@ public class Raytracer {
 				if (hit == null) {
 					raster.setDataElements(x, y, backgroundColor);
 				} else {
-					raster.setDataElements(x, y, dataElementsFromColor(hit.geo.color, colorModel));
+//					raster.setDataElements(x, y, dataElementsFromColor(hit.geo.color, colorModel)); // old version
+					raster.setDataElements(x, y, dataElementsFromColor(hit.geo.material.colorFor(hit, world), colorModel));
 				}
 			}
 		}	

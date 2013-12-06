@@ -1,8 +1,8 @@
 package raytracer.geometry;
 
 import static raytracer.math.MathUtil.isValid;
-import raytracer.Color;
 import raytracer.Ray;
+import raytracer.material.Material;
 import raytracer.math.Point3;
 
 /**
@@ -24,12 +24,12 @@ public class Sphere extends Geometry {
 	/**
 	 * Constructs a new <code>Sphere</code> with the specified parameters.
 	 * 
-	 * @param c		The center point of the sphere. Must not be <code>null</code>.
-	 * @param r		The radius of the sphere. Must not be <code>null</code>.
-	 * @param color	The color of the sphere. Must not be <code>null</code>.
+	 * @param c			The center point of the sphere. Must not be <code>null</code>.
+	 * @param r			The radius of the sphere. Must not be <code>null</code>.
+	 * @param material	The material of the sphere. Must not be <code>null</code>.
 	 */
-	public Sphere(final Point3 c, final double r, final Color color) {
-		super(color);
+	public Sphere(final Point3 c, final double r, final Material material) {
+		super(material);
 		if (c == null) {
 			throw new IllegalArgumentException("The parameter 'c' must not be null.");
 		}
@@ -77,36 +77,6 @@ public class Sphere extends Geometry {
 			numerator = Math.min(n1, n2);
 		}
 		return new Hit((numerator / (2 * a)), ray, this);
-	}
-	
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((center == null) ? 0 : center.hashCode());
-		long temp;
-		temp = Double.doubleToLongBits(r);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		return result;
-	}
-
-	@Override
-	public boolean equals(final Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		final Sphere other = (Sphere) obj;
-		if (center == null) {
-			if (other.center != null)
-				return false;
-		} else if (!center.equals(other.center))
-			return false;
-		if (Double.doubleToLongBits(r) != Double.doubleToLongBits(other.r))
-			return false;
-		return true;
 	}
 
 	@Override

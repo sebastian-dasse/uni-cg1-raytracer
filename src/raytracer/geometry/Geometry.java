@@ -1,8 +1,7 @@
 package raytracer.geometry;
 
-import raytracer.Color;
-
 import raytracer.Ray;
+import raytracer.material.Material;
 
 /**
  * This abstract base class represents a geometric object in three-dimensional space. 
@@ -15,20 +14,20 @@ import raytracer.Ray;
  */
 public abstract class Geometry {
 	/**
-	 * The color of the <code>Geometry</code>.
+	 * The material of the <code>Geometry</code>.
 	 */
-	public final Color color;
+	public final Material material;
 	
 	/**
 	 * Constructs a new <code>Geometry</code> with the specified color.
 	 * 
-	 * @param color	The color of the <code>Geometry</code>. Must not be <code>null</code>.
+	 * @param material The material of the <code>Geometry</code>. Must not be <code>null</code>.
 	 */
-	public Geometry(final Color color) {
-		if (color == null) {
-			throw new IllegalArgumentException("The parameter 'color' must not be null.");
+	public Geometry(final Material material) {
+		if (material == null) {
+			throw new IllegalArgumentException("The parameter 'material' must not be null.");
 		}
-		this.color = color;
+		this.material = material;
 	}
 	
 	/**
@@ -44,32 +43,7 @@ public abstract class Geometry {
 	public abstract Hit hit(final Ray ray);
 	
 	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((color == null) ? 0 : color.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(final Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		final Geometry other = (Geometry) obj;
-		if (color == null) {
-			if (other.color != null)
-				return false;
-		} else if (!color.equals(other.color))
-			return false;
-		return true;
-	}
-
-	@Override
 	public String toString() {
-		return getClass().getSimpleName() + "[color = " + color;
+		return getClass().getSimpleName() + "[material = " + material;
 	}
 }

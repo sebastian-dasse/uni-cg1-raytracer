@@ -8,6 +8,7 @@ import raytracer.geometry.AxisAlignedBox;
 import raytracer.geometry.Plane;
 import raytracer.geometry.Sphere;
 import raytracer.geometry.Triangle;
+import raytracer.material.Material;
 import raytracer.math.Normal3;
 import raytracer.math.Point3;
 import raytracer.math.Vector3;
@@ -83,10 +84,11 @@ public final class Factory {
 	 * --> Point / Point / Color
 	 * </pre>
 	 */
-	public static final AxisAlignedBox buildAxisAlignedBox(double p[][]) {
+	public static final AxisAlignedBox buildAxisAlignedBox(double p[][], Material material) {
 		return new AxisAlignedBox(new Point3(p[0][0], p[0][1], p[0][2]),
 								  new Point3(p[1][0], p[1][1], p[1][2]),
-								  new Color(p[2][0], p[2][1], p[2][2]));
+//								  new Color(p[2][0], p[2][1], p[2][2]));
+								  material);
 	}
 
 	/**
@@ -98,10 +100,11 @@ public final class Factory {
 	 * --> Point / Normal / Color
 	 * </pre>
 	 */
-	public static final Plane buildPlane(double p [][]) {
+	public static final Plane buildPlane(double p [][], Material material) {
 		return new Plane(new Point3(p[0][0], p[0][1], p[0][2]),
 				         new Normal3(p[1][0], p[1][1], p[1][2]),
-				         new Color(p[2][0], p[2][1], p[2][2]));
+//				         new Color(p[2][0], p[2][1], p[2][2]));
+				         material);
 	}
 	
 	/**
@@ -113,10 +116,11 @@ public final class Factory {
 	 * --> Point / double / Color
 	 * </pre>
 	 */
-	public static final Sphere buildSphere(double p[][]) {
+	public static final Sphere buildSphere(double p[][], Material material) {
 		return new Sphere(new Point3(p[0][0], p[0][1], p[0][2]),
 						  p[1][0],
-						  new Color(p[2][0], p[2][1], p[2][2]));
+//						  new Color(p[2][0], p[2][1], p[2][2]));
+						  material);
 	}
 	
 	/**
@@ -128,11 +132,11 @@ public final class Factory {
 	 * --> Point / Point / Point / Color
 	 * </pre>
 	 */
-	public static final Triangle buildTriangle(double p[][]) {
+	public static final Triangle buildTriangle(double p[][], Material material) {
 		return new Triangle(new Point3(p[0][0], p[0][1], p[0][2]),
 							new Point3(p[1][0], p[1][1], p[1][2]),
 							new Point3(p[2][0], p[2][1], p[2][2]),
-						    new Color(p[3][0], p[3][1], p[3][2]));
+//						    new Color(p[3][0], p[3][1], p[3][2]));
+							material);
 	}
-	
 }
