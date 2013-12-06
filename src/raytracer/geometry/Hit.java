@@ -2,6 +2,7 @@ package raytracer.geometry;
 
 import static raytracer.math.MathUtil.isValid;
 import raytracer.Ray;
+import raytracer.math.Normal3;
 
 /**
  * This immutable class represents a hit of a <code>Ray</code> with a <code>Geometry</code>. Therefore it stores the 
@@ -25,6 +26,10 @@ public class Hit {
 	 * The <code>Geometry</code> that was hit.
 	 */
 	public final Geometry geo;
+	/**
+	 * The normal of this hit.
+	 */
+	public final Normal3 normal;
 	
 	/**
 	 * Constructs a new <code>Hit</code> object with the specified parameters.
@@ -33,58 +38,24 @@ public class Hit {
 	 * @param ray	The <code>Ray</code> that hit the <code>Geometry</code>. Must not be <code>null</code>.
 	 * @param geo	The <code>Geometry</code> that was hit. Must not be <code>null</code>.
 	 */
-	public Hit(final double t, final Ray ray, final Geometry geo) {
+	public Hit(final double t, final Ray ray, final Geometry geo, final Normal3 normal) {
 		if (t < 0 || !isValid(t)) {
 			throw new IllegalArgumentException("The paramameter 't' must be a positive double value other than Infinity or NaN.");
 		}
-		if (ray == null || geo == null) {
+		if (ray == null || geo == null || normal == null) {
 			throw new IllegalArgumentException("The parameters must not be null.");
 		}
 		this.t = t;
 		this.ray = ray;
 		this.geo = geo;
-	}
-	
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((geo == null) ? 0 : geo.hashCode());
-		result = prime * result + ((ray == null) ? 0 : ray.hashCode());
-		long temp;
-		temp = Double.doubleToLongBits(t);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		return result;
+		this.normal = normal;
 	}
 
 	@Override
-	public boolean equals(final Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		final Hit other = (Hit) obj;
-		if (geo == null) {
-			if (other.geo != null)
-				return false;
-		} else if (!geo.equals(other.geo))
-			return false;
-		if (ray == null) {
-			if (other.ray != null)
-				return false;
-		} else if (!ray.equals(other.ray))
-			return false;
-		if (Double.doubleToLongBits(t) != Double.doubleToLongBits(other.t))
-			return false;
-		return true;
-	}
-	
-	@Override
 	public String toString() {
 		return getClass().getSimpleName() + "[\tt = " + t + ",\n" 
-										  + "\tray = " + ray + ",\n"
-										  + "\tgeo = " + geo + "]";
+										  + "\tray = " + ray + ",\n" 
+										  + "\tgeo = " + geo + ",\n" 
+										  + "\tnormal = " + normal + "]";
 	}
 }
