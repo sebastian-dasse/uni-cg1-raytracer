@@ -99,6 +99,13 @@ public class World {
 	}
 	
 	/**
+	 * @return	An array containing all the <code>Light</code>s in this world.
+	 */
+	public Light[] getLights() {
+		return lights.toArray(new Light[lights.size()]);
+	}
+	
+	/**
 	 * Returns a <code>Hit</code> object for the hit of the specified <code>Ray</code> with this <code>World</code>.
 	 * If more than one object is hit, the <code>Hit</code> with the the smallest positive t (i.e. with object that is 
 	 * closest to the camera) will be returned. For no hit <code>null</code> is returned.
