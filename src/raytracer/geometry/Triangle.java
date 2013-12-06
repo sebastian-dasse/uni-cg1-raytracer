@@ -93,11 +93,11 @@ public class Triangle extends Geometry {
 
 	@Override
 	public String toString() {
-		return super.toString() + ",\n\ta = " + a + ",\n" 
+		return super.toString() + "[,\n\ta = " + a + ",\n" 
 								+ "\tb = " + b + ",\n" 
-								+ "\tc = " + c + 
+								+ "\tc = " + c + ",\n"
 								+ "\tna = " + na + ",\n"
 								+ "\tnb = " + nb + ",\n"
-								+ "\tnc = " + nc + ",\n"]";
+								+ "\tnc = " + nc + ",\n]";
 	}
 }
