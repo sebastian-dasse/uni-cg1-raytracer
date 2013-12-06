@@ -64,7 +64,7 @@ public final class Factory {
 	 * <pre>
 	 * Construct tuple by the following scheme:
 	 * {{e0,e1,e2},{g0,g1,g2},{t0,t1,t2},{angle0}}
-	 * --> Point / Vector / Vector / double
+	 * --> Point3 / Vector3 / Vector3 / double
 	 * </pre>
 	 */
 	
@@ -80,8 +80,8 @@ public final class Factory {
 	 * Expects 2-Dimensional double Array
 	 * <pre>
 	 * Construct tuple by the following scheme:
-	 * {{lbf0,lbf1,lbf2},{run0,run1,run2},{color0,color1,color2}}
-	 * --> Point / Point / Color
+	 * {{lbf0,lbf1,lbf2},{run0,run1,run2},material}
+	 * --> Point3 / Point3 / Material
 	 * </pre>
 	 */
 	public static final AxisAlignedBox buildAxisAlignedBox(double p[][], Material material) {
@@ -96,8 +96,8 @@ public final class Factory {
 	 * Expects 2-Dimensional double Array
 	 * <pre>
 	 * Construct tuple by the following scheme:
-	 * {{a0,a1,a2},{n0,n1,n2},{color0,color1,color2}}
-	 * --> Point / Normal / Color
+	 * {{a0,a1,a2},{n0,n1,n2},material}
+	 * --> Point3 / Normal3 / Material
 	 * </pre>
 	 */
 	public static final Plane buildPlane(double p [][], Material material) {
@@ -112,8 +112,8 @@ public final class Factory {
 	 * Expects 2-Dimensional double Array
 	 * <pre>
 	 * Construct tuple by the following scheme:
-	 * {{c0,c1,c2},{r0},{color0,color1,color2}}
-	 * --> Point / double / Color
+	 * {{c0,c1,c2},{r0},material}
+	 * --> Point3 / double / Material
 	 * </pre>
 	 */
 	public static final Sphere buildSphere(double p[][], Material material) {
@@ -128,14 +128,17 @@ public final class Factory {
 	 * Expects 2-Dimensional double Array
 	 * <pre>
 	 * Construct tuple by the following scheme:
-	 * {{a0,a1,a2},{b0,b1,b2},{c0,c0,c1},{color0,color1,color2}}
-	 * --> Point / Point / Point / Color
+	 * {{a0,a1,a2},{b0,b1,b2},{c0,c0,c1},{an0,an1,an2},{bn0,bn1,bn2},{cn0,cn0,cn1},material}
+	 * --> Point3 / Point3 / Point3 / Normal3 / Normal3 / Normal3 / Material
 	 * </pre>
 	 */
 	public static final Triangle buildTriangle(double p[][], Material material) {
 		return new Triangle(new Point3(p[0][0], p[0][1], p[0][2]),
 							new Point3(p[1][0], p[1][1], p[1][2]),
 							new Point3(p[2][0], p[2][1], p[2][2]),
+							new Normal3(p[3][0], p[3][1], p[3][2]),
+							new Normal3(p[4][0], p[4][1], p[4][2]),
+							new Normal3(p[5][0], p[5][1], p[5][2]),
 //						    new Color(p[3][0], p[3][1], p[3][2]));
 							material);
 	}
