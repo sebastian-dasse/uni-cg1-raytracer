@@ -3,6 +3,7 @@ package raytracer.geometry;
 import raytracer.Ray;
 import raytracer.material.Material;
 import raytracer.math.Mat3x3;
+import raytracer.math.Normal3;
 import raytracer.math.Point3;
 import raytracer.math.Vector3;
 
@@ -26,6 +27,18 @@ public class Triangle extends Geometry {
 	 * Vertex c of this triangle.
 	 */
 	public final Point3 c;
+	/**
+	 * 
+	 */
+	public final Normal3 na;
+	/**
+	 * 
+	 */
+	public final Normal3 nb;
+	/**
+	 * 
+	 */
+	public final Normal3 nc;
 	
 	/**
 	 * Constructs a new <code>Triangle</code> with the specified parameters.
@@ -35,7 +48,8 @@ public class Triangle extends Geometry {
 	 * @param c			Vertex c of the triangle. Must not be <code>null</code>.
 	 * @param material	The material of the triangle. Must not be <code>null</code>.
 	 */
-	public Triangle(final Point3 a, final Point3 b, final Point3 c, final Material material) {
+	public Triangle(final Point3 a, final Point3 b, final Point3 c,
+			final Normal3 na, final Normal3 nb, final Normal3 nc, final Material material) {
 		super(material);
 		if (a == null || b == null || c == null) {
 			throw new IllegalArgumentException("The parameters must not be null.");
@@ -43,6 +57,9 @@ public class Triangle extends Geometry {
 			this.a = a;
 			this.b = b;
 			this.c = c;
+			this.na = na;
+			this.nb = nb;
+			this.nc = nc;
 	}
 
 	@Override
@@ -70,13 +87,17 @@ public class Triangle extends Geometry {
 		if (gamma < 0 || beta < 0 || beta + gamma > 1 || t < 0) {
 			return null; // no hit
 		}
-		return new Hit(t, ray, this);
+		final double alpha = 1 - beta - gamma;
+		return new Hit(t, ray, this,  na.mul(alpha).add(nb.mul(beta)).add(nc.mul(gamma)).asVector().asNormal());
 	}
 
 	@Override
 	public String toString() {
 		return super.toString() + ",\n\ta = " + a + ",\n" 
 								+ "\tb = " + b + ",\n" 
-								+ "\tc = " + c + "]";
+								+ "\tc = " + c + 
+								+ "\tna = " + na + ",\n"
+								+ "\tnb = " + nb + ",\n"
+								+ "\tnc = " + nc + ",\n"]";
 	}
 }
