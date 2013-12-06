@@ -83,7 +83,7 @@ public final class Factory {
 	 * --> Point / Point / Color
 	 * </pre>
 	 */
-	public static final AxisAlignedBox buildAxisAlignedBox (double p[][]) {
+	public static final AxisAlignedBox buildAxisAlignedBox(double p[][]) {
 		return new AxisAlignedBox(new Point3(p[0][0], p[0][1], p[0][2]),
 								  new Point3(p[1][0], p[1][1], p[1][2]),
 								  new Color(p[2][0], p[2][1], p[2][2]));
@@ -113,7 +113,7 @@ public final class Factory {
 	 * --> Point / double / Color
 	 * </pre>
 	 */
-	public static final Sphere buildSphere (double p[][]) {
+	public static final Sphere buildSphere(double p[][]) {
 		return new Sphere(new Point3(p[0][0], p[0][1], p[0][2]),
 						  p[1][0],
 						  new Color(p[2][0], p[2][1], p[2][2]));
@@ -128,7 +128,7 @@ public final class Factory {
 	 * --> Point / Point / Point / Color
 	 * </pre>
 	 */
-	public static final Triangle buildTriangle (double p[][]) {
+	public static final Triangle buildTriangle(double p[][]) {
 		return new Triangle(new Point3(p[0][0], p[0][1], p[0][2]),
 							new Point3(p[1][0], p[1][1], p[1][2]),
 							new Point3(p[2][0], p[2][1], p[2][2]),
