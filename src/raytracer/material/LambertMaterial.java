@@ -39,8 +39,10 @@ public class LambertMaterial extends Material{
 			final Normal3 n = hit.normal;
 			final Point3 p = hit.ray.at(hit.t);
 			final Vector3 l = light.directionFrom(p);
-			c = c.add(color.mul(light.color.mul(Math.max(0, n.dot(l)))));
+			final double f = Math.max(0, n.dot(l)); // evtl. 0,0001 oder ähnliche kleine Werte statt 0?
+			final Color temp = color.mul(light.color.mul(f));
+			c = c.add(temp);
 		}
-		return null;
+		return c.mul(0.06);
 	}
 }

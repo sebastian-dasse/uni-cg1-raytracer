@@ -38,10 +38,11 @@ public class World {
 		}
 		this.backgroundColor = backgroundColor;
 		elements = new LinkedList<Geometry>();
+		lights = new LinkedList<Light>();
 	}
 	
 	/**
-	 * Adds a <code>Geometry</code> obejct to this world.
+	 * Adds a <code>Geometry</code> object to this world.
 	 * 
 	 * @param g	The <code>Geometry</code> to be added to this world.
 	 */
@@ -70,7 +71,7 @@ public class World {
 	}
 	
 	/**
-	 * Adds a <code>Light</code> obejct to this world.
+	 * Adds a <code>Light</code> object to this world.
 	 * 
 	 * @param l	The <code>Light</code> to be added to this world.
 	 */
