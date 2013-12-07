@@ -3,6 +3,8 @@ package raytracer.material;
 import raytracer.Color;
 import raytracer.World;
 import raytracer.geometry.Hit;
+import raytracer.math.Normal3;
+import raytracer.math.Vector3;
 
 /**
  * 
@@ -39,7 +41,12 @@ public class PhongMaterial extends Material{
 
 	@Override
 	public Color colorFor(final Hit hit, final World world) {
-		// TODO Auto-generated method stub
+		
+		//c = cr[ca + cl max(n*l) + cl max(0, r*e))]
+		Normal3 normal = hit.normal;
+		
+		
+		
 		return null;
 	}
 }
