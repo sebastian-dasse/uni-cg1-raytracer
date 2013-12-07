@@ -70,7 +70,11 @@ public final class DemoScene {
 	}
 	
 	public static Raytracer scene3() {
+<<<<<<< HEAD
+		final World world = Factory.buildWorld(new double[][] { { 0, 0, 0 }, {0.1, 0.1, 0.1} });
+=======
 		final World world = Factory.buildWorld(new double[][] { { 0, 0, 0 }, {0.5, 0.5, 0.5} });
+>>>>>>> 34af9ac4852aff143a79375d80482139e8fc15f8
 		final Camera camera = Factory.buildPerspectiveCamera(new double[][] {
 				{ 4, 4, 4 }, { -1, -1, -1 }, { 0, 1, 0 }, { Math.PI / 4.0 } });
 		world.addElements(new Geometry[] {
@@ -88,9 +92,15 @@ public final class DemoScene {
 //		world.addLight(new PointLight(new Color(1, 1, 1), new Point3(10, 10, 10)));
 //		world.addLight(new PointLight(new Color(1, 1, 1), new Point3(10, 10, 10)));
 //		world.addLight(new PointLight(new Color(1, 1, 1), new Point3(10, 10, 10)));
+<<<<<<< HEAD
+		world.addLight(new PointLight(new Color(1, 1, 1), new Point3(10, 10, 10)));
+		world.addLight(new PointLight(new Color(1, 1, 1), new Point3(-10, 10, 10)));
+//		world.addLight(new PointLight(new Color(1, 1, 1), new Point3(-10, -10, 10)));
+=======
 //		world.addLight(new PointLight(new Color(1, 1, 1), new Point3(10, 10, 10)));
 //		world.addLight(new PointLight(new Color(1, 1, 1), new Point3(-10, 10, 10)));
 		world.addLight(new PointLight(new Color(1, 1, 1), new Point3(-10, -10, 10)));
+>>>>>>> 34af9ac4852aff143a79375d80482139e8fc15f8
 //		world.addLight(new PointLight(new Color(1, 1, 1), new Point3(0, 10, 0)));
 //		world.addLight(new PointLight(new Color(1, 0, 1), new Point3(-1, 10, 10))); // this s**t ain't gonna work
 		return new Raytracer(world, camera, size);
