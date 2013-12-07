@@ -7,8 +7,8 @@ import raytracer.Raytracer;
 import raytracer.World;
 import raytracer.camera.Camera;
 import raytracer.geometry.Geometry;
-import raytracer.light.DirectionalLight;
 import raytracer.light.PointLight;
+import raytracer.light.SpotLight;
 import raytracer.material.LambertMaterial;
 import raytracer.material.PhongMaterial;
 import raytracer.material.SingleColorMaterial;
@@ -73,7 +73,7 @@ public final class DemoScene {
 	}
 	
 	public static Raytracer scene3() {
-		final World world = Factory.buildWorld(new double[][] { { 0, 0, 0 }, {0.1, 0.1, 0.1} });
+		final World world = Factory.buildWorld(new double[][] { { 0, 0, 0 }, {0.5, 0.5, 0.5} });
 		final Camera camera = Factory.buildPerspectiveCamera(new double[][] {
 				{ 4, 4, 4 }, { -1, -1, -1 }, { 0, 1, 0 }, { Math.PI / 4.0 } });
 		world.addElements(new Geometry[] {
@@ -91,7 +91,8 @@ public final class DemoScene {
 //		world.addLight(new PointLight(new Color(1, 1, 1), new Point3(-10, 10, 10)));
 //		world.addLight(new PointLight(new Color(1, 1, 1), new Point3(-10, -10, 10)));
 //		world.addLight(new PointLight(new Color(1, 1, 1), new Point3(10, 10, 10)));
-		world.addLight(new DirectionalLight(new Color(1, 1, 1), new Vector3(-1, -1, -1)));
+//		world.addLight(new DirectionalLight(new Color(1, 1, 1), new Vector3(-1, -1, -1)));
+		world.addLight(new SpotLight(new Color(1, 1, 1), new Point3(10, 10 ,10), new Vector3(-1, -1, -1), (Math.PI / 14.0)));
 		return new Raytracer(world, camera, size);
 	}
 }

@@ -35,6 +35,5 @@ public class DirectionalLight extends Light {
 	@Override
 	public Vector3 directionFrom(final Point3 point) {
 		return direction.mul(-1).normalized();
-
 	}
 }
