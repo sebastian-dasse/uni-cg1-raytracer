@@ -51,13 +51,15 @@ public class PhongMaterial extends Material{
 		Color c = diffuse.mul(world.ambientLight);
 		final Light[] lights = world.getLights();
 		for (Light light : lights) {
-			final Vector3 l = light.directionFrom(p);
-			final Vector3 r = l.reflectedOn(n);
-			final double f1 = Math.max(0, n.dot(l));
-			final double f2 = Math.max(0, e.dot(r));
-			final Color s1 = diffuse.mul(light.color).mul(f1);
-			final Color s2 = specular.mul(light.color).mul(Math.pow(f2, exponent));
-			c = c.add(s1).add(s2); 
+			if (light.illuminates(p)) {
+				final Vector3 l = light.directionFrom(p);
+				final Vector3 r = l.reflectedOn(n);
+				final double f1 = Math.max(0, n.dot(l));
+				final double f2 = Math.max(0, e.dot(r));
+				final Color s1 = diffuse.mul(light.color).mul(f1);
+				final Color s2 = specular.mul(light.color).mul(Math.pow(f2, exponent));
+				c = c.add(s1).add(s2); 
+			}
 		}
 		// TODO in Raytracer.normalizeColorComponent(...) verschieben
 		final double max1 = Math.max(world.ambientLight.r, world.ambientLight.g);
