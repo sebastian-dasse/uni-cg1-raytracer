@@ -56,7 +56,7 @@ public class PhongMaterial extends Material{
 			final double f2 = Math.max(0, e.dot(r));
 			final Color s1 = diffuse.mul(light.color).mul(f1);
 			final Color s2 = specular.mul(light.color).mul(Math.pow(f2, exponent));
-			c = c.add(s1).add(s2);
+			c = c.add(s1).add(s2); 
 		}
 		
 		final double max1 = Math.max(world.ambientLight.r, world.ambientLight.g);
