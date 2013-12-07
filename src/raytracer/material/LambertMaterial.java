@@ -31,6 +31,8 @@ public class LambertMaterial extends Material{
 	
 	@Override
 	public Color colorFor(final Hit hit, final World world) {
+		
+		// Formula: c = cr[ca + cl * max(0, n.dot(l))]
 		Color c = color.mul(world.ambientLight);
 		final Light[] lights = world.getLights();
 		for (Light light : lights) {
