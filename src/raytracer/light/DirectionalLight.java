@@ -35,7 +35,6 @@ public class DirectionalLight extends Light {
 
 	@Override
 	public Vector3 directionFrom(final Point3 point) {
-		// TODO Auto-generated method stub
-		return null;
+		return direction.mul(-1);
 	}
 }
