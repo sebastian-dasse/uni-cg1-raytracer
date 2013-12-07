@@ -32,12 +32,12 @@ public class LambertMaterial extends Material{
 	@Override
 	public Color colorFor(final Hit hit, final World world) {
 		
-		// Formula: c = cr[ca + cl * max(0, n.dot(l))]
+		// Formula: c = cd[ca + cl * max(0, n.dot(l))]
 		Color c = color.mul(world.ambientLight);
+		final Normal3 n = hit.normal;
+		final Point3 p = hit.ray.at(hit.t);
 		final Light[] lights = world.getLights();
 		for (Light light : lights) {
-			final Normal3 n = hit.normal;
-			final Point3 p = hit.ray.at(hit.t);
 			final Vector3 l = light.directionFrom(p);
 			final double f = Math.max(0, n.dot(l));
 			final Color temp = color.mul(light.color.mul(f));
@@ -46,7 +46,6 @@ public class LambertMaterial extends Material{
 		// TODO in Raytracer.normalizeColorComponent(...) verschieben 
 		final double max1 = Math.max(world.ambientLight.r, world.ambientLight.g);
 		final double max2 = Math.max(max1, world.ambientLight.b);
-		c = (c.mul(1 / (lights.length + max2)));
-		return c;
+		return (c.mul(1 / (lights.length + max2)));
 	}
 }
