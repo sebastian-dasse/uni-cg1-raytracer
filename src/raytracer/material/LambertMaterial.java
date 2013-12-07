@@ -44,6 +44,7 @@ public class LambertMaterial extends Material{
 			c = c.add(temp);
 		}
 //		return c.mul(0.07);
-		return c;
+//		return c;
+		return c.mul(1 / (lights.length + 0.3));
 	}
 }
