@@ -3,13 +3,9 @@ package raytracer.material;
 import raytracer.Color;
 import raytracer.World;
 import raytracer.geometry.Hit;
-<<<<<<< HEAD
-import raytracer.math.Normal3;
-=======
 import raytracer.light.Light;
 import raytracer.math.Normal3;
 import raytracer.math.Point3;
->>>>>>> 88f90db52f40d510b654c4b2261f7b11390b6cc9
 import raytracer.math.Vector3;
 
 /**
@@ -47,14 +43,7 @@ public class PhongMaterial extends Material{
 
 	@Override
 	public Color colorFor(final Hit hit, final World world) {
-<<<<<<< HEAD
-		
-		//c = cr[ca + cl max(n*l) + cl max(0, r*e))]
-		Normal3 normal = hit.normal;
-		
-		
-		
-=======
+
 		final Vector3 e = hit.ray.d.mul(-1).normalized();
 //		Color c = color.mul(world.ambientLight);
 		final Light[] lights = world.getLights();
@@ -72,7 +61,6 @@ public class PhongMaterial extends Material{
 		final double max2 = Math.max(max1, world.ambientLight.b);
 //		c = (c.mul(1 / (lights.length + max2)));
 //		return c;
->>>>>>> 88f90db52f40d510b654c4b2261f7b11390b6cc9
 		return null;
 	}
 }
