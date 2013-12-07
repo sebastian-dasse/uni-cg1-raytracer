@@ -65,9 +65,10 @@ public final class DemoScene {
 //		world.addLight(new PointLight(new Color(1, 1, 1), new Point3(10, 10, 10)));
 //		world.addLight(new PointLight(new Color(1, 1, 1), new Point3(10, 10, 10)));
 //		world.addLight(new PointLight(new Color(1, 1, 1), new Point3(-10, 10, 10)));
-		world.addLight(new PointLight(new Color(1, 1, 1), new Point3(-10, -10, 10)));
+//		world.addLight(new PointLight(new Color(1, 1, 1), new Point3(-10, -10, 10)));
 //		world.addLight(new PointLight(new Color(1, 1, 1), new Point3(0, 10, 0)));
 //		world.addLight(new PointLight(new Color(1, 0, 1), new Point3(-1, 10, 10))); // this s**t ain't gonna work
+//		world.addLight(new DirectionalLight(new Color(1, 1, 1), new Vector3(-1, -1, 1)));
 		return new Raytracer(world, camera, size);
 	}
 	
