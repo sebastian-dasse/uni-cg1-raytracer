@@ -45,6 +45,6 @@ public class LambertMaterial extends Material{
 		}
 //		return c.mul(0.07);
 //		return c;
-		return c.mul(1 / (lights.length + 0.3));
+		return c.mul(1 / (lights.length + 0.0));
 	}
 }
