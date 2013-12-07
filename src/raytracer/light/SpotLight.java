@@ -41,14 +41,14 @@ public class SpotLight extends Light {
 
 	@Override
 	public boolean illuminates(final Point3 point) {
-		// TODO Auto-generated method stub
-		return false;
+		
+		// Formula: cos(a, b) = a.dot(b), mit |a| = |b| = 1
+		return Math.acos(direction.dot(directionFrom(point).mul(-1))) <= halfAngle;
 	}
 
 	@Override
 	public Vector3 directionFrom(final Point3 point) {
-		// TODO Auto-generated method stub
-		return null;
+		return position.sub(point).normalized(); // normalized
 	}
 	
 	

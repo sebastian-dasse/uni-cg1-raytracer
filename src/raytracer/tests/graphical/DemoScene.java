@@ -7,8 +7,8 @@ import raytracer.Raytracer;
 import raytracer.World;
 import raytracer.camera.Camera;
 import raytracer.geometry.Geometry;
-import raytracer.light.DirectionalLight;
 import raytracer.light.PointLight;
+import raytracer.light.SpotLight;
 import raytracer.material.LambertMaterial;
 import raytracer.material.PhongMaterial;
 import raytracer.material.SingleColorMaterial;
@@ -65,7 +65,8 @@ public final class DemoScene {
 //		world.addLight(new PointLight(new Color(1, 1, 1), new Point3(10, 10, 10)));
 //		world.addLight(new PointLight(new Color(1, 1, 1), new Point3(10, 10, 10)));
 //		world.addLight(new PointLight(new Color(1, 1, 1), new Point3(-10, 10, 10)));
-//		world.addLight(new PointLight(new Color(1, 1, 1), new Point3(-10, -10, 10)));
+		world.addLight(new PointLight(new Color(1, 1, 1), new Point3(-10, -10, 10)));
+//		world.addLight(new DirectionalLight(new Color(1, 1, 1), new Vector3(-1, -1, 1)));
 //		world.addLight(new PointLight(new Color(1, 1, 1), new Point3(0, 10, 0)));
 //		world.addLight(new PointLight(new Color(1, 0, 1), new Point3(-1, 10, 10))); // this s**t ain't gonna work
 //		world.addLight(new DirectionalLight(new Color(1, 1, 1), new Vector3(-1, -1, 1)));
@@ -88,16 +89,11 @@ public final class DemoScene {
 						{ 0, 0, 1 }, { 0, 0, 1 }, { 0, 0, 1 } }, new PhongMaterial(new Color(1, 1, 0), new Color(1,1,1), 64))
 			}
 		);
-//		world.addLight(new PointLight(new Color(1, 1, 1), new Point3(10, 10, 10)));
-//		world.addLight(new PointLight(new Color(1, 1, 1), new Point3(10, 10, 10)));
-//		world.addLight(new PointLight(new Color(1, 1, 1), new Point3(10, 10, 10)));
-//		world.addLight(new PointLight(new Color(1, 1, 1), new Point3(10, 10, 10)));
 //		world.addLight(new PointLight(new Color(1, 1, 1), new Point3(-10, 10, 10)));
 //		world.addLight(new PointLight(new Color(1, 1, 1), new Point3(-10, -10, 10)));
-		world.addLight(new DirectionalLight(new Color(1, 1, 1), new Vector3(-1, -1, 1)));
-		
-//		world.addLight(new PointLight(new Color(1, 1, 1), new Point3(0, 10, 0)));
-//		world.addLight(new PointLight(new Color(1, 0, 1), new Point3(-1, 10, 10))); // this s**t ain't gonna work
+//		world.addLight(new PointLight(new Color(1, 1, 1), new Point3(10, 10, 10)));
+//		world.addLight(new DirectionalLight(new Color(1, 1, 1), new Vector3(-1, -1, -1)));
+		world.addLight(new SpotLight(new Color(1, 1, 1), new Point3(10, 10 ,10), new Vector3(-1, -1, -1), (Math.PI / 14.0)));
 		return new Raytracer(world, camera, size);
 	}
 }
