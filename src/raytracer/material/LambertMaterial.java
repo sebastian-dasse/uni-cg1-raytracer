@@ -43,7 +43,7 @@ public class LambertMaterial extends Material{
 			final Color temp = color.mul(light.color.mul(f));
 			c = c.add(temp);
 		}
-		
+		// TODO in Raytracer.normalizeColorComponent(...) verschieben 
 		final double max1 = Math.max(world.ambientLight.r, world.ambientLight.g);
 		final double max2 = Math.max(max1, world.ambientLight.b);
 		c = (c.mul(1 / (lights.length + max2)));
