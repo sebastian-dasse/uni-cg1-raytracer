@@ -18,7 +18,6 @@ public class DirectionalLight extends Light {
 	
 	/**
 	 * 
-	 * 
 	 * @param color
 	 * @param direction
 	 */
