@@ -60,7 +60,7 @@ public class PhongMaterial extends Material{
 		
 		final double max1 = Math.max(world.ambientLight.r, world.ambientLight.g);
 		final double max2 = Math.max(max1, world.ambientLight.b);
-		c = (c.mul(1 / (lights.length*2 + max2)));
+		c = (c.mul(1 / (lights.length*1.5+ max2)));
 		return c;
 	}
 }
