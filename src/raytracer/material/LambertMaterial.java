@@ -31,13 +31,15 @@ public class LambertMaterial extends Material{
 	
 	@Override
 	public Color colorFor(final Hit hit, final World world) {
+		
+		// c = cr[ca + cl * max(0, n.dot(l))]
 		Color c = color.mul(world.ambientLight);
 		final Light[] lights = world.getLights();
 		for (Light light : lights) {
 			final Normal3 n = hit.normal;
 			final Point3 p = hit.ray.at(hit.t);
 			final Vector3 l = light.directionFrom(p);
-			final double f = Math.max(0, n.dot(l));
+			final double f = Math.max(0, n.dot(l)); // evtl. 0,0001 oder ähnliche kleine Werte statt 0?
 			final Color temp = color.mul(light.color.mul(f));
 			c = c.add(temp);
 		}
