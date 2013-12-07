@@ -7,6 +7,7 @@ import raytracer.Raytracer;
 import raytracer.World;
 import raytracer.camera.Camera;
 import raytracer.geometry.Geometry;
+import raytracer.light.DirectionalLight;
 import raytracer.light.PointLight;
 import raytracer.light.SpotLight;
 import raytracer.material.LambertMaterial;
@@ -91,9 +92,9 @@ public final class DemoScene {
 		);
 //		world.addLight(new PointLight(new Color(1, 1, 1), new Point3(-10, 10, 10)));
 //		world.addLight(new PointLight(new Color(1, 1, 1), new Point3(-10, -10, 10)));
-//		world.addLight(new PointLight(new Color(1, 1, 1), new Point3(10, 10, 10)));
+		world.addLight(new PointLight(new Color(1, 1, 1), new Point3(10, 10, 10)));
 //		world.addLight(new DirectionalLight(new Color(1, 1, 1), new Vector3(-1, -1, -1)));
-		world.addLight(new SpotLight(new Color(1, 1, 1), new Point3(4, 4 , 4), new Vector3(-1, -1, -1), (Math.PI / 14.0)));
+//		world.addLight(new SpotLight(new Color(1, 1, 1), new Point3(4, 4 , 4), new Vector3(-1, -1, -1), (Math.PI / 14.0)));
 		return new Raytracer(world, camera, size);
 	}
 }
