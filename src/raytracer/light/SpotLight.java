@@ -42,7 +42,7 @@ public class SpotLight extends Light {
 	@Override
 	public boolean illuminates(final Point3 point) {
 		
-		// Formula: cos(a, b) = a.dot(b), mit |a| = |b| = 1
+		// Formula: cos(l, d) = <l, d>, with |l| = |d| = 1, l:= light direction, r: = vector from light position to point
 		return Math.acos(direction.normalized().dot(directionFrom(point).mul(-1))) <= halfAngle;
 	}
 

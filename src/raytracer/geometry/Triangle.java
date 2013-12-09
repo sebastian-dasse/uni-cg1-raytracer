@@ -68,10 +68,15 @@ public class Triangle extends Geometry {
 			throw new IllegalArgumentException("The parameter 'ray' must not be null.");
 		}
 		
-		// beta  = detA_1 / detA
-		// gamma = detA_2 / detA
-		// t     = detA_3 / detA
-		// 0 <= beta + gamma <= 1
+		/*
+		 * Formulas:
+		 * 		Ax = dvector = a - o
+		 * 		A_1 := matrix A with column 1 replaced by dvector
+		 * 		beta  = detA_1 / detA
+		 * 		gamma = detA_2 / detA
+		 * 		t     = detA_3 / detA
+		 * 		0 <= beta + gamma <= 1
+		 */
 		final Mat3x3 matrix = new Mat3x3(a.x - b.x, a.x - c.x, ray.d.x,
 								   		 a.y - b.y, a.y - c.y, ray.d.y,
 								   		 a.z - b.z, a.z - c.z, ray.d.z);
@@ -83,7 +88,6 @@ public class Triangle extends Geometry {
 		final double gamma = matrix.changeCol2(dvector).determinant / matrix.determinant;
 		final double t     = matrix.changeCol3(dvector).determinant / matrix.determinant;
 		
-		// TODO FRAGE: kann t < 0 überhaupt werden?
 		if (gamma < 0 || beta < 0 || beta + gamma > 1 || t < 0) {
 			return null; // no hit
 		}
