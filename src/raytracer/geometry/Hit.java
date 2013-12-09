@@ -34,9 +34,10 @@ public class Hit {
 	/**
 	 * Constructs a new <code>Hit</code> object with the specified parameters.
 	 * 
-	 * @param t		The parameter for the hit point. Must be a positive double value other than Infinity or NaN.
-	 * @param ray	The <code>Ray</code> that hit the <code>Geometry</code>. Must not be <code>null</code>.
-	 * @param geo	The <code>Geometry</code> that was hit. Must not be <code>null</code>.
+	 * @param t			The parameter for the hit point. Must be a positive double value other than Infinity or NaN.
+	 * @param ray		The <code>Ray</code> that hit the <code>Geometry</code>. Must not be <code>null</code>.
+	 * @param geo		The <code>Geometry</code> that was hit. Must not be <code>null</code>.
+	 * @param normal	The normal of the hit point. Must not be <code>null</code>.
 	 */
 	public Hit(final double t, final Ray ray, final Geometry geo, final Normal3 normal) {
 		if (t < 0 || !isValid(t)) {
