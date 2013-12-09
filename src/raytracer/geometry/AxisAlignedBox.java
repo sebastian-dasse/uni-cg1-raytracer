@@ -18,6 +18,16 @@ import raytracer.math.Vector3;
 public class AxisAlignedBox extends Geometry {
 	
 	/**
+	 * The low bottom far point of this <code>AxisAlignedBox</code>.
+	 * Is part of the left, the back and the bottom plane.
+	 */
+	public final Point3 lbf;
+	/**
+	 * The right upper near point of this <code>AxisAlignedBox</code>.
+	 * Is part of the top, the front and the right plane.
+	 */
+	public final Point3 run;
+	/**
 	 * The normal of the left face of the box.
 	 */
 	private static final Normal3 LEFT   = new Normal3(-1,  0,  0);
@@ -41,16 +51,6 @@ public class AxisAlignedBox extends Geometry {
 	 * The normal of the back face of the box.
 	 */
 	private static final Normal3 BACK   = new Normal3( 0,  0, -1);
-	/**
-	 * The low bottom far point of this <code>AxisAlignedBox</code>.
-	 * Is part of the left, the back and the bottom plane.
-	 */
-	public final Point3 lbf;
-	/**
-	 * The right upper near point of this <code>AxisAlignedBox</code>.
-	 * Is part of the top, the front and the right plane.
-	 */
-	public final Point3 run;
 	
 	/**
 	 * Constructs a new <code>AxisAlignedBox</code> with the specified parameters.
@@ -75,7 +75,7 @@ public class AxisAlignedBox extends Geometry {
 		}
 		
 		// 1. which surfaces are visible?
-		// (o - a).dot(n_i) > 0
+		// Formula: <o - a, n_i>  > 0
 		final Vector3 toLbf = ray.o.sub(lbf);
 		final Vector3 toRun = ray.o.sub(run);
 		final LinkedList<Plane> planes = new LinkedList<Plane>();
@@ -99,7 +99,7 @@ public class AxisAlignedBox extends Geometry {
 		}
 		
 		// 2. calculate intersection point(s) - take the greatest t, i.e. the most distant point from the camera view
-		// t_i = (a - o).dot(n_i) / d.dot(n_i)
+		// Formula: t_i = <a - o, n_i> / <d, n_i>
 		Hit hitMax = null;
 		for (final Plane plane : planes) {
 			final Hit h = plane.hit(ray);
@@ -115,7 +115,7 @@ public class AxisAlignedBox extends Geometry {
 		}
 		
 		// 3. check, if the found intersection point with the plane lies in/on the box
-		// lbf <= p <= run, for all coordinates x, y, z
+		// Formula: lbf <= p <= run, for all coordinates x, y, z
 		final Plane face = (Plane) hitMax.geo;
 		final Point3 p = ray.at(hitMax.t);
 		// no need to check the coordinate that lies in the in the direction of the normal of the examined plane

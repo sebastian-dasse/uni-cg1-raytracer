@@ -47,10 +47,13 @@ public class Sphere extends Geometry {
 			throw new IllegalArgumentException("The parameter 'ray' must not be null.");
 		}
 		
-		// a = d.dot(d)  = d.x * d.x + d.y * d.y + d.z * d.z  <--  will never be negative!
-		// b = d.dot(o.sub(center).mul(2))
-		// c = (o.sub(c)).dot(o.sub(c)) - r*r
-		// t = -b +- sqrt(b*b -4ac) / 2a
+		/*
+		 * Formulas:
+		 * 		a = <d, d> = d.x² + d.y² + d.z²  <-- will never be negative!
+		 * 		b = <d, 2(o - center) >
+		 * 		c = <o - c, o - c> - r²
+		 * 		t = -b +- sqrt(b² - 4ac) / 2a
+		 */
 		final double a = ray.d.dot(ray.d);
 		if (a == 0) {
 			return null;
@@ -65,7 +68,7 @@ public class Sphere extends Geometry {
 			final double t = -b / (2.0 * a);
 			final Point3 p = ray.at(t);
 			
-			// n = p - c
+			// Formula: normal = p - center
 			final Normal3 normal = p.sub(center).normalized().asNormal(); // normalized normal
 			return (b > 0) ? null : new Hit(t, ray, this, normal);
 		} // discrimant > 0  =>  2 results => 2 hits
@@ -85,7 +88,7 @@ public class Sphere extends Geometry {
 		final double t = numerator / (2 * a);
 		final Point3 p = ray.at(t);
 		
-		// n = p - c
+		// Formula: normal = p - center
 		final Normal3 normal = p.sub(center).normalized().asNormal(); // normalized normal
 		return new Hit(t, ray, this, normal);
 	}

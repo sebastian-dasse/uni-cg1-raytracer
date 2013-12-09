@@ -11,7 +11,7 @@ import raytracer.math.Vector3;
 /**
  * 
  * This immutable class implements the color of a material with a perfect diffuse surface and specular point.
- * @author 
+ * @author Simon Lischka
  *
  */
 public class PhongMaterial extends Material{
@@ -43,7 +43,7 @@ public class PhongMaterial extends Material{
 	@Override
 	public Color colorFor(final Hit hit, final World world) {
 		
-		// Formula: c = cd * ca + cd * cl * max(0, n.dot(l)) + cs * cl * max(0, e.dot(r))^p
+		// Formula: c = cd * ca  +  cd * cl * max(0, <n, l>)  +  cs * cl * pow(max(0, <e, r>), p)
 		final Normal3 n = hit.normal;
 		final Point3 p = hit.ray.at(hit.t);
 		final Vector3 e = hit.ray.d.mul(-1).normalized();
@@ -63,10 +63,13 @@ public class PhongMaterial extends Material{
 		// TODO in Raytracer.normalizeColorComponent(...) verschieben
 		final double max1 = Math.max(world.ambientLight.r, world.ambientLight.g);
 		final double max2 = Math.max(max1, world.ambientLight.b);
-		c = (c.mul(1 / (lights.length*2+ max2)));
+		return (c.mul(1 / (lights.length*2 + max2)));
+		
+		//---- for debugging purposes:
+//		c = (c.mul(1 / (lights.length*2 + max2)));
 //		if (c.r > 1 || c.g >= 1 || c.b >= 1) {
 //			System.err.println(c);
 //		}
-		return c;
+//		return c;
 	}
 }

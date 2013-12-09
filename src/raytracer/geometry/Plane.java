@@ -45,7 +45,7 @@ public class Plane extends Geometry {
 			throw new IllegalArgumentException("The parameter 'ray' must not be null.");
 		}
 		
-		// t = (a - o).dot(n) / d.dot(n)
+		// Formula: t = <a - o, n> / <d, n>
 		final double denominator = ray.d.dot(n);
 		if (denominator == 0) { // not hit
 			return null;

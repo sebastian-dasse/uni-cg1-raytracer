@@ -9,10 +9,10 @@ import raytracer.math.Point3;
 import raytracer.math.Vector3;
 
 /**
- * 
  * This immutable class implements the color of a material with a perfect diffuse surface.
- * @author 
- *
+ * @author Simon Lischka;
+ * @author Sebastian Dass&eacute;
+ * @author Maxim Novichkov;
  */
 public class LambertMaterial extends Material{
 	/**
@@ -30,7 +30,7 @@ public class LambertMaterial extends Material{
 	@Override
 	public Color colorFor(final Hit hit, final World world) {
 		
-		// Formula: c = cd[ca + cl * max(0, n.dot(l))]
+		// Formula: c = cd[ca  +  cl * max(0, <n, l>)]
 		Color c = color.mul(world.ambientLight);
 		final Normal3 n = hit.normal;
 		final Point3 p = hit.ray.at(hit.t);

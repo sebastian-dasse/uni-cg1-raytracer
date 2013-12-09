@@ -22,6 +22,7 @@ public class PointLight extends Light {
 
 	/**
 	 * Constructs a new <code>PointLight</code> object with the specified parameters.
+	 * 
 	 * @param color
 	 * @param position
 	 */
@@ -38,11 +39,8 @@ public class PointLight extends Light {
 	public boolean illuminates(final Point3 point) {
 		// TODO Auto-generated method stub
 		return true;
+		
 	}
-	/**
-	 * Returns the vector from the point to the light source
-	 * @param point The point to be processed by the light source
-	 */
 	@Override
 	public Vector3 directionFrom(final Point3 point) {
 		return position.sub(point).normalized(); // normalized
