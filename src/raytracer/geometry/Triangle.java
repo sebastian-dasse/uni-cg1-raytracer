@@ -28,17 +28,6 @@ public class Triangle extends Geometry {
 	 */
 	public final Point3 c;
 	/**
-<<<<<<< HEAD
-	 * The normal at vertex a.
-	 */
-	public final Normal3 na;
-	/**
-	 * The normal at vertex b.
-	 */
-	public final Normal3 nb;
-	/**
-	 * The normal at vertex c.
-=======
 	 * The normal of point a in this <code>Triangle</code>.
 	 */
 	public final Normal3 na;
@@ -47,8 +36,7 @@ public class Triangle extends Geometry {
 	 */
 	public final Normal3 nb;
 	/**
-	 * The mormal of point c in this <code>Triangle</code>.
->>>>>>> f539b38a9d458b24fa9f9cd79d0fabf1ca86361b
+	 * The normal of point c in this <code>Triangle</code>.
 	 */
 	public final Normal3 nc;
 	
@@ -58,21 +46,15 @@ public class Triangle extends Geometry {
 	 * @param a			Vertex a of the triangle. Must not be <code>null</code>.
 	 * @param b			Vertex b of the triangle. Must not be <code>null</code>.
 	 * @param c			Vertex c of the triangle. Must not be <code>null</code>.
-<<<<<<< HEAD
-	 * @param na		The normal at vertex a. Must not be <code>null</code>.
-	 * @param nb		The normal at vertex b. Must not be <code>null</code>.
-	 * @param nc		The normal at vertex c. Must not be <code>null</code>.
-=======
 	 * @param na		The Normal of point a.
 	 * @param nb		The Normal of point b.
 	 * @param nc		The Normal of point c.
->>>>>>> f539b38a9d458b24fa9f9cd79d0fabf1ca86361b
 	 * @param material	The material of the triangle. Must not be <code>null</code>.
 	 */
 	public Triangle(final Point3 a, final Point3 b, final Point3 c,
 			final Normal3 na, final Normal3 nb, final Normal3 nc, final Material material) {
 		super(material);
-		if (a == null || b == null || c == null || na == null || nb == null || nc == null) {
+		if (a == null || b == null || c == null) {
 			throw new IllegalArgumentException("The parameters must not be null.");
 		}	
 			this.a = a;
