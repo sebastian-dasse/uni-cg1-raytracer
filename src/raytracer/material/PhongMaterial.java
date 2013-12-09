@@ -9,44 +9,38 @@ import raytracer.math.Point3;
 import raytracer.math.Vector3;
 
 /**
- * This immutable class implements the color of a material with a perfect diffuse surface and specular point.
+ * This immutable class implements the color of a material with a perfect diffuse reflecting surface and a specular point.
  * 
  * @author Simon Lischka
  *
  */
 public class PhongMaterial extends Material {
 	/**
-	 * The color of a diffuse surface material.
+	 * The surface color of this material.
 	 */
 	private final Color diffuse;
 	/**
-	 * The color of a specular point.
+	 * The color of the specular point of this material.
 	 */
 	private final Color specular;
 	/**
-	 * The scale of a specular point.
+	 * The scale of the specular point of this material.
 	 */
 	private final int exponent; 
 	
 	/**
+	 * Constructs a new <code>PhongMaterial</code> object with the specified parameters.
 	 * 
-<<<<<<< HEAD
 	 * @param diffuse   The surface color. Must not be <code>null</code>.
 	 * @param specular	The color of the specular point. Must not be <code>null</code>.
-	 * @param exponent	The scale of the specular point. Must be a positive value.
-=======
-	 * @param diffuse   The color of a diffuse surface.
-	 * @param specular	The color of a specular point. 
-	 * @param exponent	The scale of a specular point. Must be a positive value.
->>>>>>> d38e25e0056adb2c0e641d6016cdd13c62802421
+	 * @param exponent	The scale of the specular point. Must be a positive value below 1024.
 	 */
 	public PhongMaterial(final Color diffuse, final Color specular, final int exponent) {
 		if (diffuse == null || specular == null) {
 			throw new IllegalArgumentException("The parameters must not be null.");
 		}
-		if (exponent < 0 || exponent > Double.MAX_EXPONENT) {
-			// FIXME
-			System.err.println("eponent = " + exponent);
+		if (exponent < 0 || Double.MAX_EXPONENT < exponent) {
+			throw new IllegalArgumentException("The parameter 'exponent' must be a positive int value below 1024.");
 		}
 		this.diffuse = diffuse;
 		this.specular = specular;
@@ -55,6 +49,9 @@ public class PhongMaterial extends Material {
 
 	@Override
 	public Color colorFor(final Hit hit, final World world) {
+		if (hit == null || world == null) {
+			throw new IllegalArgumentException("The parameters must not be null.");
+		}
 		
 		// Formula: c = cd * ca  +  cd * cl * max(0, <n, l>)  +  cs * cl * pow(max(0, <e, r>), p)
 		final Normal3 n = hit.normal;
@@ -76,10 +73,10 @@ public class PhongMaterial extends Material {
 		// TODO in Raytracer.normalizeColorComponent(...) verschieben
 		final double max1 = Math.max(world.ambientLight.r, world.ambientLight.g);
 		final double max2 = Math.max(max1, world.ambientLight.b);
-		return (c.mul(1 / (lights.length*2 + max2)));
+		return (c.mul(1 / (lights.length * 2 + max2)));
 		
 		//---- for debugging purposes:
-//		c = (c.mul(1 / (lights.length*2 + max2)));
+//		c = (c.mul(1 / (lights.length * 2 + max2)));
 //		if (c.r > 1 || c.g >= 1 || c.b >= 1) {
 //			System.err.println(c);
 //		}
