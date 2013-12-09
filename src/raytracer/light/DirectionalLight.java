@@ -5,8 +5,8 @@ import raytracer.math.Point3;
 import raytracer.math.Vector3;
 
 /**
- * This class represents a directional light (sunlight) in a three-dimensional scene. A directional light, as the name 
- * suggests, has a direction - but no position.
+ * This immutable class represents a directional light (sunlight) in a three-dimensional scene. A directional light, as 
+ * the name suggests, has a direction - but no position.
  * 
  * @author Sebastian Dass&eacute; 
  *

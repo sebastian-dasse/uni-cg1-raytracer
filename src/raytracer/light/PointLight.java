@@ -5,8 +5,8 @@ import raytracer.math.Point3;
 import raytracer.math.Vector3;
 
 /**
- * This class represents a point light in a three-dimensional scene. A point light has a position and spreads its rays 
- * equally in all directions.
+ * This immutable class represents a point light in a three-dimensional scene. A point light has a position and spreads 
+ * its rays equally in all directions.
  * 
  * @author Simon Lischka
  */

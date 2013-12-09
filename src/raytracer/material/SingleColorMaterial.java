@@ -6,6 +6,7 @@ import raytracer.geometry.Hit;
 
 /**
  * This immutable class implements the color of a material with a simple surface.
+ * 
  * @author Novichkov Maxim
  */
 public class SingleColorMaterial extends Material{

@@ -10,20 +10,26 @@ import raytracer.math.Vector3;
 
 /**
  * This immutable class implements the color of a material with a perfect diffuse surface.
+ * 
  * @author Simon Lischka;
  * @author Sebastian Dass&eacute;
  * @author Maxim Novichkov;
  */
-public class LambertMaterial extends Material{
+public class LambertMaterial extends Material {
 	/**
-	 * The color of a surface material.
+	 * The surface color of this material.
 	 */
 	private final Color color;
 	
 	/**
-	 * @param color The surface color.
+	 * Constructs a new <code>LambertMaterial</code> object with the specified surface color.
+	 * 
+	 * @param color The surface color. Must not be <code>null</code>.
 	 */
-	public LambertMaterial (final Color color){
+	public LambertMaterial (final Color color) {
+		if (color == null) {
+			throw new IllegalArgumentException("The parameter 'color' must not be null.");
+		}
 		this.color = color;
 	}
 	

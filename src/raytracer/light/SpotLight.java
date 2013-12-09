@@ -5,8 +5,8 @@ import raytracer.math.Point3;
 import raytracer.math.Vector3;
 
 /**
- * This class represents a spot light in a three-dimensional scene. It has a position, a direction and an opening angle, 
- * which defines the cone inside of which everything is illuminated by the spot light.
+ * This immutable class represents a spot light in a three-dimensional scene. It has a position, a direction and an 
+ * opening angle, which defines the cone inside of which everything is illuminated by the spot light.
  * 
  * @author Sebastian Dass&eacute; 
  *

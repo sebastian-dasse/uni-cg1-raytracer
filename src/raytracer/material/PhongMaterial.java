@@ -9,12 +9,12 @@ import raytracer.math.Point3;
 import raytracer.math.Vector3;
 
 /**
- * 
  * This immutable class implements the color of a material with a perfect diffuse surface and specular point.
+ * 
  * @author Simon Lischka
  *
  */
-public class PhongMaterial extends Material{
+public class PhongMaterial extends Material {
 	/**
 	 * The color of a diffuse surface material.
 	 */
@@ -30,11 +30,18 @@ public class PhongMaterial extends Material{
 	
 	/**
 	 * 
-	 * @param diffuse   Color of a diffuse surface.
-	 * @param specular	Color of a specular point. 
-	 * @param exponent	Scale of a specular point. Must be a positive value.
+	 * @param diffuse   The surface color. Must not be <code>null</code>.
+	 * @param specular	The color of the specular point. Must not be <code>null</code>.
+	 * @param exponent	The scale of the specular point. Must be a positive value.
 	 */
-	public PhongMaterial(final Color diffuse, final Color specular, final int exponent){
+	public PhongMaterial(final Color diffuse, final Color specular, final int exponent) {
+		if (diffuse == null || specular == null) {
+			throw new IllegalArgumentException("The parameters must not be null.");
+		}
+		if (exponent < 0 || exponent > Double.MAX_EXPONENT) {
+			// FIXME
+			System.err.println("eponent = " + exponent);
+		}
 		this.diffuse = diffuse;
 		this.specular = specular;
 		this.exponent = exponent;
