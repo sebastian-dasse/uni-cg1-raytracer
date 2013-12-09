@@ -21,9 +21,9 @@ public final class DemoScene {
 	
 	public static void main(String[] args) {
 		final Raytracer[] tracers = new Raytracer[]{
-			scene1(), 
+//			scene1(), 
 			scene2(), 
-			scene3()
+//			scene3()
 		};
 		for (int i = 0; i < tracers.length; i++) {
 			ShowImage.from(tracers[i], 150 * i, 75 * i);
@@ -58,7 +58,7 @@ public final class DemoScene {
 	}
 	
 	public static Raytracer scene2() {
-		final World world = Factory.buildWorld(new double[][] { { 0, 0, 0 }, {0.1, 0.9, 0.1} });
+		final World world = Factory.buildWorld(new double[][] { { 0, 0, 0 }, {0.5, 0.5, 0.5} });
 		final Camera camera = Factory.buildPerspectiveCamera(new double[][] {
 				{ 4, 4, 4 }, { -1, -1, -1 }, { 0, 1, 0 }, { Math.PI / 4.0 } });
 		world.addElements(new Geometry[] {
@@ -73,7 +73,7 @@ public final class DemoScene {
 						{ 0, 0, 1 }, { 0, 0, 1 }, { 0, 0, 1 } }, new LambertMaterial(new Color(1, 1, 0)))
 			}
 		);
-//		world.addLight(new PointLight(new Color(1, 1, 1), new Point3(10, 10, 10)));
+		world.addLight(new PointLight(new Color(1, 1, 1), new Point3(10, 10, 10)));
 //		world.addLight(new PointLight(new Color(1, 1, 1), new Point3(10, 10, 10)));
 //		world.addLight(new PointLight(new Color(1, 1, 1), new Point3(10, 10, 10)));
 //		world.addLight(new PointLight(new Color(1, 1, 1), new Point3(10, 10, 10)));
