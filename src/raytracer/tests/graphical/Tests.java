@@ -135,7 +135,7 @@ public final class Tests {
 			testF()
 		};
 		for (int i = 0; i < tracers.length; i++) {
-			ShowImage.from(tracers[i], 150 * i, 75 * i);
+			ShowImage.from(tracers[i], 50 * i, 25 * i);
 		}
 	}
 }
