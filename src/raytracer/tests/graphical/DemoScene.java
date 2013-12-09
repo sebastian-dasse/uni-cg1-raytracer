@@ -86,12 +86,8 @@ public final class DemoScene {
 //		world.addLight(new DirectionalLight(new Color(1, 1, 1), new Vector3(-1, -1, 1)));
 //		world.addLight(new PointLight(new Color(1, 1, 1), new Point3(0, 10, 0)));
 //		world.addLight(new PointLight(new Color(1, 0, 1), new Point3(-1, 10, 10))); // this s**t ain't gonna work
-<<<<<<< HEAD
 		return new Raytracer(world, camera);
-=======
-//		world.addLight(new DirectionalLight(new Color(1, 1, 1), new Vector3(-1, -1, 1)));
-		return new Raytracer(world, camera, size);
->>>>>>> f539b38a9d458b24fa9f9cd79d0fabf1ca86361b
+
 	}
 	
 	public static Raytracer scene3() {
