@@ -10,7 +10,7 @@ import raytracer.math.Vector3;
  * It has a color and a method, which determines whether or not a point is illuminated by this light. It has another 
  * method, that returns the vector which points from a specific point to this light.
  * 
- * @author 
+ * @author Sebastian Dass&eacute;
  *
  */
 public abstract class Light {
@@ -46,8 +46,8 @@ public abstract class Light {
 	/**
 	 * Returns the vector which points from the specified point to this light.
 	 * 
-	 * @param point	The point to be checked.
+	 * @param point	The point to be checked. Must not be <code>null</code>.
 	 * @return		A <code>Vector3</code>. 
 	 */
-	public abstract Vector3 directionFrom(Point3 point);
+	public abstract Vector3 directionFrom(final Point3 point);
 }
