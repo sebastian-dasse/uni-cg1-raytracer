@@ -16,6 +16,16 @@ import raytracer.geometry.Hit;
  *
  */
 public class Raytracer {
+	
+	/**
+	 * The default screen width of 800 px.
+	 */
+	public static final int WIDTH = 800;
+	/**
+	 * The default screen height of 600 px.
+	 */
+	public static final int HEIGHT = 600;
+	
 	/**
 	 * The world of this raytracer.
 	 */
@@ -43,6 +53,16 @@ public class Raytracer {
 		this.world = world;
 		this.cam = cam;
 		this.size = size;
+	}
+	
+	/**
+	 * Constructs a new <code>Raytracer</code> with the specified parameters and a default screen size of 800 x 600.
+	 * 
+	 * @param world	The world of this <code>Raytracer</code>.
+	 * @param cam	The camera of this <code>Raytracer</code>.
+	 */
+	public Raytracer(final World world, final Camera cam) {
+		this(world, cam, new Dimension(WIDTH, HEIGHT));
 	}
 	
 	/**

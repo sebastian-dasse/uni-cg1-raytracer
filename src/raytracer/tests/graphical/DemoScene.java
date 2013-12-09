@@ -1,7 +1,5 @@
 package raytracer.tests.graphical;
 
-import java.awt.Dimension;
-
 import raytracer.Color;
 import raytracer.Raytracer;
 import raytracer.World;
@@ -17,11 +15,12 @@ import raytracer.math.Vector3;
 import raytracer.ui.ShowImage;
 
 /**
+ * Generates and displays <code>Raytracer</code> objects for demo scenes as demanded in task 3.
+ * 
  * @author Sebastian Dass&eacute;
  *
  */
 public final class DemoScene {
-	public static final Dimension size = new Dimension(800, 600);
 	
 	public static void main(String[] args) {
 		final Raytracer[] tracers = new Raytracer[]{
@@ -58,7 +57,7 @@ public final class DemoScene {
 						{ 0, 0, 1 }, { 0, 0, 1 }, { 0, 0, 1 } }, new SingleColorMaterial(new Color(1, 1, 0)))
 			}
 		);
-		return new Raytracer(world, camera, size);
+		return new Raytracer(world, camera);
 	}
 	
 	public static Raytracer scene2() {
@@ -86,7 +85,7 @@ public final class DemoScene {
 //		world.addLight(new DirectionalLight(new Color(1, 1, 1), new Vector3(-1, -1, 1)));
 //		world.addLight(new PointLight(new Color(1, 1, 1), new Point3(0, 10, 0)));
 //		world.addLight(new PointLight(new Color(1, 0, 1), new Point3(-1, 10, 10))); // this s**t ain't gonna work
-		return new Raytracer(world, camera, size);
+		return new Raytracer(world, camera);
 	}
 	
 	public static Raytracer scene3() {
@@ -111,6 +110,6 @@ public final class DemoScene {
 //		world.addLight(new DirectionalLight(new Color(1, 1, 1), new Vector3(-1, -1, -1)));
 		world.addLight(new SpotLight(new Color(1, 1, 1), new Point3(4, 4, 4), new Vector3(-1, -1, -1), (Math.PI / 14.0)));
 //		world.addLight(new SpotLight(new Color(1, 1, 1), new Point3(4, 1, 1), new Vector3(-1, 0, 0), (Math.PI / 10.0)));
-		return new Raytracer(world, camera, size);
+		return new Raytracer(world, camera);
 	}
 }

@@ -28,15 +28,15 @@ public class Triangle extends Geometry {
 	 */
 	public final Point3 c;
 	/**
-	 * 
+	 * The normal at vertex a.
 	 */
 	public final Normal3 na;
 	/**
-	 * 
+	 * The normal at vertex b.
 	 */
 	public final Normal3 nb;
 	/**
-	 * 
+	 * The normal at vertex c.
 	 */
 	public final Normal3 nc;
 	
@@ -46,12 +46,15 @@ public class Triangle extends Geometry {
 	 * @param a			Vertex a of the triangle. Must not be <code>null</code>.
 	 * @param b			Vertex b of the triangle. Must not be <code>null</code>.
 	 * @param c			Vertex c of the triangle. Must not be <code>null</code>.
+	 * @param na		The normal at vertex a. Must not be <code>null</code>.
+	 * @param nb		The normal at vertex b. Must not be <code>null</code>.
+	 * @param nc		The normal at vertex c. Must not be <code>null</code>.
 	 * @param material	The material of the triangle. Must not be <code>null</code>.
 	 */
 	public Triangle(final Point3 a, final Point3 b, final Point3 c,
 			final Normal3 na, final Normal3 nb, final Normal3 nc, final Material material) {
 		super(material);
-		if (a == null || b == null || c == null) {
+		if (a == null || b == null || c == null || na == null || nb == null || nc == null) {
 			throw new IllegalArgumentException("The parameters must not be null.");
 		}	
 			this.a = a;
