@@ -14,7 +14,7 @@ public abstract class Material {
 	 * 
 	 * @param hit   The <code>Hit</code> object.
 	 * @param world The type of a light source.
-	 * @return      The color of the geometry.
+	 * @return      The (surface) color of the geometry.
 	 */
 	abstract public Color colorFor(final Hit hit, final World world);
 }

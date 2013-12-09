@@ -28,15 +28,15 @@ public class Triangle extends Geometry {
 	 */
 	public final Point3 c;
 	/**
-	 * 
+	 * Normal na of point a in this <code>Triangle</code>.
 	 */
 	public final Normal3 na;
 	/**
-	 * 
+	 * Normal nb of point b in this <code>Triangle</code>.
 	 */
 	public final Normal3 nb;
 	/**
-	 * 
+	 * Normal nc of point c in this <code>Triangle</code>.
 	 */
 	public final Normal3 nc;
 	
@@ -46,6 +46,9 @@ public class Triangle extends Geometry {
 	 * @param a			Vertex a of the triangle. Must not be <code>null</code>.
 	 * @param b			Vertex b of the triangle. Must not be <code>null</code>.
 	 * @param c			Vertex c of the triangle. Must not be <code>null</code>.
+	 * @param na		The Normal of point a.
+	 * @param nb		The Normal of point b.
+	 * @param nc		The Normal of point c.
 	 * @param material	The material of the triangle. Must not be <code>null</code>.
 	 */
 	public Triangle(final Point3 a, final Point3 b, final Point3 c,

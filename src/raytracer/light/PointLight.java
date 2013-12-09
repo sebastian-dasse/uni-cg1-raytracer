@@ -37,7 +37,7 @@ public class PointLight extends Light {
 	@Override
 	public boolean illuminates(final Point3 point) {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 	/**
 	 * Returns the vector from the point to the light source
