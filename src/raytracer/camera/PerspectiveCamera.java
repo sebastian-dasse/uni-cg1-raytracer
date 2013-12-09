@@ -1,6 +1,5 @@
 package raytracer.camera;
 
-import static raytracer.math.MathUtil.inRange;
 import raytracer.Ray;
 import raytracer.math.Point3;
 import raytracer.math.Vector3;
@@ -30,7 +29,7 @@ public class PerspectiveCamera extends Camera{
 	 */
 	public PerspectiveCamera(final Point3 e, final Vector3 g, final Vector3 t, final double angle) {
 		super(e, g, t);
-		if (angle == 0 || !inRange(angle, 0, Math.PI)) {
+		if (angle <= 0 || Math.PI < angle) {
 			throw new IllegalArgumentException("The parameter 'angle' must be between 0 (excluding) and PI (including).");
 		}
 		this.angle = angle / 2.0;

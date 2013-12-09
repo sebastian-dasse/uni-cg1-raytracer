@@ -19,16 +19,18 @@ public final class MathUtil {
 		return !Double.isNaN(d) && !Double.isInfinite(d);
 	}
 	
+	// TODO never used
 	/**
 	 * Checks if the specified number is in the range from 0 to 1 including, i.e. 0 <= d <= 1.
 	 * 
 	 * @param d	The double value to be checked.
 	 * @return	<code>true</code> if 0 <= d <= 1, otherwise <code>false</code>. 
 	 */
-	public static boolean inRange0To1(final double d) {
-		return inRange(d, 0, 1);
-	}
+//	public static boolean inRange0To1(final double d) {
+//		return inRange(d, 0, 1);
+//	}
 	
+	// TODO never used
 	/**
 	 * Checks if the specified number is in the specified range, i.e. lo <= d <= hi.
 	 * 
@@ -37,7 +39,7 @@ public final class MathUtil {
 	 * @param hi	The upper limit of the range.
 	 * @return	<code>true</code> if 0 <= d <= 1, otherwise <code>false</code>. 
 	 */
-	public static boolean inRange(final double d, final double lo, final double hi) {
-		return lo <= d && d <= hi;
-	}
+//	public static boolean inRange(final double d, final double lo, final double hi) {
+//		return lo <= d && d <= hi;
+//	}
 }

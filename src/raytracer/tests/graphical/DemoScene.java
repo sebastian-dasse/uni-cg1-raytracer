@@ -16,6 +16,10 @@ import raytracer.math.Point3;
 import raytracer.math.Vector3;
 import raytracer.ui.ShowImage;
 
+/**
+ * @author Sebastian Dass&eacute;
+ *
+ */
 public final class DemoScene {
 	public static final Dimension size = new Dimension(800, 600);
 	
