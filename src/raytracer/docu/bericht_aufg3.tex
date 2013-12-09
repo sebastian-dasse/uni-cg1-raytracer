@@ -1,0 +1,65 @@
+\documentclass[11pt]{amsart}
+\usepackage{geometry}                % See geometry.pdf to learn the layout options. There are lots.
+\geometry{a4paper}             
+
+%\usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{epstopdf}
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+\title{CGI: Bericht zu Aufgabe 3, Raytracer}
+\author{von Sebastian Dass\'{e}, Max Novichkov, Simon Lischka }
+\date{9.12.2013}    
+
+\begin{document}
+
+\maketitle
+
+\section{Aufgabenstellung}
+\subsection{}
+Implementierung der Materialklassen Lambert, Phong und SingleColor
+
+\subsection{}
+Implementierung der Lichtklassen SpotLight, PointLight und DirectionalLight
+
+\subsection{}
+Entwerfen einer eigenen Demoszene
+
+
+\section{L\"osungsstrategien}
+\subsection{}
+Die Klassen wurden zun\"achst als leere Vorlagen generiert.
+
+\subsection{}
+Die entsprechenden Klassen wurden zun\"achst theoretisch vorbereitet und dann gemeinsam im linearen Zeitablauf implementiert.
+
+\subsection{}
+Bei unerwarteten Fehlern wurden Testausgaben mit entsprechenden Zahlenwerten, beispielsweise
+von Colorwerten beim Entwerfen der Beleuchtung, vorgenommen und analysiert. Dabei lie\ss{}en wir 
+uns gezielt fehlerverd\"achtige Wertebereiche anzeigen.
+
+
+
+\section{Besondere Probleme}
+\subsection{}
+In der colorFor Methode der Materialien muss der zur\"uckgegebene Farbwert
+kompensiert werden, um den maximalen Wertebereich von 0-1 nicht zu verletzen.
+Eine Schwierigkeit bestand darin, einen geeigneten Kompensationsfaktor zu finden
+(momentan Anzahl der Lichtquellen + maximaler Farbwert des Ambientlights).
+
+\section{Implementierung}
+\subsection{}
+Die Materialklassen wurden nach den Formeln, die in der Aufgabe vorgegeben 
+sind und unter Ber\"ucksichtigung des gegebenen Klassendiagramms implementiert.
+
+\subsection{}
+Unter der gleichen Vorgehensweise wurden die Lichtquellen implementiert.
+
+
+\section{Zeitbedarf}
+\subsection{}
+Der Zeitbedarf wurde bei allen Teammitgliedern mit jeweils 15 Stunden angegeben. Dabei 
+wurde der gr\"o{\ss}te Teil der Zeit in der Implementierung und Fehlersuche verwendet.
+
+
+\end{document} 

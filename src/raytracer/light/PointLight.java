@@ -15,7 +15,6 @@ public class PointLight extends Light {
 	 * The position of this <code>PointLight</code>.
 	 */
 	public final Point3 position;
-
 	/**
 	 * Constructs a new <code>PointLight</code> object with the specified parameters.
 	 * 
@@ -29,22 +28,26 @@ public class PointLight extends Light {
 		}
 		this.position = position;
 	}
-	
 	/**
 	 * Checks if the given point is illuminated by the light
 	 * @param point A point to be processed by the light source
 	 */
 	@Override
 	public boolean illuminates(final Point3 point) {
-		// TODO Auto-generated method stub
 		return true;
 		
 	}
+	/**
+	 * Returns the vector which points from the specified point to this light.
+	 * 
+	 * @param point	The point to be checked. Must not be <code>null</code>.
+	 * @return		A <code>Vector3</code>. 
+	 */
 	@Override
 	public Vector3 directionFrom(final Point3 point) {
 		if (point == null) {
 			throw new IllegalArgumentException("The parameter 'point' must not be null.");
 		}
-		return position.sub(point).normalized(); // normalized
+		return position.sub(point).normalized();
 	}
 }

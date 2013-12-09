@@ -30,9 +30,15 @@ public class PhongMaterial extends Material {
 	
 	/**
 	 * 
+<<<<<<< HEAD
 	 * @param diffuse   The surface color. Must not be <code>null</code>.
 	 * @param specular	The color of the specular point. Must not be <code>null</code>.
 	 * @param exponent	The scale of the specular point. Must be a positive value.
+=======
+	 * @param diffuse   The color of a diffuse surface.
+	 * @param specular	The color of a specular point. 
+	 * @param exponent	The scale of a specular point. Must be a positive value.
+>>>>>>> d38e25e0056adb2c0e641d6016cdd13c62802421
 	 */
 	public PhongMaterial(final Color diffuse, final Color specular, final int exponent) {
 		if (diffuse == null || specular == null) {

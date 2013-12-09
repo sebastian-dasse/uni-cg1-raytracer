@@ -54,7 +54,7 @@ public class Triangle extends Geometry {
 	public Triangle(final Point3 a, final Point3 b, final Point3 c,
 			final Normal3 na, final Normal3 nb, final Normal3 nc, final Material material) {
 		super(material);
-		if (a == null || b == null || c == null || na == null || nb == null || nc == null) {
+		if (a == null || b == null || c == null) {
 			throw new IllegalArgumentException("The parameters must not be null.");
 		}	
 			this.a = a;
