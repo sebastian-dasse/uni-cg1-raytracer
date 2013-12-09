@@ -42,7 +42,7 @@ public class SpotLight extends Light {
 			throw new IllegalArgumentException("The parameter 'halfAngle' must be between 0 (excluding) and PI (including).");
 		} 
 		this.position = position;
-		this.direction = direction;
+		this.direction = direction.normalized();
 		this.halfAngle = halfAngle;
 	}
 
@@ -61,6 +61,7 @@ public class SpotLight extends Light {
 
 	@Override
 	public Vector3 directionFrom(final Point3 point) {
+//		System.err.println(position.sub(point).normalized());
 		if (point == null) {
 			throw new IllegalArgumentException("The parameter 'point' must not be null.");
 		}

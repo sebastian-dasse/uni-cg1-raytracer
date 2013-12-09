@@ -30,6 +30,16 @@ public class PointLight extends Light {
 		this.position = position;
 	}
 	
+	/**
+	 * Checks if the given point is illuminated by the light
+	 * @param point A point to be processed by the light source
+	 */
+	@Override
+	public boolean illuminates(final Point3 point) {
+		// TODO Auto-generated method stub
+		return true;
+		
+	}
 	@Override
 	public Vector3 directionFrom(final Point3 point) {
 		if (point == null) {
