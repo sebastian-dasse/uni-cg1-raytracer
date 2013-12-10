@@ -117,7 +117,6 @@ public class Raytracer {
 	 * @return					The normalized float value between 0 and 1 (including).
 	 */
 	private static float normalizeColorComponent(double colorComponent) {
-//		return (colorComponent > 1) ?  1 : (float) colorComponent;
-		return (float) colorComponent;
+		return (colorComponent > 1) ?  1 : (float) colorComponent;
 	}
 }
