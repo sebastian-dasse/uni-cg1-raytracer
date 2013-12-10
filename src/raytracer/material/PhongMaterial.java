@@ -70,16 +70,6 @@ public class PhongMaterial extends Material {
 				c = c.add(s1).add(s2); 
 			}
 		}
-		// TODO in Raytracer.normalizeColorComponent(...) verschieben
-		final double max1 = Math.max(world.ambientLight.r, world.ambientLight.g);
-		final double max2 = Math.max(max1, world.ambientLight.b);
-		return (c.mul(1 / (lights.length * 2 + max2)));
-		
-		//---- for debugging purposes:
-//		c = (c.mul(1 / (lights.length * 2 + max2)));
-//		if (c.r > 1 || c.g >= 1 || c.b >= 1) {
-//			System.err.println(c);
-//		}
-//		return c;
+		return c;	
 	}
 }
