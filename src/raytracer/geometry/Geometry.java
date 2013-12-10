@@ -43,6 +43,32 @@ public abstract class Geometry {
 	public abstract Hit hit(final Ray ray);
 	
 	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((material == null) ? 0 : material.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(final Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		final Geometry other = (Geometry) obj;
+		if (material == null) {
+			if (other.material != null)
+				return false;
+		} else if (!material.equals(other.material))
+			return false;
+		return true;
+	}
+
+	@Override
 	public String toString() {
 		return getClass().getSimpleName() + "[material = " + material;
 	}

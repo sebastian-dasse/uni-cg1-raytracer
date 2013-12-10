@@ -53,6 +53,48 @@ public class Hit {
 	}
 
 	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((geo == null) ? 0 : geo.hashCode());
+		result = prime * result + ((normal == null) ? 0 : normal.hashCode());
+		result = prime * result + ((ray == null) ? 0 : ray.hashCode());
+		long temp;
+		temp = Double.doubleToLongBits(t);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		return result;
+	}
+
+	@Override
+	public boolean equals(final Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		final Hit other = (Hit) obj;
+		if (geo == null) {
+			if (other.geo != null)
+				return false;
+		} else if (!geo.equals(other.geo))
+			return false;
+		if (normal == null) {
+			if (other.normal != null)
+				return false;
+		} else if (!normal.equals(other.normal))
+			return false;
+		if (ray == null) {
+			if (other.ray != null)
+				return false;
+		} else if (!ray.equals(other.ray))
+			return false;
+		if (Double.doubleToLongBits(t) != Double.doubleToLongBits(other.t))
+			return false;
+		return true;
+	}
+
+	@Override
 	public String toString() {
 		return getClass().getSimpleName() + "[\tt = " + t + ",\n" 
 										  + "\tray = " + ray + ",\n" 

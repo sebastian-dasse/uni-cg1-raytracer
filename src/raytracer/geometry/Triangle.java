@@ -100,6 +100,61 @@ public class Triangle extends Geometry {
 	}
 
 	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((a == null) ? 0 : a.hashCode());
+		result = prime * result + ((b == null) ? 0 : b.hashCode());
+		result = prime * result + ((c == null) ? 0 : c.hashCode());
+		result = prime * result + ((na == null) ? 0 : na.hashCode());
+		result = prime * result + ((nb == null) ? 0 : nb.hashCode());
+		result = prime * result + ((nc == null) ? 0 : nc.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(final Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		final Triangle other = (Triangle) obj;
+		if (a == null) {
+			if (other.a != null)
+				return false;
+		} else if (!a.equals(other.a))
+			return false;
+		if (b == null) {
+			if (other.b != null)
+				return false;
+		} else if (!b.equals(other.b))
+			return false;
+		if (c == null) {
+			if (other.c != null)
+				return false;
+		} else if (!c.equals(other.c))
+			return false;
+		if (na == null) {
+			if (other.na != null)
+				return false;
+		} else if (!na.equals(other.na))
+			return false;
+		if (nb == null) {
+			if (other.nb != null)
+				return false;
+		} else if (!nb.equals(other.nb))
+			return false;
+		if (nc == null) {
+			if (other.nc != null)
+				return false;
+		} else if (!nc.equals(other.nc))
+			return false;
+		return true;
+	}
+
+	@Override
 	public String toString() {
 		return super.toString() + ",\n\ta = " + a + ",\n" 
 								+ "\tb = " + b + ",\n" 
