@@ -33,21 +33,30 @@ public class World {
 	 * The list of all <code>Light</code> objects in this world.
 	 */
 	private LinkedList<Light> lights;
+	/**
+	 * The index of refraction of this world.
+	 */
+	private double indexOfRefraction;
 	
 	/**
-	 * Creates a new <code>World</code> with the specified background color and ambient light color.
+	 * Creates a new <code>World</code> with the specified background color, ambient light color and index of refraction.
 	 * 
 	 * @param backgroundColor	The background color of the world.
 	 * @param ambientLight		The color of the ambient light of the world.
+	 * @param indexOfRefraction	The index of refraction of the world.
 	 */
-	public World(final Color backgroundColor, final Color ambientLight) {
+	public World(final Color backgroundColor, final Color ambientLight, final double indexOfRefraction) {
 		if (backgroundColor == null || ambientLight == null) {
 			throw new IllegalArgumentException("The parameters must not be null.");
+		}
+		if (indexOfRefraction < 1 || 2.42 < indexOfRefraction) {
+			throw new IllegalArgumentException("The parameter 'indexofRefraction' must be between 1 and 2.42 (including).");
 		}
 		this.backgroundColor = backgroundColor;
 		this.ambientLight = ambientLight;
 		elements = new LinkedList<Geometry>();
 		lights = new LinkedList<Light>();
+		this.indexOfRefraction = indexOfRefraction;
 	}
 	
 	/**

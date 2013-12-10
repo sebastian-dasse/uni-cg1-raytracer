@@ -38,8 +38,8 @@ public final class Factory {
 	 * --> Color / Color
 	 * </pre>
 	 */
-	public static final World buildWorld(double[][] p) {
-		return new World(new Color(p[0][0],p[0][1],p[0][2]), new Color(p[1][0],p[1][1],p[1][2]));
+	public static final World buildWorld(double[][] p, double indexOfRefraction) {
+		return new World(new Color(p[0][0],p[0][1],p[0][2]), new Color(p[1][0],p[1][1],p[1][2]), indexOfRefraction);
 	}
 	
 	/**
