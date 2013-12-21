@@ -30,12 +30,12 @@ public final class DemoScene {
 	 */
 	public static void main(final String[] args) {
 		final Raytracer[] tracers = new Raytracer[]{
-			scene1(), 
-			scene2(), 
-			scene3(), 
-			scene4(), 
-			scene5(), 
-			scene6(), 
+//			scene1(), 
+//			scene2(), 
+//			scene3(), 
+//			scene4(), 
+//			scene5(), 
+//			scene6(), 
 			scene7()
 		};
 		for (int i = 0; i < tracers.length; i++) {
@@ -219,9 +219,9 @@ public final class DemoScene {
 		);
 		world.addLight(new PointLight(new Color(0.4, 0.2, 0.2), new Point3(4, 4, 4)));
 		world.addLight(new PointLight(new Color(0.1, 0.1, 0.1), new Point3(-4, 4, 4)));
-		world.addLight(new DirectionalLight(new Color(0.1, 0.1, 0.1), new Vector3(-1, -1, -1)));
-		world.addLight(new SpotLight(new Color(0.6, 0.6, 0.6), new Point3(1, 1, 4), new Vector3(-1, -1, -4), Math.PI / 7.0));
-		world.addLight(new SpotLight(new Color(0.1, 0.1, 0.1), new Point3(1, 1, 1), new Vector3(-1, -1, -1), Math.PI / 7.0));
+//		world.addLight(new DirectionalLight(new Color(0.1, 0.1, 0.1), new Vector3(-1, -1, -1)));
+//		world.addLight(new SpotLight(new Color(0.6, 0.6, 0.6), new Point3(1, 1, 4), new Vector3(-1, -1, -4), Math.PI / 7.0));
+//		world.addLight(new SpotLight(new Color(0.1, 0.1, 0.1), new Point3(1, 1, 1), new Vector3(-1, -1, -1), Math.PI / 7.0));
 		return new Raytracer(world, camera);
 	}
 }
