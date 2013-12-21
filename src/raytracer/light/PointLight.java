@@ -41,12 +41,21 @@ public class PointLight extends Light {
 	public boolean illuminates(final Point3 point, World world) {
 		final Ray ray = new Ray(point, position.sub(point).normalized());
 		final Hit hit = world.hit(ray);
-		if (hit == null) {
+		final double t = position.sub(point).normalized().magnitude;
+		if (hit == null){
+			return true;
+		} else if ( hit.t > 0.0001){
+			return hit.t < t;
+		} else {
 			return true;
 		}
-		final double tk = hit.t;
-		final double tl = position.sub(point).magnitude;
-		return tk < tl;
+//		} else if (hit.t > 0.0001){
+//			final double t = position.sub(point).magnitude;
+//			return hit.t < t;
+//		} else {
+//			return false;
+//		}
+		
 	}
 	
 	@Override

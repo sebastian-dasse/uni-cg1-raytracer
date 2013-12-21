@@ -204,20 +204,20 @@ public final class DemoScene {
 		world.addElements(new Geometry[] {
 				Factory.buildPlane(new double[][] { 
 						{ 0, 0, 0 }, { 0, 1, 0} }, new PhongMaterial(new Color(1, 0, 0), new Color(1, 1, 1), 64)),
-				Factory.buildPlane(new double[][] { 
-						{ -3, 0, 0 }, { -3, -0.5, -1} }, new PhongMaterial(new Color(1, 1, 1), new Color(1, 1, 1), 64)),
+//				Factory.buildPlane(new double[][] { 
+//						{ -3, 0, 0 }, { -3, -0.5, -1} }, new PhongMaterial(new Color(1, 1, 1), new Color(1, 1, 1), 64)),
 						
 				Factory.buildSphere(new double[][] { 
-						{ 1.5, 0, 0 }, { 0.5 } }, new PhongMaterial(new Color(0, 1, 0), new Color(1, 1, 1), 64)),
-				Factory.buildSphere(new double[][] { 
-						{ -1, 1, 0 }, { 0.25 } }, new PhongMaterial(new Color(0, 1, 1), new Color(1, 1, 1), 64)),
-				Factory.buildSphere(new double[][] { 
-						{ -1, 1, -5 }, { 1 } }, new PhongMaterial(new Color(1, 1, 0.2), new Color(1, 1, 1), 64)),
-				Factory.buildAxisAlignedBox(new double[][] { 
-						{ 0, 0, -5 }, { 0.5, 0.5, 5 } }, new PhongMaterial(new Color(0.3, 1, 0.3), new Color(1, 1, 1), 64)),
+						{ 0, 1, 0 }, { 0.5 } }, new PhongMaterial(new Color(0, 1, 0), new Color(1, 1, 1), 64)),
+//				Factory.buildSphere(new double[][] { 
+//						{ -1, 1, 0 }, { 0.25 } }, new PhongMaterial(new Color(0, 1, 1), new Color(1, 1, 1), 64)),
+//				Factory.buildSphere(new double[][] { 
+//						{ -1, 1, -5 }, { 1 } }, new PhongMaterial(new Color(1, 1, 0.2), new Color(1, 1, 1), 64)),
+//				Factory.buildAxisAlignedBox(new double[][] { 
+//						{ 0, 0, -5 }, { 0.5, 0.5, 5 } }, new PhongMaterial(new Color(0.3, 1, 0.3), new Color(1, 1, 1), 64)),
 			}
 		);
-		world.addLight(new PointLight(new Color(0.4, 0.2, 0.2), new Point3(4, 4, 4)));
+		world.addLight(new PointLight(new Color(0.9, 0.9, 0.9), new Point3(4, 4, 4)));
 		world.addLight(new PointLight(new Color(0.1, 0.1, 0.1), new Point3(-4, 4, 4)));
 //		world.addLight(new DirectionalLight(new Color(0.1, 0.1, 0.1), new Vector3(-1, -1, -1)));
 //		world.addLight(new SpotLight(new Color(0.6, 0.6, 0.6), new Point3(1, 1, 4), new Vector3(-1, -1, -4), Math.PI / 7.0));
