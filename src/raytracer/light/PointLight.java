@@ -1,6 +1,7 @@
 package raytracer.light;
 
 import raytracer.Color;
+import raytracer.World;
 import raytracer.math.Point3;
 import raytracer.math.Vector3;
 
@@ -33,7 +34,7 @@ public class PointLight extends Light {
 	 * @param point A point to be processed by the light source
 	 */
 	@Override
-	public boolean illuminates(final Point3 point) {
+	public boolean illuminates(final Point3 point, World w) {
 		return true;
 		
 	}

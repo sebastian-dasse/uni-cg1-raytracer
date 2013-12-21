@@ -1,6 +1,7 @@
 package raytracer.light;
 
 import raytracer.Color;
+import raytracer.World;
 import raytracer.math.Point3;
 import raytracer.math.Vector3;
 
@@ -53,7 +54,7 @@ public class SpotLight extends Light {
 	 * @return		<code>true</code> if the specified point is illuminated, otherwise <code>false</code>.
 	 */
 	@Override
-	public boolean illuminates(final Point3 point) {
+	public boolean illuminates(final Point3 point, World w) {
 		// Formula: cos(l, d) = <l, d>, with |l| = |d| = 1, l:= light direction, r: = vector from light position to point
 		return Math.acos(direction.normalized().dot(directionFrom(point).mul(-1))) <= halfAngle;
 	}
