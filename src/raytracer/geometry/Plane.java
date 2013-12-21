@@ -1,5 +1,6 @@
 package raytracer.geometry;
 
+import raytracer.Constants;
 import raytracer.Ray;
 import raytracer.material.Material;
 import raytracer.math.Normal3;
@@ -52,7 +53,7 @@ public class Plane extends Geometry {
 		}
 		final double t = a.sub(ray.o).dot(n) / denominator;
 		final Normal3 normal = n.asVector().normalized().asNormal(); // normalized normal
-		return (t < 0) ? null : new Hit(t, ray, this, normal);
+		return (t < Constants.EPSILON) ? null : new Hit(t, ray, this, normal);
 	}
 
 	@Override
