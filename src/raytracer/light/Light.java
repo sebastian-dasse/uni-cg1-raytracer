@@ -18,17 +18,19 @@ public abstract class Light {
 	 * The color of this <code>Light</code>.
 	 */
 	public final Color color;
+	public final boolean castShadow;
 	
 	/**
 	 * Constructs a new <code>Light</code> with the specified color.
 	 * 
 	 * @param color	The color of the <code>Light</code>. Must not be <code>null</code>.
 	 */
-	public Light(final Color color) {
+	public Light(final Color color, final boolean castShadow) {
 		if (color == null) {
 			throw new IllegalArgumentException("The parameter 'color' must not be null.");
 		}
 		this.color = color;
+		this.castShadow = castShadow;
 	}
 	
 	/**

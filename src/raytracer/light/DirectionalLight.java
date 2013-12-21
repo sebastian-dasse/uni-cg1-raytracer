@@ -23,8 +23,8 @@ public class DirectionalLight extends Light {
 	 * @param color		The color of the light. Must not be <code>null</code>.
 	 * @param direction	The direction of the light. Must not be <code>null</code>.
 	 */
-	public DirectionalLight(final Color color, final Vector3 direction) {
-		super(color);
+	public DirectionalLight(final Color color, final Vector3 direction, final boolean castShadow) {
+		super(color, castShadow);
 		if (direction == null) {
 			throw new IllegalArgumentException("The parameter 'direction' must not be null.");
 		}
