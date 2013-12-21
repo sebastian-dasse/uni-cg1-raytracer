@@ -40,15 +40,12 @@ public abstract class Light {
 	
 	/**
 	 * Returns <code>true</code> if the specified point is illuminated by this light.
-	 * <p>
-	 * The default implementation always returns <code>true</code>, thus subclasses must override to change this behavior.
 	 * 
 	 * @param point	The point to be checked.
+	 * @param world	The world.
 	 * @return		<code>true</code> if the specified point is illuminated, otherwise <code>false</code>.
 	 */
-	public boolean illuminates(final Point3 point, World w) {
-		return true;
-	}
+	public abstract boolean illuminates(final Point3 point, World world);
 	
 	/**
 	 * Returns the vector which points from the specified point to this light.
