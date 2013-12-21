@@ -3,6 +3,7 @@ package raytracer.light;
 import raytracer.Color;
 import raytracer.Ray;
 import raytracer.World;
+import raytracer.geometry.Hit;
 import raytracer.math.Point3;
 import raytracer.math.Vector3;
 
@@ -37,11 +38,10 @@ public class PointLight extends Light {
 	}
 	
 	@Override
-	public boolean illuminates(final Point3 point, World w) {
+	public boolean illuminates(final Point3 point, World world) {
 		final Ray ray = new Ray(point, position.sub(point).normalized());
-		final double tk = w.hit(ray).t;
-		final double tl = position.sub(point).magnitude;
-		return tk < tl;
+		final Hit hit = world.hit(ray);
+		return hit == null ? true : hit.t < position.sub(point).magnitude;
 	}
 	
 	@Override
