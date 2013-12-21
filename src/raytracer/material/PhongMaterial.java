@@ -60,7 +60,7 @@ public class PhongMaterial extends Material {
 		Color c = diffuse.mul(world.ambientLight);
 		final Light[] lights = world.getLights();
 		for (Light light : lights) {
-			if (light.illuminates(p)) {
+			if (light.illuminates(p, world)) {
 				final Vector3 l = light.directionFrom(p);
 				final Vector3 r = l.reflectedOn(n);
 				final double f1 = Math.max(0, n.dot(l));
