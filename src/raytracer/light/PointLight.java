@@ -37,24 +37,14 @@ public class PointLight extends Light {
 		this(color, position, true);
 	}
 	
-	/**
-	 * Checks if the given point is illuminated by the light
-	 * @param point A point to be processed by the light source
-	 */
 	@Override
 	public boolean illuminates(final Point3 point, World w) {
 		Ray ray = new Ray(point, (position.sub(point)).normalized());
 		Hit hit = w.hit(ray);
 		hit.t
 		return true;
-		
 	}
-	/**
-	 * Returns the vector which points from the specified point to this light.
-	 * 
-	 * @param point	The point to be checked. Must not be <code>null</code>.
-	 * @return		A <code>Vector3</code>. 
-	 */
+	
 	@Override
 	public Vector3 directionFrom(final Point3 point) {
 		if (point == null) {
