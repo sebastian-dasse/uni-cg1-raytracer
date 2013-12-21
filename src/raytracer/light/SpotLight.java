@@ -1,6 +1,7 @@
 package raytracer.light;
 
 import raytracer.Color;
+import raytracer.World;
 import raytracer.math.Point3;
 import raytracer.math.Vector3;
 
@@ -47,6 +48,9 @@ public class SpotLight extends Light {
 		this.halfAngle = halfAngle;
 	}
 
+	public SpotLight(final Color color, final Point3 position, final Vector3 direction, final double halfAngle) {
+		this(color, position, direction, halfAngle, true);
+	}
 	/**
 	 * Returns <code>true</code> if the specified point is illuminated by this light, i.e. if it is in the cone of light.
 	 * 
@@ -54,15 +58,13 @@ public class SpotLight extends Light {
 	 * @return		<code>true</code> if the specified point is illuminated, otherwise <code>false</code>.
 	 */
 	@Override
-	public boolean illuminates(final Point3 point) {
-		
+	public boolean illuminates(final Point3 point, World w) {
 		// Formula: cos(l, d) = <l, d>, with |l| = |d| = 1, l:= light direction, r: = vector from light position to point
 		return Math.acos(direction.normalized().dot(directionFrom(point).mul(-1))) <= halfAngle;
 	}
 
 	@Override
 	public Vector3 directionFrom(final Point3 point) {
-//		System.err.println(position.sub(point).normalized());
 		if (point == null) {
 			throw new IllegalArgumentException("The parameter 'point' must not be null.");
 		}

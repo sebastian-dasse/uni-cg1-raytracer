@@ -1,6 +1,7 @@
 package raytracer.light;
 
 import raytracer.Color;
+import raytracer.World;
 import raytracer.math.Point3;
 import raytracer.math.Vector3;
 
@@ -45,7 +46,7 @@ public abstract class Light {
 	 * @param point	The point to be checked.
 	 * @return		<code>true</code> if the specified point is illuminated, otherwise <code>false</code>.
 	 */
-	public boolean illuminates(final Point3 point) {
+	public boolean illuminates(final Point3 point, World w) {
 		return true;
 	}
 	
