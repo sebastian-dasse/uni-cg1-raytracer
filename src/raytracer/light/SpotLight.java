@@ -28,13 +28,14 @@ public class SpotLight extends Light {
 	/**
 	 * Constructs a new <code>SpotLight</code> object with the specified parameters.
 	 * 
-	 * @param color		The color of the light. Must not be <code>null</code>.
-	 * @param position	The position of the light. Must not be <code>null</code>.
-	 * @param direction	The direction of the light. Must not be <code>null</code>.
-	 * @param halfAngle	The half opening angle of the spot light in radians. Must be a double value between 0 (excluding) and PI (including).
+	 * @param color			The color of the light. Must not be <code>null</code>.
+	 * @param position		The position of the light. Must not be <code>null</code>.
+	 * @param direction		The direction of the light. Must not be <code>null</code>.
+	 * @param halfAngle		The half opening angle of the spot light in radians. Must be a double value between 0 (excluding) and PI (including).
+	 * @param castsShadow	If <code>true</code> the <code>SpotLight</code> casts a shadow.
 	 */
-	public SpotLight(final Color color, final Point3 position, final Vector3 direction, final double halfAngle, boolean castShadow) {
-		super(color, castShadow);
+	public SpotLight(final Color color, final Point3 position, final Vector3 direction, final double halfAngle, boolean castsShadow) {
+		super(color, castsShadow);
 		if (position == null || direction == null) {
 			throw new IllegalArgumentException("The parameters must not be null.");
 		}

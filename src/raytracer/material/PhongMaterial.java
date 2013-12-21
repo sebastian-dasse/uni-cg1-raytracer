@@ -70,7 +70,7 @@ public class PhongMaterial extends Material {
 				c = c.add(s1).add(s2); 
 			}
 		}
-		return c;	
+		return c;
 	}
 
 	@Override

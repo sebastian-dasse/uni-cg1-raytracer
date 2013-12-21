@@ -18,11 +18,12 @@ public class PointLight extends Light {
 	/**
 	 * Constructs a new <code>PointLight</code> object with the specified parameters.
 	 * 
-	 * @param color		The color of the light. Must not be <code>null</code>.
-	 * @param position	The position of the light. Must not be <code>null</code>.
+	 * @param color			The color of the light. Must not be <code>null</code>.
+	 * @param position		The position of the light. Must not be <code>null</code>.
+	 * @param castsShadow	If <code>true</code> the <code>PointLight</code> casts a shadow.
 	 */
-	public PointLight(final Color color, final Point3 position, final boolean castShadow) {
-		super(color, castShadow);
+	public PointLight(final Color color, final Point3 position, final boolean castsShadow) {
+		super(color, castsShadow);
 		if (position == null) {
 			throw new IllegalArgumentException("The parameter 'position' must not be null.");
 		}
