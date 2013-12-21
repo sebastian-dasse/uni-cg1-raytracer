@@ -42,20 +42,10 @@ public class PointLight extends Light {
 		final Ray ray = new Ray(point, position.sub(point).normalized());
 		final Hit hit = world.hit(ray);
 		final double t = position.sub(point).normalized().magnitude;
-		if (hit == null){
+		if (hit == null || hit.t < 0.0001){
 			return true;
-		} else if ( hit.t > 0.0001){
-			return hit.t < t;
-		} else {
-			return true;
-		}
-//		} else if (hit.t > 0.0001){
-//			final double t = position.sub(point).magnitude;
-//			return hit.t < t;
-//		} else {
-//			return false;
-//		}
-		
+		} 
+		return hit.t < t;
 	}
 	
 	@Override
