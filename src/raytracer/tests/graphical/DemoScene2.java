@@ -7,7 +7,6 @@ import raytracer.camera.Camera;
 import raytracer.geometry.Geometry;
 import raytracer.light.PointLight;
 import raytracer.material.PhongMaterial;
-import raytracer.material.SingleColorMaterial;
 import raytracer.math.Point3;
 import raytracer.ui.ShowImage;
 
@@ -35,8 +34,8 @@ public class DemoScene2 {
 //						{ 0.5, 0.5, 0.5 }, { 1.5, 1.5, 1.5 } }, new PhongMaterial(new Color(0.3, 1, 0.3), new Color(1, 1, 1), 64)),
 			}
 		);
-//		world.addLight(new PointLight(new Color(0.6, 0.6, 0.6), new Point3(4, 4, 4)));
-		world.addLight(new PointLight(new Color(0.3, 0.3, 0.3), new Point3(-4, 4, 4)));
+		world.addLight(new PointLight(new Color(0.6, 0.6, 0.6), new Point3(4, 4, 4)));
+//		world.addLight(new PointLight(new Color(0.3, 0.3, 0.3), new Point3(-4, 4, 4)));
 		return new Raytracer(world, camera);
 	}
 }

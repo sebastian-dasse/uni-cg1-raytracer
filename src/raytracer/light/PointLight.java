@@ -41,10 +41,10 @@ public class PointLight extends Light {
 	public boolean illuminates(final Point3 point, World world) {
 		final Ray ray = new Ray(point, position.sub(point).normalized());
 		final Hit hit = world.hit(ray);
-		final double t = position.sub(point).normalized().magnitude;
 		if (hit == null){
 			return true;
 		} 
+		final double t = position.sub(point).normalized().magnitude;
 		return hit.t < t;
 	}
 	
