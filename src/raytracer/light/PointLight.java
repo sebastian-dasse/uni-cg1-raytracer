@@ -3,7 +3,6 @@ package raytracer.light;
 import raytracer.Color;
 import raytracer.Ray;
 import raytracer.World;
-import raytracer.geometry.Hit;
 import raytracer.math.Point3;
 import raytracer.math.Vector3;
 
