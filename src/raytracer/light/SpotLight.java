@@ -47,6 +47,9 @@ public class SpotLight extends Light {
 		this.halfAngle = halfAngle;
 	}
 
+	public SpotLight(final Color color, final Point3 position, final Vector3 direction, final double halfAngle) {
+		this(color, position, direction, halfAngle, true);
+	}
 	/**
 	 * Returns <code>true</code> if the specified point is illuminated by this light, i.e. if it is in the cone of light.
 	 * 

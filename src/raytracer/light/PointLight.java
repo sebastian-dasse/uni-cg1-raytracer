@@ -29,6 +29,11 @@ public class PointLight extends Light {
 		}
 		this.position = position;
 	}
+	
+	public PointLight(final Color color, final Point3 position) {
+		this(color, position, true);
+	}
+	
 	/**
 	 * Checks if the given point is illuminated by the light
 	 * @param point A point to be processed by the light source
