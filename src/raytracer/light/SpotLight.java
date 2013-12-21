@@ -54,14 +54,12 @@ public class SpotLight extends Light {
 	 */
 	@Override
 	public boolean illuminates(final Point3 point) {
-		
 		// Formula: cos(l, d) = <l, d>, with |l| = |d| = 1, l:= light direction, r: = vector from light position to point
 		return Math.acos(direction.normalized().dot(directionFrom(point).mul(-1))) <= halfAngle;
 	}
 
 	@Override
 	public Vector3 directionFrom(final Point3 point) {
-//		System.err.println(position.sub(point).normalized());
 		if (point == null) {
 			throw new IllegalArgumentException("The parameter 'point' must not be null.");
 		}
