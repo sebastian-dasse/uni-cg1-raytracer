@@ -45,7 +45,7 @@ public class PointLight extends Light {
 			return true;
 		} 
 		final double t = position.sub(point).normalized().magnitude;
-		return hit.t < t;
+		return hit.t < 0.001 && hit.t < t;
 	}
 	
 	@Override

@@ -35,6 +35,7 @@ public class DemoScene2 {
 			}
 		);
 		world.addLight(new PointLight(new Color(0.6, 0.6, 0.6), new Point3(4, 4, 4)));
+		world.addLight(new PointLight(new Color(0.6, 0.6, 0.6), new Point3(-5, 5, 5)));
 //		world.addLight(new PointLight(new Color(0.3, 0.3, 0.3), new Point3(-4, 4, 4)));
 		return new Raytracer(world, camera);
 	}
