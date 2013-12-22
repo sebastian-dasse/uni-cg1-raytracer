@@ -1,5 +1,6 @@
 package raytracer.geometry;
 
+import raytracer.Constants;
 import raytracer.Ray;
 import raytracer.material.Material;
 import raytracer.math.Mat3x3;
@@ -91,7 +92,7 @@ public class Triangle extends Geometry {
 		final double gamma = matrix.changeCol2(dvector).determinant / matrix.determinant;
 		final double t     = matrix.changeCol3(dvector).determinant / matrix.determinant;
 		
-		if (gamma < 0 || beta < 0 || beta + gamma > 1 || t < 0) {
+		if (gamma < 0 || beta < 0 || beta + gamma > 1 || t < Constants.EPSILON) {
 			return null; // no hit
 		}
 		final double alpha = 1 - beta - gamma;

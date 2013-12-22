@@ -1,6 +1,7 @@
 package raytracer.light;
 
 import raytracer.Color;
+import raytracer.Constants;
 import raytracer.Ray;
 import raytracer.World;
 import raytracer.geometry.Hit;
@@ -45,7 +46,7 @@ public class PointLight extends Light {
 			return true;
 		} 
 		final double t = position.sub(point).normalized().magnitude;
-		return hit.t < 0.001 && hit.t < t;
+		return hit.t < Constants.EPSILON && hit.t < t;
 	}
 	
 	@Override

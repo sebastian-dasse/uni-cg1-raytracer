@@ -1,6 +1,7 @@
 package raytracer.geometry;
 
 import static raytracer.math.MathUtil.isValid;
+import raytracer.Constants;
 import raytracer.Ray;
 import raytracer.material.Material;
 import raytracer.math.Normal3;
@@ -75,12 +76,12 @@ public class Sphere extends Geometry {
 		final double numerator;
 		final double n1 = -b + Math.sqrt(discriminant);
 		final double n2 = -b - Math.sqrt(discriminant);
-		if (n1 < 0 && n2 < 0){
+		if (n1 < Constants.EPSILON && n2 < Constants.EPSILON){
 			return null; // no hit
 		} // t1 >= 0 || t2 >= 0
-		if (n1 < 0) {
+		if (n1 < Constants.EPSILON) {
 			numerator = n2;
-		} else if (n2 < 0) { // t1 >= 0
+		} else if (n2 < Constants.EPSILON) { // t1 >= 0
 			numerator = n1;
 		} else { // t1 >= 0 && t2 >= 0
 			numerator = Math.min(n1, n2);
