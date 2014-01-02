@@ -1,7 +1,9 @@
 package raytracer.light;
 
 import raytracer.Color;
+import raytracer.Ray;
 import raytracer.World;
+import raytracer.geometry.Hit;
 import raytracer.math.Point3;
 import raytracer.math.Vector3;
 
@@ -33,14 +35,16 @@ public class DirectionalLight extends Light {
 		this.direction = direction; 
 	}
 	
-	public boolean illuminates(final Point3 point, World w) {
-		return true;
-		
-	}
-	
 	public DirectionalLight(final Color color, final Vector3 direction) {
 		this(color, direction, true);
 	}
+	
+	public boolean illuminates(final Point3 point, World world) {
+		final Ray ray = new Ray(point, direction.mul(-1.0).normalized());
+		final Hit hit = world.hit(ray);
+		return hit == null;
+	}
+	
 	@Override
 	public Vector3 directionFrom(final Point3 point) {
 		return direction.mul(-1).normalized();
