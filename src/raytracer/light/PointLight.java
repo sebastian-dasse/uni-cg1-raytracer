@@ -45,8 +45,9 @@ public class PointLight extends Light {
 		if (hit == null){
 			return true;
 		} 
-		final double t = position.sub(point).normalized().magnitude;
-		return hit.t < Constants.EPSILON && hit.t < t;
+//		final double t = position.sub(point).normalized().magnitude;
+//		return hit.t < Constants.EPSILON && hit.t < t;
+		return false;
 	}
 	
 	@Override

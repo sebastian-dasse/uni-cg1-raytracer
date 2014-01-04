@@ -1,7 +1,10 @@
 package raytracer.light;
 
 import raytracer.Color;
+import raytracer.Constants;
+import raytracer.Ray;
 import raytracer.World;
+import raytracer.geometry.Hit;
 import raytracer.math.Point3;
 import raytracer.math.Vector3;
 
@@ -58,7 +61,18 @@ public class SpotLight extends Light {
 	@Override
 	public boolean illuminates(final Point3 point, World world) {
 		// Formula: cos(l, d) = <l, d>, with |l| = |d| = 1, l:= light direction, r: = vector from light position to point
-		return Math.acos(direction.normalized().dot(directionFrom(point).mul(-1))) <= halfAngle;
+		if(Math.acos(direction.normalized().dot(directionFrom(point).mul(-1))) <= halfAngle){
+			final Ray ray = new Ray(point, position.sub(point).normalized());
+			final Hit hit = world.hit(ray);
+			if (hit == null){
+				return true;
+			} 
+//				else {
+//			final double t = position.sub(point).normalized().magnitude;
+//			return hit.t < Constants.EPSILON && hit.t < t;
+//			}
+		}	
+		return false;
 	}
 
 	@Override

@@ -6,6 +6,7 @@ import raytracer.World;
 import raytracer.camera.Camera;
 import raytracer.geometry.Geometry;
 import raytracer.light.DirectionalLight;
+import raytracer.light.PointLight;
 import raytracer.light.SpotLight;
 import raytracer.material.PhongMaterial;
 import raytracer.math.Point3;
@@ -45,8 +46,8 @@ public class DemoScene2 {
 		);
 //		world.addLight(new PointLight(new Color(0.6, 0.6, 0.6), new Point3(4, 4, 4)));
 //		world.addLight(new PointLight(new Color(0.6, 0.6, 0.6), new Point3(-5, 5, 5)));
-//		world.addLight(new PointLight(new Color(0.3, 0.3, 0.3), new Point3(-4, 4, 4)));
-		world.addLight(new DirectionalLight(new Color(0.6, 0.6, 0.6), new Vector3(-10, -10, -40)));
+		world.addLight(new PointLight(new Color(0.6, 0.6, 0.6), new Point3(4, 4, 4)));
+//		world.addLight(new DirectionalLight(new Color(0.6, 0.6, 0.6), new Vector3(-10, -10, -40)));
 //		world.addLight(new SpotLight(new Color(1, 1, 1), new Point3(4, 4, 4), new Vector3(-1, -1, -1), Math.PI / 14.0));
 		return new Raytracer(world, camera);
 	}
