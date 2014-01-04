@@ -1,7 +1,6 @@
 package raytracer.light;
 
 import raytracer.Color;
-import raytracer.Constants;
 import raytracer.Ray;
 import raytracer.World;
 import raytracer.geometry.Hit;

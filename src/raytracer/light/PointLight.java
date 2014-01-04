@@ -1,7 +1,6 @@
 package raytracer.light;
 
 import raytracer.Color;
-import raytracer.Constants;
 import raytracer.Ray;
 import raytracer.World;
 import raytracer.geometry.Hit;
@@ -43,8 +42,9 @@ public class PointLight extends Light {
 		if (!castsShadow) {
 			return true;
 		}
-		final Ray ray = new Ray(point, position.sub(point).normalized());
-		return world.hit(ray) == null;
+		final Ray ray = new Ray(point, directionFrom(point));
+		final Hit hit = world.hit(ray);
+		return hit == null || hit.t >= ray.tOf(position);
 	}
 	
 	@Override

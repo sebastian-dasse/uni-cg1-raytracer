@@ -3,7 +3,6 @@ package raytracer.light;
 import raytracer.Color;
 import raytracer.Ray;
 import raytracer.World;
-import raytracer.geometry.Hit;
 import raytracer.math.Point3;
 import raytracer.math.Vector3;
 
@@ -43,7 +42,7 @@ public class DirectionalLight extends Light {
 		if (!castsShadow) {
 			return true;
 		}
-		final Ray ray = new Ray(point, direction.mul(-1.0).normalized());
+		final Ray ray = new Ray(point, directionFrom(point));
 		return world.hit(ray) == null;
 	}
 	
