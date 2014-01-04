@@ -46,10 +46,12 @@ public class LambertMaterial extends Material {
 		final Point3 p = hit.ray.at(hit.t);
 		final Light[] lights = world.getLights();
 		for (Light light : lights) {
+			if (light.illuminates(p, world)){
 			final Vector3 l = light.directionFrom(p);
 			final double f = Math.max(0, n.dot(l));
 			final Color temp = color.mul(light.color.mul(f));
 			c = c.add(temp);
+			}
 		}
 		return c;
 	}
