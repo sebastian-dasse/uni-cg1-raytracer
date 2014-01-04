@@ -11,12 +11,8 @@ public class TransparentMaterial extends Material{
 		this.indexOfRefraction = indexOfRefraction;
 	}
 	
-	public void TransparentMaterial(final double indexOfRefraction){
-		
-	}
-	
 	@Override
-	public Color colorFor(Hit hit, World world) {
+	public Color colorFor(final Hit hit, final World world/*, final Tracer tracer*/) {
 		// TODO Auto-generated method stub
 		return null;
 	}
