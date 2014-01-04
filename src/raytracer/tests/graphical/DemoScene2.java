@@ -17,8 +17,9 @@ public class DemoScene2 {
 	
 	public static void main(String[] args) {
 		final Raytracer[] tracers = new Raytracer[]{
-				scene1(), 
-//				scene7()
+//				scene1()
+//				, 
+				scene7()
 		};
 		for (int i = 0; i < tracers.length; i++) {
 			ShowImage.from(tracers[i], 50 * i, 25 * i);
@@ -48,8 +49,8 @@ public class DemoScene2 {
 //		world.addLight(new PointLight(new Color(0.6, 0.6, 0.6), new Point3(4, 4, 4)));
 //		world.addLight(new PointLight(new Color(0.6, 0.6, 0.6), new Point3(-5, 5, 5)));
 //		world.addLight(new PointLight(new Color(0.6, 0.6, 0.6), new Point3(4, 4, 4)));
-		world.addLight(new DirectionalLight(new Color(0.6, 0.6, 0.6), new Vector3(-10, -10, -40)));
-//		world.addLight(new SpotLight(new Color(1, 1, 1), new Point3(4, 4, 4), new Vector3(-1, -1, -1), Math.PI / 14.0));
+//		world.addLight(new DirectionalLight(new Color(0.6, 0.6, 0.6), new Vector3(-10, -10, -40)));
+		world.addLight(new SpotLight(new Color(1, 1, 1), new Point3(4, 4, 4), new Vector3(-1, -1, -1), Math.PI / 14.0));
 		return new Raytracer(world, camera);
 	}
 	
@@ -77,6 +78,7 @@ public class DemoScene2 {
 //		world.addLight(new PointLight(new Color(0.3, 0.3, 0.3), new Point3(-4, 4, 4)));
 //		world.addLight(new DirectionalLight(new Color(0.1, 0.1, 0.1), new Vector3(-1, -1, -1)));
 		world.addLight(new SpotLight(new Color(0.6, 0.6, 0.6), new Point3(1, 1, 4), new Vector3(-1, -1, -4), Math.PI / 7.0, true));
+		world.addLight(new SpotLight(new Color(0.6, 0.6, 0.6), new Point3(1, 1, -4), new Vector3(-1, -1, 4), Math.PI / 7.0, true));
 //		world.addLight(new SpotLight(new Color(0.1, 0.1, 0.1), new Point3(1, 1, 1), new Vector3(-1, -1, -1), Math.PI / 7.0));
 		return new Raytracer(world, camera);
 	}
