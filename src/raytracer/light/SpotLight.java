@@ -61,18 +61,11 @@ public class SpotLight extends Light {
 	@Override
 	public boolean illuminates(final Point3 point, World world) {
 		// Formula: cos(l, d) = <l, d>, with |l| = |d| = 1, l:= light direction, r: = vector from light position to point
-		if(Math.acos(direction.normalized().dot(directionFrom(point).mul(-1))) <= halfAngle){
-			final Ray ray = new Ray(point, position.sub(point).normalized());
-			final Hit hit = world.hit(ray);
-			if (hit == null){
-				return true;
-			} 
-//				else {
-//			final double t = position.sub(point).normalized().magnitude;
-//			return hit.t < Constants.EPSILON && hit.t < t;
-//			}
+		if(Math.acos(direction.normalized().dot(directionFrom(point).mul(-1))) > halfAngle){
+			return false;
 		}	
-		return false;
+		final Ray ray = new Ray(point, position.sub(point).normalized());
+		return world.hit(ray) == null;
 	}
 
 	@Override
