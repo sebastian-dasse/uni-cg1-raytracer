@@ -40,6 +40,9 @@ public class PointLight extends Light {
 	
 	@Override
 	public boolean illuminates(final Point3 point, World world) {
+		if (!castsShadow) {
+			return true;
+		}
 		final Ray ray = new Ray(point, position.sub(point).normalized());
 		return world.hit(ray) == null;
 	}
