@@ -40,9 +40,11 @@ public class DirectionalLight extends Light {
 	}
 	
 	public boolean illuminates(final Point3 point, World world) {
+		if (!castsShadow) {
+			return true;
+		}
 		final Ray ray = new Ray(point, direction.mul(-1.0).normalized());
-		final Hit hit = world.hit(ray);
-		return hit == null;
+		return world.hit(ray) == null;
 	}
 	
 	@Override
