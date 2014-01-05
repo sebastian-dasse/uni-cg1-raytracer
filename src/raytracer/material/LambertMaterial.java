@@ -1,6 +1,7 @@
 package raytracer.material;
 
 import raytracer.Color;
+import raytracer.Tracer;
 import raytracer.World;
 import raytracer.geometry.Hit;
 import raytracer.light.Light;
@@ -35,7 +36,7 @@ public class LambertMaterial extends Material {
 	}
 	
 	@Override
-	public Color colorFor(final Hit hit, final World world) {
+	public Color colorFor(final Hit hit, final World world, final Tracer tracer) {
 		if (hit == null || world == null) {
 			throw new IllegalArgumentException("The parameters must not be null.");
 		}

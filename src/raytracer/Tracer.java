@@ -18,7 +18,7 @@ public class Tracer {
 		if (hit == null) {
 			return world.backgroundColor;
 		}
-		return hit.geo.material.colorFor(hit, world/*, new Tracer(recursions-1)*/);
+		return hit.geo.material.colorFor(hit, world, new Tracer(recursions-1));
 	}
 
 }
