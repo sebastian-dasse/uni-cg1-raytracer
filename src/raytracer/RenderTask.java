@@ -31,7 +31,11 @@ public class RenderTask implements Runnable {
 		final Ray ray = cam.rayFor(size.width, size.height, x, size.height - y);
 		final WritableRaster raster = image.getRaster();
 		final ColorModel colorModel = image.getColorModel();
-		raster.setDataElements(x,y,Util.dataElementsFromColor(new Tracer(1).trace(ray, world), colorModel));
+		for (int x = 0; x < image.getWidth()-1; x++) {
+			for (int y = 0; y < image.getHeight()-1; y++) {
+				raster.setDataElements(x,y,Util.dataElementsFromColor(new Tracer(1).trace(ray, world), colorModel));
+	
+			}
+		}
 	}
-
 }
