@@ -1,7 +1,7 @@
 package raytracer.tests.graphical;
 
 import raytracer.Color;
-import raytracer.Raytracer;
+import raytracer.Renderer;
 import raytracer.World;
 import raytracer.camera.Camera;
 import raytracer.geometry.Geometry;
@@ -16,7 +16,7 @@ import raytracer.ui.ShowImage;
 public class DemoScene2 {
 	
 	public static void main(String[] args) {
-		final Raytracer[] tracers = new Raytracer[]{
+		final Renderer[] tracers = new Renderer[]{
 //				scene1()
 //				, 
 				scene7()
@@ -26,7 +26,7 @@ public class DemoScene2 {
 		}
 	}
 	
-	private static Raytracer scene1() {
+	private static Renderer scene1() {
 		final World world = Factory.buildWorld(new double[][] { { 0, 0, 0 }, {0.1, 0.1, 0.1} }, 1);
 		final Camera camera = Factory.buildPerspectiveCamera(new double[][] {
 				{ 4, 4, 4 }, { -1, -1, -1 }, { 0, 1, 0 }, { Math.PI / 4.0 } });
@@ -51,10 +51,10 @@ public class DemoScene2 {
 //		world.addLight(new PointLight(new Color(0.6, 0.6, 0.6), new Point3(4, 4, 4)));
 //		world.addLight(new DirectionalLight(new Color(0.6, 0.6, 0.6), new Vector3(-10, -10, -40)));
 		world.addLight(new SpotLight(new Color(1, 1, 1), new Point3(4, 4, 4), new Vector3(-1, -1, -1), Math.PI / 14.0));
-		return new Raytracer(world, camera);
+		return new Renderer(world, camera);
 	}
 	
-	private static Raytracer scene7() {
+	private static Renderer scene7() {
 		final World world = Factory.buildWorld(new double[][] { { 0, 0, 0 }, {0.1, 0.1, 0.1} }, 1);
 		final Camera camera = Factory.buildPerspectiveCamera(new double[][] {
 				{ 1, 1, 4 }, { -1, -1, -4 }, { 0, 1, 0 }, { Math.PI / 4.0 } });
@@ -88,6 +88,6 @@ public class DemoScene2 {
 //		world.addLight(new DirectionalLight(new Color(0.6, 0.6, 0.6), new Vector3(-1, -1, 4), true));
 		
 //		world.addLight(new SpotLight(new Color(0.1, 0.1, 0.1), new Point3(1, 1, 1), new Vector3(-1, -1, -1), Math.PI / 7.0));
-		return new Raytracer(world, camera);
+		return new Renderer(world, camera);
 	}
 }

@@ -2,7 +2,7 @@ package raytracer.ui;
 
 import javax.swing.JFrame;
 
-import raytracer.Raytracer;
+import raytracer.Renderer;
 import raytracer.image.TracerCanvas;
 
 /**
@@ -22,8 +22,8 @@ public final class ShowImage {
 	 * @param x Horizontal coordinate of the window location
 	 * @param y Vertical coordinate of the window location
 	 */
-	public static void from(final Raytracer raytracer, final int x, final int y) {
-		final TracerCanvas mainCanvas = new TracerCanvas(raytracer.trace());
+	public static void from(final Renderer raytracer, final int x, final int y) {
+		final TracerCanvas mainCanvas = new TracerCanvas(raytracer.render());
 		final JFrame frame = new JFrame();
 		frame.getContentPane().add(mainCanvas);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -39,7 +39,7 @@ public final class ShowImage {
 	 * 
 	 * @param raytracer Raytracer to be displayed; must implement trace() function 
 	 */
-	public static void from(final Raytracer raytracer) {
+	public static void from(final Renderer raytracer) {
 		from(raytracer, 0, 0);
 	}
 }

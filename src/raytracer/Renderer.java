@@ -6,7 +6,6 @@ import java.awt.image.ColorModel;
 import java.awt.image.WritableRaster;
 
 import raytracer.camera.Camera;
-import raytracer.geometry.Hit;
 
 /**
  * This class represents a ray tracer. It has a world, containing all the objects in a specific scene, a camera and a 
@@ -15,7 +14,7 @@ import raytracer.geometry.Hit;
  * @author Simon Lischka
  *
  */
-public class Raytracer {
+public class Renderer {
 	
 	/**
 	 * The default screen width of 800 px.
@@ -46,7 +45,7 @@ public class Raytracer {
 	 * @param cam	The camera of this <code>Raytracer</code>.
 	 * @param size	The screen size of this <code>Raytracer</code>.
 	 */
-	public Raytracer(final World world, final Camera cam, Dimension size) {
+	public Renderer(final World world, final Camera cam, Dimension size) {
 		if (world == null || cam == null || size == null) {
 			throw new IllegalArgumentException("The parameters must not be null.");
 		}
@@ -61,7 +60,7 @@ public class Raytracer {
 	 * @param world	The world of this <code>Raytracer</code>.
 	 * @param cam	The camera of this <code>Raytracer</code>.
 	 */
-	public Raytracer(final World world, final Camera cam) {
+	public Renderer(final World world, final Camera cam) {
 		this(world, cam, new Dimension(WIDTH, HEIGHT));
 	}
 	
@@ -70,24 +69,26 @@ public class Raytracer {
 	 * 
 	 * @return	A <code>BufferedImage</code> of a scene.
 	 */
-	public BufferedImage trace() {
+	public BufferedImage render() {
 		final BufferedImage image = new BufferedImage(size.width, size.height, BufferedImage.TYPE_INT_RGB);
 		final WritableRaster raster = image.getRaster();
 		final ColorModel colorModel = image.getColorModel();
-		final Object backgroundColor = dataElementsFromColor(world.backgroundColor, colorModel);
+//		final Object backgroundColor = dataElementsFromColor(world.backgroundColor, colorModel);
 
 		for (int x = 0; x < image.getWidth()-1; x++) {
 			for (int y = 0; y < image.getHeight()-1; y++) {
 				final Ray ray = cam.rayFor(size.width, size.height, x, size.height - y);
 				
 				//<---- ab hier Tracer -- TODO in eigene Klasse auslagern und in Materials weiterverwenden
-				final Hit hit = world.hit(ray);
-				if (hit == null) {
-					raster.setDataElements(x, y, backgroundColor);
-				} else {
-					raster.setDataElements(x, y, dataElementsFromColor(hit.geo.material.colorFor(hit, world), colorModel));
-				}
+//				final Hit hit = world.hit(ray);
+//				if (hit == null) {
+//					raster.setDataElements(x, y, backgroundColor);
+//				} else {
+//					raster.setDataElements(x, y, dataElementsFromColor(hit.geo.material.colorFor(hit, world), colorModel));
+//				}
 				//<---- bis hier
+				
+				raster.setDataElements(x, y, dataElementsFromColor(new Tracer(1).trace(ray, world), colorModel));
 			}
 		}	
 		return image;
