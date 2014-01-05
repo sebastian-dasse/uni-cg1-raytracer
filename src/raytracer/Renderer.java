@@ -71,15 +71,26 @@ public class Renderer {
 	 */
 	public BufferedImage render() {
 		final BufferedImage image = new BufferedImage(size.width, size.height, BufferedImage.TYPE_INT_RGB);
-		for (int x = 0; x < image.getWidth()-1; x++) {
-			for (int y = 0; y < image.getHeight()-1; y++) {
-				//(final int x, final int y, final int blockSize, Ray ray, 
-				//final World world, final Camera cam,  final BufferedImage image) {
-				RenderTask r = new RenderTask(x, y, 0, size, world, cam, image);
+		final int nThreads = Runtime.getRuntime().availableProcessors();
+		final int hBlock = image.getHeight() / nThreads * 2;
+		final int wBlock = image.getWidth() / nThreads * 2;
+		System.out.println("HB" + hBlock + "VB" + wBlock);
+		
+		final int virtualHeight = hBlock / 2 * nThreads;
+		final int virtualWidth = wBlock / 2 * nThreads;
+		
+		int i = 0;
+		for (int y = 0; y < virtualHeight; y+= hBlock ) {
+			for (int x = 0; x < virtualWidth; x+= wBlock) {
+//			    System.out.println(x + " " +y);
+				RenderTask r = new RenderTask(x, y, nThreads, size, world, cam, image);
 				Thread t = new Thread(r);
 				t.run();
+				i++;
 			}
-		}	
+		}
+		
+//		System.out.println(i);
 		return image;
 	}
 	
