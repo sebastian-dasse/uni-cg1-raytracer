@@ -1,9 +1,9 @@
 package raytracer;
 
 import java.awt.Dimension;
+import java.util.List;
 import java.awt.image.BufferedImage;
-import java.awt.image.ColorModel;
-import java.awt.image.WritableRaster;
+import java.util.ArrayList;
 
 import raytracer.camera.Camera;
 
@@ -74,23 +74,28 @@ public class Renderer {
 		final int nThreads = Runtime.getRuntime().availableProcessors();
 		final int hBlock = image.getHeight() / nThreads * 2;
 		final int wBlock = image.getWidth() / nThreads * 2;
-		System.out.println("HB" + hBlock + "VB" + wBlock);
-		
 		final int virtualHeight = hBlock / 2 * nThreads;
 		final int virtualWidth = wBlock / 2 * nThreads;
-		
+		List<Thread> threads = new ArrayList<Thread>();
+		long t1 = System.currentTimeMillis();
 		int i = 0;
 		for (int y = 0; y < virtualHeight; y+= hBlock ) {
 			for (int x = 0; x < virtualWidth; x+= wBlock) {
-//			    System.out.println(x + " " +y);
-				RenderTask r = new RenderTask(x, y, nThreads, size, world, cam, image);
-				Thread t = new Thread(r);
-				t.run();
+				
+				threads.add(new Thread(new RenderTask(x, y, nThreads, size, world, cam, image)));
+//				RenderTask r = new RenderTask(x, y, nThreads, size, world, cam, image);
+//				Thread t = new Thread(r);
+//				t.start();
 				i++;
 			}
 		}
-		
-//		System.out.println(i);
+		for (Thread thread : threads) {
+			thread.start();
+		}
+		for (Thread thread: threads) {
+			while (thread.isAlive());
+		}
+		System.out.println(System.currentTimeMillis() - t1);
 		return image;
 	}
 	
