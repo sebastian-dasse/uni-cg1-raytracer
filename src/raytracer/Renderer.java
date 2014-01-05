@@ -73,21 +73,9 @@ public class Renderer {
 		final BufferedImage image = new BufferedImage(size.width, size.height, BufferedImage.TYPE_INT_RGB);
 		final WritableRaster raster = image.getRaster();
 		final ColorModel colorModel = image.getColorModel();
-//		final Object backgroundColor = dataElementsFromColor(world.backgroundColor, colorModel);
-
 		for (int x = 0; x < image.getWidth()-1; x++) {
 			for (int y = 0; y < image.getHeight()-1; y++) {
 				final Ray ray = cam.rayFor(size.width, size.height, x, size.height - y);
-				
-				//<---- ab hier Tracer -- TODO in eigene Klasse auslagern und in Materials weiterverwenden
-//				final Hit hit = world.hit(ray);
-//				if (hit == null) {
-//					raster.setDataElements(x, y, backgroundColor);
-//				} else {
-//					raster.setDataElements(x, y, dataElementsFromColor(hit.geo.material.colorFor(hit, world), colorModel));
-//				}
-				//<---- bis hier
-				
 				raster.setDataElements(x, y, dataElementsFromColor(new Tracer(1).trace(ray, world), colorModel));
 			}
 		}	
