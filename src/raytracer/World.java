@@ -139,11 +139,12 @@ public class World {
 		}
 		Hit minHit = null;
 		for (final Geometry element : elements) {
-			if (element.hit(ray) == null) {
+			final Hit hit = element.hit(ray);
+			if (hit == null) {
 				continue;
 			}
-			if (minHit == null || element.hit(ray).t < minHit.t) {
-				minHit = element.hit(ray);
+			if (minHit == null || hit.t < minHit.t) {
+				minHit = hit;
 			}
 		}
 		return minHit;
