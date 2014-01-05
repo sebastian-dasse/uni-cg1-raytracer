@@ -88,7 +88,7 @@ public class Renderer {
 //				}
 				//<---- bis hier
 				
-				raster.setDataElements(x, y, dataElementsFromColor(new Tracer(1).trace(ray, world), colorModel));
+				raster.setDataElements(x, y, dataElementsFromColor(new Tracer(10).trace(ray, world), colorModel));
 			}
 		}	
 		return image;

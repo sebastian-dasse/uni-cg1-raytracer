@@ -14,9 +14,10 @@ import raytracer.geometry.Hit;
 public abstract class Material {
 	
 	/**
-	 * @param hit   The <code>Hit</code> object. Must not be <code>null</code>.
-	 * @param world The world. Must not be <code>null</code>.
-	 * @return      The color for a <code>Hit</code> object.
+	 * @param hit   	The <code>Hit</code> object. Must not be <code>null</code>.
+	 * @param world 	The world. Must not be <code>null</code>.
+	 * @param tracer	The <code>Tracer</code>.
+	 * @return      	The color for a <code>Hit</code> object.
 	 */
 	abstract public Color colorFor(final Hit hit, final World world, final Tracer tracer);
 }
