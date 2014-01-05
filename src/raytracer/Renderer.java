@@ -1,9 +1,12 @@
 package raytracer;
 
 import java.awt.Dimension;
-import java.util.List;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 import raytracer.camera.Camera;
 
@@ -76,24 +79,19 @@ public class Renderer {
 		final int wBlock = image.getWidth() / nThreads * 2;
 		final int virtualHeight = hBlock / 2 * nThreads;
 		final int virtualWidth = wBlock / 2 * nThreads;
-		List<Thread> threads = new ArrayList<Thread>();
 		long t1 = System.currentTimeMillis();
-		int i = 0;
+		ExecutorService executor = Executors.newFixedThreadPool(nThreads);
 		for (int y = 0; y < virtualHeight; y+= hBlock ) {
 			for (int x = 0; x < virtualWidth; x+= wBlock) {
-				
-				threads.add(new Thread(new RenderTask(x, y, nThreads, size, world, cam, image)));
-//				RenderTask r = new RenderTask(x, y, nThreads, size, world, cam, image);
-//				Thread t = new Thread(r);
-//				t.start();
-				i++;
+				Runnable worker = new Thread(new RenderTask(x, y, nThreads, size, world, cam, image));
+				executor.execute(worker);
 			}
 		}
-		for (Thread thread : threads) {
-			thread.start();
-		}
-		for (Thread thread: threads) {
-			while (thread.isAlive());
+		executor.shutdown();
+		try {
+			executor.awaitTermination(60, TimeUnit.SECONDS);
+		} catch (InterruptedException e) {
+			System.err.println("Rendering took too long");
 		}
 		System.out.println(System.currentTimeMillis() - t1);
 		return image;
