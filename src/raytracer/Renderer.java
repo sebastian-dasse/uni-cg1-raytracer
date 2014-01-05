@@ -43,11 +43,11 @@ public class Renderer {
 	private final int recursion;
 	
 	/**
-	 * Constructs a new <code>Raytracer</code> with the specified parameters.
+	 * Constructs a new <code>Renderer</code> with the specified parameters.
 	 * 
-	 * @param world		The world of the <code>Raytracer</code>.
-	 * @param cam		The camera of the <code>Raytracer</code>.
-	 * @param size		The screen size of the <code>Raytracer</code>.
+	 * @param world		The world of the <code>Renderer</code>.
+	 * @param cam		The camera of the <code>Renderer</code>.
+	 * @param size		The screen size of the <code>Renderer</code>.
 	 * @param recursion	The depth of recursion of the <code>Renderer</code>.
 	 */
 	public Renderer(final World world, final Camera cam, final Dimension size, final int recursion) {
@@ -61,7 +61,7 @@ public class Renderer {
 	}
 	
 	/**
-	 * Constructs a new <code>Raytracer</code> with the specified parameters and a default screen size of 800 x 600.
+	 * Constructs a new <code>Renderer</code> with the specified parameters and a default screen size of 800 x 600.
 	 * 
 	 * @param world		The world of the <code>Renderer</code>.
 	 * @param cam		The camera of the <code>Renderer</code>.
@@ -69,6 +69,17 @@ public class Renderer {
 	 */
 	public Renderer(final World world, final Camera cam, final int recursion) {
 		this(world, cam, new Dimension(WIDTH, HEIGHT), recursion);
+	}
+	
+	/**
+	 * Constructs a new <code>Renderer</code> with the specified parameters and a default screen size of 800 x 600 as 
+	 * well as a default depth of recursion of 1.
+	 * 
+	 * @param world		The world of the <code>Renderer</code>.
+	 * @param cam		The camera of the <code>Renderer</code>.
+	 */
+	public Renderer(final World world, final Camera cam) {
+		this(world, cam, new Dimension(WIDTH, HEIGHT), 1);
 	}
 	
 	/**
