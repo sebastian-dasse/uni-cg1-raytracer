@@ -1,7 +1,6 @@
 package raytracer;
 
 import java.awt.Dimension;
-import raytracer.Util;
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorModel;
 import java.awt.image.WritableRaster;
@@ -72,13 +71,16 @@ public class Renderer {
 	 */
 	public BufferedImage render() {
 		final BufferedImage image = new BufferedImage(size.width, size.height, BufferedImage.TYPE_INT_RGB);
-		final WritableRaster raster = image.getRaster();
-		final ColorModel colorModel = image.getColorModel();
+		
+		
+//		RenderTask(x, y, blockSize, ray, world, colorModel);
+		
 		
 		for (int x = 0; x < image.getWidth()-1; x++) {
 			for (int y = 0; y < image.getHeight()-1; y++) {
-				final Ray ray = cam.rayFor(size.width, size.height, x, size.height - y);
-				raster.setDataElements(x, y, Util.dataElementsFromColor(new Tracer(1).trace(ray, world), colorModel));
+				//(final int x, final int y, final int blockSize, Ray ray, 
+				//final World world, final Camera cam,  final BufferedImage image) {
+				(new RenderTask(x, y, 0, size, world, cam, image)).run();
 			}
 		}	
 		return image;
