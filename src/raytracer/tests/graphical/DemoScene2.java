@@ -114,7 +114,7 @@ public class DemoScene2 {
 				Factory.buildSphere(new double[][] { 
 						{ -1, 1, -5 }, { 1 } }, new ReflectiveMaterial(new Color(1, 1, 0.2), specularColor, 64, reflectionColor)),
 //				Factory.buildAxisAlignedBox(new double[][] { 
-//						{ 0, 0, -5 }, { 0.5, 0.5, 5 } }, new ReflectiveMaterial(new Color(0.3, 1, 0.3), specularColor, 64, reflectionColor)),
+//						{ 0, 0, -5 }, { 0.5, 0.75, 5 } }, new ReflectiveMaterial(new Color(0.3, 1, 0.3), specularColor, 64, reflectionColor)),
 				Factory.buildAxisAlignedBox(new double[][] { 
 						{ 0, 0, -5 }, { 0.5, 0.75, 5 } }, new TransparentMaterial(Constants.INDEX_OF_REFRACTION_GLASS)),
 			}

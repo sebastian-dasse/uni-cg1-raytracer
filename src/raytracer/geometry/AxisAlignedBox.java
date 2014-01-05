@@ -76,25 +76,25 @@ public class AxisAlignedBox extends Geometry {
 		
 		// 1. which surfaces are visible?
 		// Formula: <o - a, n_i>  > 0
-		final Vector3 toLbf = ray.o.sub(lbf);
-		final Vector3 toRun = ray.o.sub(run);
+		final Vector3 fromLbf = ray.o.sub(lbf);
+		final Vector3 fromRun = ray.o.sub(run);
 		final LinkedList<Plane> planes = new LinkedList<Plane>();
-		if (toRun.dot(TOP) > 0) {
+		if (fromRun.dot(TOP) > 0) {
 			planes.add(new Plane(run, TOP, material));
 		}
-		if (toRun.dot(FRONT) > 0) {
+		if (fromRun.dot(FRONT) > 0) {
 			planes.add(new Plane(run, FRONT, material));
 		}
-		if (toRun.dot(RIGHT) > 0) {
+		if (fromRun.dot(RIGHT) > 0) {
 			planes.add(new Plane(run, RIGHT, material));
 		}
-		if (toLbf.dot(LEFT) > 0) {
+		if (fromLbf.dot(LEFT) > 0) {
 			planes.add(new Plane(lbf, LEFT, material));
 		}
-		if (toLbf.dot(BACK) > 0) {
+		if (fromLbf.dot(BACK) > 0) {
 			planes.add(new Plane(lbf, BACK, material));
 		}
-		if (toLbf.dot(BOTTOM) > 0) {
+		if (fromLbf.dot(BOTTOM) > 0) {
 			planes.add(new Plane(lbf, BOTTOM, material));
 		}
 		
