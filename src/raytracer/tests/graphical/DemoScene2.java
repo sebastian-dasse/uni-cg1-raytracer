@@ -1,6 +1,7 @@
 package raytracer.tests.graphical;
 
 import raytracer.Color;
+import raytracer.Constants;
 import raytracer.Renderer;
 import raytracer.World;
 import raytracer.camera.Camera;
@@ -9,6 +10,7 @@ import raytracer.light.PointLight;
 import raytracer.light.SpotLight;
 import raytracer.material.PhongMaterial;
 import raytracer.material.ReflectiveMaterial;
+import raytracer.material.TransparentMaterial;
 import raytracer.math.Point3;
 import raytracer.math.Vector3;
 import raytracer.ui.ShowImage;
@@ -113,6 +115,8 @@ public class DemoScene2 {
 						{ -1, 1, -5 }, { 1 } }, new ReflectiveMaterial(new Color(1, 1, 0.2), specularColor, 64, reflectionColor)),
 //				Factory.buildAxisAlignedBox(new double[][] { 
 //						{ 0, 0, -5 }, { 0.5, 0.5, 5 } }, new ReflectiveMaterial(new Color(0.3, 1, 0.3), specularColor, 64, reflectionColor)),
+				Factory.buildAxisAlignedBox(new double[][] { 
+						{ 0, 0, -5 }, { 0.5, 0.75, 5 } }, new TransparentMaterial(Constants.INDEX_OF_REFRACTION_GLASS)),
 			}
 		);
 //		world.addLight(new PointLight(new Color(0.3, 0.3, 0.3), new Point3(4, 4, 4)));

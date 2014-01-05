@@ -36,7 +36,7 @@ public class World {
 	/**
 	 * The index of refraction of this world.
 	 */
-	private double indexOfRefraction;
+	public final double indexOfRefraction;
 	
 	/**
 	 * Creates a new <code>World</code> with the specified background color, ambient light color and index of refraction.
