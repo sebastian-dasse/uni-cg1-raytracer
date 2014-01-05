@@ -8,8 +8,8 @@ import java.awt.image.WritableRaster;
 import raytracer.camera.Camera;
 
 /**
- * This class represents a ray tracer. It has a world, containing all the objects in a specific scene, a camera and a 
- * screen size. The method <code>trace()</code> returns a <code>BufferedImage</code> of the ray tracer.
+ * This class represents a renderer. It has a world, containing all the objects in a specific scene, a camera, a screen 
+ * size and a field for the depth of recursion . The method <code>render()</code> returns a <code>BufferedImage</code>.
  * 
  * @author Simon Lischka
  *
@@ -26,42 +26,49 @@ public class Renderer {
 	public static final int HEIGHT = 600;
 	
 	/**
-	 * The world of this raytracer.
+	 * The world of this renderer.
 	 */
 	private final World world;
 	/**
-	 * The camera of this raytracer.
+	 * The camera of this renderer.
 	 */
 	private final Camera cam;
 	/**
-	 * The screen size of this raytracer.
+	 * The screen size of this renderer.
 	 */
 	private final Dimension size;
+	/**
+	 * The depth of recursion for recursive raytracing.
+	 */
+	private final int recursion;
 	
 	/**
 	 * Constructs a new <code>Raytracer</code> with the specified parameters.
 	 * 
-	 * @param world	The world of this <code>Raytracer</code>.
-	 * @param cam	The camera of this <code>Raytracer</code>.
-	 * @param size	The screen size of this <code>Raytracer</code>.
+	 * @param world		The world of the <code>Raytracer</code>.
+	 * @param cam		The camera of the <code>Raytracer</code>.
+	 * @param size		The screen size of the <code>Raytracer</code>.
+	 * @param recursion	The depth of recursion of the <code>Renderer</code>.
 	 */
-	public Renderer(final World world, final Camera cam, Dimension size) {
+	public Renderer(final World world, final Camera cam, final Dimension size, final int recursion) {
 		if (world == null || cam == null || size == null) {
 			throw new IllegalArgumentException("The parameters must not be null.");
 		}
 		this.world = world;
 		this.cam = cam;
 		this.size = size;
+		this.recursion = recursion;
 	}
 	
 	/**
 	 * Constructs a new <code>Raytracer</code> with the specified parameters and a default screen size of 800 x 600.
 	 * 
-	 * @param world	The world of this <code>Raytracer</code>.
-	 * @param cam	The camera of this <code>Raytracer</code>.
+	 * @param world		The world of the <code>Renderer</code>.
+	 * @param cam		The camera of the <code>Renderer</code>.
+	 * @param recursion	The depth of recursion of the <code>Renderer</code>.
 	 */
-	public Renderer(final World world, final Camera cam) {
-		this(world, cam, new Dimension(WIDTH, HEIGHT));
+	public Renderer(final World world, final Camera cam, final int recursion) {
+		this(world, cam, new Dimension(WIDTH, HEIGHT), recursion);
 	}
 	
 	/**
@@ -73,24 +80,11 @@ public class Renderer {
 		final BufferedImage image = new BufferedImage(size.width, size.height, BufferedImage.TYPE_INT_RGB);
 		final WritableRaster raster = image.getRaster();
 		final ColorModel colorModel = image.getColorModel();
+		
 		for (int x = 0; x < image.getWidth()-1; x++) {
 			for (int y = 0; y < image.getHeight()-1; y++) {
 				final Ray ray = cam.rayFor(size.width, size.height, x, size.height - y);
-<<<<<<< HEAD
-				
-				//<---- ab hier Tracer -- TODO in eigene Klasse auslagern und in Materials weiterverwenden
-//				final Hit hit = world.hit(ray);
-//				if (hit == null) {
-//					raster.setDataElements(x, y, backgroundColor);
-//				} else {
-//					raster.setDataElements(x, y, dataElementsFromColor(hit.geo.material.colorFor(hit, world), colorModel));
-//				}
-				//<---- bis hier
-				
-				raster.setDataElements(x, y, dataElementsFromColor(new Tracer(10).trace(ray, world), colorModel));
-=======
-				raster.setDataElements(x, y, dataElementsFromColor(new Tracer(1).trace(ray, world), colorModel));
->>>>>>> 821ea77cd339087bd0f8a4b351b8303d2b041f71
+				raster.setDataElements(x, y, dataElementsFromColor(new Tracer(recursion).trace(ray, world), colorModel));
 			}
 		}	
 		return image;
