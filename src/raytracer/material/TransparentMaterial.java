@@ -28,14 +28,22 @@ public class TransparentMaterial extends Material{
 		 * 		rd = (eta1 / eta2) * d - (cos phi2 - (eta1 / eta2) * cos phi1) * n
 		 * 		c = R * fr[pr, rd] + T * fr[pr, rt], R: = reflection, T := transmission
 		 */
-		final Normal3 n = hit.normal;
+		Normal3 n = hit.normal;
 		final Ray ray = hit.ray;
 		final Vector3 d = ray.d;
 		final Point3 p = ray.at(hit.t);
-		final double eta1 = world.indexOfRefraction;
-		final double eta2 = indexOfRefraction;
+		double eta1 = world.indexOfRefraction;
+		double eta2 = indexOfRefraction;
+		double cosPhi1 = d.mul(-1).dot(n);
+//		if (d.mul(-1).dot(n) <= 0) {
+		if (cosPhi1 <= 0) { // <d, n> <= 
+			cosPhi1 = -cosPhi1;
+			n = n.mul(-1);
+			final double temp = eta1;
+			eta1 = eta2;
+			eta2 = temp;
+		}
 		final double quotient = eta1 / eta2;
-		final double cosPhi1 = d.mul(-1).dot(n);
 		final double cosPhi2 = Math.sqrt(1 - quotient * quotient * (1 - cosPhi1 * cosPhi1));
 		final Vector3 rd = d.add(n.mul(2 * cosPhi1));
 		final Vector3 rt = d.mul(quotient).sub(n.mul(cosPhi2 - quotient * cosPhi1));
@@ -43,6 +51,10 @@ public class TransparentMaterial extends Material{
 		final double r = r0 + (1 - r0) * Math.pow(1 - cosPhi1, 5);
 		final double t = 1 - r;
 		
+		if (t < 0) { // TODO is this total internal reflection?
+			System.err.println(t);
+			return world.backgroundColor;
+		}
 		final Color cr = tracer.trace(new Ray(p, rd), world).mul(r);
 		final Color ct = tracer.trace(new Ray(p, rt), world).mul(t);
 		return cr.add(ct);
