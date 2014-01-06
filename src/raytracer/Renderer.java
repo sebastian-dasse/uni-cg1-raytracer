@@ -80,7 +80,7 @@ public class Renderer {
 		final int virtualHeight = hBlock / 2 * nThreads;
 		final int virtualWidth = wBlock / 2 * nThreads;
 		long t1 = System.currentTimeMillis();
-		ExecutorService executor = Executors.newFixedThreadPool(nThreads);
+		ExecutorService executor = Executors.newCachedThreadPool();
 		for (int y = 0; y < virtualHeight; y+= hBlock ) {
 			for (int x = 0; x < virtualWidth; x+= wBlock) {
 				Runnable worker = new Thread(new RenderTask(x, y, nThreads, size, world, cam, image));
