@@ -93,17 +93,14 @@ public class Renderer {
 	public BufferedImage render() {
 		final BufferedImage image = new BufferedImage(size.width, size.height, BufferedImage.TYPE_INT_RGB);
 		final int nThreads = Runtime.getRuntime().availableProcessors();
-		final int hBlock = image.getHeight() / nThreads * 2;
-		final int wBlock = image.getWidth() / nThreads * 2;
-		final int virtualHeight = hBlock / 2 * nThreads;
-		final int virtualWidth = wBlock / 2 * nThreads;
 		long t1 = System.currentTimeMillis();
-		ExecutorService executor = Executors.newCachedThreadPool();
-		for (int y = 0; y < virtualHeight; y+= hBlock ) {
-			for (int x = 0; x < virtualWidth; x+= wBlock) {
-				Runnable worker = new Thread(new RenderTask(x, y, nThreads, size, world, cam, image, recursion));
+//		ExecutorService executor = Executors.newCachedThreadPool();
+		ExecutorService executor = Executors.newFixedThreadPool(nThreads);
+		int i = 0;
+		for (int y = 0; y < size.height; y++ ) {
+				i++;
+				Runnable worker = new Thread(new RenderTask(y, size, world, cam, image, recursion));
 				executor.execute(worker);
-			}
 		}
 		executor.shutdown();
 		try {
