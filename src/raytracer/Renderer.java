@@ -2,8 +2,11 @@ package raytracer;
 
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
-import java.awt.image.ColorModel;
-import java.awt.image.WritableRaster;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 import raytracer.camera.Camera;
 
@@ -89,15 +92,26 @@ public class Renderer {
 	 */
 	public BufferedImage render() {
 		final BufferedImage image = new BufferedImage(size.width, size.height, BufferedImage.TYPE_INT_RGB);
-		final WritableRaster raster = image.getRaster();
-		final ColorModel colorModel = image.getColorModel();
-		
-		for (int x = 0; x < image.getWidth()-1; x++) {
-			for (int y = 0; y < image.getHeight()-1; y++) {
-				final Ray ray = cam.rayFor(size.width, size.height, x, size.height - y);
-				raster.setDataElements(x, y, dataElementsFromColor(new Tracer(recursion).trace(ray, world), colorModel));
+		final int nThreads = Runtime.getRuntime().availableProcessors();
+		final int hBlock = image.getHeight() / nThreads * 2;
+		final int wBlock = image.getWidth() / nThreads * 2;
+		final int virtualHeight = hBlock / 2 * nThreads;
+		final int virtualWidth = wBlock / 2 * nThreads;
+		long t1 = System.currentTimeMillis();
+		ExecutorService executor = Executors.newCachedThreadPool();
+		for (int y = 0; y < virtualHeight; y+= hBlock ) {
+			for (int x = 0; x < virtualWidth; x+= wBlock) {
+				Runnable worker = new Thread(new RenderTask(x, y, nThreads, size, world, cam, image, recursion));
+				executor.execute(worker);
 			}
-		}	
+		}
+		executor.shutdown();
+		try {
+			executor.awaitTermination(60, TimeUnit.SECONDS);
+		} catch (InterruptedException e) {
+			System.err.println("Rendering took too long");
+		}
+		System.out.println(System.currentTimeMillis() - t1);
 		return image;
 	}
 	
@@ -105,29 +119,4 @@ public class Renderer {
 		return size;
 	}
 	
-	/**
-	 * Returns a data element array representation of a pixel in the specified <code>ColorModel</code> from the specified 
-	 * <code>raytracer.Color</code>.
-	 * 
-	 * @param color			The specified <code>raytracer.Color</code>.
-	 * @param colorModel	The specified <code>ColorModel</code>.
-	 * @return				An Object which is a primitive data array representation of a pixel.
-	 */
-	private static Object dataElementsFromColor(final Color color, final ColorModel colorModel) {
-		return colorModel.getDataElements(new float[] {
-					normalizeColorComponent(color.r),
-					normalizeColorComponent(color.g),
-					normalizeColorComponent(color.b)
-				}, 0, null);
-	}
-	
-	/**
-	 * Converts a color component from a specified double value to a normalized float value between 0 and 1 (including).
-	 * 
-	 * @param colorComponent	The double value to be normalized.
-	 * @return					The normalized float value between 0 and 1 (including).
-	 */
-	private static float normalizeColorComponent(double colorComponent) {
-		return (colorComponent > 1) ?  1 : (float) colorComponent;
-	}
 }
