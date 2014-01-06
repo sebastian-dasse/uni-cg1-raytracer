@@ -96,10 +96,9 @@ public class Renderer {
 		long t1 = System.currentTimeMillis();
 //		ExecutorService executor = Executors.newCachedThreadPool();
 		ExecutorService executor = Executors.newFixedThreadPool(nThreads);
-		int i = 0;
-		for (int y = 0; y < size.height; y++ ) {
-				i++;
-				Runnable worker = new Thread(new RenderTask(y, size, world, cam, image, recursion));
+		final int interval = nThreads;
+		for (int y = 0; y < size.height; y+=interval) {
+				Runnable worker = new Thread(new RenderTask(y, interval, size, world, cam, image, recursion));
 				executor.execute(worker);
 		}
 		executor.shutdown();
