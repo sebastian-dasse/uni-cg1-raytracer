@@ -50,6 +50,7 @@ public class TransparentMaterial extends Material{
 		final double r0 = Math.pow((eta1 - eta2) / (eta1 + eta2), 2);
 		final double r = r0 + (1 - r0) * Math.pow(1 - cosPhi1, 5);
 		final double t = 1 - r;
+//		System.out.println(" \n r: " + r + "\n t: " + t);
 		
 		if (t < 0) { // TODO is this total internal reflection?
 			System.err.println(t);

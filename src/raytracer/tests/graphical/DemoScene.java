@@ -1,6 +1,7 @@
 package raytracer.tests.graphical;
 
 import raytracer.Color;
+import raytracer.Constants;
 import raytracer.Renderer;
 import raytracer.World;
 import raytracer.camera.Camera;
@@ -10,7 +11,9 @@ import raytracer.light.PointLight;
 import raytracer.light.SpotLight;
 import raytracer.material.LambertMaterial;
 import raytracer.material.PhongMaterial;
+import raytracer.material.ReflectiveMaterial;
 import raytracer.material.SingleColorMaterial;
+import raytracer.material.TransparentMaterial;
 import raytracer.math.Point3;
 import raytracer.math.Vector3;
 import raytracer.ui.ShowImage;
@@ -37,7 +40,8 @@ public final class DemoScene {
 //			scene5(), 
 //			scene6(), 
 //			scene7(),
-			scene8()
+//			scene8(),
+			scene9()
 		};
 		for (int i = 0; i < tracers.length; i++) {
 			ShowImage.from(tracers[i], 50 * i, 25 * i);
@@ -225,6 +229,7 @@ public final class DemoScene {
 		world.addLight(new SpotLight(new Color(0.1, 0.1, 0.1), new Point3(1, 1, 1), new Vector3(-1, -1, -1), Math.PI / 7.0));
 		return new Renderer(world, camera);
 	}
+	
 	private static Renderer scene8() {
 		final World world = Factory.buildWorld(new double[][] { { 0, 0, 0 }, {0.1, 0.1, 0.1} }, 1);
 		final Camera camera = Factory.buildPerspectiveCamera(new double[][] {
@@ -238,5 +243,47 @@ public final class DemoScene {
 		);
 		world.addLight(new PointLight(new Color(1, 1, 1), new Point3(8, 8, 0)));
 		return new Renderer(world, camera);
+	}
+	
+	private static Renderer scene9() {
+		final World world = Factory.buildWorld(new double[][] { { 0, 0, 0 }, {0.1, 0.1, 0.1} }, 1);
+		final Camera camera = Factory.buildPerspectiveCamera(new double[][] {
+				{ 8, 8, 8 }, { -1, -1, -1 }, { 0, 1, 0 }, { Math.PI / 4.0 } });
+		world.addElements(new Geometry[] {
+				Factory.buildPlane(new double[][] { 
+						{ 0, 0, 0 }, { 0, 1, 0} }, new ReflectiveMaterial(new Color(1, 1, 1), new Color(1, 1, 1), 10, new Color(1, 1, 1))),
+				
+				Factory.buildSphere(new double[][] { 
+						{ 0, 1, 0 }, { 0.5 } }, new ReflectiveMaterial(new Color(1, 0, 0), new Color(1, 1, 1), 10, new Color(1, 0.5, 0.5))),
+				Factory.buildSphere(new double[][] { 
+						{ -1.5, 1, 0 }, { 0.5 } }, new ReflectiveMaterial(new Color(0, 1, 0), new Color(1, 1, 1), 10, new Color(1, 0.5, 0.5))),
+				Factory.buildSphere(new double[][] { 
+						{ 1.5, 1, 0 }, { 0.5 } }, new ReflectiveMaterial(new Color(0, 0, 1), new Color(1, 1, 1), 10, new Color(1, 0.5, 0.5))),
+				Factory.buildSphere(new double[][] { 
+						{ 0, 0.5, -1.5 }, { 0.5 } }, new ReflectiveMaterial(new Color(0, 1, 1), new Color(1, 1, 1), 10, new Color(1, 0.5, 0.5))),
+				Factory.buildSphere(new double[][] { 
+						{ -1.5, 1, -1.5 }, { 0.5 } }, new ReflectiveMaterial(new Color(1, 0, 1), new Color(1, 1, 1), 10, new Color(1, 0.5, 0.5))),
+				Factory.buildSphere(new double[][] { 
+						{ 1.5, 1, -1.5 }, { 0.5 } }, new ReflectiveMaterial(new Color(1, 1, 0), new Color(1, 1, 1), 10, new Color(1, 0.5, 0.5))),
+				
+				Factory.buildSphere(new double[][] { 
+						{ 0, 2, 1.5 }, { 0.5 } }, new TransparentMaterial(Constants.INDEX_OF_REFRACTION_WATER)),
+				Factory.buildSphere(new double[][] { 
+						{ -1.5, 2, 1.5 }, { 0.5 } }, new TransparentMaterial(Constants.INDEX_OF_REFRACTION_WATER)),
+				Factory.buildSphere(new double[][] { 
+						{ 1.5, 2, 1.5 }, { 0.5 } }, new TransparentMaterial(Constants.INDEX_OF_REFRACTION_WATER)),
+																												
+				Factory.buildAxisAlignedBox(new double[][] { 
+						{ -0.5, 0, 3 }, { 0.5, 1, 4 } }, new TransparentMaterial(Constants.INDEX_OF_REFRACTION_GLASS)), 
+				
+				Factory.buildTriangle(new double[][] { 
+						{ 0.7, 0.5, 3 }, { 1.3, 0.5, 3 }, { 0.7, 0.5, 4 }, 
+						{ 0, 1, 0 }, { 0, 1, 0 }, { 0, 1, 0 } }, new PhongMaterial(new Color(0, 1, 0), new Color(0, 1, 0), 20))
+			}
+		);
+		world.addLight(new SpotLight(new Color(0.3, 0.3, 0.3), new Point3(0, 5, -10), new Vector3(0, -1, 0), Math.PI / 8.0, true));
+		world.addLight(new PointLight(new Color(0.3, 0.3, 0.3), new Point3(5, 5, -10), true));
+		world.addLight(new DirectionalLight(new Color(0.3, 0.3, 0.3), new Vector3(1, -1, 0)));
+		return new Renderer(world, camera, 3);
 	}
 }

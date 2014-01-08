@@ -19,12 +19,14 @@ import raytracer.ui.ShowImage;
 public class DemoScene2 {
 	
 	public static void main(String[] args) {
+		
 		final Renderer[] tracers = new Renderer[]{
 //				scene1()
 //				, 
 //				scene7()
 //				,
-				scene7b()
+				scene4(),
+//				scene7b()
 //				,
 //				scene7c()
 		};
@@ -184,5 +186,29 @@ public class DemoScene2 {
 		
 //		world.addLight(new SpotLight(new Color(0.1, 0.1, 0.1), new Point3(1, 1, 1), new Vector3(-1, -1, -1), Math.PI / 7.0));
 		return new Renderer(world, camera, 10);
+	}
+	private static Renderer scene4() {
+		final World world = Factory.buildWorld(new double[][] { { 0, 0, 0 }, {0.0, 0.0, 0.0} }, 1);
+		final Color specularColor = new Color(1, 1, 1);
+		final Color reflectionColor = new Color(0.4, 0.4, 0.4);
+		final Camera camera = Factory.buildPerspectiveCamera(new double[][] {
+				{ 3, 3, 4 }, { -1, -1, -1 }, { 0, 1, 0 }, { Math.PI / 4.0 } });
+		world.addElements(new Geometry[] {
+				Factory.buildPlane(new double[][] { 
+						{ 0, 0, 0 }, { 0, 1, 0} }, new LambertMaterial(new Color(0.8, 0.8, 0.8))),
+//				Factory.buildPlane(new double[][] { 
+//						{ 0, 0, 0 }, { 0, 1, 0} }, new PhongMaterial(new Color(1, 0, 0), new Color(1, 1, 1), 64)),
+				Factory.buildSphere(new double[][] { 
+						{ 1.2, 1.5, 2 }, { 0.5 } }, new TransparentMaterial(Constants.INDEX_OF_REFRACTION_GLASS)),
+				Factory.buildAxisAlignedBox(new double[][] { 
+						{ -1.5, 0.5, 0.5 }, { -0.5, 1.5, 1.5 } }, new TransparentMaterial(Constants.INDEX_OF_REFRACTION_GLASS)), 
+				Factory.buildTriangle(new double[][] { 
+						{ -3, 0, 1 }, { -2, 0, 1 }, { -2, 1, 1 }, 
+						{ 0, 0, 1 }, { 0, 0, 1 }, { 0, 0, 1 } }, new ReflectiveMaterial(new Color(1, 1, 0), specularColor, 64, reflectionColor))
+			}
+		);
+		world.addLight(new PointLight(new Color(0.6, 0.6, 0.6), new Point3(-1, 4, 4), true));
+		world.addLight(new PointLight(new Color(0.6, 0.6, 0.6), new Point3(4, 4, 5), true));
+		return new Renderer(world, camera, 2);
 	}
 }
