@@ -260,7 +260,7 @@ public final class DemoScene {
 				Factory.buildSphere(new double[][] { 
 						{ 1.5, 1, 0 }, { 0.5 } }, new ReflectiveMaterial(new Color(0, 0, 1), new Color(1, 1, 1), 10, new Color(1, 0.5, 0.5))),
 				Factory.buildSphere(new double[][] { 
-						{ 0, 0.5, -1.5 }, { 0.5 } }, new ReflectiveMaterial(new Color(0, 1, 1), new Color(1, 1, 1), 10, new Color(1, 0.5, 0.5))),
+						{ 0, 1, -1.5 }, { 0.5 } }, new ReflectiveMaterial(new Color(0, 1, 1), new Color(1, 1, 1), 10, new Color(1, 0.5, 0.5))),
 				Factory.buildSphere(new double[][] { 
 						{ -1.5, 1, -1.5 }, { 0.5 } }, new ReflectiveMaterial(new Color(1, 0, 1), new Color(1, 1, 1), 10, new Color(1, 0.5, 0.5))),
 				Factory.buildSphere(new double[][] { 
@@ -274,7 +274,7 @@ public final class DemoScene {
 						{ 1.5, 2, 1.5 }, { 0.5 } }, new TransparentMaterial(Constants.INDEX_OF_REFRACTION_WATER)),
 																												
 				Factory.buildAxisAlignedBox(new double[][] { 
-						{ -0.5, 0, 3 }, { 0.5, 1, 4 } }, new TransparentMaterial(Constants.INDEX_OF_REFRACTION_GLASS)), 
+						{ -0.5, 0, 3 }, { 0.5, 1, 4 } }, new TransparentMaterial(Constants.INDEX_OF_REFRACTION_WATER)), 
 				
 				Factory.buildTriangle(new double[][] { 
 						{ 0.7, 0.5, 3 }, { 1.3, 0.5, 3 }, { 0.7, 0.5, 4 }, 
@@ -284,6 +284,6 @@ public final class DemoScene {
 		world.addLight(new SpotLight(new Color(0.3, 0.3, 0.3), new Point3(0, 5, -10), new Vector3(0, -1, 0), Math.PI / 8.0, true));
 		world.addLight(new PointLight(new Color(0.3, 0.3, 0.3), new Point3(5, 5, -10), true));
 		world.addLight(new DirectionalLight(new Color(0.3, 0.3, 0.3), new Vector3(1, -1, 0)));
-		return new Renderer(world, camera, 3);
+		return new Renderer(world, camera, 4);
 	}
 }
