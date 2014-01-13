@@ -1,0 +1,90 @@
+\documentclass[11pt]{amsart}
+\usepackage{ngerman}
+\usepackage{geometry}                % See geometry.pdf to learn the layout options. There are lots.
+\geometry{a4paper}             
+
+%\usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{epstopdf}
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+\title{CGI: Bericht zu Aufgabe 4, Raytracer}
+\author{von Sebastian Dass\'{e}, Max Novichkov, Simon Lischka }
+\date{13.01.2014}
+
+\begin{document}
+
+\maketitle
+
+\section{Aufgabenstellung}
+Die Implementierung der Beleuchtung sollte um Schatten, Reflexion und Refraktion erweitert werden. Dazu gab es folgende 
+Teilaufgaben: 
+
+\subsection{}
+Der Welt sollte ein Attribut f\"ur den Brechungsindex hinzugef\"ugt werden.
+
+\subsection{}
+Die Klassen f\"ur das Licht sollten ein zus\"atzliches Attribut \texttt{castsShadow} erhalten, das an den Konstruktor 
+als Parameter \"ubergeben wird und das bestimmt, ob das entsprechende Licht einen Schatten wirft. Au\ss{}erdem sollte 
+in der Methode \texttt{illuminates} die \texttt{World} als Parameter \"ubergeben werden.
+
+\subsection{}
+Es war eine Klasse \texttt{Tracer} zu implementieren, die eine Methode zum Raytracen liefert. Die Klassen f\"ur das 
+Material waren so zu ver\"andern, dass in der Methode \texttt{colorFor} der \texttt{Tracer} als Parameter mit 
+\"ubergeben wird.
+
+\subsection{}
+Zwei neue Materialien sollten implementiert werden: \texttt{ReflectiveMaterial}, das Material f\"ur einen perfekt 
+diffus reflektiernden K\"orper mit Glanzpunkt und Reflexion, und \texttt{TransparentMaterial}, das Material f\"ur einen 
+perfekt transparenten K\"orper.
+
+\subsection{}
+Nach all diesen Modifikationen waren drei vorgegebene Szenen zu rendern.
+
+
+
+\section{L\"osungsstrategien}
+\subsection{}
+Zun\"achst wurden alle rein "`formalen"' \"Anderungen der Methodenheader usw. umgesetzt und die neuen Klassen nach 
+bew\"ahrtem Schema als leere Vorlagen generiert.
+
+\subsection{}
+Die aus der Vorlesung bekannten Formeln wurden nach M\"oglichkeit an passender Stelle direkt in Code umgesetzt und das 
+Ergebnis an kleinen Testszenen ausprobiert.
+
+
+
+\section{Besondere Probleme}
+\subsection{}
+Beim Schatten traten, wie zu erwarten war, anfangs Artefakte auf. Die Schwierigkeit dabei war nun, "`an der richtigen 
+Stelle"' den Vergleich von t mit 0 durch einen Vergleich von t mit einem kleinen positiven $\varepsilon$ zu ersetzen.
+
+\subsection{}
+Die Umsetzung der Refraktion erwies sich als erhebliche Schwierigkeit. Besondere Probleme bereitete die Frage, wie bei 
+der \texttt{AxisAlignedBox} f\"ur den Fall, dass man sich "`innen"' befindet, die "`richtige"', d.h. die vom Strahl 
+getroffene Seite herausgesucht werden sollte.
+
+
+
+\section{Implementierung}
+\subsection{Schatten}
+Bei allen nicht abstrakten Klassen f\"ur das Licht wird in der Methode \texttt{illuminates} gepr\"uft, ob 
+\texttt{castsShadow == false}. In diesem Fall wird direkt \texttt{true} zur\"ueckgegeben. Andernfalls wird nun 
+gepr\"uft, ob sich ein Objekt zwischen dem untersuchten Punkt und der Lichtquelle befindet, bzw. beim 
+\texttt{DirectionalLight}: ob sich \"uberhaupt ein Objekt auf dem Strahl vom Punkt in Richtung Licht befindet.
+
+In allen Klassen f\"ur das Material wurde nochmals gepr\"uft, dass ein Licht nur zur Beleuchtung des jeweiligen Punkts 
+beitr\"agt, wenn die entsprechende Methode \texttt{illuminates true} zur\"uckgibt.
+
+
+\subsection{Reflexion und Refraktion}
+Reflexion und Refraktion wurden nach den Formeln, die in der Aufgabe vorgegeben wurden, implementiert.
+
+
+
+\section{Zeitbedarf}
+\subsection{}
+Der Zeitbedarf wurde bei allen Teammitgliedern mit jeweils 20 Stunden angegeben.
+
+
+\end{document} 
