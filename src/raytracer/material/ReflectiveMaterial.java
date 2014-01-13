@@ -49,4 +49,53 @@ public class ReflectiveMaterial extends Material{
 		return c.add(s3);
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((diffuse == null) ? 0 : diffuse.hashCode());
+		result = prime * result + exponent;
+		result = prime * result
+				+ ((reflection == null) ? 0 : reflection.hashCode());
+		result = prime * result
+				+ ((specular == null) ? 0 : specular.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(final Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		final ReflectiveMaterial other = (ReflectiveMaterial) obj;
+		if (diffuse == null) {
+			if (other.diffuse != null)
+				return false;
+		} else if (!diffuse.equals(other.diffuse))
+			return false;
+		if (exponent != other.exponent)
+			return false;
+		if (reflection == null) {
+			if (other.reflection != null)
+				return false;
+		} else if (!reflection.equals(other.reflection))
+			return false;
+		if (specular == null) {
+			if (other.specular != null)
+				return false;
+		} else if (!specular.equals(other.specular))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return getClass().getSimpleName() + "[diffuse = " + diffuse + ",\n" 
+						+ "\tspecular = " + specular + ",\n" 
+						+ "\texponent = " + exponent + ",\n" 
+						+ "\treflection = " + reflection + "]";
+	}
 }

@@ -106,7 +106,7 @@ public class AxisAlignedBox extends Geometry {
 			if (h == null) {
 				continue;
 			}
-			if (hitMax == null || hitMax.t < h.t) {
+			if (hitMax == null || hitMax.t < h.t) { // TODO ??? replace with: ... || Constants.EPSILON < h.t - hitMax.t
 				hitMax = h;
 			}
 		}
