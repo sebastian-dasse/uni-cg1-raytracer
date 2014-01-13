@@ -39,9 +39,9 @@ public final class DemoScene {
 //			scene4(), 
 //			scene5(), 
 //			scene6(), 
-			scene7(),
+//			scene7(),
 //			scene8(),
-//			scene9()
+			scene9()
 		};
 		for (int i = 0; i < tracers.length; i++) {
 			ShowImage.from(tracers[i], 50 * i, 25 * i);

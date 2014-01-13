@@ -10,12 +10,35 @@ import raytracer.math.Normal3;
 import raytracer.math.Point3;
 import raytracer.math.Vector3;
 
-public class ReflectiveMaterial extends Material{	
+/**
+ * This immutable class implements the color of a material with a perfect reflecting surface.
+ * @author Maxim Novichkov;
+ * @author Sebastian Dass&eacute;
+ */
+public class ReflectiveMaterial extends Material{
+	/**
+	 * The surface color of this material.
+	 */
 	private final Color diffuse;
+	/**
+	 * The color of the specular point of this material.
+	 */
 	private final Color specular;
+	/**
+	 * The scale of the specular point of this material.
+	 */
 	private final int exponent;
+	/**
+	 * The reflection color of this material.
+	 */
 	private final Color reflection;
 	
+	/**
+	 * @param diffuse    The surface color. Must not be <code>null</code>.
+	 * @param specular   The color of the specular point. Must not be <code>null</code>.
+	 * @param exponent   The scale of the specular point. Must be a positive value below 1024.
+	 * @param reflection The reflection color of the surface. Must not be <code>null</code>.
+	 */
 	public ReflectiveMaterial(final Color diffuse, final Color specular, final int exponent, final Color reflection){
 		this.diffuse = diffuse;
 		this.specular = specular;
