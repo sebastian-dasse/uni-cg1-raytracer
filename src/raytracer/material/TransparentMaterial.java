@@ -9,9 +9,18 @@ import raytracer.math.Normal3;
 import raytracer.math.Point3;
 import raytracer.math.Vector3;
 
+/**
+ * This immutable class implements the color of a refracting material.
+ * @author Sebastian Dass&eacute;
+ */
 public class TransparentMaterial extends Material{
+	/**
+	 *  The index of refraction for this material.
+	 */
 	private final double indexOfRefraction;
-	
+	/**
+	 * @param indexOfRefraction The refraction index of the material for this geometry. Must not be <code>null</code>.
+	 */
 	public TransparentMaterial(final double indexOfRefraction){
 		this.indexOfRefraction = indexOfRefraction;
 	}
