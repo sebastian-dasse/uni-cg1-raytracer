@@ -10,7 +10,8 @@ import raytracer.math.Point3;
 import raytracer.math.Vector3;
 
 /**
- * This immutable class implements the color of a refracting material.
+ * This immutable class implements the color of a transparent material.
+ * 
  * @author Sebastian Dass&eacute;
  */
 public class TransparentMaterial extends Material{
@@ -18,8 +19,11 @@ public class TransparentMaterial extends Material{
 	 *  The index of refraction for this material.
 	 */
 	private final double indexOfRefraction;
+	
 	/**
-	 * @param indexOfRefraction The refraction index of the material for this geometry. Must not be <code>null</code>.
+	 * Constructs a new <code>TransparentMaterial</code> object with the specified index of refraction.
+	 * 
+	 * @param indexOfRefraction The refraction index of the material. Must not be <code>null</code>.
 	 */
 	public TransparentMaterial(final double indexOfRefraction){
 		this.indexOfRefraction = indexOfRefraction;
@@ -70,4 +74,33 @@ public class TransparentMaterial extends Material{
 		return cr.add(ct);
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		long temp;
+		temp = Double.doubleToLongBits(indexOfRefraction);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		return result;
+	}
+
+	@Override
+	public boolean equals(final Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		final TransparentMaterial other = (TransparentMaterial) obj;
+		if (Double.doubleToLongBits(indexOfRefraction) != Double
+				.doubleToLongBits(other.indexOfRefraction))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return getClass().getSimpleName() + "[indexOfRefraction = " + indexOfRefraction + "]";
+	}
 }

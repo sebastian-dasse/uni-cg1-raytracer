@@ -15,40 +15,42 @@ import raytracer.camera.Camera;
  * in the for-loop of a renderer and has to receive the same interval parameter
  * to work correctly.<br>
  * The RenderTask renders the number of lines specified in the constructor.
+ * 
  * @author Simon Lischka
  *
  */
 public class RenderTask implements Runnable {
-	/*
+	/**
 	 * Reference to the world used by the renderer
 	 */
 	private final World world;
-	/*
+	/**
 	 * Reference to the camera used by the renderer
 	 */
 	private final Camera cam;
-	/*
+	/**
 	 * Reference to the BufferedImage used by the renderer for render output
 	 */
 	private final BufferedImage image;
-	/*
+	/**
 	 * The size of the canvas to be drawn to
 	 */
 	private final Dimension size;
-	/*
+	/**
 	 * The recursion depth of the Tracer Object (e.g. used for reflections)
 	 */
 	private final int recursion;
-	/*
+	/**
 	 * Start position of the fragment that should be rendered
 	 */
 	private final int yStart;
-	/*
+	/**
 	 * Number of pixels until the end of the fragment 
 	 */
 	private final int interval;
 	/**
 	 * Creates a new RenderTask with the specified parameters.
+	 * 
 	 * @param yStart  		Start position on the y-Axis
 	 * @param interval		Number of lines to be rendered
 	 * @param size	   		Size of the canvas
