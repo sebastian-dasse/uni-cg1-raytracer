@@ -12,7 +12,7 @@ import raytracer.math.Vector3;
  * a specific resolution.
  * 
  * @author Sebastian Dass&eacute;
- * @author Maxim Novichkov;
+ * @author Maxim Novichkov
  * 
  */
 public abstract class Camera {

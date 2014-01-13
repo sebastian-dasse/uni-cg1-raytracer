@@ -2,6 +2,12 @@ package raytracer;
 
 import raytracer.geometry.Hit;
 
+/**
+ * TODO doc-comment everything
+ * 
+ * @author Sebastian Dass&eacute;
+ *
+ */
 public class Tracer {
 	
 	private int recursions;
@@ -18,7 +24,7 @@ public class Tracer {
 		if (hit == null) {
 			return world.backgroundColor;
 		}
-		return hit.geo.material.colorFor(hit, world, new Tracer(recursions-1));
+		return hit.geo.material.colorFor(hit, world, new Tracer(recursions - 1));
 	}
 
 }

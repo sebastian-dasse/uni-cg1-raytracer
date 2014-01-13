@@ -2,8 +2,6 @@ package raytracer;
 
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -76,13 +74,13 @@ public class Renderer {
 	
 	/**
 	 * Constructs a new <code>Renderer</code> with the specified parameters and a default screen size of 800 x 600 as 
-	 * well as a default depth of recursion of 1.
+	 * well as a default depth of recursion of 2.
 	 * 
 	 * @param world		The world of the <code>Renderer</code>.
 	 * @param cam		The camera of the <code>Renderer</code>.
 	 */
 	public Renderer(final World world, final Camera cam) {
-		this(world, cam, new Dimension(WIDTH, HEIGHT), 1);
+		this(world, cam, new Dimension(WIDTH, HEIGHT), 2);
 	}
 	
 	/**

@@ -21,14 +21,12 @@ public class DemoScene2 {
 	public static void main(String[] args) {
 		
 		final Renderer[] tracers = new Renderer[]{
-//				scene1()
-//				, 
-//				scene7()
-//				,
-				scene4(),
-//				scene7b()
-//				,
-//				scene7c()
+//				scene1(),  
+//				scene7(), 
+//				scene4(), 
+//				scene7b(), 
+//				scene7c(), 
+				scene8()
 		};
 		for (int i = 0; i < tracers.length; i++) {
 			ShowImage.from(tracers[i], 50 * i, 25 * i);
@@ -187,6 +185,7 @@ public class DemoScene2 {
 //		world.addLight(new SpotLight(new Color(0.1, 0.1, 0.1), new Point3(1, 1, 1), new Vector3(-1, -1, -1), Math.PI / 7.0));
 		return new Renderer(world, camera, 10);
 	}
+	
 	private static Renderer scene4() {
 		final World world = Factory.buildWorld(new double[][] { { 0, 0, 0 }, {0.0, 0.0, 0.0} }, 1);
 		final Color specularColor = new Color(1, 1, 1);
@@ -210,5 +209,23 @@ public class DemoScene2 {
 		world.addLight(new PointLight(new Color(0.6, 0.6, 0.6), new Point3(-1, 4, 4), true));
 		world.addLight(new PointLight(new Color(0.6, 0.6, 0.6), new Point3(4, 4, 5), true));
 		return new Renderer(world, camera, 2);
+	}
+	
+	private static Renderer scene8() {
+		final World world = Factory.buildWorld(new double[][] { { 0, 0, 0 }, {0.25, 0.25, 0.25} }, 1);
+		final Camera camera = Factory.buildPerspectiveCamera(new double[][] {
+				{ 4, 4, 4 }, { -1, -1, -1 }, { 0, 1, 0 }, { Math.PI / 4.0 } });
+		world.addElements(new Geometry[] {
+				Factory.buildPlane(new double[][] { 
+						{ 0, 0, 0 }, { 0, 1, 0} }, new ReflectiveMaterial(new Color(0.2, 0.2, 0.2), new Color(1, 1, 1), 10, new Color(0.5, 0.5, 0.5))), 
+				Factory.buildAxisAlignedBox(new double[][] { 
+						{ -1.5, 0.5, 0.5 }, { -0.5, 1.5, 1.5 } }, new TransparentMaterial(Constants.INDEX_OF_REFRACTION_GLASS)), 
+				Factory.buildSphere(new double[][] { 
+						{ -3, 1, -1 }, { 1 } }, new ReflectiveMaterial(new Color(1, 0, 0), new Color(1, 0, 0), 64, new Color(0.6, 0.6, 0.6)))
+			}
+		);
+		world.addLight(new PointLight(new Color(0.45, 0.45, 0.45), new Point3(4, 4, 4), true));
+		world.addLight(new PointLight(new Color(0.45, 0.45, 0.45), new Point3(-4, 4, 4), true));
+		return new Renderer(world, camera, 4);
 	}
 }
