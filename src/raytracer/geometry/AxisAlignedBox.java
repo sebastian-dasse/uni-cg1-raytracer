@@ -1,12 +1,11 @@
 package raytracer.geometry;
 
-import java.util.LinkedList;
+import java.util.HashSet;
 
 import raytracer.Ray;
 import raytracer.material.Material;
 import raytracer.math.Normal3;
 import raytracer.math.Point3;
-import raytracer.math.Vector3;
 
 /**
  * This immutable class represents an axis aligned box in three-dimensional space. It is defined through its <em>low 
@@ -70,6 +69,8 @@ public class AxisAlignedBox extends Geometry {
 	
 	@Override
 	public Hit hit(final Ray ray) {
+		HashSet<Hit> hits = new HashSet<Hit>();
+		
 		return new Hit(hitMax.t, ray, this, hitMax.normal);
 	}
 
