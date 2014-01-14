@@ -34,8 +34,8 @@ public final class DemoSceneUE04 {
 	 */
 	public static void main(final String[] args) {
 		final Renderer[] tracers = new Renderer[]{
-			scene1(), 
-			scene2(), 
+//			scene1(), 
+//			scene2(), 
 			scene3()
 		};
 		for (int i = 0; i < tracers.length; i++) {
@@ -121,7 +121,7 @@ public final class DemoSceneUE04 {
 					{ 1.5, 2, 1.5 }, { 0.5 } }, new TransparentMaterial(Constants.INDEX_OF_REFRACTION_WATER)),
 																											
 			Factory.buildAxisAlignedBox(new double[][] { 
-					{ -0.5, 0, 3 }, { 0.5, 1, 4 } }, new TransparentMaterial(Constants.INDEX_OF_REFRACTION_WATER)), 
+					{ -0.5, 0, 3 }, { 0.5, 1, 4 } }, new TransparentMaterial(1.3)), 
 			
 			Factory.buildTriangle(new double[][] { 
 					{ 0.7, 0.5, 3 }, { 1.3, 0.5, 3 }, { 0.7, 0.5, 4 }, 
