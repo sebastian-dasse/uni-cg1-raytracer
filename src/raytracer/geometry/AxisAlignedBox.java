@@ -1,6 +1,7 @@
 package raytracer.geometry;
 
-import java.util.HashSet;
+import java.util.Collection;
+import java.util.LinkedList;
 
 import raytracer.Ray;
 import raytracer.material.Material;
@@ -81,8 +82,8 @@ public class AxisAlignedBox extends Geometry {
 	
 	@Override
 	public Hit hit(final Ray ray) {
-		HashSet<Hit> hits = new HashSet<Hit>();
-		HashSet<Hit> hitsOnPlane = new HashSet<Hit>();
+		LinkedList<Hit> hits = new LinkedList<Hit>();
+		LinkedList<Hit> hitsOnPlane = new LinkedList<Hit>();
 		
 		Hit rightHit = right.hit(ray);
 		Hit leftHit = left.hit(ray);
@@ -131,9 +132,7 @@ public class AxisAlignedBox extends Geometry {
 			 }
 		}
 		hitsOnPlane.clear();
-		
-		Object[] hitBs = hits.toArray();
-		Hit nearestHit = (Hit) hitBs[0];
+	    Hit nearestHit = hits.pop();
 		double t = 9999999999.0;
 		for (Hit hit : hits) {
 		  if (hit.t < t) {
