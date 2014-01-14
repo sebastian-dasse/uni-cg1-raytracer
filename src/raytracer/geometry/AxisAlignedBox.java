@@ -14,7 +14,7 @@ import raytracer.math.Point3;
  * @author Sebastian Dass&eacute;
  *
  */
-public class AxisAlignedBox extends Geometry {
+public class  extends Geometry {
 	
 	/**
 	 * The low bottom far point of this <code>AxisAlignedBox</code>.
@@ -29,27 +29,33 @@ public class AxisAlignedBox extends Geometry {
 	/**
 	 * The normal of the left face of the box.
 	 */
-	private static final Normal3 LEFT   = new Normal3(-1,  0,  0);
+	private static final Normal3 LEFT_NORMAL   = new Normal3(-1,  0,  0);
 	/**
 	 * The normal of the right face of the box.
 	 */
-	private static final Normal3 RIGHT  = new Normal3( 1,  0,  0);
+	private static final Normal3 RIGHT_NORMAL  = new Normal3( 1,  0,  0);
 	/**
 	 * The normal of the top face of the box.
 	 */
-	private static final Normal3 TOP    = new Normal3( 0,  1,  0);
+	private static final Normal3 TOP_NORMAL    = new Normal3( 0,  1,  0);
 	/**
 	 * The normal of the bottom face of the box.
 	 */
-	private static final Normal3 BOTTOM = new Normal3( 0, -1,  0);
+	private static final Normal3 BOTTOM_NORMAL = new Normal3( 0, -1,  0);
 	/**
 	 * The normal of the front face of the box.
 	 */
-	private static final Normal3 FRONT  = new Normal3( 0,  0,  1);
+	private static final Normal3 FRONT_NORMAL  = new Normal3( 0,  0,  1);
 	/**
 	 * The normal of the back face of the box.
 	 */
-	private static final Normal3 BACK   = new Normal3( 0,  0, -1);
+	private static final Normal3 BACK_NORMAL   = new Normal3( 0,  0, -1);
+	private Plane left;
+	private Plane right;
+	private Plane top;
+	private Plane bottom;
+	private Plane front;
+	private Plane back;
 	
 	/**
 	 * Constructs a new <code>AxisAlignedBox</code> with the specified parameters.
@@ -65,11 +71,66 @@ public class AxisAlignedBox extends Geometry {
 		}
 		this.lbf = lbf;
 		this.run = run;
+		left = new Plane(lbf, LEFT_NORMAL, material);
+		right = new Plane(run, RIGHT_NORMAL, material);
+		top = new Plane(run, TOP_NORMAL, material);
+		bottom = new Plane(lbf, BOTTOM_NORMAL, material);
+		front = new Plane(run, FRONT_NORMAL, material);
+		back = new Plane(lbf, BACK_NORMAL, material);
 	}
 	
 	@Override
 	public Hit hit(final Ray ray) {
 		HashSet<Hit> hits = new HashSet<Hit>();
+		HashSet<Hit> hitsOnPlane = new HashSet<Hit>();
+		
+		Hit rightHit = right.hit(ray);
+		Hit leftHit = left.hit(ray);
+		if (rightHit != null) {
+			hitsOnPlane.add(rightHit);
+		}
+		if (leftHit != null) {
+			hitsOnPlane.add(leftHit);
+		}
+		for (Hit hit : hitsOnPlane) {
+			Point3 p = ray.at(hit.t);
+			 if( p.y >= lbf.y && p.y <= run.y && p.z >= lbf.z && p.z <= run.z) {
+				 hits.add(hit);
+			 }
+		}
+		hitsOnPlane.clear();
+		
+		Hit topHit = top.hit(ray);
+		Hit bottomHit = bottom.hit(ray);
+		if (topHit != null) {
+			hitsOnPlane.add(topHit);
+		}
+		if (bottomHit != null) {
+			hitsOnPlane.add(bottomHit);
+		}
+		for (Hit hit : hitsOnPlane) {
+			Point3 p = ray.at(hit.t);
+			 if( p.x >= lbf.x && p.x <= run.x && p.z >= lbf.z && p.z <= run.z ) {
+				 hits.add(hit);
+			 }
+		}
+		hitsOnPlane.clear();
+		
+		Hit frontHit = front.hit(ray);
+		Hit farHit = far.hit(ray);
+		if (frontHit != null) {
+			hitsOnPlane.add(frontHit);
+		}
+		if (farHit != null) {
+			hitsOnPlane.add(farHit);
+		}
+		for (Hit hit : hitsOnPlane) {
+			Point3 p = ray.at(hit.t);
+			 if( p.x >= lbf.x && p.x <= run.x && p.y >= lbf.y && p.y <= run.y ) {
+				 hits.add(hit);
+			 }
+		}
+		hitsOnPlane.clear();
 		
 		return new Hit(hitMax.t, ray, this, hitMax.normal);
 	}
