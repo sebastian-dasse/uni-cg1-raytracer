@@ -14,7 +14,7 @@ import raytracer.math.Point3;
  * @author Sebastian Dass&eacute;
  *
  */
-public class  extends Geometry {
+public class AxisAlignedBox extends Geometry {
 	
 	/**
 	 * The low bottom far point of this <code>AxisAlignedBox</code>.
@@ -117,12 +117,12 @@ public class  extends Geometry {
 		hitsOnPlane.clear();
 		
 		Hit frontHit = front.hit(ray);
-		Hit farHit = far.hit(ray);
+		Hit backHit = back.hit(ray);
 		if (frontHit != null) {
 			hitsOnPlane.add(frontHit);
 		}
-		if (farHit != null) {
-			hitsOnPlane.add(farHit);
+		if (backHit != null) {
+			hitsOnPlane.add(backHit);
 		}
 		for (Hit hit : hitsOnPlane) {
 			Point3 p = ray.at(hit.t);
@@ -132,7 +132,17 @@ public class  extends Geometry {
 		}
 		hitsOnPlane.clear();
 		
-		return new Hit(hitMax.t, ray, this, hitMax.normal);
+		Object[] hitBs = hits.toArray();
+		Hit nearestHit = (Hit) hitBs[0];
+		double t = 9999999999.0;
+		for (Hit hit : hits) {
+		  if (hit.t < t) {
+			  t = hit.t;
+			  nearestHit = hit;
+		  }
+		 
+		}
+		return new Hit(nearestHit.t, ray, this, nearestHit.normal);
 	}
 
 	@Override
