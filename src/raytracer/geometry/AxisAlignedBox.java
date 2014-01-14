@@ -70,6 +70,94 @@ public class AxisAlignedBox extends Geometry {
 	
 	@Override
 	public Hit hit(final Ray ray) {
+		if (ray == null) {
+			throw new IllegalArgumentException("The parameter 'ray' must not be null.");
+		}
+		
+		// 1. which surfaces are visible?
+		// Formula: <o - a, n_i>  > 0
+		final Vector3 fromLbf = ray.o.sub(lbf);
+		final Vector3 fromRun = ray.o.sub(run);
+		final LinkedList<Plane> planes = new LinkedList<Plane>();
+			if (fromRun.dot(TOP) > 0) {
+				planes.add(new Plane(run, TOP, material));
+			}
+			if (fromRun.dot(FRONT) > 0) {
+				planes.add(new Plane(run, FRONT, material));
+			}
+			if (fromRun.dot(RIGHT) > 0) {
+				planes.add(new Plane(run, RIGHT, material));
+			}
+			if (fromLbf.dot(LEFT) > 0) {
+				planes.add(new Plane(lbf, LEFT, material));
+			}
+			if (fromLbf.dot(BACK) > 0) {
+				planes.add(new Plane(lbf, BACK, material));
+			}
+			if (fromLbf.dot(BOTTOM) > 0) {
+				planes.add(new Plane(lbf, BOTTOM, material));
+			}
+			if (planes.size() == 0) {
+				Normal3 TOP_INV = TOP.mul(-1);
+				Normal3 FRONT_INV = FRONT.mul(-1);
+				Normal3 RIGHT_INV = RIGHT.mul(-1);
+				Normal3 LEFT_INV = LEFT.mul(-1);
+				Normal3 BACK_INV = BACK.mul(-1);
+				Normal3 BOTTOM_INV = BOTTOM.mul(-1);
+				
+				Point3 run_new = lbf;
+				Point3 lbf_new = run;
+				
+				if (fromRun.dot(TOP_INV) > 0) {
+					planes.add(new Plane(run_new, TOP_INV, material));
+				}
+				if (fromRun.dot(FRONT_INV) > 0)  {
+					planes.add(new Plane(run_new, FRONT_INV, material));
+				}
+				if (fromRun.dot(RIGHT_INV) > 0) {
+					planes.add(new Plane(run_new, RIGHT_INV, material));
+				}
+				if (fromLbf.dot(LEFT_INV) > 0) {
+					planes.add(new Plane(lbf_new, LEFT_INV, material));
+				}
+				if (fromLbf.dot(BACK_INV) > 0) {
+					planes.add(new Plane(lbf_new, BACK_INV, material));
+				}
+				if (fromLbf.dot(BOTTOM_INV) > 0) {
+					planes.add(new Plane(lbf_new, BOTTOM_INV, material));
+				}
+			}
+		
+		// 2. calculate intersection point(s) - take the greatest t, i.e. the most distant point from the camera view
+		// Formula: t_i = <a - o, n_i> / <d, n_i>
+		Hit hitMax = null;
+		for (final Plane plane : planes) {
+			final Hit h = plane.hit(ray);
+			if (h == null) {
+				continue;
+			}
+			if (hitMax == null || hitMax.t < h.t) { // TODO ??? replace with: ... || Constants.EPSILON < h.t - hitMax.t
+				hitMax = h;
+			}
+		}
+		if (hitMax == null) {
+			return null; // no hit
+		}
+		
+//		// 3. check, if the found intersection point with the plane lies in/on the box
+//		// Formula: lbf <= p <= run, for all coordinates x, y, z
+		final Plane face = (Plane) hitMax.geo;
+		final Point3 p = ray.at(hitMax.t);
+//		// no need to check the coordinate that lies in the in the direction of the normal of the examined plane
+		if (face.n.x == 0 && (p.x < lbf.x || run.x < p.x)) {
+			return null;
+		}
+		if (face.n.y == 0 && (p.y < lbf.y || run.y < p.y)) {
+			return null;
+		}
+		if (face.n.z == 0 && (p.z < lbf.z || run.z < p.z)) {
+			return null;
+		}
 		return new Hit(hitMax.t, ray, this, hitMax.normal);
 	}
 
