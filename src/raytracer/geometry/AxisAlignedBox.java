@@ -1,12 +1,13 @@
 package raytracer.geometry;
 
-import java.util.Collection;
 import java.util.LinkedList;
 
+import raytracer.Constants;
 import raytracer.Ray;
 import raytracer.material.Material;
 import raytracer.math.Normal3;
 import raytracer.math.Point3;
+import static raytracer.math.MathUtil.isValid;
 
 /**
  * This immutable class represents an axis aligned box in three-dimensional space. It is defined through its <em>low 
@@ -84,7 +85,6 @@ public class AxisAlignedBox extends Geometry {
 	public Hit hit(final Ray ray) {
 		LinkedList<Hit> hits = new LinkedList<Hit>();
 		LinkedList<Hit> hitsOnPlane = new LinkedList<Hit>();
-		
 		Hit rightHit = right.hit(ray);
 		Hit leftHit = left.hit(ray);
 		if (rightHit != null) {
@@ -131,15 +131,13 @@ public class AxisAlignedBox extends Geometry {
 				 hits.add(hit);
 			 }
 		}
-		hitsOnPlane.clear();
-	    Hit nearestHit = hits.pop();
-		double t = 9999999999.0;
+		Hit nearestHit = null;
+		double t = -1;
 		for (Hit hit : hits) {
-		  if (hit.t < t) {
+		  if (hit != null && (hit.t < t || t == -1) && hit.t > Constants.EPSILON) {
 			  t = hit.t;
 			  nearestHit = hit;
 		  }
-		 
 		}
 		return new Hit(nearestHit.t, ray, this, nearestHit.normal);
 	}

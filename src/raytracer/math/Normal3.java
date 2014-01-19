@@ -38,10 +38,9 @@ public class Normal3 {
 	 * @param z The z coordinate. Must be a double value other than +-Infinity or NaN.
 	 */
 	public Normal3(final double x, final double y, final double z) {
-		// TODO not necessary? IMPORTANT: change doc-comment if you plan to remove this check for good!!!
-//		if (x == 0 && y == 0 && z == 0) {
-//			throw new IllegalArgumentException("The null vector (0, 0, 0) is not a meaningful normal.");
-//		}
+		if (x == 0 && y == 0 && z == 0) {
+			throw new IllegalArgumentException("The null vector (0, 0, 0) is not a meaningful normal.");
+		}
 		if (!(isValid(x) && isValid(y) && isValid(z))) {
 			throw new IllegalArgumentException("Only double values other than +-Infinity or NaN are allowed.");
 		}
