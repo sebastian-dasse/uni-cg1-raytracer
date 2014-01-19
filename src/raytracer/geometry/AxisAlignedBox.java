@@ -3,7 +3,6 @@ package raytracer.geometry;
 import java.util.Collection;
 import java.util.LinkedList;
 
-import raytracer.Constants;
 import raytracer.Ray;
 import raytracer.material.Material;
 import raytracer.math.Normal3;
@@ -132,19 +131,17 @@ public class AxisAlignedBox extends Geometry {
 				 hits.add(hit);
 			 }
 		}
-		Hit nearestHit = null;
-		if (hits.size() > 0) {
-			nearestHit = hits.pop();
-		}
-		double t = Constants.EPSILON;
+		hitsOnPlane.clear();
+	    Hit nearestHit = hits.pop();
+		double t = 9999999999.0;
 		for (Hit hit : hits) {
-		  if (hit != null && hit.t < t && hit.t > Constants.EPSILON) {
+		  if (hit.t < t) {
 			  t = hit.t;
 			  nearestHit = hit;
 		  }
+		 
 		}
-		return nearestHit;
-//		return new Hit(nearestHit.t, ray, this, nearestHit.normal);
+		return new Hit(nearestHit.t, ray, this, nearestHit.normal);
 	}
 
 	@Override
