@@ -43,6 +43,7 @@ public class Vector3 implements Comparable<Vector3> {
 	 * @param z The z coordinate. Must be a double value other than +-Infinity or NaN.
 	 */
 	public Vector3(final double x, final double y, final double z) {
+		// Temporarely commented out for AAB - Debug.
 		if (!(isValid(x) && isValid(y) && isValid(z))) {
 			throw new IllegalArgumentException("Only double values other than +-Infinity or NaN are allowed.");
 		}
@@ -92,6 +93,7 @@ public class Vector3 implements Comparable<Vector3> {
 	 * @return	The resulting <code>Vector3</code>.
 	 */
 	public Vector3 sub(final Vector3 v) {
+		// Temporarely commented out for AAB - Debug.
 		if (v == null) {
 			throw new IllegalArgumentException("The parameter 'v' must not be null.");
 		}
@@ -125,6 +127,7 @@ public class Vector3 implements Comparable<Vector3> {
 	 * @return	The resulting <code>Vector3</code>.
 	 */
 	public Vector3 mul(final double c) {
+		// Temporarely commented out for AAB - Debug.
 		if (!isValid(c)) {
 			throw new IllegalArgumentException("Only a double value other than +-Infinity or NaN is allowed.");
 		}

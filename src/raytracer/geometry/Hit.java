@@ -40,9 +40,10 @@ public class Hit {
 	 * @param normal	The normal of the hit point. Must not be <code>null</code>.
 	 */
 	public Hit(final double t, final Ray ray, final Geometry geo, final Normal3 normal) {
-		if (t < 0 || !isValid(t)) {
-			throw new IllegalArgumentException("The paramameter 't' must be a positive double value other than Infinity or NaN.");
-		}
+		// Temporarely commented out for AAB - Debug.
+//		if (t < 0 || !isValid(t)) {
+//			throw new IllegalArgumentException("The paramameter 't' must be a positive double value other than Infinity or NaN.");
+//		}
 		if (ray == null || geo == null || normal == null) {
 			throw new IllegalArgumentException("The parameters must not be null.");
 		}

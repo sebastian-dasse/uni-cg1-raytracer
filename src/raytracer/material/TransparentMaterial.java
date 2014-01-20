@@ -31,8 +31,6 @@ public class TransparentMaterial extends Material{
 	
 	@Override
 	public Color colorFor(final Hit hit, final World world, final Tracer tracer) {
-		// TODO Auto-generated method stub
-		
 		/*
 		 * Formulas:
 		 * 		cos phi1 = <-d, n>
@@ -48,7 +46,6 @@ public class TransparentMaterial extends Material{
 		double eta1 = world.indexOfRefraction;
 		double eta2 = indexOfRefraction;
 		double cosPhi1 = d.mul(-1).dot(n);
-//		if (d.mul(-1).dot(n) <= 0) {
 		if (cosPhi1 <= 0) { // <d, n> <= 
 			cosPhi1 = -cosPhi1;
 			n = n.mul(-1);
@@ -57,15 +54,17 @@ public class TransparentMaterial extends Material{
 			eta2 = temp;
 		}
 		final double quotient = eta1 / eta2;
+		//																      0,25   
 		final double cosPhi2 = Math.sqrt(1 - quotient * quotient * (1 - cosPhi1 * cosPhi1));
+		if (Double.isNaN(cosPhi2)) {
+			System.err.println("Caught myself a NaN. cosPhi1: " + cosPhi1 + ", quotient: " + quotient);
+		}
 		final Vector3 rd = d.add(n.mul(2 * cosPhi1));
 		final Vector3 rt = d.mul(quotient).sub(n.mul(cosPhi2 - quotient * cosPhi1));
 		final double r0 = Math.pow((eta1 - eta2) / (eta1 + eta2), 2);
 		final double r = r0 + (1 - r0) * Math.pow(1 - cosPhi1, 5);
 		final double t = 1 - r;
-//		System.out.println(" \n r: " + r + "\n t: " + t);
-		
-		if (t < 0) { // TODO is this total internal reflection?
+		if (t < 0) { 
 			System.err.println(t);
 			return world.backgroundColor;
 		}

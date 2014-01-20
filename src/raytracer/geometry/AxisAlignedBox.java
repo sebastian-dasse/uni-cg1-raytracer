@@ -2,11 +2,12 @@ package raytracer.geometry;
 
 import java.util.LinkedList;
 
+import raytracer.Constants;
 import raytracer.Ray;
 import raytracer.material.Material;
 import raytracer.math.Normal3;
 import raytracer.math.Point3;
-import raytracer.math.Vector3;
+import static raytracer.math.MathUtil.isValid;
 
 /**
  * This immutable class represents an axis aligned box in three-dimensional space. It is defined through its <em>low 
@@ -30,27 +31,33 @@ public class AxisAlignedBox extends Geometry {
 	/**
 	 * The normal of the left face of the box.
 	 */
-	private static final Normal3 LEFT   = new Normal3(-1,  0,  0);
+	private static final Normal3 LEFT_NORMAL   = new Normal3(-1,  0,  0);
 	/**
 	 * The normal of the right face of the box.
 	 */
-	private static final Normal3 RIGHT  = new Normal3( 1,  0,  0);
+	private static final Normal3 RIGHT_NORMAL  = new Normal3( 1,  0,  0);
 	/**
 	 * The normal of the top face of the box.
 	 */
-	private static final Normal3 TOP    = new Normal3( 0,  1,  0);
+	private static final Normal3 TOP_NORMAL    = new Normal3( 0,  1,  0);
 	/**
 	 * The normal of the bottom face of the box.
 	 */
-	private static final Normal3 BOTTOM = new Normal3( 0, -1,  0);
+	private static final Normal3 BOTTOM_NORMAL = new Normal3( 0, -1,  0);
 	/**
 	 * The normal of the front face of the box.
 	 */
-	private static final Normal3 FRONT  = new Normal3( 0,  0,  1);
+	private static final Normal3 FRONT_NORMAL  = new Normal3( 0,  0,  1);
 	/**
 	 * The normal of the back face of the box.
 	 */
-	private static final Normal3 BACK   = new Normal3( 0,  0, -1);
+	private static final Normal3 BACK_NORMAL   = new Normal3( 0,  0, -1);
+	private Plane left;
+	private Plane right;
+	private Plane top;
+	private Plane bottom;
+	private Plane front;
+	private Plane back;
 	
 	/**
 	 * Constructs a new <code>AxisAlignedBox</code> with the specified parameters.
@@ -66,69 +73,73 @@ public class AxisAlignedBox extends Geometry {
 		}
 		this.lbf = lbf;
 		this.run = run;
+		left = new Plane(lbf, LEFT_NORMAL, material);
+		right = new Plane(run, RIGHT_NORMAL, material);
+		top = new Plane(run, TOP_NORMAL, material);
+		bottom = new Plane(lbf, BOTTOM_NORMAL, material);
+		front = new Plane(run, FRONT_NORMAL, material);
+		back = new Plane(lbf, BACK_NORMAL, material);
 	}
 	
 	@Override
 	public Hit hit(final Ray ray) {
-		if (ray == null) {
-			throw new IllegalArgumentException("The parameter 'ray' must not be null.");
+		LinkedList<Hit> hits = new LinkedList<Hit>();
+		LinkedList<Hit> hitsOnPlane = new LinkedList<Hit>();
+		Hit rightHit = right.hit(ray);
+		Hit leftHit = left.hit(ray);
+		if (rightHit != null) {
+			hitsOnPlane.add(rightHit);
 		}
+		if (leftHit != null) {
+			hitsOnPlane.add(leftHit);
+		}
+		for (Hit hit : hitsOnPlane) {
+			Point3 p = ray.at(hit.t);
+			 if( p.y >= lbf.y && p.y <= run.y && p.z >= lbf.z && p.z <= run.z) {
+				 hits.add(hit);
+			 }
+		}
+		hitsOnPlane.clear();
 		
-		// 1. which surfaces are visible?
-		// Formula: <o - a, n_i>  > 0
-		final Vector3 fromLbf = ray.o.sub(lbf);
-		final Vector3 fromRun = ray.o.sub(run);
-		final LinkedList<Plane> planes = new LinkedList<Plane>();
-		if (fromRun.dot(TOP) > 0) {
-			planes.add(new Plane(run, TOP, material));
+		Hit topHit = top.hit(ray);
+		Hit bottomHit = bottom.hit(ray);
+		if (topHit != null) {
+			hitsOnPlane.add(topHit);
 		}
-		if (fromRun.dot(FRONT) > 0) {
-			planes.add(new Plane(run, FRONT, material));
+		if (bottomHit != null) {
+			hitsOnPlane.add(bottomHit);
 		}
-		if (fromRun.dot(RIGHT) > 0) {
-			planes.add(new Plane(run, RIGHT, material));
+		for (Hit hit : hitsOnPlane) {
+			Point3 p = ray.at(hit.t);
+			 if( p.x >= lbf.x && p.x <= run.x && p.z >= lbf.z && p.z <= run.z ) {
+				 hits.add(hit);
+			 }
 		}
-		if (fromLbf.dot(LEFT) > 0) {
-			planes.add(new Plane(lbf, LEFT, material));
-		}
-		if (fromLbf.dot(BACK) > 0) {
-			planes.add(new Plane(lbf, BACK, material));
-		}
-		if (fromLbf.dot(BOTTOM) > 0) {
-			planes.add(new Plane(lbf, BOTTOM, material));
-		}
+		hitsOnPlane.clear();
 		
-		// 2. calculate intersection point(s) - take the greatest t, i.e. the most distant point from the camera view
-		// Formula: t_i = <a - o, n_i> / <d, n_i>
-		Hit hitMax = null;
-		for (final Plane plane : planes) {
-			final Hit h = plane.hit(ray);
-			if (h == null) {
-				continue;
-			}
-			if (hitMax == null || hitMax.t < h.t) { // TODO ??? replace with: ... || Constants.EPSILON < h.t - hitMax.t
-				hitMax = h;
-			}
+		Hit frontHit = front.hit(ray);
+		Hit backHit = back.hit(ray);
+		if (frontHit != null) {
+			hitsOnPlane.add(frontHit);
 		}
-		if (hitMax == null) {
-			return null; // no hit
+		if (backHit != null) {
+			hitsOnPlane.add(backHit);
 		}
-		
-		// 3. check, if the found intersection point with the plane lies in/on the box
-		// Formula: lbf <= p <= run, for all coordinates x, y, z
-		final Plane face = (Plane) hitMax.geo;
-		final Point3 p = ray.at(hitMax.t);
-		// no need to check the coordinate that lies in the in the direction of the normal of the examined plane
-		if (face.n.x == 0 && (p.x < lbf.x || run.x < p.x)) {
-			return null;
+		for (Hit hit : hitsOnPlane) {
+			Point3 p = ray.at(hit.t);
+			 if( p.x >= lbf.x && p.x <= run.x && p.y >= lbf.y && p.y <= run.y ) {
+				 hits.add(hit);
+			 }
 		}
-		if (face.n.y == 0 && (p.y < lbf.y || run.y < p.y)) {
-			return null;
+		Hit nearestHit = null;
+		double t = -1;
+		for (Hit hit : hits) {
+		  if ((hit.t < t || t == -1) && hit.t > Constants.EPSILON) {
+			  t = hit.t;
+			  nearestHit = hit;
+		  }
 		}
-		if (face.n.z == 0 && (p.z < lbf.z || run.z < p.z)) {
-			return null;
-		}
-		return new Hit(hitMax.t, ray, this, hitMax.normal);
+		return nearestHit;
 	}
 
 	@Override
