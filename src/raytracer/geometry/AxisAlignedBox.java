@@ -135,12 +135,15 @@ public class AxisAlignedBox extends Geometry {
 		double t = -1;
 		for (Hit hit : hits) {
 		  if (hit != null && (hit.t < t || t == -1) && hit.t > Constants.EPSILON) {
-			  t = hit.t;
+			  if (hit.t < Constants.EPSILON) {
+				  t = Constants.EPSILON;
+			  } else {
+				  t = hit.t;
+			  }
 			  nearestHit = hit;
 		  }
 		}
 		return nearestHit;
-//		return new Hit(nearestHit.t, ray, this, nearestHit.normal);
 	}
 
 	@Override

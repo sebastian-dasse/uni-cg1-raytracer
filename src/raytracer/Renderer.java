@@ -92,7 +92,6 @@ public class Renderer {
 		final BufferedImage image = new BufferedImage(size.width, size.height, BufferedImage.TYPE_INT_RGB);
 		final int nThreads = Runtime.getRuntime().availableProcessors();
 		long t1 = System.currentTimeMillis();
-//		ExecutorService executor = Executors.newCachedThreadPool();
 		ExecutorService executor = Executors.newFixedThreadPool(nThreads);
 		final int interval = nThreads;
 		for (int y = 0; y < size.height; y+=interval) {
