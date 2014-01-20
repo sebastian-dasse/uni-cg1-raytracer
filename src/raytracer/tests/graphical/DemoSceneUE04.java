@@ -115,15 +115,13 @@ public final class DemoSceneUE04 {
 			
 			Factory.buildSphere(new double[][] { 
 					{ 0, 2, 1.5 }, { 0.5 } }, new  TransparentMaterial(Constants.INDEX_OF_REFRACTION_WATER)),
-//			Factory.buildSphere(new double[][] { 
-//					{ -1.5, 2, 1.5 }, { 0.5 } }, new TransparentMaterial(Constants.INDEX_OF_REFRACTION_WATER)),
-//			Factory.buildSphere(new double[][] { 
-//					{ 1.5, 2, 1.5 }, { 0.5 } }, new TransparentMaterial(Constants.INDEX_OF_REFRACTION_WATER)),
+			Factory.buildSphere(new double[][] { 
+					{ -1.5, 2, 1.5 }, { 0.5 } }, new TransparentMaterial(Constants.INDEX_OF_REFRACTION_WATER)),
+			Factory.buildSphere(new double[][] { 
+					{ 1.5, 2, 1.5 }, { 0.5 } }, new TransparentMaterial(Constants.INDEX_OF_REFRACTION_WATER)),
 																											
 			Factory.buildAxisAlignedBox(new double[][] { 
-					//{ -0.5, 0, 3 }, { 0.5, 1, 4 } }, new TransparentMaterial(1.3)), 
-					{ -0.5, 0, 3 }, { 0.5, 1, 4 } },  new ReflectiveMaterial(new Color(1, 1, 0), new Color(1, 1, 1), 10, new Color(1, 0.5, 0.5))), 
-//			
+					{ -0.5, 0, 3 }, { 0.5, 1, 4 } }, new TransparentMaterial(Constants.INDEX_OF_REFRACTION_WATER)), 
 			Factory.buildTriangle(new double[][] { 
 					{ 0.7, 0.5, 3 }, { 1.3, 0.5, 3 }, { 0.7, 0.5, 4 }, 
 					{ 0, 1, 0 }, { 0, 1, 0 }, { 0, 1, 0 } }, new PhongMaterial(new Color(0, 1, 0), new Color(0, 1, 0), 20))
