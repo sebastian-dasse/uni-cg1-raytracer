@@ -35,9 +35,11 @@ public class Point3 {
 	 * @param z The z coordinate. Must be a double value other than +-Infinity or NaN.
 	 */
 	public Point3(final double x, final double y, final double z) {
-		if (!(isValid(x) && isValid(y) && isValid(z))) {
-			throw new IllegalArgumentException("Only double values other than +-Infinity or NaN are allowed.");
-		}
+		// Temporarely commented out for AAB - Debug.
+//		if (!(isValid(x) && isValid(y) && isValid(z))) {
+//			throw new IllegalArgumentException("Only double values other than +-Infinity or NaN are allowed.");
+//		}
+		
 		this.x = x;
 		this.y = y;
 		this.z = z;
@@ -127,9 +129,5 @@ public class Point3 {
 	@Override
 	public String toString() {
 		return getClass().getSimpleName() + "[x = " + x + ", y = " + y + ", z = " + z + "]";
-	}
-	
-	public static void main(String[] args) {
-		System.out.println(new Point3(1, 2, 3));
 	}
 }

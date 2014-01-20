@@ -139,7 +139,8 @@ public class AxisAlignedBox extends Geometry {
 			  nearestHit = hit;
 		  }
 		}
-		return new Hit(nearestHit.t, ray, this, nearestHit.normal);
+		return nearestHit;
+//		return new Hit(nearestHit.t, ray, this, nearestHit.normal);
 	}
 
 	@Override

@@ -45,9 +45,10 @@ public class Ray {
 	 * @return	The <code>Point3</code> for the given t.
 	 */
 	public Point3 at(final double t) {
-		if (t < 0 || !isValid(t)) {
-			throw new IllegalArgumentException("The paramameter 't' must be a positive double value other than Infinity or NaN.");
-		}
+		// Temporarely commented out for AAB - Debug.
+//		if (t < 0 || !isValid(t)) {
+//			throw new IllegalArgumentException("The paramameter 't' must be a positive double value other than Infinity or NaN.");
+//		}
 //		 p = o + td
 		return o.add(d.mul(t));
 	}
