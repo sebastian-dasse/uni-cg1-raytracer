@@ -133,6 +133,6 @@ public final class DemoSceneUE04 {
 			new PointLight(new Color(0.3, 0.3, 0.3), new Point3(5, 5, -10), true), 
 			new DirectionalLight(new Color(0.3, 0.3, 0.3), new Vector3(1, -1, 0))
 		});
-		return new Renderer(world, camera, 4);
+		return new Renderer(world, camera, 10);
 	}
 }
