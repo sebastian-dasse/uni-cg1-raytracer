@@ -44,9 +44,9 @@ public class Vector3 implements Comparable<Vector3> {
 	 */
 	public Vector3(final double x, final double y, final double z) {
 		// Temporarely commented out for AAB - Debug.
-//		if (!(isValid(x) && isValid(y) && isValid(z))) {
-//			throw new IllegalArgumentException("Only double values other than +-Infinity or NaN are allowed.");
-//		}
+		if (!(isValid(x) && isValid(y) && isValid(z))) {
+			throw new IllegalArgumentException("Only double values other than +-Infinity or NaN are allowed.");
+		}
 		this.x = x;
 		this.y = y;
 		this.z = z;
@@ -94,9 +94,9 @@ public class Vector3 implements Comparable<Vector3> {
 	 */
 	public Vector3 sub(final Vector3 v) {
 		// Temporarely commented out for AAB - Debug.
-//		if (v == null) {
-//			throw new IllegalArgumentException("The parameter 'v' must not be null.");
-//		}
+		if (v == null) {
+			throw new IllegalArgumentException("The parameter 'v' must not be null.");
+		}
 		return new Vector3(x - v.x, 
 						   y - v.y, 
 						   z - v.z);
@@ -128,9 +128,9 @@ public class Vector3 implements Comparable<Vector3> {
 	 */
 	public Vector3 mul(final double c) {
 		// Temporarely commented out for AAB - Debug.
-//		if (!isValid(c)) {
-//			throw new IllegalArgumentException("Only a double value other than +-Infinity or NaN is allowed.");
-//		}
+		if (!isValid(c)) {
+			throw new IllegalArgumentException("Only a double value other than +-Infinity or NaN is allowed.");
+		}
 		return new Vector3(x * c, 
 						   y * c, 
 						   z * c);
