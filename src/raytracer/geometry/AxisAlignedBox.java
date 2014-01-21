@@ -52,12 +52,12 @@ public class AxisAlignedBox extends Geometry {
 	 * The normal of the back face of the box.
 	 */
 	private static final Normal3 BACK_NORMAL   = new Normal3( 0,  0, -1);
-	private Plane left;
-	private Plane right;
-	private Plane top;
-	private Plane bottom;
-	private Plane front;
-	private Plane back;
+	private final Plane left;
+	private final Plane right;
+	private final Plane top;
+	private final Plane bottom;
+	private final Plane front;
+	private final Plane back;
 	
 	/**
 	 * Constructs a new <code>AxisAlignedBox</code> with the specified parameters.
@@ -83,10 +83,10 @@ public class AxisAlignedBox extends Geometry {
 	
 	@Override
 	public Hit hit(final Ray ray) {
-		LinkedList<Hit> hits = new LinkedList<Hit>();
-		LinkedList<Hit> hitsOnPlane = new LinkedList<Hit>();
-		Hit rightHit = right.hit(ray);
-		Hit leftHit = left.hit(ray);
+		final LinkedList<Hit> hits = new LinkedList<Hit>();
+		final LinkedList<Hit> hitsOnPlane = new LinkedList<Hit>();
+		final Hit rightHit = right.hit(ray);
+		final Hit leftHit = left.hit(ray);
 		if (rightHit != null) {
 			hitsOnPlane.add(rightHit);
 		}
@@ -101,8 +101,8 @@ public class AxisAlignedBox extends Geometry {
 		}
 		hitsOnPlane.clear();
 		
-		Hit topHit = top.hit(ray);
-		Hit bottomHit = bottom.hit(ray);
+		final Hit topHit = top.hit(ray);
+		final Hit bottomHit = bottom.hit(ray);
 		if (topHit != null) {
 			hitsOnPlane.add(topHit);
 		}
@@ -117,8 +117,8 @@ public class AxisAlignedBox extends Geometry {
 		}
 		hitsOnPlane.clear();
 		
-		Hit frontHit = front.hit(ray);
-		Hit backHit = back.hit(ray);
+		final Hit frontHit = front.hit(ray);
+		final Hit backHit = back.hit(ray);
 		if (frontHit != null) {
 			hitsOnPlane.add(frontHit);
 		}
@@ -131,13 +131,18 @@ public class AxisAlignedBox extends Geometry {
 				 hits.add(hit);
 			 }
 		}
+		
 		Hit nearestHit = null;
+		//---- alternativ zu Zeile 139-141:
+//		double t = Double.MAX_VALUE;
+//		for (Hit hit : hits) {
+//			if (hit.t > Constants.EPSILON && hit.t - t < Constants.EPSILON) {
 		double t = -1;
 		for (Hit hit : hits) {
-		  if ((hit.t < t || t == -1) && hit.t > Constants.EPSILON) {
-			  t = hit.t;
-			  nearestHit = hit;
-		  }
+			if ((hit.t < t || t == -1) && hit.t > Constants.EPSILON) {
+				t = hit.t;
+				nearestHit = hit;
+			}
 		}
 		return nearestHit;
 	}

@@ -57,19 +57,21 @@ public class TransparentMaterial extends Material{
 		//																      0,25v
 		final double radikand = 1 - quotient * quotient * (1 - cosPhi1 * cosPhi1);
 		final Vector3 rd = d.add(n.mul(2 * cosPhi1)); // evtl. reflected on probieren TODO
-		if (radikand < 0) {
+		if (radikand < 0) { // total inner reflection
 			return tracer.trace(new Ray(p, rd), world);
 		}
 		final double cosPhi2 = Math.sqrt(radikand);
+		
 		if (Double.isNaN(cosPhi2)) {
 			System.err.println("Caught myself a NaN. cosPhi1: " + cosPhi1 + ", quotient: " + quotient);
 		}
+		
 //		final Vector3 rd = d.add(n.mul(2 * cosPhi1));
 		final Vector3 rt = d.mul(quotient).sub(n.mul(cosPhi2 - quotient * cosPhi1));
 		final double r0 = Math.pow((eta1 - eta2) / (eta1 + eta2), 2);
 		final double r = r0 + (1 - r0) * Math.pow(1 - cosPhi1, 5);
 		final double t = 1 - r;
-		if (t < 0) { 
+		if (t < 0) { // should never happen -> unused -> remove? TODO
 			System.err.println(t);
 			return world.backgroundColor;
 		}

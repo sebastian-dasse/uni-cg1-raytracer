@@ -34,8 +34,8 @@ public final class DemoSceneUE04 {
 	 */
 	public static void main(final String[] args) {
 		final Renderer[] tracers = new Renderer[]{
-//			scene1(), 
-//			scene2(), 
+			scene1(), 
+			scene2(), 
 			scene3()
 		};
 		for (int i = 0; i < tracers.length; i++) {
