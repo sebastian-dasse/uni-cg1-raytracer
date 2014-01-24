@@ -50,19 +50,19 @@ public class Mat4x4 {
 	 */
 	public final double m34;
 	/**
-	 * The m41 component of this <codeMat4x4</code>.
+	 * The m41 component of this <code>Mat4x4</code>.
 	 */
 	public final double m41;
 	/**
-	 * The m42 component of this <codeMat4x4</code>.
+	 * The m42 component of this <code>Mat4x4</code>.
 	 */
 	public final double m42;
 	/**
-	 * The m43 component of this <codeMat4x4</code>.
+	 * The m43 component of this <code>Mat4x4</code>.
 	 */
 	public final double m43;
 	/**
-	 * The m44 component of this <codeMat4x4</code>.
+	 * The m44 component of this <code>Mat4x4</code>.
 	 */
 	public final double m44;
 
@@ -87,4 +87,19 @@ public class Mat4x4 {
 	this.m43 = m43;
 	this.m44 = m44;
 	}
+	
+	public Vector3 mul(final Vector3 v){
+		return null;
+	}
+	
+	public Point3 mul(final Point3 p){
+		return null;
+	}
+	
+	public Mat4x4 mul(final Mat4x4 m){
+		return null;
+	}
+	
+	
+	
 }
