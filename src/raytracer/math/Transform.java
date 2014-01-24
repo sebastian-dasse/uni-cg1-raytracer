@@ -51,5 +51,4 @@ public class Transform {
 	public Normal3 mul(final Normal3 normal) {
 	    return null;
 	  }
-	
 }
