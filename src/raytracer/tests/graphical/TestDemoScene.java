@@ -40,7 +40,8 @@ public class TestDemoScene {
 		final Camera camera = Factory.buildPerspectiveCamera(new double[][] {
 				{ 4, 4, 4 }, { -1, -1, -1 }, { 0, 1, 0 }, { Math.PI / 4.0 } });
 		world.addElements(new Geometry[] {
-				new Node(new Sphere(new Point3(0, 0, 0), 1, new LambertMaterial(new Color(1, 0, 0))),
+				new Node(new Sphere(
+						new LambertMaterial(new Color(1, 0, 0))),
 //				new Node(new Sphere(new Point3(0, 0, 0), 1, new PhongMaterial(new Color(1, 0, 0), new Color(0, 0, 0), 20)), 
 //				new Node(new Sphere(new Point3(0, 0, 0), 1, new SingleColorMaterial(new Color(1, 0, 0))),
 						new Transform().scale(1, 2, 0.5))
