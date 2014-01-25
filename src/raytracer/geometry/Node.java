@@ -39,8 +39,7 @@ public class Node extends Geometry {
 	
 	@Override
 	public Hit hit(Ray ray) {
-		// TODO Auto-generated method stub
-		return null;
+		
 	}
 
 }
