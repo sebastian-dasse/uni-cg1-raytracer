@@ -8,7 +8,7 @@ import raytracer.math.Normal3;
 import raytracer.math.Point3;
 
 /**
- * This immutable class represents a sphere in three-dimensional space. It is defined trough its center point and radius.
+ * This immutable class represents a sphere in three-dimensional space with a center point at (0, 0, 0) and radius 1.
  *  
  * @author Maxim Novichkov
  * @author Sebastian Dass&eacute;
@@ -23,7 +23,7 @@ public class Sphere extends Geometry {
       */
 	private static final double r = 1;
 	/**
-	 * Constructs a new <code>Sphere</code> with the specified parameters.
+	 * Constructs a new <code>Sphere</code> with the specified material.
 	 * 
 	 * @param material	The material of the sphere. Must not be <code>null</code>.
 	 */
@@ -83,40 +83,10 @@ public class Sphere extends Geometry {
 		return new Hit(t, ray, this, normal);
 	}
 	
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((center == null) ? 0 : center.hashCode());
-		long temp;
-		temp = Double.doubleToLongBits(r);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		return result;
-	}
-
-	@Override
-	public boolean equals(final Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		final Sphere other = (Sphere) obj;
-		if (center == null) {
-			if (other.center != null)
-				return false;
-		} else if (!center.equals(other.center))
-			return false;
-		if (Double.doubleToLongBits(r) != Double.doubleToLongBits(other.r))
-			return false;
-		return true;
-	}
-
+	// TODO might be useless now
 	@Override
 	public String toString() {
 		return super.toString() + ",\n\tcenter = " + center + ",\n" + "\tr = "
 				+ r + "]";
 	}
-
 }

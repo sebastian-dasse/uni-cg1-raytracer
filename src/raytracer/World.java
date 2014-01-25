@@ -64,6 +64,7 @@ public class World {
 	 * 
 	 * @param g	The <code>Geometry</code> to be added to this world.
 	 */
+	@Deprecated
 	public void addElement(final Geometry g) {
 		elements.add(g);
 	}
@@ -73,7 +74,12 @@ public class World {
 	 * 
 	 * @param gg	The <code>Geometry</code> array to be added to this world.
 	 */
-	public void addElements(final Geometry[] gg) {
+//	public void addElements(final Geometry[] gg) {
+//		for (Geometry g : gg) {
+//			elements.add(g);
+//		}
+//	}
+	public void addElements(final Geometry... gg) {
 		for (Geometry g : gg) {
 			elements.add(g);
 		}
