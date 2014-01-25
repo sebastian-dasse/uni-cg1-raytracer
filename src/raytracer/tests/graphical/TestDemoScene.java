@@ -1,12 +1,13 @@
 package raytracer.tests.graphical;
 
 import raytracer.Color;
+import raytracer.Constants;
 import raytracer.Renderer;
 import raytracer.World;
 import raytracer.camera.Camera;
+import raytracer.geometry.AxisAlignedBox;
 import raytracer.geometry.Geometry;
 import raytracer.geometry.Node;
-import raytracer.geometry.Sphere;
 import raytracer.light.SpotLight;
 import raytracer.material.LambertMaterial;
 import raytracer.math.Point3;
@@ -36,15 +37,19 @@ public class TestDemoScene {
 //		parent.add(child1);
 //		parent.add(child2);
 		
-		final World world = Factory.buildWorld(new double[][] { { 0, 0, 0 }, {0.5, 0.5, 0.5} }, 1);
+		final World world = Factory.buildWorld(new double[][] { { 0, 0, 0 }, {0.5, 0.5, 0.5} }, Constants.INDEX_OF_REFRACTION_VACUUM);
 		final Camera camera = Factory.buildPerspectiveCamera(new double[][] {
 				{ 4, 4, 4 }, { -1, -1, -1 }, { 0, 1, 0 }, { Math.PI / 4.0 } });
 		world.addElements(new Geometry[] {
-				new Node(new Sphere(new Point3(0, 0, 0), 1, new LambertMaterial(new Color(1, 0, 0))),
-//				new Node(new Sphere(new Point3(0, 0, 0), 1, new PhongMaterial(new Color(1, 0, 0), new Color(0, 0, 0), 20)), 
-//				new Node(new Sphere(new Point3(0, 0, 0), 1, new SingleColorMaterial(new Color(1, 0, 0))),
-						new Transform().scale(1, 2, 0.5))
+//				new Node(new Sphere(new Point3(0, 0, 0), 1, new LambertMaterial(new Color(1, 0, 0))),
+////				new Node(new Sphere(new Point3(0, 0, 0), 1, new PhongMaterial(new Color(1, 0, 0), new Color(0, 0, 0), 20)), 
+////				new Node(new Sphere(new Point3(0, 0, 0), 1, new SingleColorMaterial(new Color(1, 0, 0))),
+//						new Transform().scale(1, 2, 0.5))
 				
+				new Node(new AxisAlignedBox(new Point3(-0.5, -0.5, -0.5), new Point3(0.5, 0.5, 0.5), 
+//						new SingleColorMaterial(new Color(1, 0, 0))), 
+						new LambertMaterial(new Color(1, 1, 1))), 
+						new Transform().rotateX(Math.toRadians(33)))
 				}
 		
 		);

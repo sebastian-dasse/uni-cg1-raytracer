@@ -44,8 +44,8 @@ public class Transform {
 	}
 	
 
-	public Transform translate(Point3 point) {
-		return translate (point.x, point.y, point.z);
+	public Transform translate(final Point3 point) {
+		return translate(point.x, point.y, point.z);
 	}
 	
 	/**
