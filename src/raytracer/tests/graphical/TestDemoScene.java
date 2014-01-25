@@ -8,7 +8,7 @@ import raytracer.camera.Camera;
 import raytracer.geometry.AxisAlignedBox;
 import raytracer.geometry.Node;
 import raytracer.light.SpotLight;
-import raytracer.material.LambertMaterial;
+import raytracer.material.PhongMaterial;
 import raytracer.math.Point3;
 import raytracer.math.Transform;
 import raytracer.math.Vector3;
@@ -39,6 +39,7 @@ public class TestDemoScene {
 		final World world = Factory.buildWorld(new double[][] { { 0, 0, 1 }, {0.0, 0.0, 0.0} }, Constants.INDEX_OF_REFRACTION_VACUUM);
 		final Camera camera = Factory.buildPerspectiveCamera(new double[][] {
 				{ 4, 4, 4 }, { -1, -1, -1 }, { 0, 1, 0 }, { Math.PI / 4.0 } });
+//				{ 20, 20, 20 }, { -1, -1, -1 }, { 0, 1, 0 }, { Math.PI / 40.0 } });
 		world.addElements(
 //				new Node(new Sphere(
 //						new LambertMaterial(new Color(1, 0, 0))), 
@@ -52,13 +53,13 @@ public class TestDemoScene {
 				
 				new Node(new AxisAlignedBox( 
 //						new SingleColorMaterial(new Color(1, 0, 0))), 
-						new LambertMaterial(new Color(1, 0, 0))),
-//						new PhongMaterial(new Color(1, 0, 0), new Color(0, 0, 0), 20)),
+//						new LambertMaterial(new Color(1, 0, 0))),
+						new PhongMaterial(new Color(1, 0, 0), new Color(0, 0, 0), 20)),
 						new Transform()
-//							.scale(2, 0.5, 2)
+							.scale(2, 0.5, 2)
 //							.rotateX(Math.toRadians(-45))
-//							.rotateX(Math.toRadians(-199))
-							.rotateZ(Math.toRadians(270))
+							.rotateX(Math.toRadians(-199))
+//							.rotateZ(Math.toRadians(270))
 //							.rotateZ(Math.toRadians(-45))
 						)
 		

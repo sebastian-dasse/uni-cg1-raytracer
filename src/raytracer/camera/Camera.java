@@ -67,7 +67,7 @@ public abstract class Camera {
 	 * @param height	The screen width in pixels.
 	 * @param x			The x coordinate of the pixel.
 	 * @param y			The y coordinate of the pixel.
-	 * @return          
+	 * @return          The <code>Ray</code> for the specified pixel.
 	 */
 	public abstract Ray rayFor(final int width, final int height, final int x, final int y);
 	
