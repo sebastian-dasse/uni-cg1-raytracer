@@ -150,7 +150,7 @@ public class Transform {
 		if (ray == null) {
 			throw new IllegalArgumentException("The parameter 'ray' must not be null.");
 		}
-	    return new Ray(i.mul(ray.o), i.mul(ray.d));
+		return new Ray(i.mul(ray.o), i.mul(ray.d));
 	  }
 	
 	/**
@@ -164,5 +164,5 @@ public class Transform {
 			throw new IllegalArgumentException("The parameter 'normal' must not be null.");
 		}
 		return (i.transposed().mul(normal.asVector())).normalized().asNormal();
-	  }
+	}
 }
