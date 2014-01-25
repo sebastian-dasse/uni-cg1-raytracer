@@ -5,8 +5,8 @@ import java.util.LinkedList;
 import raytracer.Constants;
 import raytracer.Ray;
 import raytracer.material.Material;
-import raytracer.math.Normal3;
 import raytracer.math.Point3;
+import raytracer.math.Transform;
 
 /**
  * This immutable class represents an axis aligned box in three-dimensional space. It is defined through its <em>low 
@@ -25,33 +25,16 @@ public class AxisAlignedBox extends Geometry {
 	/**
 	 * The right upper near point of this <code>AxisAlignedBox</code>.
 	 * Is part of the top, the front and the right plane.
-	 */
+	 */s
 	private static final Point3 run = new Point3(0.5, 0.5, 0.5);
-	/**
-	 * The normal of the left face of the box.
-	 */
-	private static final Normal3 LEFT_NORMAL   = new Normal3(-1,  0,  0);
-	/**
-	 * The normal of the right face of the box.
-	 */
-	private static final Normal3 RIGHT_NORMAL  = new Normal3( 1,  0,  0);
-	/**
-	 * The normal of the top face of the box.
-	 */
-	private static final Normal3 TOP_NORMAL    = new Normal3( 0,  1,  0);
-	/**
-	 * The normal of the bottom face of the box.
-	 */
-	private static final Normal3 BOTTOM_NORMAL = new Normal3( 0, -1,  0);
-	/**
-	 * The normal of the front face of the box.
-	 */
-	private static final Normal3 FRONT_NORMAL  = new Normal3( 0,  0,  1);
-	/**
-	 * The normal of the back face of the box.
-	 */
-	private static final Normal3 BACK_NORMAL   = new Normal3( 0,  0, -1);
-	private final Plane left;
+	new Node(
+		    Transform.translate( AxisAlignedBox.run ).rotateZ( -math.Pi/2.0 ),
+		    new Plane( material )
+		  )
+	
+	private final Node left = new Node(
+			new Transform().translate(run)
+			)
 	private final Plane right;
 	private final Plane top;
 	private final Plane bottom;
