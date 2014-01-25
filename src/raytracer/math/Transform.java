@@ -90,6 +90,6 @@ public class Transform {
 	
 	public Normal3 mul(final Normal3 normal) {
 		final Vector3 temp = (i.transposed().mul(normal.asVector())).normalized();
-	    return new Normal3(temp.x, normal.y, normal.z);
+	    return new Normal3(temp.x, temp.y, temp.z);
 	  }
 }
