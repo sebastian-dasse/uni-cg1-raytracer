@@ -24,7 +24,11 @@ public class Transform {
 		this.i = i;
 	}
 	
-	public Transform translate(final double x, final double y, final double z) {
+	public Transform translate(Point3 point) {
+		return translate (point.x, point.y, point.z);
+	}
+	
+ 	public Transform translate(final double x, final double y, final double z) {
 		return new Transform(new Mat4x4(1, 0, 0, x, 
 							            0, 1, 0, y, 
 							            0, 0, 1, z, 
