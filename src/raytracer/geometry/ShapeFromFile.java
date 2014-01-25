@@ -1,16 +1,28 @@
 package raytracer.geometry;
 
-import java.util.LinkedList;
+import java.io.File;
 
+import raytracer.Ray;
 import raytracer.material.Material;
-import raytracer.math.Transform;
 
-public class ShapeFromFile extends Node {
-
-	public ShapeFromFile(Transform transform, LinkedList<Geometry> geos,
-			Material material) {
-		super(transform, geos, material);
-		// TODO Auto-generated constructor stub
+public class ShapeFromFile extends Geometry {
+	private final File file;
+	
+	public ShapeFromFile(String filename, Material material) {
+		super(material);
+		this.file = new File(filename);
+	}
+	
+	public ShapeFromFile(File filename, Material material) {
+		super(material);
+		this.file = filename;
+	}
+	
+	@Override
+	public Hit hit(Ray ray) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
+	
 }
