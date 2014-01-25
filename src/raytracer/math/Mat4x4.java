@@ -89,37 +89,46 @@ public class Mat4x4 {
 	}
 	
 	public Vector3 mul(final Vector3 v){
+		if (v == null) {
+			throw new IllegalArgumentException("The parameter 'v' must not be null.");
+		}
 		return new Vector3(m11 * v.x + m12 * v.y + m13 * v.z,
 						   m21 * v.x + m22 * v.y + m23 * v.z,
 						   m31 * v.x + m32 * v.y + m33 * v.z);
 	}
 	
 	public Point3 mul(final Point3 p){
+		if (p == null) {
+			throw new IllegalArgumentException("The parameter 'p' must not be null.");
+		}
 		return new Point3(m11 * p.x + m12 * p.y + m13 * p.z + m14,
 						  m21 * p.x + m22 * p.y + m23 * p.z + m24,
 						  m31 * p.x + m32 * p.y + m33 * p.z + m34);
 	}
 	
 	public Mat4x4 mul(final Mat4x4 m){
-		return new Mat4x4(m11*m.m11+m12*m.m21+m13*m.m31+m14*m.m41, 
-						  m11*m.m12+m12*m.m22+m13*m.m32+m14*m.m42, 
-						  m11*m.m13+m12*m.m23+m13*m.m33+m14*m.m43, 
-						  m11*m.m14+m12*m.m24+m13*m.m34+m14*m.m44,
+		if (m == null) {
+			throw new IllegalArgumentException("The parameter 'm' must not be null.");
+		}
+		return new Mat4x4(m11*m.m11 + m12*m.m21 + m13*m.m31 + m14*m.m41, 
+						  m11*m.m12 + m12*m.m22 + m13*m.m32 + m14*m.m42, 
+						  m11*m.m13 + m12*m.m23 + m13*m.m33 + m14*m.m43, 
+						  m11*m.m14 + m12*m.m24 + m13*m.m34 + m14*m.m44,
 				
-						  m21*m.m11+m22*m.m21+m23*m.m31+m24*m.m41, 
-						  m21*m.m12+m22*m.m22+m23*m.m32+m24*m.m42, 
-						  m21*m.m13+m22*m.m23+m23*m.m33+m24*m.m43, 
-						  m21*m.m14+m22*m.m24+m23*m.m34+m24*m.m44,
+						  m21*m.m11 + m22*m.m21 + m23*m.m31 + m24*m.m41, 
+						  m21*m.m12 + m22*m.m22 + m23*m.m32 + m24*m.m42, 
+						  m21*m.m13 + m22*m.m23 + m23*m.m33 + m24*m.m43, 
+						  m21*m.m14 + m22*m.m24 + m23*m.m34 + m24*m.m44,
 						  
-                          m31*m.m11+m32*m.m21+m33*m.m31+m34*m.m41, 
-                          m31*m.m12+m32*m.m22+m33*m.m32+m34*m.m42,
-                          m31*m.m13+m32*m.m23+m33*m.m33+m34*m.m43, 
-                          m31*m.m14+m32*m.m24+m33*m.m34+m34*m.m44,
+                          m31*m.m11 + m32*m.m21 + m33*m.m31 + m34*m.m41, 
+                          m31*m.m12 + m32*m.m22 + m33*m.m32 + m34*m.m42,
+                          m31*m.m13 + m32*m.m23 + m33*m.m33 + m34*m.m43, 
+                          m31*m.m14 + m32*m.m24 + m33*m.m34 + m34*m.m44,
                           
-                          m41*m.m11+m42*m.m21+m43*m.m31+m44*m.m41, 
-                          m41*m.m12+m42*m.m22+m43*m.m32+m44*m.m42, 
-                          m41*m.m13+m42*m.m23+m43*m.m33+m44*m.m43, 
-                          m41*m.m14+m42*m.m24+m43*m.m34+m44*m.m44);
+                          m41*m.m11 + m42*m.m21 + m43*m.m31 + m44*m.m41, 
+                          m41*m.m12 + m42*m.m22 + m43*m.m32 + m44*m.m42, 
+                          m41*m.m13 + m42*m.m23 + m43*m.m33 + m44*m.m43, 
+                          m41*m.m14 + m42*m.m24 + m43*m.m34 + m44*m.m44);
 	}
 	
 	public Mat4x4 transposed(){
@@ -129,4 +138,95 @@ public class Mat4x4 {
 						  m14, m24, m34, m44);
 	}
 	
+	public String toString() {
+		return getClass().getSimpleName() 
+				+ "[\tm11 = " + m11 + ", m12 = " + m12 + ", m13 = " + m13 + ", m14 = " + m14 + ",\n" 
+				+ "\tm21 =  " + m21 + ", m22 = " + m22 + ", m23 = " + m23 + ", m24 = " + m24 + ",\n" 
+				+ "\tm31 =  " + m31 + ", m32 = " + m32 + ", m33 = " + m33 + ", m34 = " + m34 + ",\n"
+				+ "\tm41 =  " + m41 + ", m42 = " + m42 + ", m43 = " + m43 + ", m44 = " + m44 + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		long temp;
+		temp = Double.doubleToLongBits(m11);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(m12);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(m13);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(m14);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(m21);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(m22);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(m23);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(m24);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(m31);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(m32);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(m33);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(m34);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(m41);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(m42);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(m43);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(m44);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Mat4x4 other = (Mat4x4) obj;
+		if (Double.doubleToLongBits(m11) != Double.doubleToLongBits(other.m11))
+			return false;
+		if (Double.doubleToLongBits(m12) != Double.doubleToLongBits(other.m12))
+			return false;
+		if (Double.doubleToLongBits(m13) != Double.doubleToLongBits(other.m13))
+			return false;
+		if (Double.doubleToLongBits(m14) != Double.doubleToLongBits(other.m14))
+			return false;
+		if (Double.doubleToLongBits(m21) != Double.doubleToLongBits(other.m21))
+			return false;
+		if (Double.doubleToLongBits(m22) != Double.doubleToLongBits(other.m22))
+			return false;
+		if (Double.doubleToLongBits(m23) != Double.doubleToLongBits(other.m23))
+			return false;
+		if (Double.doubleToLongBits(m24) != Double.doubleToLongBits(other.m24))
+			return false;
+		if (Double.doubleToLongBits(m31) != Double.doubleToLongBits(other.m31))
+			return false;
+		if (Double.doubleToLongBits(m32) != Double.doubleToLongBits(other.m32))
+			return false;
+		if (Double.doubleToLongBits(m33) != Double.doubleToLongBits(other.m33))
+			return false;
+		if (Double.doubleToLongBits(m34) != Double.doubleToLongBits(other.m34))
+			return false;
+		if (Double.doubleToLongBits(m41) != Double.doubleToLongBits(other.m41))
+			return false;
+		if (Double.doubleToLongBits(m42) != Double.doubleToLongBits(other.m42))
+			return false;
+		if (Double.doubleToLongBits(m43) != Double.doubleToLongBits(other.m43))
+			return false;
+		if (Double.doubleToLongBits(m44) != Double.doubleToLongBits(other.m44))
+			return false;
+		return true;
+	}
 }
