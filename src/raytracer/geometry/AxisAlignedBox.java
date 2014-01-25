@@ -25,21 +25,29 @@ public class AxisAlignedBox extends Geometry {
 	/**
 	 * The right upper near point of this <code>AxisAlignedBox</code>.
 	 * Is part of the top, the front and the right plane.
-	 */s
+	 */
 	private static final Point3 run = new Point3(0.5, 0.5, 0.5);
-	new Node(
-		    Transform.translate( AxisAlignedBox.run ).rotateZ( -math.Pi/2.0 ),
-		    new Plane( material )
-		  )
+
+	private final Node right = new Node(new Plane(material),
+			new Transform().translate(run).rotateZ( -Math.PI/2.0));
+	 
+	private final Node top =  new Node(new Plane(material),
+			new Transform().translate(run));
 	
-	private final Node left = new Node(
-			new Transform().translate(run)
-			)
-	private final Plane right;
-	private final Plane top;
-	private final Plane bottom;
-	private final Plane front;
-	private final Plane back;
+	private final Node front =  new Node(new Plane(material),
+			new Transform().translate(run).rotateZ( Math.PI)
+			.rotateX(Math.PI / 2.0));
+	
+	private final Node left =  new Node(new Plane(material),
+			new Transform().translate(lbf).rotateZ( Math.PI/2.0));
+	
+	private final Node bottom =  new Node(new Plane(material),
+			new Transform().translate(lbf).rotateX(Math.PI));
+	
+	
+	private final Node back =  new Node(new Plane(material),
+			new Transform().translate(lbf).rotateZ(Math.PI)
+			.rotateX(-Math.PI / 2.0));
 	
 	/**
 	 * Constructs a new <code>AxisAlignedBox</code> with the specified parameters.
@@ -48,13 +56,6 @@ public class AxisAlignedBox extends Geometry {
 	 */
 	public AxisAlignedBox(final Material material) {
 		super(material);
-		final Plane plane = new Plane(material);
-		left = plane;
-		right = plane;
-		top = plane;
-		bottom = plane;
-		front = plane;
-		back = plane;
 	}
 	
 	@Override
