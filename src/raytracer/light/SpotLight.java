@@ -58,7 +58,7 @@ public class SpotLight extends Light {
 	 * Returns <code>true</code> if the specified point is illuminated by this light, i.e. if it is in the cone of light.
 	 */
 	@Override
-	public boolean illuminates(final Point3 point, World world) {
+	public boolean illuminates(final Point3 point, final World world) {
 		// Formula: cos(l, d) = <l, d>, with |l| = |d| = 1, l:= light direction, d: = vector from light position to point
 		final Vector3 from = directionFrom(point);
 		if (Math.acos(direction.normalized().dot(from.mul(-1))) > halfAngle){

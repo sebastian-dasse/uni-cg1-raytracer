@@ -38,7 +38,7 @@ public class DirectionalLight extends Light {
 		this(color, direction, true);
 	}
 	
-	public boolean illuminates(final Point3 point, World world) {
+	public boolean illuminates(final Point3 point, final World world) {
 		if (!castsShadow) {
 			return true;
 		}

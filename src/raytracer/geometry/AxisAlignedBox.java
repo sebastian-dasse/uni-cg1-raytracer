@@ -5,13 +5,13 @@ import java.util.LinkedList;
 import raytracer.Constants;
 import raytracer.Ray;
 import raytracer.material.Material;
-import raytracer.math.Normal3;
 import raytracer.math.Point3;
-import static raytracer.math.MathUtil.isValid;
+import raytracer.math.Transform;
 
 /**
- * This immutable class represents an axis aligned box in three-dimensional space. It is defined through its <em>low 
- * bottom far point</em> (lbf) and its <em>right upper near point</em> (run).
+ * This immutable class represents an axis aligned box in three-dimensional space. It has a default width, height and 
+ * depth of 1. It is defined through its <em>low bottom far point</em> (lbf) and its <em>right upper near point</em> 
+ * (run).
  * 
  * @author Sebastian Dass&eacute;
  *
@@ -19,66 +19,31 @@ import static raytracer.math.MathUtil.isValid;
 public class AxisAlignedBox extends Geometry {
 	
 	/**
-	 * The low bottom far point of this <code>AxisAlignedBox</code>.
+	 * The default low bottom far point of this <code>AxisAlignedBox</code>.
 	 * Is part of the left, the back and the bottom plane.
 	 */
-	public final Point3 lbf;
+	private static final Point3 lbf = new Point3(-0.5, -0.5, -0.5);
 	/**
-	 * The right upper near point of this <code>AxisAlignedBox</code>.
+	 * The default right upper near point of this <code>AxisAlignedBox</code>.
 	 * Is part of the top, the front and the right plane.
 	 */
-	public final Point3 run;
-	/**
-	 * The normal of the left face of the box.
-	 */
-	private static final Normal3 LEFT_NORMAL   = new Normal3(-1,  0,  0);
-	/**
-	 * The normal of the right face of the box.
-	 */
-	private static final Normal3 RIGHT_NORMAL  = new Normal3( 1,  0,  0);
-	/**
-	 * The normal of the top face of the box.
-	 */
-	private static final Normal3 TOP_NORMAL    = new Normal3( 0,  1,  0);
-	/**
-	 * The normal of the bottom face of the box.
-	 */
-	private static final Normal3 BOTTOM_NORMAL = new Normal3( 0, -1,  0);
-	/**
-	 * The normal of the front face of the box.
-	 */
-	private static final Normal3 FRONT_NORMAL  = new Normal3( 0,  0,  1);
-	/**
-	 * The normal of the back face of the box.
-	 */
-	private static final Normal3 BACK_NORMAL   = new Normal3( 0,  0, -1);
-	private final Plane left;
-	private final Plane right;
-	private final Plane top;
-	private final Plane bottom;
-	private final Plane front;
-	private final Plane back;
+	private static final Point3 run = new Point3(0.5, 0.5, 0.5);
+
+	private final Plane plane = new Plane(material);
+	private final Node top = new Node(plane, new Transform().translate(run));
+	private final Node right = new Node(plane, new Transform().translate(run).rotateZ(-Math.PI / 2.0));
+	private final Node front = new Node(plane, new Transform().translate(run).rotateZ(Math.PI).rotateX(Math.PI / 2.0));
+	private final Node left = new Node(plane, new Transform().translate(lbf).rotateZ(Math.PI / 2.0));
+	private final Node bottom = new Node(plane, new Transform().translate(lbf).rotateX(Math.PI));
+	private final Node back = new Node(plane, new Transform().translate(lbf).rotateZ(Math.PI).rotateX(-Math.PI / 2.0));
 	
 	/**
 	 * Constructs a new <code>AxisAlignedBox</code> with the specified parameters.
 	 * 
-	 * @param lbf		The low bottom far point of the <code>AxisAlignedBox</code>. Must not be <code>null</code>.
-	 * @param run		The right upper near point of the <code>AxisAlignedBox</code>. Must not be <code>null</code>.
 	 * @param material	The material of the <code>AxisAlignedBox</code>. Must not be <code>null</code>.
 	 */
-	public AxisAlignedBox(final Point3 lbf, final Point3 run, final Material material) {
+	public AxisAlignedBox(final Material material) {
 		super(material);
-		if (lbf == null || run == null) {
-			throw new IllegalArgumentException("The parameters must not be null.");
-		}
-		this.lbf = lbf;
-		this.run = run;
-		left = new Plane(lbf, LEFT_NORMAL, material);
-		right = new Plane(run, RIGHT_NORMAL, material);
-		top = new Plane(run, TOP_NORMAL, material);
-		bottom = new Plane(lbf, BOTTOM_NORMAL, material);
-		front = new Plane(run, FRONT_NORMAL, material);
-		back = new Plane(lbf, BACK_NORMAL, material);
 	}
 	
 	@Override

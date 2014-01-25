@@ -45,7 +45,7 @@ public abstract class Light {
 	 * @param world	The world.
 	 * @return		<code>true</code> if the specified point is illuminated, otherwise <code>false</code>.
 	 */
-	public abstract boolean illuminates(final Point3 point, World world);
+	public abstract boolean illuminates(final Point3 point, final World world);
 	
 	/**
 	 * Returns the vector which points from the specified point to this light.
