@@ -43,6 +43,11 @@ public class Transform {
 		this.i = i;
 	}
 	
+
+	public Transform translate(Point3 point) {
+		return translate (point.x, point.y, point.z);
+	}
+	
 	/**
 	 * Appends a translation and returns a new <code>Transform</code> object.
 	 * 
@@ -61,6 +66,7 @@ public class Transform {
 								     0, 0, 1, -z, 
 								     0, 0, 0,  1);
 		return new Transform(m.mul(tm), ti.mul(i));
+
 	}
 	
 	/**
