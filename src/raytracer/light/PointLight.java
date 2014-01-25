@@ -38,7 +38,7 @@ public class PointLight extends Light {
 	}
 	
 	@Override
-	public boolean illuminates(final Point3 point, World world) {
+	public boolean illuminates(final Point3 point, final World world) {
 		if (!castsShadow) {
 			return true;
 		}

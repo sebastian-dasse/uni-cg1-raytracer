@@ -59,6 +59,15 @@ public class Node extends Geometry {
 				t = hit.t;
 			}
 		}
-		return nearestHit;
+		if (nearestHit == null) {
+			return null;
+		}
+		return new Hit(
+				t, 
+				processedRay, 
+				nearestHit.geo, 
+				transform.mul(
+						nearestHit.normal));
+//		return nearestHit;
 	}
 }

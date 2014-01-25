@@ -17,29 +17,18 @@ public class Sphere extends Geometry {
 	/**
 	 * The center point of this sphere.
 	 */
-	public final Point3 center;
+	private static final Point3 center = new Point3(0, 0, 0);
 	/**
-	 * The radius of this sphere.
-	 */
-	public final double r;
-	
+      * The radius of this sphere.
+      */
+	private static final double r = 1;
 	/**
 	 * Constructs a new <code>Sphere</code> with the specified parameters.
 	 * 
-	 * @param c			The center point of the sphere. Must not be <code>null</code>.
-	 * @param r			The radius of the sphere. Must not be <code>null</code>.
 	 * @param material	The material of the sphere. Must not be <code>null</code>.
 	 */
-	public Sphere(final Point3 c, final double r, final Material material) {
+	public Sphere(final Material material) {
 		super(material);
-		if (c == null) {
-			throw new IllegalArgumentException("The parameter 'c' must not be null.");
-		}
-		if (r < 0 || !isValid(r)) {
-			throw new IllegalArgumentException("The paramameter 'r' must be a positive double value other than Infinity or NaN.");
-		}
-		center = c;
-		this.r = r;
 	}
 
 	@Override
@@ -93,7 +82,7 @@ public class Sphere extends Geometry {
 		final Normal3 normal = p.sub(center).normalized().asNormal(); // normalized normal
 		return new Hit(t, ray, this, normal);
 	}
-
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -126,7 +115,8 @@ public class Sphere extends Geometry {
 
 	@Override
 	public String toString() {
-		return super.toString() + ",\n\tcenter = " + center + ",\n" 
-								+ "\tr = " + r + "]";
+		return super.toString() + ",\n\tcenter = " + center + ",\n" + "\tr = "
+				+ r + "]";
 	}
+
 }

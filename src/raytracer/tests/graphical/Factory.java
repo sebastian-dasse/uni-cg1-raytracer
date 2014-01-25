@@ -85,9 +85,7 @@ public final class Factory {
 	 * </pre>
 	 */
 	public static final AxisAlignedBox buildAxisAlignedBox(double[][] p, Material material) {
-		return new AxisAlignedBox(new Point3(p[0][0], p[0][1], p[0][2]),
-								  new Point3(p[1][0], p[1][1], p[1][2]),
-//								  new Color(p[2][0], p[2][1], p[2][2]));
+		return new AxisAlignedBox(
 								  material);
 	}
 
@@ -101,9 +99,7 @@ public final class Factory {
 	 * </pre>
 	 */
 	public static final Plane buildPlane(double[][] p, Material material) {
-		return new Plane(new Point3(p[0][0], p[0][1], p[0][2]),
-				         new Normal3(p[1][0], p[1][1], p[1][2]),
-//				         new Color(p[2][0], p[2][1], p[2][2]));
+		return new Plane(
 				         material);
 	}
 	
@@ -117,9 +113,7 @@ public final class Factory {
 	 * </pre>
 	 */
 	public static final Sphere buildSphere(double[][] p, Material material) {
-		return new Sphere(new Point3(p[0][0], p[0][1], p[0][2]),
-						  p[1][0],
-//						  new Color(p[2][0], p[2][1], p[2][2]));
+		return new Sphere(
 						  material);
 	}
 	
