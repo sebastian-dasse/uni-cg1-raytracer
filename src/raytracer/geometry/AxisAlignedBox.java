@@ -7,7 +7,6 @@ import raytracer.Ray;
 import raytracer.material.Material;
 import raytracer.math.Normal3;
 import raytracer.math.Point3;
-import static raytracer.math.MathUtil.isValid;
 
 /**
  * This immutable class represents an axis aligned box in three-dimensional space. It is defined through its <em>low 
@@ -22,12 +21,12 @@ public class AxisAlignedBox extends Geometry {
 	 * The low bottom far point of this <code>AxisAlignedBox</code>.
 	 * Is part of the left, the back and the bottom plane.
 	 */
-	public final Point3 lbf;
+	private static final Point3 lbf = new Point3(-0.5, -0.5, -0.5);
 	/**
 	 * The right upper near point of this <code>AxisAlignedBox</code>.
 	 * Is part of the top, the front and the right plane.
 	 */
-	public final Point3 run;
+	private static final Point3 run = new Point3(0.5, 0.5, 0.5);
 	/**
 	 * The normal of the left face of the box.
 	 */
@@ -62,23 +61,17 @@ public class AxisAlignedBox extends Geometry {
 	/**
 	 * Constructs a new <code>AxisAlignedBox</code> with the specified parameters.
 	 * 
-	 * @param lbf		The low bottom far point of the <code>AxisAlignedBox</code>. Must not be <code>null</code>.
-	 * @param run		The right upper near point of the <code>AxisAlignedBox</code>. Must not be <code>null</code>.
 	 * @param material	The material of the <code>AxisAlignedBox</code>. Must not be <code>null</code>.
 	 */
-	public AxisAlignedBox(final Point3 lbf, final Point3 run, final Material material) {
+	public AxisAlignedBox(final Material material) {
 		super(material);
-		if (lbf == null || run == null) {
-			throw new IllegalArgumentException("The parameters must not be null.");
-		}
-		this.lbf = lbf;
-		this.run = run;
-		left = new Plane(lbf, LEFT_NORMAL, material);
-		right = new Plane(run, RIGHT_NORMAL, material);
-		top = new Plane(run, TOP_NORMAL, material);
-		bottom = new Plane(lbf, BOTTOM_NORMAL, material);
-		front = new Plane(run, FRONT_NORMAL, material);
-		back = new Plane(lbf, BACK_NORMAL, material);
+		final Plane plane = new Plane(material);
+		left = plane;
+		right = plane;
+		top = plane;
+		bottom = plane;
+		front = plane;
+		back = plane;
 	}
 	
 	@Override

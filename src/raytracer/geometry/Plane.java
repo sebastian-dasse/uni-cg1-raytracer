@@ -14,30 +14,21 @@ import raytracer.math.Point3;
  *
  */
 public class Plane extends Geometry {
-	
 	/**
 	 * A point on this plane.
 	 */
-	public final Point3 a;
+	private static final Point3 a = new Point3(0, 0, 0);
 	/**
 	 * The normal of this plane.
 	 */
-	public final Normal3 n;
-	
+	private static final Normal3 n = new Normal3(0, 1, 0);
 	/**
 	 * Constructs a new <code>Plane</code> with the specified parameters.
 	 * 
-	 * @param a			A point on the plane. Must not be <code>null</code>.
-	 * @param n			The normal of the plane. Must not be <code>null</code>.
 	 * @param material	The material of the plane. Must not be <code>null</code>.
 	 */
-	public Plane(final Point3 a, final Normal3 n, final Material material) {
+	public Plane(final Material material) {
 		super(material);
-		if (a == null || n == null) {
-			throw new IllegalArgumentException("The parameters must not be null.");
-		}
-		this.a = a;
-		this.n = n;
 	}
 
 	@Override
@@ -45,7 +36,6 @@ public class Plane extends Geometry {
 		if (ray == null) {
 			throw new IllegalArgumentException("The parameter 'ray' must not be null.");
 		}
-		
 		// Formula: t = <a - o, n> / <d, n>
 		final double denominator = ray.d.dot(n);
 		if (denominator == 0) { // not hit
@@ -55,7 +45,7 @@ public class Plane extends Geometry {
 		final Normal3 normal = n.asVector().normalized().asNormal(); // normalized normal
 		return (t < Constants.EPSILON) ? null : new Hit(t, ray, this, normal);
 	}
-
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -89,7 +79,8 @@ public class Plane extends Geometry {
 
 	@Override
 	public String toString() {
-		return super.toString() + ",\n\t[a = " + a + ",\n" 
-								+ "\tn = " + n + "]";
+		return super.toString() + ",\n\t[a = " + a + ",\n" + "\tn = " + n + "]";
 	}
+
+
 }
