@@ -54,7 +54,7 @@ public class Node extends Geometry {
 		Hit nearestHit = null;
 		for (Geometry geo : geos) {
 			final Hit hit = geo.hit(processedRay);
-			if (hit.t < t) {
+			if (hit != null && hit.t < t) {
 				nearestHit = hit;
 				t = hit.t;
 			}
