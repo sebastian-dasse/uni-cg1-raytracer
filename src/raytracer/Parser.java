@@ -17,6 +17,9 @@ public class Parser {
 	public final String NORMAL = "vn";
 	public final String FACE = "f";
 	public final String COMMENT = "#";
+	public final String SLASH = "/";
+	public final String BLANK = " ";
+	public final int FACELENGTH = 9;
 	LinkedList <String> lines;
 	private Collection<Point3> vertices;
 	private Collection<TextCoord> textures;
@@ -75,26 +78,33 @@ public class Parser {
 			
 			final boolean objectEnd = ((previousType.equals(FACE) && !type.equals(FACE) || lno == lines.size() - 1));
 			if (objectEnd) {
-				System.out.println("Vertices");
-				System.out.println("=======================");
-				listAll(vertices);
-				System.out.println("Textures");
-				System.out.println("=======================");
-				listAll(textures);
-				System.out.println("Normals");
-				System.out.println("=======================");
-				listAll(normals);
-				System.out.println("Faces");
-				System.out.println("=======================");
-				listAll(faces);
+				for (String face : faces) {
+					String [] blocks = face.replaceAll(FACE, "").trim().split(BLANK);
+					Collection<String> facesProcessed= new LinkedList<String>();
+					
+					for (int i = 0; i < blocks.length; i++) {
+						System.out.println(blocks[i]);
+					}
+				}
+//				
+//				System.out.println("Vertices");
+//				System.out.println("=======================");
+//				listAll(vertices);
+//				System.out.println("Textures");
+//				System.out.println("=======================");
+//				listAll(textures);
+//				System.out.println("Normals");
+//				System.out.println("=======================");
+//				listAll(normals);
+//				System.out.println("Faces");
+//				System.out.println("=======================");
+				
+//				listAll(faces);
 			}
 			
 			
 			if (type.equals(FACE)) {
-				for (int i = 1; i < slots.length; i++) {
-					faces.add(slots[i]);
-				}
-				
+				faces.add(line);
 			} else {
 				double slotsAsDouble [] = new double [slots.length - 1];
 				for (int i = 1; i < slots.length; i++)  {
