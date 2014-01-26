@@ -13,7 +13,7 @@ public class ParserTest {
 		parser.readFile(new File("/Users/funkjaymatada/Beuth/CGI/szenengraph/models/cube-v.obj"));
 		try {
 			parser.parseBasicData();
-			parser.listAll();
+//			parser.listAll();
 		}
 		catch (DataFormatException e) {
 			System.err.println("You suck");

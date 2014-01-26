@@ -144,18 +144,42 @@ public class Parser {
 						}
 					}
 					/*
-					 * Build String array with one entry per tupel
+					 * Build String array with one entry per desired NINER - tupel
 					 */
-					String[] valuesForOneLine = tupelsAsString.toString()
+					String[] ninerTupelsAsString = tupelsAsString.toString()
 							.split(BLANK);
+					
 					/*
 					 * Convert string array into 2-Dimensional int array
 					 */
-					for (int i = 0; i < valuesForOneLine.length; i++) {
+					for (int i = 0; i < ninerTupelsAsString.length; i++) {
 						result[count][i] = Integer
-								.parseInt(valuesForOneLine[i]);
+								.parseInt(ninerTupelsAsString[i]);
 					}
+					
 					count++;
+				}
+				
+				/*
+				 * Remap
+				 */
+				
+				int minValue = Integer.MAX_VALUE;
+				// FIND MINIMUM
+				for (int i = 0; i < result.length; i++) {
+					for (int value : result[i]) {
+						if (Math.signum(value - minValue) == -1) {
+							minValue = value;
+						}
+					}
+				}
+			    // THROWS ERROR ----> 
+				int compensation = (1 - minValue);
+				//COMPENSATE
+				for (int i = 0; i < result.length; i++) {
+					for (int i2 = 0; i2 < result[i].length; i2++) {
+						faces [i][i2] = result [i][i2] + compensation;
+					}
 				}
 				faces = result;
 			}
