@@ -62,6 +62,7 @@ public class Parser {
 			 * Indicators
 			 */
 			final String type = slots[0];
+			System.out.println("LINE : " + line + "TYPE: " + type);
 			if (lno > 0) {
 				previousType = lines.get(lno - 1).split(" ")[0];
 			}
@@ -78,54 +79,14 @@ public class Parser {
 				throw new DataFormatException();
 			}
 			
-			final boolean objectEnd = ((previousType.equals(FACE) && !type.equals(FACE) || lno == lines.size() - 1));
-			if (objectEnd) {
-				int [][] result = new int [faces.size()][9];
-				int count = 0;
-				for (String face : faces) {
-					String [] blocks = face.replaceAll(FACE, "").trim().split(BLANK);
-					StringBuilder tupelsAsString = new StringBuilder();
-					for (int i = 0; i < blocks.length; i++) {
-						String slashFiltered = blocks[i].replace(SLASH, " ");
-						String [] atomicElements = slashFiltered.split(BLANK);
-						StringBuilder tupelFilled = new StringBuilder();
-						
-						tupelFilled.append(atomicElements[0]);
-						// Fill up with zeros
-						for (int i2 = 1; i2 <= TUPELSIZE - atomicElements.length; i2++) {
-							tupelFilled.append(" 0");
-						}
-						if (TUPELSIZE - atomicElements.length == 0) {
-							tupelsAsString.append(slashFiltered + BLANK);
-						} else {
-							tupelsAsString.append(tupelFilled + BLANK);
-						}
-					}
-					String[] valuesForOneLine = tupelsAsString.toString().split(BLANK);
-					for (int i = 0; i < valuesForOneLine.length; i++) {
-						result[count][i] = Integer.parseInt(valuesForOneLine[i]);
-					}
-					
-					count++;
-				}
-//				
-//				System.out.println("Vertices");
-//				System.out.println("=======================");
-//				listAll(vertices);
-//				System.out.println("Textures");
-//				System.out.println("=======================");
-//				listAll(textures);
-//				System.out.println("Normals");
-//				System.out.println("=======================");
-//				listAll(normals);
-//				System.out.println("Faces");
-//				System.out.println("=======================");
-				
-//				listAll(faces);
-			}
+			/*
+			 * Process faces to int array
+			 */
+			final boolean objectEnd = ((previousType.equals(FACE) && !type.equals(FACE)) || lno == lines.size() - 1);
 			
 			
 			if (type.equals(FACE)) {
+				System.out.println("Got face!");
 				faces.add(line);
 			} else {
 				double slotsAsDouble [] = new double [slots.length - 1];
@@ -161,12 +122,65 @@ public class Parser {
 					);
 				}
 			}
+			if (objectEnd) {
+				/* 
+				 * Done reading non-face data from file
+				 */
+				int [][] result = new int [faces.size()][9];
+				int count = 0;
+				/*
+				 * Iterate linewise
+				 */
+				System.out.println(faces.size()); ///NOT ENOUGH FACES
+				for (String face : faces) {
+					/*
+					 * Split line into blocks
+					 */
+					String [] blocks = face.replaceAll(FACE, "").trim().split(BLANK);
+					StringBuilder tupelsAsString = new StringBuilder();
+					/*
+					 * Retrieve blocks: Fill them up with 0s if necessary
+					 */
+					for (int i = 0; i < blocks.length; i++) {
+						String slashFiltered = blocks[i].replace(SLASH, " ");
+						String [] atomicElements = slashFiltered.split(BLANK);
+						StringBuilder tupelFilled = new StringBuilder();
+						tupelFilled.append(atomicElements[0]);
+						for (int i2 = 1; i2 <= TUPELSIZE - atomicElements.length; i2++) {
+							tupelFilled.append(" 0");
+						}
+						if (TUPELSIZE - atomicElements.length == 0) {
+							tupelsAsString.append(slashFiltered + BLANK);
+						} else {
+							tupelsAsString.append(tupelFilled + BLANK);
+						}
+					}
+					/*
+					 * Build String array with one entry per tupel
+					 */
+					String[] valuesForOneLine = tupelsAsString.toString().split(BLANK);
+					/*
+					 * Convert string array into 2-Dimensional int array
+					 */
+					for (int i = 0; i < valuesForOneLine.length; i++) {
+						result[count][i] = Integer.parseInt(valuesForOneLine[i]);
+					}
+					count++;
+				}
+
+				
+				listAll(result);
+			}
+			
 		}
 	}
 	
-	public void listAll(Collection<?> c) {
-		for (Object o : c) {
-			System.out.println(o);
+	public void listAll(int[][] data) {
+		for (int[] i1 : data) {
+			System.out.println("--");
+			for (int i2 : i1) {
+				System.out.println(i2);
+			}
 		}
 	}
 	public void buildFaces() {
