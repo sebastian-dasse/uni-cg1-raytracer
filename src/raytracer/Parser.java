@@ -16,7 +16,7 @@ public class Parser {
 	public final String TEXTURE = "vt";
 	public final String NORMAL = "vn";
 	public final String FACE = "f";
-	public final char COMMENT = '#';
+	public final String COMMENT = "#";
 	LinkedList <String> lines;
 	private Collection<Point3> vertices;
 	private Collection<TextCoord> textures;
@@ -65,21 +65,32 @@ public class Parser {
 			/*
 			 * Special cases
 			 */
-			if (line.toCharArray()[0] == COMMENT) {
+			if (line.startsWith(COMMENT)) {
 				continue;
 			}
 			
-			if (type == FACE && (slots.length - 1) < 3) {
+			if (type.equals(FACE) && (slots.length - 1) < 3) {
 				throw new DataFormatException();
 			}
 			
-			final boolean objectEnd = (previousType == FACE && type != FACE);
+			final boolean objectEnd = ((previousType.equals(FACE) && !type.equals(FACE) || lno == lines.size() - 1));
 			if (objectEnd) {
-				System.out.println("My time ended");
+				System.out.println("Vertices");
+				System.out.println("=======================");
+				listAll(vertices);
+				System.out.println("Textures");
+				System.out.println("=======================");
+				listAll(textures);
+				System.out.println("Normals");
+				System.out.println("=======================");
+				listAll(normals);
+				System.out.println("Faces");
+				System.out.println("=======================");
+				listAll(faces);
 			}
 			
 			
-			if (type == FACE) {
+			if (type.equals(FACE)) {
 				for (int i = 1; i < slots.length; i++) {
 					faces.add(slots[i]);
 				}
@@ -87,10 +98,9 @@ public class Parser {
 			} else {
 				double slotsAsDouble [] = new double [slots.length - 1];
 				for (int i = 1; i < slots.length; i++)  {
-					slotsAsDouble[i] = slots[i].isEmpty() ? Double.NaN : Double.parseDouble(slots[i]);
+					slotsAsDouble[i - 1] = slots[i].isEmpty() ? Double.NaN : Double.parseDouble(slots[i]);
 				}
-
-				if (type == VERTICE) {
+				if (type.equals(VERTICE)) {
 					vertices.add(
 							new Point3(
 									Double.parseDouble(slots[1]),
@@ -100,7 +110,7 @@ public class Parser {
 					);
 				}
 
-				if (type == TEXTURE) {
+				if (type.equals(TEXTURE)) {
 					textures.add(
 							new TextCoord(
 									Double.parseDouble(slots[1]),
@@ -109,7 +119,7 @@ public class Parser {
 					);
 				}
 
-				if (type == NORMAL) {
+				if (type.equals(NORMAL)) {
 					normals.add(
 							new Normal3(
 									Double.parseDouble(slots[1]),
@@ -122,6 +132,11 @@ public class Parser {
 		}
 	}
 	
+	public void listAll(Collection<?> c) {
+		for (Object o : c) {
+			System.out.println(o);
+		}
+	}
 	public void buildFaces() {
 		
 	}
