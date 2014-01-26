@@ -1,4 +1,4 @@
-package raytracer.tests.graphical;
+package raytracer;
 
 import java.io.File;
 import java.io.IOException;
@@ -11,7 +11,7 @@ import raytracer.math.Normal3;
 import raytracer.math.Point3;
 import raytracer.texture.TextCoord;
 
-public class MySense {
+public class Parser {
 	public final String VERTICE = "v";
 	public final String TEXTURE = "vt";
 	public final String NORMAL = "vn";
@@ -21,13 +21,13 @@ public class MySense {
 	private Collection<Point3> vertices;
 	private Collection<TextCoord> textures;
 	private Collection<Normal3> normals;
-	private Collection<String[]> faces;
+	private Collection<String> faces;
 	
-	public MySense() {
+	public Parser() {
 		vertices = new LinkedList<Point3>();
 		textures = new LinkedList<TextCoord>();
 		normals = new LinkedList<Normal3>();
-		faces = new LinkedList<String[]>();
+		faces = new LinkedList<String>();
 		lines = new LinkedList<String>();
 	}
 	
@@ -45,7 +45,6 @@ public class MySense {
 	
 	
 	public void parseBasicData() throws DataFormatException {
-		boolean facesEnd = false;
 		String previousType = "";
 		for (int lno = 0; lno < lines.size(); lno++) {
 			/*
@@ -61,7 +60,7 @@ public class MySense {
 			if (lno > 0) {
 				previousType = lines.get(lno - 1).split(" ")[0];
 			}
-			facesEnd = (previousType == FACE && type != FACE);
+			
 			
 			/*
 			 * Special cases
@@ -74,14 +73,16 @@ public class MySense {
 				throw new DataFormatException();
 			}
 			
-			if (facesEnd) {
-				
+			final boolean objectEnd = (previousType == FACE && type != FACE);
+			if (objectEnd) {
+				System.out.println("My time ended");
 			}
 			
 			
 			if (type == FACE) {
-				
-				//
+				for (int i = 1; i < slots.length; i++) {
+					faces.add(slots[i]);
+				}
 				
 			} else {
 				double slotsAsDouble [] = new double [slots.length - 1];
@@ -122,13 +123,6 @@ public class MySense {
 	}
 	
 	public void buildFaces() {
-		
-	}
-	
-	public static void main (String[] args) {
-//		
-//		int [] values = new int[3];
-		System.out.println(Double.parseDouble(Double.N));
 		
 	}
 }
