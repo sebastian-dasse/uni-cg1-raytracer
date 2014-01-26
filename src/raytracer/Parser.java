@@ -81,6 +81,7 @@ public class Parser {
 			final boolean objectEnd = ((previousType.equals(FACE) && !type.equals(FACE) || lno == lines.size() - 1));
 			if (objectEnd) {
 				int [][] result = new int [faces.size()][9];
+				int count = 0;
 				for (String face : faces) {
 					String [] blocks = face.replaceAll(FACE, "").trim().split(BLANK);
 					StringBuilder tupelsAsString = new StringBuilder();
@@ -100,8 +101,12 @@ public class Parser {
 							tupelsAsString.append(tupelFilled + BLANK);
 						}
 					}
+					String[] valuesForOneLine = tupelsAsString.toString().split(BLANK);
+					for (int i = 0; i < valuesForOneLine.length; i++) {
+						result[count][i] = Integer.parseInt(valuesForOneLine[i]);
+					}
 					
-					System.out.println(tupelsAsString);
+					count++;
 				}
 //				
 //				System.out.println("Vertices");
