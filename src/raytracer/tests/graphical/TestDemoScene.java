@@ -6,13 +6,13 @@ import raytracer.Renderer;
 import raytracer.World;
 import raytracer.camera.Camera;
 import raytracer.geometry.AxisAlignedBox;
+import raytracer.geometry.Geometry;
 import raytracer.geometry.Node;
-import raytracer.geometry.Plane;
-import raytracer.geometry.TriangleMesh;
+import raytracer.geometry.Sphere;
 import raytracer.light.PointLight;
 import raytracer.material.LambertMaterial;
-import raytracer.material.ReflectiveMaterial;
-import raytracer.math.Normal3;
+import raytracer.material.Material;
+import raytracer.material.PhongMaterial;
 import raytracer.math.Point3;
 import raytracer.math.Transform;
 import raytracer.ui.ShowImage;
@@ -95,31 +95,49 @@ public class TestDemoScene {
 		final Camera camera = Factory.buildPerspectiveCamera(new double[][] {
 				{ 4, 4, 4 }, { -1, -1, -1 }, { 0, 1, 0 }, { Math.PI / 4.0 } });
 //				{ 20, 20, 20 }, { -1, -1, -1 }, { 0, 1, 0 }, { Math.PI / 40.0 } });
-		world.addElements(
-				new Node(
-					new Plane(
-						new Point3(0, -1, 0), 
-						new Normal3(0, 1, 0), 
-						new ReflectiveMaterial(new Color(1, 0, 0), new Color(1, 1, 1), 20, new Color(0.5, 0.5, 0.5))
-					), new Transform()),
-				
-				new Node(
-					TriangleMesh.createTestTriangleMesh(new ReflectiveMaterial(new Color(1, 1, 0), new Color(1, 1, 0), 0, new Color(0.5, 0.5, 0.5))),
-					new Transform()
-						.scale(1, 0.5, 2)
-						.rotateX(Math.toRadians(45)))
-				
-//				TriangleMesh.createTestTriangleMesh(
-////						new SingleColorMaterial(new Color(1, 1, 1)),
-////						new LambertMaterial(new Color(1, 1, 1)),
-////						new PhongMaterial(new Color(1, 1, 1), new Color(1, 1, 1), 20),
-//						new ReflectiveMaterial(new Color(1, 1, 0), new Color(1, 1, 0), 0, new Color(0.5, 0.5, 0.5))
-//						)
 		
+		final Material boxMaterial;
+//		boxMaterial = new SingleColorMaterial(new Color(1, 0, 0));
+//		boxMaterial = new LambertMaterial(new Color(1, 0, 0)); 
+		boxMaterial = new PhongMaterial(new Color(1, 0, 0), new Color(1, 1, 1), 20);
+//		boxMaterial = new ReflectiveMaterial(new Color(1, 0, 0), new Color(1, 1, 1), 20, new Color(0.5, 0.5, 0.5));
+		
+		final Material planeMaterial;
+//		planeMaterial = new SingleColorMaterial(new Color(0.5, 0.5, 0.5));
+		planeMaterial = new LambertMaterial(new Color(0.5, 0.5, 0.5));
+//		planeMaterial = new PhongMaterial(new Color(0.5, 0.5, 0.5), new Color(0.5, 0.5, 0.5), 20);
+//		planeMaterial = new ReflectiveMaterial(new Color(0.5, 0.5, 0.5), new Color(0.5, 0.5, 0.5), 20, new Color(0.5, 0.5, 0.5));
+		
+		final Geometry box;
+		box = new AxisAlignedBox(boxMaterial);
+//		box = TriangleMesh.createTestTriangleMesh(boxMaterial);
+		
+		final Transform boxTransform = new Transform()
+//			.scale(1, 1, 4)
+//			.rotateX(Math.toRadians(45))
+//			.rotateX(Math.toRadians(90))
+//			.rotateX(Math.toRadians(-199))
+	//		.rotateZ(Math.toRadians(270))
+	//		.rotateZ(Math.toRadians(-45))
+//			.scale(1, 1, 4)
+			;
+		
+		world.addElements(
+//				new Node(
+//					new Plane(
+//						new Point3(0, -1, 0), 
+//						new Normal3(0, 1, 0), 
+//						planeMaterial
+//					), new Transform()),
+				 
+				new Node(box, boxTransform)
+				
+//				new Node(new Sphere(boxMaterial), boxTransform)
 		);
 //		world.addLight(new PointLight(new Color(0.6, 0.6, 0.6), new Point3(4, 4, 4)));
 //		world.addLight(new PointLight(new Color(0.6, 0.6, 0.6), new Point3(-5, 5, 5)));
-		world.addLight(new PointLight(new Color(0.6, 0.6, 0.6), new Point3(4, 4, 4), false));
+//		world.addLight(new PointLight(new Color(0.6, 0.6, 0.6), new Point3(4, 4, 4), false));
+		world.addLight(new PointLight(new Color(1, 1, 1), new Point3(4, 3, 3), false));
 //		world.addLight(new DirectionalLight(new Color(0.6, 0.6, 0.6), new Vector3(-10, -10, -40)));
 //		world.addLight(new SpotLight(new Color(1, 1, 1), new Point3(4, 4, 4), new Vector3(-1, -1, -1), Math.PI / 14.0, false));
 		return new Renderer(world, camera, 10);

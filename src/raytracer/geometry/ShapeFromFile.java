@@ -4,25 +4,25 @@ import java.io.File;
 
 import raytracer.Ray;
 import raytracer.material.Material;
+import raytracer.math.Transform;
 
 public class ShapeFromFile extends Geometry {
 	private final File file;
-	
-	public ShapeFromFile(String filename, Material material) {
+	private final Node node;
+
+	public ShapeFromFile(final File file, final Material material) {
 		super(material);
-		this.file = new File(filename);
+		this.file = file;
+		node = new Node(new Transform());
 	}
 	
-	public ShapeFromFile(File filename, Material material) {
-		super(material);
-		this.file = filename;
+	public ShapeFromFile(final String filename, final Material material) {
+		this(new File(filename), material);
 	}
 	
 	@Override
-	public Hit hit(Ray ray) {
+	public Hit hit(final Ray ray) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-	
 }
