@@ -7,6 +7,8 @@ import java.util.LinkedList;
 import java.util.Scanner;
 import java.util.zip.DataFormatException;
 
+import raytracer.geometry.TriangleMesh;
+import raytracer.material.Material;
 import raytracer.math.Normal3;
 import raytracer.math.Point3;
 import raytracer.texture.TextCoord;
@@ -37,6 +39,15 @@ public class Parser {
 		lines = new LinkedList<String>();
 	}
 	
+	public TriangleMesh createTriangleMash(final Material material) {		
+		return new TriangleMesh(
+				material, 
+				vertices.toArray(new Point3[vertices.size()]), 
+				textures.toArray(new TextCoord[textures.size()]), 
+				normals.toArray(new Normal3[normals.size()]), 
+				faces);
+	}
+	
 	public void readFile(File f) {
 		try {
 			Scanner in = new Scanner(f);
@@ -51,6 +62,8 @@ public class Parser {
 	
 	
 	public void parseBasicData() throws DataFormatException {
+		vertices.add(new Point3(0, 0, 0));
+		
 		String previousType = "";
 		for (int lno = 0; lno < lines.size(); lno++) {
 			/*
@@ -174,13 +187,13 @@ public class Parser {
 					}
 				}
 			    // THROWS ERROR ----> 
-				int compensation = (1 - minValue);
-				//COMPENSATE
-				for (int i = 0; i < result.length; i++) {
-					for (int i2 = 0; i2 < result[i].length; i2++) {
-						faces [i][i2] = result [i][i2] + compensation;
-					}
-				}
+//				int compensation = (1 - minValue);
+//				//COMPENSATE
+//				for (int i = 0; i < result.length; i++) {
+//					for (int i2 = 0; i2 < result[i].length; i2++) {
+//						faces [i][i2] = result [i][i2] + compensation;
+//					}
+//				}
 				faces = result;
 			}
 
