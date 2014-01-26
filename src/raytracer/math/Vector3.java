@@ -154,7 +154,7 @@ public class Vector3 implements Comparable<Vector3> {
 	 * Calculates the scalar product (or dot product) of this <code>Vector3</code> with the specified 
 	 * <code>Normal3</code>.
 	 * 
-	 * @param v The other vector of the scalar product. Must not be <code>null</code>.
+	 * @param vertices The other vector of the scalar product. Must not be <code>null</code>.
 	 * @return	The resulting scalar.
 	 */
 	public double dot(final Normal3 n) {
