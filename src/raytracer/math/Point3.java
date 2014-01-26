@@ -94,6 +94,15 @@ public class Point3 {
 						  z + v.z);
 	}
 	
+	/**
+	 * Converts this <code>Point</code> to <code>Vector3</code>.
+	 * 
+	 * @return The <code>Vector3</code>.
+	 */
+	public Vector3 asVector() {
+		return new Vector3(x, y, z);
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

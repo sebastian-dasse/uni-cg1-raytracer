@@ -5,13 +5,14 @@ import java.util.LinkedList;
 import raytracer.Constants;
 import raytracer.Ray;
 import raytracer.material.Material;
+import raytracer.math.Normal3;
 import raytracer.math.Point3;
 import raytracer.math.Transform;
 
 /**
  * This immutable class represents an axis aligned box in three-dimensional space. It has a default width, height and 
- * depth of 1. It is defined through its <em>low bottom far point</em> (lbf) and its <em>right upper near point</em> 
- * (run).
+ * depth of 1. It is defined through its <em>low bottom far point</em> (lbf) at (-0.5, -0.5, -0.5) and its <em>right 
+ * upper near point</em> (run) at (0.5, 0.5, 0.5).
  * 
  * @author Sebastian Dass&eacute;
  *
@@ -29,16 +30,32 @@ public class AxisAlignedBox extends Geometry {
 	 */
 	private static final Point3 run = new Point3(0.5, 0.5, 0.5);
 
-	private final Plane plane = new Plane(material);
-	private final Node top = new Node(plane, new Transform().translate(run));
-	private final Node right = new Node(plane, new Transform().translate(run).rotateZ(-Math.PI / 2.0));
-	private final Node front = new Node(plane, new Transform().translate(run).rotateZ(Math.PI).rotateX(Math.PI / 2.0));
-	private final Node left = new Node(plane, new Transform().translate(lbf).rotateZ(Math.PI / 2.0));
-	private final Node bottom = new Node(plane, new Transform().translate(lbf).rotateX(Math.PI));
-	private final Node back = new Node(plane, new Transform().translate(lbf).rotateZ(Math.PI).rotateX(-Math.PI / 2.0));
+	private static final Transform topT = new Transform().translate(run);
+	private static final Transform rightT = new Transform().translate(run).rotateZ(-Math.PI / 2.0);
+	private static final Transform frontT = new Transform().translate(run).rotateZ(Math.PI).rotateX(Math.PI / 2.0);
+	private static final Transform lefT = new Transform().translate(lbf).rotateZ(Math.PI / 2.0);
+	private static final Transform bottomT = new Transform().translate(lbf).rotateX(Math.PI);
+	private static final Transform backT = new Transform().translate(lbf).rotateZ(Math.PI).rotateX(-Math.PI / 2.0);
+	
+	// TODO -- for testing -- when done --> comment back in 
+//	private final Plane plane = new Plane(material);
+//	private final Node top = new Node(plane, topT);
+//	private final Node right = new Node(plane, rightT);
+//	private final Node front = new Node(plane, frontT);
+//	private final Node left = new Node(plane, lefT);
+//	private final Node bottom = new Node(plane, bottomT);
+//	private final Node back = new Node(plane, backT);
+	
+	// TODO -- for testing -- when done --> remove
+	private final Plane top = new Plane(run, new Normal3(0, 1, 0), material);
+	private final Plane right = new Plane(run, new Normal3(1, 0, 0), material);
+	private final Plane front = new Plane(run, new Normal3(0, 0, 1), material);
+	private final Plane left = new Plane(lbf, new Normal3(-1, 0, 0), material);
+	private final Plane bottom = new Plane(lbf, new Normal3(0, -1, 0), material);
+	private final Plane back = new Plane(lbf, new Normal3(0, 0, -1), material);
 	
 	/**
-	 * Constructs a new <code>AxisAlignedBox</code> with the specified parameters.
+	 * Constructs a new <code>AxisAlignedBox</code> with the specified material.
 	 * 
 	 * @param material	The material of the <code>AxisAlignedBox</code>. Must not be <code>null</code>.
 	 */
@@ -112,37 +129,7 @@ public class AxisAlignedBox extends Geometry {
 		return nearestHit;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((lbf == null) ? 0 : lbf.hashCode());
-		result = prime * result + ((run == null) ? 0 : run.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(final Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		final AxisAlignedBox other = (AxisAlignedBox) obj;
-		if (lbf == null) {
-			if (other.lbf != null)
-				return false;
-		} else if (!lbf.equals(other.lbf))
-			return false;
-		if (run == null) {
-			if (other.run != null)
-				return false;
-		} else if (!run.equals(other.run))
-			return false;
-		return true;
-	}
-
+	// TODO might be useless now
 	@Override
 	public String toString() {
 		return super.toString() + ",\n\tlbf = " + lbf + ",\n" 

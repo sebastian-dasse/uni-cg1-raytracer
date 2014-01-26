@@ -43,7 +43,12 @@ public class Transform {
 		this.i = i;
 	}
 	
-
+	/**
+	 * Appends a translation and returns a new <code>Transform</code> object.
+	 * 
+	 * @param point	The x, y and z values as <code>Point3</code> for the translation.
+	 * @return		A new <code>Transform</code> object with the appended translation.
+	 */
 	public Transform translate(final Point3 point) {
 		return translate(point.x, point.y, point.z);
 	}

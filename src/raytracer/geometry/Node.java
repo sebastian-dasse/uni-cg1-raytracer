@@ -13,9 +13,21 @@ import raytracer.math.Transform;
  */
 public class Node extends Geometry {
 
+	/**
+	 * The transformation of this node.
+	 */
 	public final Transform transform;
+	/**
+	 * The geometries of this node.
+	 */
 	public final Collection <Geometry> geos;
 
+	/**
+	 * 
+	 * 
+	 * @param geos
+	 * @param transform
+	 */
 	public Node(final Collection <Geometry> geos, final Transform transform) {
 		super(new SingleColorMaterial(new Color(0, 0, 0)));
 		this.geos = geos;
@@ -62,12 +74,6 @@ public class Node extends Geometry {
 		if (nearestHit == null) {
 			return null;
 		}
-		return new Hit(
-				t, 
-				processedRay, 
-				nearestHit.geo, 
-				transform.mul(
-						nearestHit.normal));
-//		return nearestHit;
+		return new Hit(t, processedRay, nearestHit.geo, transform.mul(nearestHit.normal));
 	}
 }
