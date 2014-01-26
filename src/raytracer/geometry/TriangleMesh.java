@@ -1,7 +1,9 @@
 package raytracer.geometry;
 
+import raytracer.Color;
 import raytracer.Ray;
 import raytracer.material.Material;
+import raytracer.material.ReflectiveMaterial;
 import raytracer.math.Normal3;
 import raytracer.math.Point3;
 import raytracer.texture.TextCoord;
@@ -35,6 +37,8 @@ public class TriangleMesh extends Geometry {
 	@Override
 	public Hit hit(final Ray ray) {
 		
+		Hit closestHit = null;
+		double closestT = Double.POSITIVE_INFINITY;
 		for (int[] face : faces) {
 			final Point3 a = vertices[ face[0] ];
 			final Point3 b = vertices[ face[3] ];
@@ -64,10 +68,72 @@ public class TriangleMesh extends Geometry {
 				an = bn = cn = b.sub(a).x(c.sub(a)).asNormal();
 			}
 			
-			Triangle tri = new Triangle(a, b, c, an, bn, cn, material);
-			Hit hit = tri.hit(ray);
+			final Triangle tri = new Triangle(a, b, c, an, bn, cn, material);
+			final Hit hit = tri.hit(ray);
+			
+			if (hit != null && hit.t < closestT) {
+				closestHit = hit;
+				closestT = hit.t;
+			}
 		}
 		
-		return null;
+		return closestHit;
+	}
+	
+	public static TriangleMesh createTestTriangleMesh(final Material material) {
+		return new TriangleMesh(
+				material, 
+				new Point3[]{
+					new Point3(0, 0, 0), 
+					new Point3(-0.5, -0.5, 0.5), 
+					new Point3(0.5, -0.5, 0.5), 
+					new Point3(0.5, 0.5, 0.5), 
+					new Point3(-0.5, 0.5, 0.5), 
+					new Point3(-0.5, -0.5, -0.5), 
+					new Point3(0.5, -0.5, -0.5), 
+					new Point3(0.5, 0.5, -0.5), 
+					new Point3(-0.5, 0.5, -0.5)
+				}, 
+				new TextCoord[0], 
+				new Normal3[]{
+					
+				}, new int[][]{
+					{1, 0, 0, 
+					 2, 0, 0, 
+					 3, 0, 0}, 
+					{3, 0, 0, 
+					 4, 0, 0, 
+					 1, 0, 0}, 
+					{2, 0, 0, 
+					 6, 0, 0, 
+					 7, 0, 0}, 
+					{7, 0, 0, 
+					 3, 0, 0, 
+					 2, 0, 0}, 
+					{6, 0, 0, 
+					 5, 0, 0, 
+					 8, 0, 0}, 
+					{8, 0, 0, 
+					 7, 0, 0, 
+					 6, 0, 0}, 
+					{5, 0, 0, 
+					 1, 0, 0, 
+					 4, 0, 0}, 
+					{4, 0, 0, 
+					 8, 0, 0, 
+					 5, 0, 0}, 
+					{4, 0, 0, 
+					 3, 0, 0, 
+					 7, 0, 0}, 
+					{7, 0, 0, 
+					 8, 0, 0, 
+					 4, 0, 0}, 
+					{5, 0, 0, 
+					 6, 0, 0, 
+					 2, 0, 0}, 
+					{2, 0, 0, 
+					 1, 0, 0, 
+					 5, 0, 0}
+				});
 	}
 }
