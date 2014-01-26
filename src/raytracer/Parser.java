@@ -26,13 +26,14 @@ public class Parser {
 	private Collection<Point3> vertices;
 	private Collection<TextCoord> textures;
 	private Collection<Normal3> normals;
-	private Collection<String> faces;
+	private Collection<String> facesSourceLine;
+	private int faces[][];
 	
 	public Parser() {
 		vertices = new LinkedList<Point3>();
 		textures = new LinkedList<TextCoord>();
 		normals = new LinkedList<Normal3>();
-		faces = new LinkedList<String>();
+		facesSourceLine = new LinkedList<String>();
 		lines = new LinkedList<String>();
 	}
 	
@@ -56,8 +57,8 @@ public class Parser {
 			 * Line processing
 			 */
 			String line = lines.get(lno);
-			String [] slots = line.split(" ");
-			
+			String[] slots = line.split(" ");
+
 			/*
 			 * Indicators
 			 */
@@ -66,87 +67,77 @@ public class Parser {
 			if (lno > 0) {
 				previousType = lines.get(lno - 1).split(" ")[0];
 			}
-			
-			
+
 			/*
 			 * Special cases
 			 */
 			if (line.startsWith(COMMENT)) {
 				continue;
 			}
-			
+
 			if (type.equals(FACE) && (slots.length - 1) < 3) {
 				throw new DataFormatException();
 			}
-			
+
 			/*
 			 * Process faces to int array
 			 */
-			final boolean objectEnd = ((previousType.equals(FACE) && !type.equals(FACE)) || lno == lines.size() - 1);
-			
-			
+			final boolean objectEnd = ((previousType.equals(FACE) && !type
+					.equals(FACE)) || lno == lines.size() - 1);
+
 			if (type.equals(FACE)) {
 				System.out.println("Got face!");
-				faces.add(line);
+				facesSourceLine.add(line);
 			} else {
-				double slotsAsDouble [] = new double [slots.length - 1];
-				for (int i = 1; i < slots.length; i++)  {
-					slotsAsDouble[i - 1] = slots[i].isEmpty() ? Double.NaN : Double.parseDouble(slots[i]);
+				double slotsAsDouble[] = new double[slots.length - 1];
+				for (int i = 1; i < slots.length; i++) {
+					slotsAsDouble[i - 1] = slots[i].isEmpty() ? Double.NaN
+							: Double.parseDouble(slots[i]);
 				}
 				if (type.equals(VERTICE)) {
-					vertices.add(
-							new Point3(
-									Double.parseDouble(slots[1]),
-									Double.parseDouble(slots[2]), 
-									Double.parseDouble(slots[3])
-									)
-					);
+					vertices.add(new Point3(Double.parseDouble(slots[1]),
+							Double.parseDouble(slots[2]), Double
+									.parseDouble(slots[3])));
 				}
 
 				if (type.equals(TEXTURE)) {
-					textures.add(
-							new TextCoord(
-									Double.parseDouble(slots[1]),
-									Double.parseDouble(slots[2])
-									)
-					);
+					textures.add(new TextCoord(Double.parseDouble(slots[1]),
+							Double.parseDouble(slots[2])));
 				}
 
 				if (type.equals(NORMAL)) {
-					normals.add(
-							new Normal3(
-									Double.parseDouble(slots[1]),
-									Double.parseDouble(slots[2]), 
-									Double.parseDouble(slots[3])
-									)
-					);
+					normals.add(new Normal3(Double.parseDouble(slots[1]),
+							Double.parseDouble(slots[2]), Double
+									.parseDouble(slots[3])));
 				}
 			}
 			if (objectEnd) {
-				/* 
+				/*
 				 * Done reading non-face data from file
 				 */
-				int [][] result = new int [faces.size()][9];
+				int[][] result = new int[facesSourceLine.size()][9];
 				int count = 0;
 				/*
 				 * Iterate linewise
 				 */
-				System.out.println(faces.size()); ///NOT ENOUGH FACES
-				for (String face : faces) {
+				System.out.println(facesSourceLine.size()); // /NOT ENOUGH FACES
+				for (String face : facesSourceLine) {
 					/*
 					 * Split line into blocks
 					 */
-					String [] blocks = face.replaceAll(FACE, "").trim().split(BLANK);
+					String[] blocks = face.replaceAll(FACE, "").trim()
+							.split(BLANK);
 					StringBuilder tupelsAsString = new StringBuilder();
 					/*
 					 * Retrieve blocks: Fill them up with 0s if necessary
 					 */
 					for (int i = 0; i < blocks.length; i++) {
 						String slashFiltered = blocks[i].replace(SLASH, " ");
-						String [] atomicElements = slashFiltered.split(BLANK);
+						String[] atomicElements = slashFiltered.split(BLANK);
 						StringBuilder tupelFilled = new StringBuilder();
 						tupelFilled.append(atomicElements[0]);
-						for (int i2 = 1; i2 <= TUPELSIZE - atomicElements.length; i2++) {
+						for (int i2 = 1; i2 <= TUPELSIZE
+								- atomicElements.length; i2++) {
 							tupelFilled.append(" 0");
 						}
 						if (TUPELSIZE - atomicElements.length == 0) {
@@ -158,25 +149,25 @@ public class Parser {
 					/*
 					 * Build String array with one entry per tupel
 					 */
-					String[] valuesForOneLine = tupelsAsString.toString().split(BLANK);
+					String[] valuesForOneLine = tupelsAsString.toString()
+							.split(BLANK);
 					/*
 					 * Convert string array into 2-Dimensional int array
 					 */
 					for (int i = 0; i < valuesForOneLine.length; i++) {
-						result[count][i] = Integer.parseInt(valuesForOneLine[i]);
+						result[count][i] = Integer
+								.parseInt(valuesForOneLine[i]);
 					}
 					count++;
 				}
-
-				
-				listAll(result);
+				faces = result;
 			}
-			
+
 		}
 	}
 	
-	public void listAll(int[][] data) {
-		for (int[] i1 : data) {
+	public void listAll() {
+		for (int[] i1 : faces) {
 			System.out.println("--");
 			for (int i2 : i1) {
 				System.out.println(i2);
