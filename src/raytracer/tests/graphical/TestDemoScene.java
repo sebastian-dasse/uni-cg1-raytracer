@@ -40,7 +40,7 @@ public class TestDemoScene {
 		final Camera camera = Factory.buildPerspectiveCamera(new double[][] {
 				{ 4, 4, 4 }, { -1, -1, -1 }, { 0, 1, 0 }, { Math.PI / 4.0 } });
 //				{ 20, 20, 20 }, { -1, -1, -1 }, { 0, 1, 0 }, { Math.PI / 40.0 } });
-		world.addElements(
+//		world.addElements(
 //				new Node(new Sphere(
 //						new LambertMaterial(new Color(1, 0, 0))), 
 //				new Node(new Sphere(
@@ -50,7 +50,7 @@ public class TestDemoScene {
 ////							.scale(1, 3, 0.5)
 ////							.rotateX(Math.toRadians(-45))
 //						), 
-				
+//				
 				new Node(new AxisAlignedBox( 
 //						new SingleColorMaterial(new Color(1, 0, 0))), 
 //						new LambertMaterial(new Color(1, 0, 0))),
@@ -61,9 +61,7 @@ public class TestDemoScene {
 							.rotateX(Math.toRadians(-199))
 //							.rotateZ(Math.toRadians(270))
 //							.rotateZ(Math.toRadians(-45))
-						)
-		
-		);
+						);
 //		world.addLight(new PointLight(new Color(0.6, 0.6, 0.6), new Point3(4, 4, 4)));
 //		world.addLight(new PointLight(new Color(0.6, 0.6, 0.6), new Point3(-5, 5, 5)));
 //		world.addLight(new PointLight(new Color(0.6, 0.6, 0.6), new Point3(4, 4, 4)));
