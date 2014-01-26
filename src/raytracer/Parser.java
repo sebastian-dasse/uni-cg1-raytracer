@@ -20,6 +20,8 @@ public class Parser {
 	public final String SLASH = "/";
 	public final String BLANK = " ";
 	public final int FACELENGTH = 9;
+	public final int TUPELSIZE = 3;
+	
 	LinkedList <String> lines;
 	private Collection<Point3> vertices;
 	private Collection<TextCoord> textures;
@@ -78,13 +80,28 @@ public class Parser {
 			
 			final boolean objectEnd = ((previousType.equals(FACE) && !type.equals(FACE) || lno == lines.size() - 1));
 			if (objectEnd) {
+				int [][] result = new int [faces.size()][9];
 				for (String face : faces) {
 					String [] blocks = face.replaceAll(FACE, "").trim().split(BLANK);
-					Collection<String> facesProcessed= new LinkedList<String>();
-					
+					StringBuilder tupelsAsString = new StringBuilder();
 					for (int i = 0; i < blocks.length; i++) {
-						System.out.println(blocks[i]);
+						String slashFiltered = blocks[i].replace(SLASH, " ");
+						String [] atomicElements = slashFiltered.split(BLANK);
+						StringBuilder tupelFilled = new StringBuilder();
+						
+						tupelFilled.append(atomicElements[0]);
+						// Fill up with zeros
+						for (int i2 = 1; i2 <= TUPELSIZE - atomicElements.length; i2++) {
+							tupelFilled.append(" 0");
+						}
+						if (TUPELSIZE - atomicElements.length == 0) {
+							tupelsAsString.append(slashFiltered + BLANK);
+						} else {
+							tupelsAsString.append(tupelFilled + BLANK);
+						}
 					}
+					
+					System.out.println(tupelsAsString);
 				}
 //				
 //				System.out.println("Vertices");
