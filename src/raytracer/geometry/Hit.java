@@ -1,6 +1,7 @@
 package raytracer.geometry;
 
 import static raytracer.math.MathUtil.isValid;
+import raytracer.Constants;
 import raytracer.Ray;
 import raytracer.math.Normal3;
 
@@ -13,7 +14,7 @@ import raytracer.math.Normal3;
  * @author Sebastian Dass&eacute;
  *
  */
-public class Hit {
+public class Hit /*implements Comparable<Hit>*/ {
 	/**
 	 * The parameter for this hit point. Never is smaller than 0.
 	 */
@@ -102,4 +103,10 @@ public class Hit {
 										  + "\tgeo = " + geo + ",\n" 
 										  + "\tnormal = " + normal + "]";
 	}
+
+//	@Override
+//	public int compareTo(Hit o) {
+//		double diff = t - o.t;
+//		return Math.abs(diff) < Constants.EPSILON ? 0 : (int) Math.signum(diff);
+//	}
 }

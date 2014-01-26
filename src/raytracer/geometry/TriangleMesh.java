@@ -1,7 +1,9 @@
 package raytracer.geometry;
 
+import raytracer.Color;
 import raytracer.Ray;
 import raytracer.material.Material;
+import raytracer.material.ReflectiveMaterial;
 import raytracer.math.Normal3;
 import raytracer.math.Point3;
 import raytracer.texture.TextCoord;
@@ -35,28 +37,103 @@ public class TriangleMesh extends Geometry {
 	@Override
 	public Hit hit(final Ray ray) {
 		
+		Hit closestHit = null;
+		double closestT = Double.POSITIVE_INFINITY;
 		for (int[] face : faces) {
-			final int a = face[0];
-			final int b = face[3];
-			final int c = face[6];
+			final Point3 a = vertices[ face[0] ];
+			final Point3 b = vertices[ face[3] ];
+			final Point3 c = vertices[ face[6] ];
 			
-			final int at = face[1];
-			final int bt = face[4];
-			final int ct = face[7];
-			
-			final int an = face[2];
-			final int bn;
-			final int cn;
-			if (an != 0) {
-				bn = 0;
-				cn = 0;
+			/* //-- texture -- not yet used 
+			*/
+			final TextCoord at;
+			final TextCoord bt;
+			final TextCoord ct;
+			if (face[1] != 0) {
+				at = textCoords[ face[1] ];
+				bt = textCoords[ face[4] ];
+				ct = textCoords[ face[7] ];
 			} else {
-				bn = face[5];
-				cn = face[8];
+				at = bt = ct = new TextCoord(0, 0);
 			}
 			
+			final Normal3 an;
+			final Normal3 bn;
+			final Normal3 cn;
+			if (face[2] != 0) {
+				an = normals[ face[2] ];
+				bn = normals[ face[5] ];
+				cn = normals[ face[8] ];
+			} else {
+				an = bn = cn = b.sub(a).x(c.sub(a)).asNormal();
+			}
+			
+			final Triangle tri = new Triangle(a, b, c, an, bn, cn, material);
+			final Hit hit = tri.hit(ray);
+			
+			if (hit != null && hit.t < closestT) {
+				closestHit = hit;
+				closestT = hit.t;
+			}
 		}
 		
-		return null;
+		return closestHit;
+	}
+	
+	public static TriangleMesh createTestTriangleMesh(final Material material) {
+		return new TriangleMesh(
+				material, 
+				new Point3[]{
+					new Point3(0, 0, 0), 
+					new Point3(-0.5, -0.5, 0.5), 
+					new Point3(0.5, -0.5, 0.5), 
+					new Point3(0.5, 0.5, 0.5), 
+					new Point3(-0.5, 0.5, 0.5), 
+					new Point3(-0.5, -0.5, -0.5), 
+					new Point3(0.5, -0.5, -0.5), 
+					new Point3(0.5, 0.5, -0.5), 
+					new Point3(-0.5, 0.5, -0.5)
+				}, 
+				new TextCoord[0], 
+				new Normal3[]{
+					
+				}, new int[][]{
+					{1, 0, 0, 
+					 2, 0, 0, 
+					 3, 0, 0}, 
+					{3, 0, 0, 
+					 4, 0, 0, 
+					 1, 0, 0}, 
+					{2, 0, 0, 
+					 6, 0, 0, 
+					 7, 0, 0}, 
+					{7, 0, 0, 
+					 3, 0, 0, 
+					 2, 0, 0}, 
+					{6, 0, 0, 
+					 5, 0, 0, 
+					 8, 0, 0}, 
+					{8, 0, 0, 
+					 7, 0, 0, 
+					 6, 0, 0}, 
+					{5, 0, 0, 
+					 1, 0, 0, 
+					 4, 0, 0}, 
+					{4, 0, 0, 
+					 8, 0, 0, 
+					 5, 0, 0}, 
+					{4, 0, 0, 
+					 3, 0, 0, 
+					 7, 0, 0}, 
+					{7, 0, 0, 
+					 8, 0, 0, 
+					 4, 0, 0}, 
+					{5, 0, 0, 
+					 6, 0, 0, 
+					 2, 0, 0}, 
+					{2, 0, 0, 
+					 1, 0, 0, 
+					 5, 0, 0}
+				});
 	}
 }
