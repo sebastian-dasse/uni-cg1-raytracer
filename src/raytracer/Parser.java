@@ -63,7 +63,6 @@ public class Parser {
 			 * Indicators
 			 */
 			final String type = slots[0];
-			System.out.println("LINE : " + line + "TYPE: " + type);
 			if (lno > 0) {
 				previousType = lines.get(lno - 1).split(" ")[0];
 			}
@@ -86,7 +85,6 @@ public class Parser {
 					.equals(FACE)) || lno == lines.size() - 1);
 
 			if (type.equals(FACE)) {
-				System.out.println("Got face!");
 				facesSourceLine.add(line);
 			} else {
 				double slotsAsDouble[] = new double[slots.length - 1];
@@ -120,7 +118,6 @@ public class Parser {
 				/*
 				 * Iterate linewise
 				 */
-				System.out.println(facesSourceLine.size()); // /NOT ENOUGH FACES
 				for (String face : facesSourceLine) {
 					/*
 					 * Split line into blocks
@@ -167,6 +164,18 @@ public class Parser {
 	}
 	
 	public void listAll() {
+		System.out.println("Vertices");
+		System.out.println("--------------------------");
+		System.out.println(vertices.toString());
+		System.out.println();
+		System.out.println("Textures");
+		System.out.println("--------------------------");
+		System.out.println(textures.toString());
+		System.out.println();
+		System.out.println("Normals");
+		System.out.println("--------------------------");
+		System.out.println(normals.toString());
+		System.out.println();
 		for (int[] i1 : faces) {
 			System.out.println("--");
 			for (int i2 : i1) {
