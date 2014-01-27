@@ -3,7 +3,7 @@ package raytracer.math;
 import raytracer.Ray;
 
 /**
- * TODO comment everything!
+ * This immutable class provides methods to transform the geometries in three dimensional space.
  * 
  * @author Maxim Novichkov
  * @author Sebastian Dass&eacute;
@@ -19,7 +19,7 @@ public class Transform {
 	public final Mat4x4 i;
 	
 	/**
-	 * TODO comment
+	 * Construct a new <code>Transformation</code> object and initialize it with the unit matrix.
 	 */
 	public Transform(){
 		m = new Mat4x4(1, 0, 0, 0, 
@@ -33,7 +33,7 @@ public class Transform {
 	}
 	
 	/**
-	 * TODO comment
+	 * Construct a new <code>Transformation</code> object with transformation and inverse matrix.
 	 * 
 	 * @param m	The transformation matrix of the transformation.
 	 * @param i	The inverse transformation matrix of the transformation.
