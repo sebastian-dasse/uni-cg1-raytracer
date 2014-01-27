@@ -37,18 +37,16 @@ public static void main(String[] args) {
 		
 		final Camera camera = Factory.buildPerspectiveCamera(new double[][] {
 				{ 4, 4, 4 }, { -1, -1, -1 }, { 0, 1, 0 }, { Math.PI / 4.0 } });
-//		Node first = new Node(
-//				new Sphere(new LambertMaterial(new Color(0, 1, 0))), 
-//				new Transform().scale(2.0, 1.0, 2.0));
-		//world.addElement(new Sphere(new Point3(0, 1, 0), 0.5, new PhongMaterial(new Color(0, 1, 0), new Color(1, 1, 1), 64)));
-		//world.addElement(new Plane(new Point3( 0, 0, 0), new Normal3(0, 1, 0), new PhongMaterial(new Color(1, 0, 0), new Color(1, 1, 1), 64)));
-//		world.addElement(new Node(
-//				new Sphere(new Point3(1, 3, 1), 0.5, new LambertMaterial(new Color(0, 1, 0))), 
-//				new Transform().scale(2.0, 1.0, 2.0)));
 		world.addElements(
 //		new Node(
-//				new AxisAlignedBox(new LambertMaterial(new Color(0, 1, 0))), 
-//			new Transform().rotateX(8)));
+//				new AxisAlignedBox(new LambertMaterial(new Color(1, 1, 0))), 
+//				new Transform()
+//		//ready transformed Box
+//				.rotateX(Math.PI/1.17)
+//				.rotateY(Math.PI/0.2) 
+//				.rotateZ(Math.PI/1.15) 
+//				.scale(1.0, 0.26, 3.7)
+		//ready transformed Sphere
 		new Node(
 				new Sphere(new PhongMaterial(new Color(1, 0, 0), new Color(1, 1, 1), 64)), 
 				new Transform()
@@ -56,7 +54,6 @@ public static void main(String[] args) {
 				.rotateZ(Math.PI/0.9)
 				.rotateX(Math.PI/1.15)
 				.scale(2.0, 0.5, 2.0)
-				
 				
 		));
 		
