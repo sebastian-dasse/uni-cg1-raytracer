@@ -98,10 +98,8 @@ public class ObjLoader {
 	private void parseBasicData() throws DataFormatException {
 		String previousType = "";
 		for (int lno = 0; lno < lines.size(); lno++) {
-			/*
-			 * Line processing
-			 */
-			String line = lines.get(lno).replaceAll("\\s+", " ");
+			String line = lines.get(lno);
+//			line = line.replaceAll("\\s+", " ");
 			String[] slots = line.split(" ");
 			String type = slots[0];
 			
@@ -116,10 +114,9 @@ public class ObjLoader {
 				throw new DataFormatException();
 			}
 
-			final boolean objectEnd = ((previousType.equals(FACE) && !type
-					.equals(FACE)) || lno == lines.size() - 1);
 
-			if (objectEnd) {
+			if (((previousType.equals(FACE) && !type
+					.equals(FACE)) || lno == lines.size() - 1)) {
 				faces = buildFacesArray();
 				calibrateFacesArray(faces);
 			}
