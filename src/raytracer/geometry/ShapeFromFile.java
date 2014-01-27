@@ -1,8 +1,8 @@
 package raytracer.geometry;
 
-import raytracer.ObjLoader;
 import raytracer.Ray;
 import raytracer.material.Material;
+import raytracer.parser.ObjLoader;
 
 /**
  * TODO comment everything.

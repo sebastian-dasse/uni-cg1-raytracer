@@ -21,10 +21,10 @@ public final class DemoSceneUE05 {
 
 	public static void main(String[] args) {
 		final Renderer[] tracers = new Renderer[]{
-				smartieScene(), 
-				boxScene(), 
-				teddyScene(), 
-//				bunnyScene()
+//				smartieScene(), 
+//				boxScene(), 
+//				teddyScene(), 
+				bunnyScene()
 		};
 		for (int i = 0; i < tracers.length; i++) {
 			ShowImage.from(tracers[i], 50 * i, 25 * i);
