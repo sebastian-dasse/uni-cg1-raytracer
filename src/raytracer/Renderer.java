@@ -16,7 +16,6 @@ import raytracer.camera.Camera;
  *
  */
 public class Renderer {
-	
 	/**
 	 * The default screen width of 800 px.
 	 */
@@ -24,7 +23,11 @@ public class Renderer {
 	/**
 	 * The default screen height of 600 px.
 	 */
-	public static final int HEIGHT = 600;
+	public static final int HEIGHT = 600;	
+	/**
+	 * The maximum render time in minutes
+	 */
+	public static final int MAX_RENDER_TIME_MINUTES = 20;
 	
 	/**
 	 * The world of this renderer.
@@ -100,9 +103,9 @@ public class Renderer {
 		}
 		executor.shutdown();
 		try {
-			executor.awaitTermination(60, TimeUnit.SECONDS);
+			executor.awaitTermination(MAX_RENDER_TIME_MINUTES, TimeUnit.MINUTES);
 		} catch (InterruptedException e) {
-			System.err.println("Rendering took too long");
+			System.err.println("Thread was interrupted.");
 		}
 		System.out.println(System.currentTimeMillis() - t1);
 		return image;

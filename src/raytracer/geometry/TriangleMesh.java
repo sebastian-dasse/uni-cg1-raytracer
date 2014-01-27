@@ -1,9 +1,7 @@
 package raytracer.geometry;
 
-import raytracer.Color;
 import raytracer.Ray;
 import raytracer.material.Material;
-import raytracer.material.ReflectiveMaterial;
 import raytracer.math.Normal3;
 import raytracer.math.Point3;
 import raytracer.texture.TextureCoord;
@@ -11,7 +9,7 @@ import raytracer.texture.TextureCoord;
 /*
  * -- Notiz --
  * Zugriff auf Arrays: 
- * f[0][3]
+ * f[n][9]
  * 
  *  0   1    2    3   4    5    6   7    8
  * [v1][vt1][vn1][v2][vt2][vn2][v3][vt3][vn3]
@@ -19,6 +17,12 @@ import raytracer.texture.TextureCoord;
  * [v1][vt1][vn1][v2][vt2][vn2][v3][vt3][vn3]
  */
 
+/**
+ * TODO comment everything
+ * 
+ * @author Sebastian Dass&ecaute;
+ *
+ */
 public class TriangleMesh extends Geometry {
 	public final Point3[] vertices;
 	public final TextureCoord[] textCoords;
@@ -45,15 +49,15 @@ public class TriangleMesh extends Geometry {
 			final Point3 c = vertices[ face[6] ];
 			
 			/* //-- texture -- not yet used
-			final TextCoord at;
-			final TextCoord bt;
-			final TextCoord ct;
+			final TextureCoord at;
+			final TextureCoord bt;
+			final TextureCoord ct;
 			if (face[1] != 0) {
 				at = textCoords[ face[1] ];
 				bt = textCoords[ face[4] ];
 				ct = textCoords[ face[7] ];
 			} else {
-				at = bt = ct = new TextCoord(0, 0);
+				at = bt = ct = new TextureCoord(0, 0);
 			}
 			*/
 			
@@ -80,6 +84,7 @@ public class TriangleMesh extends Geometry {
 		return closestHit;
 	}
 	
+	// TODO -- for testing --> remove later
 	public static TriangleMesh createTestTriangleMesh(final Material material) {
 		return new TriangleMesh(
 				material, 
@@ -134,6 +139,7 @@ public class TriangleMesh extends Geometry {
 					{2, 0, 0, 
 					 1, 0, 0, 
 					 5, 0, 0}
-				});
+				}
+			);
 	}
 }
