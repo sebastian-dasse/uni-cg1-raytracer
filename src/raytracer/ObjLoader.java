@@ -61,7 +61,7 @@ public class ObjLoader {
 		read(filename);
 		try {
 			parseBasicData();
-			listAll(); // for debugging
+//			listAll(); // for debugging
 		} catch (DataFormatException e) {
 			e.printStackTrace();
 			throw new RuntimeException("Failed loading defective *.obj file.");
