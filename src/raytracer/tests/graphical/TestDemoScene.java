@@ -5,13 +5,14 @@ import java.util.zip.DataFormatException;
 
 import raytracer.Color;
 import raytracer.Constants;
-import raytracer.Parser;
+import raytracer.ObjLoader;
 import raytracer.Renderer;
 import raytracer.World;
 import raytracer.camera.Camera;
 import raytracer.geometry.AxisAlignedBox;
 import raytracer.geometry.Geometry;
 import raytracer.geometry.Node;
+import raytracer.geometry.ShapeFromFile;
 import raytracer.geometry.Sphere;
 import raytracer.light.PointLight;
 import raytracer.material.LambertMaterial;
@@ -159,22 +160,8 @@ private static Renderer scene3() {
 		meshMaterial = new PhongMaterial(new Color(1, 0, 0), new Color(1, 1, 1), 20);
 //		boxMaterial = new ReflectiveMaterial(new Color(1, 0, 0), new Color(1, 1, 1), 20, new Color(0.5, 0.5, 0.5));
 		
-		final Geometry mesh;
-		
-		Parser parser = new Parser();
-		String path = "D:/UNI/2013-WiSe/CG1/UE/models";
-//		parser.readFile(new File(path + "/cube-v.obj"))
-		parser.readFile(new File(path + "/cube-v-blocks.obj"));
-		
-		try {
-			parser.parseBasicData();
-//			parser.listAll();
-		}
-		catch (DataFormatException e) {
-			System.err.println("You suck");
-		}
-		
-		mesh = parser.createTriangleMash(meshMaterial);
+		String path = "models/cube-v.obj";
+		final Geometry mesh = new ShapeFromFile(path, meshMaterial);
 		
 //		mesh = new AxisAlignedBox(meshMaterial);
 //		box = TriangleMesh.createTestTriangleMesh(boxMaterial);
