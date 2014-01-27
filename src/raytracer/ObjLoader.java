@@ -61,7 +61,7 @@ public class ObjLoader {
 		read(filename);
 		try {
 			parseBasicData();
-//			listAll(); // for debugging
+			listAll(); // for debugging
 		} catch (DataFormatException e) {
 			e.printStackTrace();
 			throw new RuntimeException("Failed loading defective *.obj file.");
@@ -69,7 +69,7 @@ public class ObjLoader {
 		return createTriangleMash(material);
 	}
 
-	private void read(String filename) {
+	private void read(final String filename) {
 		Scanner in = null;
 		try {
 			if (!filename.endsWith(".obj")) {
@@ -81,8 +81,7 @@ public class ObjLoader {
 			}
 		} catch (IOException e) {
 			System.err.println(e.getMessage());
-			System.err
-					.println("Error reading file. Please check that you're not drunk.");
+			System.err.println("Error reading file. Please check that you're not drunk.");
 		} finally {
 			if (in != null) {
 				in.close();

@@ -182,7 +182,9 @@ private static Renderer scene3() {
 //						planeMaterial
 //					), new Transform()),
 				 
-				new Node(mesh, boxTransform)
+				new Node(mesh, boxTransform
+//						.rotateZ(Math.toRadians(180))
+						)
 				
 //				new Node(new Sphere(boxMaterial), boxTransform)
 		);
