@@ -101,8 +101,7 @@ public class ObjLoader {
 			/*
 			 * Line processing
 			 */
-			String line = lines.get(lno);
-			line = line.replaceAll("\\s+", " "); // Remove multiple spaces
+			String line = lines.get(lno).replaceAll("\\s+", " ");
 			String[] slots = line.split(" ");
 			String type = slots[0];
 			
@@ -110,38 +109,7 @@ public class ObjLoader {
 				previousType = lines.get(lno - 1).split(" ")[0];
 			}
 			
-			switch (type) {
-			case VERTICE:
-				if (slots[0].trim() == "" || slots[1].trim() == "" ||  slots[2].trim() == "" ) {
-					break;
-				}
-					vertices.add(new Point3(Double.parseDouble(slots[1]), Double.parseDouble(slots[2]), Double.parseDouble(slots[3])));
-				break;
-			case TEXTURE:
-				if (slots[1].trim() == "" || slots[2].trim() == "") {
-					break;
-				}
-				textures.add(new TextureCoord(Double.parseDouble(slots[1]), Double.parseDouble(slots[2])));
-				break;
-			case NORMAL:
-				if (slots[1].trim() == "" || slots[2].trim() == "" || slots[3].trim() == "") {
-					break;
-				}
-				normals.add(new Normal3(Double.parseDouble(slots[1]), Double.parseDouble(slots[2]), Double.parseDouble(slots[3])));
-				break;
-			case FACE:
-				if (slots.length < 4) {
-					throw new DataFormatException();
-				}
-				facesSourceLine.add(line);
-				break;
-			case COMMENT:
-				continue;
-			case BLANK: 
-				continue;
-			default:
-				continue;
-			}
+			fillOutputLists(line, slots, type);
 			
 			
 			if (type.equals(FACE) && (slots.length - 1) < 3) {
@@ -156,6 +124,42 @@ public class ObjLoader {
 				calibrateFacesArray(faces);
 			}
 
+		}
+	}
+
+	private void fillOutputLists(String line, String[] slots, String type)
+			throws DataFormatException {
+		switch (type) {
+		case VERTICE:
+			if (slots[0].trim() == "" || slots[1].trim() == "" ||  slots[2].trim() == "" ) {
+				break;
+			}
+				vertices.add(new Point3(Double.parseDouble(slots[1]), Double.parseDouble(slots[2]), Double.parseDouble(slots[3])));
+			break;
+		case TEXTURE:
+			if (slots[1].trim() == "" || slots[2].trim() == "") {
+				break;
+			}
+			textures.add(new TextureCoord(Double.parseDouble(slots[1]), Double.parseDouble(slots[2])));
+			break;
+		case NORMAL:
+			if (slots[1].trim() == "" || slots[2].trim() == "" || slots[3].trim() == "") {
+				break;
+			}
+			normals.add(new Normal3(Double.parseDouble(slots[1]), Double.parseDouble(slots[2]), Double.parseDouble(slots[3])));
+			break;
+		case FACE:
+			if (slots.length < 4) {
+				throw new DataFormatException();
+			}
+			facesSourceLine.add(line);
+			break;
+		case COMMENT:
+			return;
+		case BLANK: 
+			return;
+		default:
+			return;
 		}
 	}
 
