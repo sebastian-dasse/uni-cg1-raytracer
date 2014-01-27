@@ -20,10 +20,13 @@ import raytracer.ui.ShowImage;
 public final class DemoSceneUE05 {
 
 	public static void main(String[] args) {
+		
+		debug();
+		
 		final Renderer[] tracers = new Renderer[]{
 //				smartieScene(), 
 //				boxScene(), 
-				teddyScene()
+//				teddyScene()
 //				bunnyScene()
 		};
 		for (int i = 0; i < tracers.length; i++) {
@@ -31,6 +34,18 @@ public final class DemoSceneUE05 {
 		}
 	}
 
+	private static void debug() {
+		final String path = "models/teddy.obj";
+		final Material material = new LambertMaterial(new Color(1, 1, 1));
+		
+		final World world = Factory.buildWorld(new double[][]{{0, 0, 0}, {0, 0, 0}}, Constants.INDEX_OF_REFRACTION_AIR_AT_20_DEG);
+		final Camera camera = Factory.buildPerspectiveCamera(new double[][]{
+				{2.5, 2.5, 2.5}, {-1, -1, -1}, {0, 1, 0}, {Math.PI / 4.0}});
+		world.addElements(
+				new Node(new ShapeFromFile(path, material), new Transform())
+		);
+	}
+	
 	private static Renderer smartieScene() {
 		final World world = Factory.buildWorld(new double[][] { { 0, 0, 0 }, {0.1, 0.1, 0.1} }, 1);
 		final Camera camera = Factory.buildPerspectiveCamera(new double[][] {

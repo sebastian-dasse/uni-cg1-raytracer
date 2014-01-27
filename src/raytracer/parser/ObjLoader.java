@@ -29,6 +29,7 @@ public class ObjLoader {
 	public final String COMMENT = "#";
 	public final String SLASH = "/";
 	public final String BLANK = " ";
+	public final String EMPTY = "";
 	public final int FACELENGTH = 9;
 	public final int TUPELSIZE = 3;
 
@@ -88,6 +89,7 @@ public class ObjLoader {
 	}
 
 	private TriangleMesh createTriangleMash(final Material material) {
+		listAll();
 		return new TriangleMesh(
 				material, 
 				vertices.toArray(new Point3[vertices.size()]), 
@@ -99,26 +101,26 @@ public class ObjLoader {
 		String previousType = "";
 		for (int lno = 0; lno < lines.size(); lno++) {
 			String line = lines.get(lno);
-//			line = line.replaceAll("\\s+", " ");
+			line = line.replaceAll("\\s+", " ");
 			String[] slots = line.split(" ");
 			String type = slots[0];
+			if (type.equals(COMMENT) || type.equals(EMPTY)) {
+				continue;
+			}
+			if (type.equals(FACE) && (slots.length - 1) < 3) {
+				throw new DataFormatException();
+			}
 			
 			if (lno > 0) {
 				previousType = lines.get(lno - 1).split(" ")[0];
 			}
-			
 			fillOutputLists(line, slots, type);
 			
-			
-			if (type.equals(FACE) && (slots.length - 1) < 3) {
-				throw new DataFormatException();
-			}
-
 
 			if (((previousType.equals(FACE) && !type
 					.equals(FACE)) || lno == lines.size() - 1)) {
 				faces = buildFacesArray();
-				calibrateFacesArray(faces);
+//				calibrateFacesArray(faces);
 			}
 
 		}
@@ -151,10 +153,6 @@ public class ObjLoader {
 			}
 			facesSourceLine.add(line);
 			break;
-		case COMMENT:
-			return;
-		case BLANK: 
-			return;
 		default:
 			return;
 		}
@@ -188,48 +186,41 @@ public class ObjLoader {
 		 */
 		int count = 0;
 		for (String face : facesSourceLine) {
-			/*
-			 * Split line into blocks
-			 */
 			String[] blocks = face.replaceAll(FACE, "").trim()
 					.split(BLANK);
-			StringBuilder tupelsAsString = new StringBuilder();
-			/*
-			 * Retrieve blocks: Fill them up with 0s if necessary
-			 */
-			for (int i = 0; i < blocks.length; i++) {
-				String slashFiltered = blocks[i].replace(SLASH, " ");
-				String[] atomicElements = slashFiltered.split(BLANK);
-				StringBuilder tupelFilled = new StringBuilder();
-				tupelFilled.append(atomicElements[0]);
-				for (int i2 = 1; i2 <= TUPELSIZE
-						- atomicElements.length; i2++) {
-					tupelFilled.append(" 0");
-				}
-				if (TUPELSIZE - atomicElements.length == 0) {
-					tupelsAsString.append(slashFiltered + BLANK);
-				} else {
-					tupelsAsString.append(tupelFilled + BLANK);
-				}
-			}
-			/*
-			 * Build String array with one entry per desired NINER -
-			 * tupel
-			 */
+			
+			StringBuilder tupelsAsString = fillZeros(blocks);
+
 			String[] ninerTupelsAsString = tupelsAsString.toString()
 					.split(BLANK);
-
-			/*
-			 * Convert string array into 2-Dimensional int array
-			 */
+			
 			for (int i = 0; i < ninerTupelsAsString.length; i++) {
 				result[count][i] = Integer
 						.parseInt(ninerTupelsAsString[i]);
 			}
-
 			count++;
 		}
 		return result;
+	}
+
+	private StringBuilder fillZeros(String[] blocks) {
+		StringBuilder tupelsAsString = new StringBuilder();
+		for (int i = 0; i < blocks.length; i++) {
+			String slashFiltered = blocks[i].replace(SLASH, " ");
+			String[] atomicElements = slashFiltered.split(BLANK);
+			StringBuilder tupelFilled = new StringBuilder();
+			tupelFilled.append(atomicElements[0]);
+			for (int i2 = 1; i2 <= TUPELSIZE
+					- atomicElements.length; i2++) {
+				tupelFilled.append(" 0");
+			}
+			if (TUPELSIZE - atomicElements.length == 0) {
+				tupelsAsString.append(slashFiltered + BLANK);
+			} else {
+				tupelsAsString.append(tupelFilled + BLANK);
+			}
+		}
+		return tupelsAsString;
 	}
 
 	public void listAll() {

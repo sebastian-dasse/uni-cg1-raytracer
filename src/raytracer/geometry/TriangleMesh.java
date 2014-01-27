@@ -66,7 +66,6 @@ public class TriangleMesh extends Geometry {
 			final Normal3 an;
 			final Normal3 bn;
 			final Normal3 cn;
-			System.out.println(normals[face[2]]);
 			if (face[2] != 0) {
 				an = normals[ face[2] ];
 				bn = normals[ face[5] ];
