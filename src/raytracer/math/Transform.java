@@ -3,7 +3,8 @@ package raytracer.math;
 import raytracer.Ray;
 
 /**
- * TODO comment everything!
+ * This immutable class represents a transformation and is meant to transform <code>Node</code>s. There are methods to 
+ * append other transformations on the right side.
  * 
  * @author Maxim Novichkov
  *
@@ -19,7 +20,8 @@ public class Transform {
 	public final Mat4x4 i;
 	
 	/**
-	 * TODO comment
+	 * Constructs a new <code>Transform</code> object. To actually perform a transformation, one of the transformation 
+	 * methods must be appended to this transformation.
 	 */
 	public Transform(){
 		m = new Mat4x4(1, 0, 0, 0, 
@@ -33,7 +35,7 @@ public class Transform {
 	}
 	
 	/**
-	 * TODO comment
+	 * This private method constructs a new <code>Transform</code> object as specified by the given matrices.
 	 * 
 	 * @param m	The transformation matrix of the transformation.
 	 * @param i	The inverse transformation matrix of the transformation.
@@ -175,5 +177,43 @@ public class Transform {
 			throw new IllegalArgumentException("The parameter 'normal' must not be null.");
 		}
 		return (i.transposed().mul(normal.asVector())).normalized().asNormal();
+	}
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((i == null) ? 0 : i.hashCode());
+		result = prime * result + ((m == null) ? 0 : m.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Transform other = (Transform) obj;
+		if (i == null) {
+			if (other.i != null)
+				return false;
+		} else if (!i.equals(other.i))
+			return false;
+		if (m == null) {
+			if (other.m != null)
+				return false;
+		} else if (!m.equals(other.m))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return getClass().getSimpleName()
+				+ "[\n\tm = " + m + "," 
+				+ "\n\ti = " + i + "]";
 	}
 }

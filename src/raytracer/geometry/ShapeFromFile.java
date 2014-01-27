@@ -17,6 +17,9 @@ import raytracer.material.Material;
  *
  */
 public class ShapeFromFile extends Geometry {
+	/**
+	 * The geometry that was loaded from the file.
+	 */
 	private final Geometry geo;
 
 	/**

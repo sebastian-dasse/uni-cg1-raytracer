@@ -5,7 +5,6 @@ import java.util.LinkedList;
 import raytracer.Constants;
 import raytracer.Ray;
 import raytracer.material.Material;
-import raytracer.math.Normal3;
 import raytracer.math.Point3;
 import raytracer.math.Transform;
 
@@ -18,7 +17,6 @@ import raytracer.math.Transform;
  *
  */
 public class AxisAlignedBox extends Geometry {
-	
 	/**
 	 * The default low bottom far point of this <code>AxisAlignedBox</code>.
 	 * Is part of the left, the back and the bottom plane.
@@ -38,21 +36,21 @@ public class AxisAlignedBox extends Geometry {
 	private static final Transform backT = new Transform().translate(lbf).rotateZ(Math.PI).rotateX(-Math.PI / 2.0);
 	
 	// TODO -- for testing -- when done --> comment back in 
-//	private final Plane plane = new Plane(material);
-//	private final Node top = new Node(plane, topT);
-//	private final Node right = new Node(plane, rightT);
-//	private final Node front = new Node(plane, frontT);
-//	private final Node left = new Node(plane, lefT);
-//	private final Node bottom = new Node(plane, bottomT);
-//	private final Node back = new Node(plane, backT);
+	private final Plane plane = new Plane(material);
+	private final Node top = new Node(plane, topT);
+	private final Node right = new Node(plane, rightT);
+	private final Node front = new Node(plane, frontT);
+	private final Node left = new Node(plane, lefT);
+	private final Node bottom = new Node(plane, bottomT);
+	private final Node back = new Node(plane, backT);
 	
 	// TODO -- for testing -- when done --> remove
-	private final Plane top = new Plane(run, new Normal3(0, 1, 0), material);
-	private final Plane right = new Plane(run, new Normal3(1, 0, 0), material);
-	private final Plane front = new Plane(run, new Normal3(0, 0, 1), material);
-	private final Plane left = new Plane(lbf, new Normal3(-1, 0, 0), material);
-	private final Plane bottom = new Plane(lbf, new Normal3(0, -1, 0), material);
-	private final Plane back = new Plane(lbf, new Normal3(0, 0, -1), material);
+//	private final Plane top = new Plane(run, new Normal3(0, 1, 0), material);
+//	private final Plane right = new Plane(run, new Normal3(1, 0, 0), material);
+//	private final Plane front = new Plane(run, new Normal3(0, 0, 1), material);
+//	private final Plane left = new Plane(lbf, new Normal3(-1, 0, 0), material);
+//	private final Plane bottom = new Plane(lbf, new Normal3(0, -1, 0), material);
+//	private final Plane back = new Plane(lbf, new Normal3(0, 0, -1), material);
 	
 	/**
 	 * Constructs a new <code>AxisAlignedBox</code> with the specified material.
@@ -115,24 +113,13 @@ public class AxisAlignedBox extends Geometry {
 		}
 		
 		Hit nearestHit = null;
-		//---- alternativ zu Zeile 139-141:
-//		double t = Double.MAX_VALUE;
-//		for (Hit hit : hits) {
-//			if (hit.t > Constants.EPSILON && hit.t - t < Constants.EPSILON) {
-		double t = -1;
+		double t = Double.POSITIVE_INFINITY;
 		for (Hit hit : hits) {
-			if ((hit.t < t || t == -1) && hit.t > Constants.EPSILON) {
+			if (hit.t > Constants.EPSILON && hit.t - t < Constants.EPSILON) {
 				t = hit.t;
 				nearestHit = hit;
 			}
 		}
 		return nearestHit;
-	}
-
-	// TODO might be useless now
-	@Override
-	public String toString() {
-		return super.toString() + ",\n\tlbf = " + lbf + ",\n" 
-								+ "\trun = " + run + "]";
 	}
 }

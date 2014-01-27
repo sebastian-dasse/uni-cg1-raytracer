@@ -15,7 +15,12 @@ import raytracer.math.Point3;
 import raytracer.texture.TextureCoord;
 
 /**
- * TODO comment everything
+ * This class is a loader for OBJ files. It can parse <code>TriangleMesh</code>es from such a file.
+ * <p>
+ * As for now, only vertices, and faces can be loaded.
+ * <p>
+ * For further information on the OBJ format 
+ * <a href="http://www.martinreddy.net/gfx/3d/OBJ.spec">check out the documentation</a>.
  * 
  * @author Simon Lischka
  * @author Sebastian Dass&ecaute;
@@ -41,12 +46,11 @@ public class ObjLoader {
 
 	public ObjLoader() {
 		vertices = new ArrayList<Point3>();
-		vertices.add(new Point3(0, 0, 0)); // add unused point at first position
+		vertices.add(new Point3(0, 0, 0)); // add unused point at first position for easier array indexing
 		textures = new ArrayList<TextureCoord>();
 		normals = new ArrayList<Normal3>();
 		facesSourceLine = new ArrayList<String>();
 		lines = new LinkedList<String>();
-//		faces = new int[0][0];
 		faces = new int[0][0];
 	}
 
