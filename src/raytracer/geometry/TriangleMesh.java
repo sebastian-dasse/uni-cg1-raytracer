@@ -6,7 +6,7 @@ import raytracer.material.Material;
 import raytracer.material.ReflectiveMaterial;
 import raytracer.math.Normal3;
 import raytracer.math.Point3;
-import raytracer.texture.TextCoord;
+import raytracer.texture.TextureCoord;
 
 /*
  * -- Notiz --
@@ -21,11 +21,11 @@ import raytracer.texture.TextCoord;
 
 public class TriangleMesh extends Geometry {
 	public final Point3[] vertices;
-	public final TextCoord[] textCoords;
+	public final TextureCoord[] textCoords;
 	public final Normal3[] normals;
 	public final int[][] faces;
 	
-	public TriangleMesh(final Material material, final Point3[] vertices, final TextCoord[] textCoords, 
+	public TriangleMesh(final Material material, final Point3[] vertices, final TextureCoord[] textCoords, 
 			final Normal3[] normals, final int[][] faces) {
 		super(material);
 		this.vertices = vertices;
@@ -94,7 +94,7 @@ public class TriangleMesh extends Geometry {
 					new Point3(0.5, 0.5, -0.5), 
 					new Point3(-0.5, 0.5, -0.5)
 				}, 
-				new TextCoord[0], 
+				new TextureCoord[0], 
 				new Normal3[]{
 					
 				}, new int[][]{
