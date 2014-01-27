@@ -97,27 +97,29 @@ public class ObjLoader {
 				normals.toArray(new Normal3[normals.size()]), 
 				faces);
 	}
+	
+	
 	private void parseBasicData() throws DataFormatException {
 		String previousType = "";
+		System.out.println(lines.size());
 		for (int lno = 0; lno < lines.size(); lno++) {
 			String line = lines.get(lno);
 			line = line.replaceAll("\\s+", " ");
 			String[] slots = line.split(" ");
 			String type = slots[0];
-			System.out.println(slots[0]);
 			if (type.equals(COMMENT) || type.equals(EMPTY)) {
 				continue;
 			}
-			if (type.equals(FACE) && (slots.length - 1) < 3) {
-				throw new DataFormatException();
-			}
-			
-			if (lno > 0) {
-				previousType = lines.get(lno - 1).split(" ")[0];
-			}
+//			if (type.equals(FACE) && (slots.length - 1) < 3) {
+//				throw new DataFormatException();
+//			}
+//			
+//			if (lno > 0) {
+//				previousType = lines.get(lno - 1).split(" ")[0];
+//			}
 			fillOutputLists(line, slots, type);
 			
-
+//
 			if (((previousType.equals(FACE) && !type
 					.equals(FACE)) || lno == lines.size() - 1)) {
 				faces = buildFacesArray();
@@ -132,27 +134,15 @@ public class ObjLoader {
 			throws DataFormatException {
 		switch (type) {
 		case VERTICE:
-			if (slots[0].trim() == "" || slots[1].trim() == "" ||  slots[2].trim() == "" ) {
-				break;
-			}
 				vertices.add(new Point3(Double.parseDouble(slots[1]), Double.parseDouble(slots[2]), Double.parseDouble(slots[3])));
 			break;
 		case TEXTURE:
-			if (slots[1].trim() == "" || slots[2].trim() == "") {
-				break;
-			}
 			textures.add(new TextureCoord(Double.parseDouble(slots[1]), Double.parseDouble(slots[2])));
 			break;
 		case NORMAL:
-			if (slots[1].trim() == "" || slots[2].trim() == "" || slots[3].trim() == "") {
-				break;
-			}
 			normals.add(new Normal3(Double.parseDouble(slots[1]), Double.parseDouble(slots[2]), Double.parseDouble(slots[3])));
 			break;
 		case FACE:
-			if (slots.length < 4) {
-				throw new DataFormatException();
-			}
 			facesSourceLine.add(line);
 			break;
 		default:
@@ -182,7 +172,6 @@ public class ObjLoader {
 
 	private int[][] buildFacesArray() {
 		int[][] result = new int[facesSourceLine.size()][9];
-		System.out.println(facesSourceLine);
 		
 		/*
 		 * Iterate linewise
