@@ -37,19 +37,30 @@ public static void main(String[] args) {
 		
 		final Camera camera = Factory.buildPerspectiveCamera(new double[][] {
 				{ 4, 4, 4 }, { -1, -1, -1 }, { 0, 1, 0 }, { Math.PI / 4.0 } });
-		Node first = new Node(
-				new Sphere(new Point3(1, 3, 1), 0.5, new LambertMaterial(new Color(0, 1, 0))), 
-				new Transform().scale(2.0, 1.0, 2.0));
+//		Node first = new Node(
+//				new Sphere(new LambertMaterial(new Color(0, 1, 0))), 
+//				new Transform().scale(2.0, 1.0, 2.0));
 		//world.addElement(new Sphere(new Point3(0, 1, 0), 0.5, new PhongMaterial(new Color(0, 1, 0), new Color(1, 1, 1), 64)));
 		//world.addElement(new Plane(new Point3( 0, 0, 0), new Normal3(0, 1, 0), new PhongMaterial(new Color(1, 0, 0), new Color(1, 1, 1), 64)));
 //		world.addElement(new Node(
 //				new Sphere(new Point3(1, 3, 1), 0.5, new LambertMaterial(new Color(0, 1, 0))), 
 //				new Transform().scale(2.0, 1.0, 2.0)));
-		world.addElement(new Node(
-				new AxisAlignedBox(new Point3(-0.5, 0, -0.5), new Point3(0.5, 1, 0.5), new LambertMaterial(new Color(0, 1, 0))), 
-				new Transform().rotateX(8)));
+		world.addElements(
+//		new Node(
+//				new AxisAlignedBox(new LambertMaterial(new Color(0, 1, 0))), 
+//			new Transform().rotateX(8)));
+		new Node(
+				new Sphere(new PhongMaterial(new Color(1, 0, 0), new Color(1, 1, 1), 64)), 
+				new Transform()
+				.rotateY(Math.PI/0.2)
+				.rotateZ(Math.PI/0.9)
+				.rotateX(Math.PI/1.15)
+				.scale(2.0, 0.5, 2.0)
+				
+				
+		));
 		
-		world.addLight(new PointLight(new Color(1, 1, 1), new Point3(4, 4, 4)));
+		world.addLight(new PointLight(new Color(1, 1, 1), new Point3(4, 4, 4), false));
 		return new Renderer(world, camera, 10);
 	}
 	
