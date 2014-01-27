@@ -6,17 +6,6 @@ import raytracer.math.Normal3;
 import raytracer.math.Point3;
 import raytracer.texture.TextureCoord;
 
-/*
- * -- Notiz --
- * Zugriff auf Arrays: 
- * f[n][9]
- * 
- *  0   1    2    3   4    5    6   7    8
- * [v1][vt1][vn1][v2][vt2][vn2][v3][vt3][vn3]
- * [v1][vt1][vn1][v2][vt2][vn2][v3][vt3][vn3]
- * [v1][vt1][vn1][v2][vt2][vn2][v3][vt3][vn3]
- */
-
 /**
  * This immutable class represents a triangle mesh, that is a polygon that comprises a set of triangles that are 
  * defined through a number of shared vertices. The triangular faces are further defined through a number of normals 
