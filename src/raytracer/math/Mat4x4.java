@@ -1,5 +1,20 @@
 package raytracer.math;
-
+/**
+ * This immutable class represents a matrix with four rows and four columns. Thus it has fields for its sixteen 
+ * components, which are to be addressed as follows: the first index specifies the row, the second indicates the column 
+ * of the particular element, like that: 
+ * <blockquote><code>
+ * m11 m12 m13 m14<br />
+ * m21 m22 m23 m24<br />
+ * m31 m32 m33 m34<br />
+ * m41 m42 m43 m44</code></blockquote>
+ * 
+ * <p>The class <code>Mat4x4</code> includes methods to calculate the matrix product with a <code>Vector3</code>, 
+ * a <code>Point3</code> or with another <code>Matrix4</code> object.
+ * 
+ * <p>Passing a <code>null</code> object to a method in this class will cause an <code>IllegalArgumentException</code> 
+ * to be thrown.
+ */
 public class Mat4x4 {
 	/**
 	 * The m11 component of this <code>Mat4x4</code>.
@@ -65,7 +80,26 @@ public class Mat4x4 {
 	 * The m44 component of this <code>Mat4x4</code>.
 	 */
 	public final double m44;
-
+	/**
+	 * Constructs a new <code>Mat4x4</code> based on the nine specified components.
+	 * 
+	 * @param m11 The m11 component. Must be a double value other than +-Infinity or NaN.
+	 * @param m12 The m12 component. Must be a double value other than +-Infinity or NaN.
+	 * @param m13 The m13 component. Must be a double value other than +-Infinity or NaN.
+	 * @param m14 The m14 component. Must be a double value other than +-Infinity or NaN.
+	 * @param m21 The m21 component. Must be a double value other than +-Infinity or NaN.
+	 * @param m22 The m22 component. Must be a double value other than +-Infinity or NaN.
+	 * @param m23 The m23 component. Must be a double value other than +-Infinity or NaN.
+	 * @param m24 The m24 component. Must be a double value other than +-Infinity or NaN.
+	 * @param m31 The m31 component. Must be a double value other than +-Infinity or NaN.
+	 * @param m32 The m32 component. Must be a double value other than +-Infinity or NaN.
+	 * @param m33 The m33 component. Must be a double value other than +-Infinity or NaN.
+	 * @param m34 The m34 component. Must be a double value other than +-Infinity or NaN.
+	 * @param m41 The m41 component. Must be a double value other than +-Infinity or NaN.
+	 * @param m42 The m42 component. Must be a double value other than +-Infinity or NaN.
+	 * @param m43 The m43 component. Must be a double value other than +-Infinity or NaN.
+	 * @param m44 The m44 component. Must be a double value other than +-Infinity or NaN.
+	 */
 	public Mat4x4(final double m11, final double m12, final double m13, final double m14,
 			  final double m21, final double m22, final double m23, final double m24, 
 			  final double m31, final double m32, final double m33, final double m34,
@@ -88,6 +122,12 @@ public class Mat4x4 {
 	this.m44 = m44;
 	}
 	
+	/**
+	 * Calculates the matrix product of this matrix with the specified <code>Vector3</code>.
+	 * 
+	 * @param v The <code>Vector3</code> with which	this matrix is multiplied. Must not be <code>null</code>.
+	 * @return	The resulting <code>Vector3</code>.
+	 */
 	public Vector3 mul(final Vector3 v){
 		if (v == null) {
 			throw new IllegalArgumentException("The parameter 'v' must not be null.");
@@ -97,6 +137,12 @@ public class Mat4x4 {
 						   m31 * v.x + m32 * v.y + m33 * v.z);
 	}
 	
+	/**
+	 * Calculates the matrix product of this matrix with the specified <code>Point3</code>.
+	 * 
+	 * @param p The <code>Point3</code> with which this matrix is multiplied. Must not be <code>null</code>.
+	 * @return	The resulting <code>Point3</code>;
+	 */
 	public Point3 mul(final Point3 p){
 		if (p == null) {
 			throw new IllegalArgumentException("The parameter 'p' must not be null.");
@@ -105,7 +151,12 @@ public class Mat4x4 {
 						  m21 * p.x + m22 * p.y + m23 * p.z + m24,
 						  m31 * p.x + m32 * p.y + m33 * p.z + m34);
 	}
-	
+	/**
+	 * Calculates the matrix product of this matrix with the specified <code>Mat4x4</code>.
+	 * 
+	 * @param m The other matrix with which this matrix is multiplied. Must not be <code>null</code>.
+	 * @return	The resulting <code>Mat4x4</code>.
+	 */
 	public Mat4x4 mul(final Mat4x4 m){
 		if (m == null) {
 			throw new IllegalArgumentException("The parameter 'm' must not be null.");
@@ -131,6 +182,11 @@ public class Mat4x4 {
                           m41*m.m14 + m42*m.m24 + m43*m.m34 + m44*m.m44);
 	}
 	
+	/**
+	 * Calculate transposed <code>Mat4x4</code>.
+	 *  
+	 * @return The resulted transposed <code>Mat4x4</code>.
+	 */
 	public Mat4x4 transposed(){
 		return new Mat4x4(m11, m21, m31, m41,
 						  m12, m22, m32, m42,

@@ -3,11 +3,15 @@ package raytracer.math;
 import raytracer.Ray;
 
 /**
+<<<<<<< HEAD
  * This immutable class represents a transformation and is meant to transform <code>Node</code>s. There are methods to 
  * append other transformations on the right side.
+=======
+ * This immutable class provides methods to transform the geometries in three dimensional space.
+>>>>>>> efefa0e1476fd2c54e575c658b575f28703afe96
  * 
  * @author Maxim Novichkov
- *
+ * @author Sebastian Dass&eacute;
  */
 public class Transform {	
 	/**
@@ -20,8 +24,12 @@ public class Transform {
 	public final Mat4x4 i;
 	
 	/**
+<<<<<<< HEAD
 	 * Constructs a new <code>Transform</code> object. To actually perform a transformation, one of the transformation 
 	 * methods must be appended to this transformation.
+=======
+	 * Construct a new <code>Transformation</code> object and initialize it with the unit matrix.
+>>>>>>> efefa0e1476fd2c54e575c658b575f28703afe96
 	 */
 	public Transform(){
 		m = new Mat4x4(1, 0, 0, 0, 
@@ -35,7 +43,11 @@ public class Transform {
 	}
 	
 	/**
+<<<<<<< HEAD
 	 * This private method constructs a new <code>Transform</code> object as specified by the given matrices.
+=======
+	 * Construct a new <code>Transformation</code> object with transformation and inverse matrix.
+>>>>>>> efefa0e1476fd2c54e575c658b575f28703afe96
 	 * 
 	 * @param m	The transformation matrix of the transformation.
 	 * @param i	The inverse transformation matrix of the transformation.
@@ -144,11 +156,11 @@ public class Transform {
 	public Transform rotateZ(final double angle) {
 		final Mat4x4 tm = new Mat4x4( Math.cos(angle),-Math.sin(angle), 0, 0,
 									  Math.sin(angle), Math.cos(angle), 0, 0,
-									  0, 				  0,              1, 0,
+									  0, 			    0,              1, 0,
 									  0,                0,              0, 1);
 		final Mat4x4 ti = new Mat4x4( Math.cos(angle), Math.sin(angle), 0, 0,
 									 -Math.sin(angle), Math.cos(angle), 0, 0,
-									  0, 				  0,              1, 0,
+									  0, 			    0,              1, 0,
 									  0,                0,              0, 1);
 		return new Transform(m.mul(tm), ti.mul(i));
 	  }
