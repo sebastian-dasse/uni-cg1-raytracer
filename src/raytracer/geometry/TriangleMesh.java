@@ -11,7 +11,7 @@ import raytracer.texture.TextureCoord;
 /*
  * -- Notiz --
  * Zugriff auf Arrays: 
- * f[0][3]
+ * f[n][9]
  * 
  *  0   1    2    3   4    5    6   7    8
  * [v1][vt1][vn1][v2][vt2][vn2][v3][vt3][vn3]
@@ -19,6 +19,12 @@ import raytracer.texture.TextureCoord;
  * [v1][vt1][vn1][v2][vt2][vn2][v3][vt3][vn3]
  */
 
+/**
+ * TODO comment everything
+ * 
+ * @author Sebastian Dass&ecaute;
+ *
+ */
 public class TriangleMesh extends Geometry {
 	public final Point3[] vertices;
 	public final TextureCoord[] textCoords;
@@ -80,6 +86,7 @@ public class TriangleMesh extends Geometry {
 		return closestHit;
 	}
 	
+	// TODO -- for testing --> remove later
 	public static TriangleMesh createTestTriangleMesh(final Material material) {
 		return new TriangleMesh(
 				material, 
@@ -134,6 +141,7 @@ public class TriangleMesh extends Geometry {
 					{2, 0, 0, 
 					 1, 0, 0, 
 					 5, 0, 0}
-				});
+				}
+			);
 	}
 }

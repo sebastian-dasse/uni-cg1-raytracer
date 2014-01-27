@@ -156,7 +156,9 @@ private static Renderer scene3() {
 //		meshMaterial = new PhongMaterial(new Color(1, 1, 1), new Color(1, 1, 1), 20);
 //		meshMaterial = new ReflectiveMaterial(new Color(1, 1, 1), new Color(1, 1, 1), 20, new Color(0.5, 0.5, 0.5));
 		
-		String path = "models/cube-v.obj";
+//		String path = "models/cube-v.obj";
+		String path = "models/teddy.obj";
+//		String path = "models/ted.obj";
 		final Geometry mesh = new ShapeFromFile(path, meshMaterial);
 		
 //		mesh = new AxisAlignedBox(meshMaterial);
