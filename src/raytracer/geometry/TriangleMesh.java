@@ -1,9 +1,7 @@
 package raytracer.geometry;
 
-import raytracer.Color;
 import raytracer.Ray;
 import raytracer.material.Material;
-import raytracer.material.ReflectiveMaterial;
 import raytracer.math.Normal3;
 import raytracer.math.Point3;
 import raytracer.texture.TextureCoord;
@@ -51,15 +49,15 @@ public class TriangleMesh extends Geometry {
 			final Point3 c = vertices[ face[6] ];
 			
 			/* //-- texture -- not yet used
-			final TextCoord at;
-			final TextCoord bt;
-			final TextCoord ct;
+			final TextureCoord at;
+			final TextureCoord bt;
+			final TextureCoord ct;
 			if (face[1] != 0) {
 				at = textCoords[ face[1] ];
 				bt = textCoords[ face[4] ];
 				ct = textCoords[ face[7] ];
 			} else {
-				at = bt = ct = new TextCoord(0, 0);
+				at = bt = ct = new TextureCoord(0, 0);
 			}
 			*/
 			
