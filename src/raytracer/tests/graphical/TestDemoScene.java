@@ -1,11 +1,7 @@
 package raytracer.tests.graphical;
 
-import java.io.File;
-import java.util.zip.DataFormatException;
-
 import raytracer.Color;
 import raytracer.Constants;
-import raytracer.ObjLoader;
 import raytracer.Renderer;
 import raytracer.World;
 import raytracer.camera.Camera;
@@ -13,16 +9,16 @@ import raytracer.geometry.AxisAlignedBox;
 import raytracer.geometry.Geometry;
 import raytracer.geometry.Node;
 import raytracer.geometry.ShapeFromFile;
-import raytracer.geometry.Sphere;
 import raytracer.light.PointLight;
 import raytracer.material.LambertMaterial;
 import raytracer.material.Material;
 import raytracer.material.PhongMaterial;
+import raytracer.material.ReflectiveMaterial;
 import raytracer.math.Point3;
 import raytracer.math.Transform;
 import raytracer.ui.ShowImage;
 
-public class TestDemoScene {
+public final class TestDemoScene {
 	
 	public static void main(String[] args) {
 		
@@ -152,15 +148,15 @@ public class TestDemoScene {
 private static Renderer scene3() {
 		final World world = Factory.buildWorld(new double[][] { { 0, 0, 0 }, {0.0, 0.0, 0.0} }, Constants.INDEX_OF_REFRACTION_VACUUM);
 		final Camera camera = Factory.buildPerspectiveCamera(new double[][] {
-				{ 4, 4, 4 }, { -1, -1, -1 }, { 0, 1, 0 }, { Math.PI / 4.0 } });
+				{ 2.5, 2.5, 2.5 }, { -1, -1, -1 }, { 0, 1, 0 }, { Math.PI / 4.0 } });
 		
 		final Material meshMaterial;
-//		boxMaterial = new SingleColorMaterial(new Color(1, 0, 0));
-//		boxMaterial = new LambertMaterial(new Color(1, 0, 0)); 
-		meshMaterial = new PhongMaterial(new Color(1, 0, 0), new Color(1, 1, 1), 20);
-//		boxMaterial = new ReflectiveMaterial(new Color(1, 0, 0), new Color(1, 1, 1), 20, new Color(0.5, 0.5, 0.5));
+//		meshMaterial = new SingleColorMaterial(new Color(1, 1, 1));
+		meshMaterial = new LambertMaterial(new Color(1, 1, 1)); 
+//		meshMaterial = new PhongMaterial(new Color(1, 1, 1), new Color(1, 1, 1), 20);
+//		meshMaterial = new ReflectiveMaterial(new Color(1, 1, 1), new Color(1, 1, 1), 20, new Color(0.5, 0.5, 0.5));
 		
-		String path = "models/cube-vv.obj";
+		String path = "models/cube-v.obj";
 		final Geometry mesh = new ShapeFromFile(path, meshMaterial);
 		
 //		mesh = new AxisAlignedBox(meshMaterial);
@@ -188,12 +184,7 @@ private static Renderer scene3() {
 				
 //				new Node(new Sphere(boxMaterial), boxTransform)
 		);
-//		world.addLight(new PointLight(new Color(0.6, 0.6, 0.6), new Point3(4, 4, 4)));
-//		world.addLight(new PointLight(new Color(0.6, 0.6, 0.6), new Point3(-5, 5, 5)));
-//		world.addLight(new PointLight(new Color(0.6, 0.6, 0.6), new Point3(4, 4, 4), false));
-		world.addLight(new PointLight(new Color(1, 1, 1), new Point3(4, 3, 3), false));
-//		world.addLight(new DirectionalLight(new Color(0.6, 0.6, 0.6), new Vector3(-10, -10, -40)));
-//		world.addLight(new SpotLight(new Color(1, 1, 1), new Point3(4, 4, 4), new Vector3(-1, -1, -1), Math.PI / 14.0, false));
+		world.addLight(new PointLight(new Color(1, 1, 1), new Point3(4, 3, 2), false));
 		return new Renderer(world, camera, 10);
 	}
 }

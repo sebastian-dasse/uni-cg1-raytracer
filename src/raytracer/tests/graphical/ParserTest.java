@@ -6,7 +6,7 @@ import raytracer.Color;
 import raytracer.ObjLoader;
 import raytracer.material.SingleColorMaterial;
 
-
+// TODO not used remove
 public class ParserTest {
 	public static void main (String[] args) {
 		ObjLoader parser = new ObjLoader();
