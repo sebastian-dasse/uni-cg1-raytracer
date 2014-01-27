@@ -3,10 +3,11 @@ package raytracer.math;
 import raytracer.Ray;
 
 /**
- * TODO comment everything!
+ * This immutable class represents a transformation that is meant to transform <code>Node</code>s. Therefore it provides 
+ * methods to append other transformations on the right side.
  * 
  * @author Maxim Novichkov
- *
+ * @author Sebastian Dass&eacute;
  */
 public class Transform {	
 	/**
@@ -19,7 +20,8 @@ public class Transform {
 	public final Mat4x4 i;
 	
 	/**
-	 * TODO comment
+	 * Constructs a new <code>Transform</code> object that does nothing. To actually perform a transformation, one of 
+	 * the transformation methods must be appended to this transformation.
 	 */
 	public Transform(){
 		m = new Mat4x4(1, 0, 0, 0, 
@@ -33,7 +35,8 @@ public class Transform {
 	}
 	
 	/**
-	 * TODO comment
+	 * This private method constructs a new <code>Transform</code> object as specified by the given matrices.
+	 * Construct a new <code>Transformation</code> object with transformation and inverse matrix.
 	 * 
 	 * @param m	The transformation matrix of the transformation.
 	 * @param i	The inverse transformation matrix of the transformation.
@@ -142,11 +145,11 @@ public class Transform {
 	public Transform rotateZ(final double angle) {
 		final Mat4x4 tm = new Mat4x4( Math.cos(angle),-Math.sin(angle), 0, 0,
 									  Math.sin(angle), Math.cos(angle), 0, 0,
-									  0, 				  0,              1, 0,
+									  0, 			    0,              1, 0,
 									  0,                0,              0, 1);
 		final Mat4x4 ti = new Mat4x4( Math.cos(angle), Math.sin(angle), 0, 0,
 									 -Math.sin(angle), Math.cos(angle), 0, 0,
-									  0, 				  0,              1, 0,
+									  0, 			    0,              1, 0,
 									  0,                0,              0, 1);
 		return new Transform(m.mul(tm), ti.mul(i));
 	  }
@@ -175,5 +178,43 @@ public class Transform {
 			throw new IllegalArgumentException("The parameter 'normal' must not be null.");
 		}
 		return (i.transposed().mul(normal.asVector())).normalized().asNormal();
+	}
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((i == null) ? 0 : i.hashCode());
+		result = prime * result + ((m == null) ? 0 : m.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Transform other = (Transform) obj;
+		if (i == null) {
+			if (other.i != null)
+				return false;
+		} else if (!i.equals(other.i))
+			return false;
+		if (m == null) {
+			if (other.m != null)
+				return false;
+		} else if (!m.equals(other.m))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return getClass().getSimpleName()
+				+ "[\n\tm = " + m + "," 
+				+ "\n\ti = " + i + "]";
 	}
 }

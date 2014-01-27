@@ -1,6 +1,5 @@
 package raytracer.geometry;
 
-import static raytracer.math.MathUtil.isValid;
 import raytracer.Constants;
 import raytracer.Ray;
 import raytracer.material.Material;
@@ -81,12 +80,5 @@ public class Sphere extends Geometry {
 		// Formula: normal = p - center
 		final Normal3 normal = p.sub(center).normalized().asNormal(); // normalized normal
 		return new Hit(t, ray, this, normal);
-	}
-	
-	// TODO might be useless now
-	@Override
-	public String toString() {
-		return super.toString() + ",\n\tcenter = " + center + ",\n" + "\tr = "
-				+ r + "]";
 	}
 }

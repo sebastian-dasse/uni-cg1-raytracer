@@ -7,8 +7,8 @@ import raytracer.math.Normal3;
 import raytracer.math.Point3;
 
 /**
- * This immutable class represents an infinitely large plane in three-dimensional space. It is defined through a 
- * <code>Point3</code> and a <code>Normal3</code>.
+ * This immutable class represents an infinitely large plane in three-dimensional space. It is defined through its 
+ * normal (0, 1, 0) and runs through the origin (0, 0, 0).
  * 
  * @author Sebastian Dass&eacute;
  *
@@ -17,11 +17,13 @@ public class Plane extends Geometry {
 	/**
 	 * The origin (0, 0, 0).
 	 */
-	private Point3 origin = new Point3(0, 0, 0); // TODO -- for testing -- when done --> should be static final
+	private static final Point3 origin = new Point3(0, 0, 0);
+//	private Point3 origin = new Point3(0, 0, 0); // TODO -- for testing -- when done --> should be static final
 	/**
 	 * The standard normal of all planes (0, 1, 0).
 	 */
-	private Normal3 n = new Normal3(0, 1, 0); // TODO -- for testing -- when done --> should be static final
+	private static final Normal3 n = new Normal3(0, 1, 0);
+//	private Normal3 n = new Normal3(0, 1, 0); // TODO -- for testing -- when done --> should be static final
 	/**
 	 * Constructs a new <code>Plane</code> with the specified material.
 	 * 
@@ -32,11 +34,11 @@ public class Plane extends Geometry {
 	}
 	
 	// TODO -- for testing -- when done --> remove
-	public Plane(final Point3 point, final Normal3 normal , final Material material) {
-		super(material);
-		this.origin = point;
-		this.n= normal;
-	}
+//	public Plane(final Point3 point, final Normal3 normal , final Material material) {
+//		super(material);
+//		this.origin = point;
+//		this.n= normal;
+//	}
 
 	@Override
 	public Hit hit(final Ray ray) {
@@ -52,12 +54,4 @@ public class Plane extends Geometry {
 		final Normal3 normal = n.asVector().normalized().asNormal(); // normalized normal
 		return (t < Constants.EPSILON) ? null : new Hit(t, ray, this, normal);
 	}
-
-	// TODO might be useless now
-	@Override
-	public String toString() {
-		return super.toString() + ",\n\t[a = " + origin + ",\n" + "\tn = " + n + "]";
-	}
-
-
 }

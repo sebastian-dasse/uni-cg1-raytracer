@@ -9,7 +9,7 @@
 \usepackage{epstopdf}
 \DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
 \title{CGI: Bericht zu Aufgabe 5, Raytracer}
-\author{von Sebastian Dass\'{e}, Max Novichkov, Simon Lischka }
+\author{von Sebastian Dass\'{e}, Maxim Novichkov, Simon Lischka }
 \date{27.01.2014}
 
 \begin{document}
@@ -17,33 +17,52 @@
 \maketitle
 
 \section{Aufgabenstellung}
-... . Dazu gab es folgende 
-Teilaufgaben: 
 
 \subsection{}
+Zeichnung einer UML Diagramme
 
+\subsection{}
+Implementierung der 4x4 Matrizen und Transformationsklassen
 
+\subsection{}
+Implementierung einer Nodeklasse
+
+\subsection{}
+Implementierung einer Loader f\"ur das OBJ Format
+
+\subsection{}
+Notwendige Anpassungen an die Geometrieklassen
 
 \section{L\"osungsstrategien}
 \subsection{}
+Die Klassen wurden zun\"achst als leere Vorlagen nach den UML Diagrammen generiert.
 
-
+\subsection{}
+Die Formeln der entsprechenden Klassen wurden aus der Vorlesungsmaterial genommen.
 
 \section{Besondere Probleme}
-\subsection{}
 
+\subsection{}
+Die schwierigste Aufgabe war das korrekte Parsing der gegebenen Dateien und die entsprechende Umwandlung gewonnenen Daten in
+eine Figur.   
+F\"ur Testen, die Suche und Aufhebung der entstehenden Problemen wurde sehr viel Zeit in Anspruch genommen.
 
 
 \section{Implementierung}
-\subsection{Schatten}
+\subsection{}
+Die 4x4 Matrize und Transformationsklassen wurden nach den Formeln, die im Vorlesungsmaterial angegeben 
+wurden und unter Ber\"ucksichtigung des UML Diagramms implementiert.
 
-\subsection{Reflexion und Refraktion}
+\subsection{}
+Die Nodeklasse wurde nach in der Vorlesung besprochener Konzeption entworfen. 
 
-
+\subsection{}
+Nach dem langen Testen wurde Loader f\"ur das OBJ Format implementiert. 
 
 \section{Zeitbedarf}
 \subsection{}
-Der Zeitbedarf wurde bei allen Teammitgliedern mit jeweils ??? Stunden angegeben.
+Der Zeitbedarf wurde bei allen Teammitgliedern mit jeweils 20 Stunden angegeben.
+
 
 
 \end{document} 

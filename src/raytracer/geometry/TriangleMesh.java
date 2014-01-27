@@ -1,36 +1,52 @@
 package raytracer.geometry;
 
-import raytracer.Color;
 import raytracer.Ray;
 import raytracer.material.Material;
-import raytracer.material.ReflectiveMaterial;
 import raytracer.math.Normal3;
 import raytracer.math.Point3;
 import raytracer.texture.TextureCoord;
 
-/*
- * -- Notiz --
- * Zugriff auf Arrays: 
- * f[n][9]
- * 
- *  0   1    2    3   4    5    6   7    8
- * [v1][vt1][vn1][v2][vt2][vn2][v3][vt3][vn3]
- * [v1][vt1][vn1][v2][vt2][vn2][v3][vt3][vn3]
- * [v1][vt1][vn1][v2][vt2][vn2][v3][vt3][vn3]
- */
-
 /**
- * TODO comment everything
+ * This immutable class represents a triangle mesh, that is a polygon that comprises a set of triangles that are 
+ * defined through a number of shared vertices. The triangular faces are further defined through a number of normals 
+ * and coordinates for their texture.
  * 
  * @author Sebastian Dass&ecaute;
  *
  */
 public class TriangleMesh extends Geometry {
-	public final Point3[] vertices;
-	public final TextureCoord[] textCoords;
-	public final Normal3[] normals;
-	public final int[][] faces;
+	/**
+	 * The vertices of this triangle mesh.
+	 */
+	private final Point3[] vertices;
+	/**
+	 * The texture coordinates for this triangle mesh.
+	 */
+	private final TextureCoord[] textCoords;
+	/**
+	 * The normals used in this triangle mesh.
+	 */
+	private final Normal3[] normals;
+	/**
+	 * The data for the faces of this triangle mesh. Address a single face by the first index and the data of each face 
+	 * as follows:
+	 * <pre>
+	 * index: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 
+	 * type:  v1|vt1|vn1| v2|vt2|vn2| v3|vt3|vn3
+	 * </pre>
+	 */
+	private final int[][] faces;
 	
+	/**
+	 * Constructs a new <code>TriangleMesh</code> with the specified material, vertices, texture coordinates, normals 
+	 * and faces.
+	 * 
+	 * @param material
+	 * @param vertices
+	 * @param textCoords
+	 * @param normals
+	 * @param faces
+	 */
 	public TriangleMesh(final Material material, final Point3[] vertices, final TextureCoord[] textCoords, 
 			final Normal3[] normals, final int[][] faces) {
 		super(material);
@@ -42,7 +58,6 @@ public class TriangleMesh extends Geometry {
 
 	@Override
 	public Hit hit(final Ray ray) {
-		
 		Hit closestHit = null;
 		double closestT = Double.POSITIVE_INFINITY;
 		for (int[] face : faces) {
@@ -51,15 +66,15 @@ public class TriangleMesh extends Geometry {
 			final Point3 c = vertices[ face[6] ];
 			
 			/* //-- texture -- not yet used
-			final TextCoord at;
-			final TextCoord bt;
-			final TextCoord ct;
+			final TextureCoord at;
+			final TextureCoord bt;
+			final TextureCoord ct;
 			if (face[1] != 0) {
 				at = textCoords[ face[1] ];
 				bt = textCoords[ face[4] ];
 				ct = textCoords[ face[7] ];
 			} else {
-				at = bt = ct = new TextCoord(0, 0);
+				at = bt = ct = new TextureCoord(0, 0);
 			}
 			*/
 			
@@ -82,7 +97,6 @@ public class TriangleMesh extends Geometry {
 				closestT = hit.t;
 			}
 		}
-		
 		return closestHit;
 	}
 	
