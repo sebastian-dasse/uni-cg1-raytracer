@@ -6,7 +6,7 @@ import raytracer.Ray;
  * TODO comment everything!
  * 
  * @author Maxim Novichkov
- *
+ * @author Sebastian Dass&eacute;
  */
 public class Transform {	
 	/**
@@ -142,11 +142,11 @@ public class Transform {
 	public Transform rotateZ(final double angle) {
 		final Mat4x4 tm = new Mat4x4( Math.cos(angle),-Math.sin(angle), 0, 0,
 									  Math.sin(angle), Math.cos(angle), 0, 0,
-									  0, 				  0,              1, 0,
+									  0, 			    0,              1, 0,
 									  0,                0,              0, 1);
 		final Mat4x4 ti = new Mat4x4( Math.cos(angle), Math.sin(angle), 0, 0,
 									 -Math.sin(angle), Math.cos(angle), 0, 0,
-									  0, 				  0,              1, 0,
+									  0, 			    0,              1, 0,
 									  0,                0,              0, 1);
 		return new Transform(m.mul(tm), ti.mul(i));
 	  }
