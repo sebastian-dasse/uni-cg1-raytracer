@@ -24,7 +24,7 @@ public class ObjLoader {
 	public final int FACELENGTH = 9;
 	public final int TUPELSIZE = 3;
 	
-	LinkedList <String> lines;
+	private LinkedList <String> lines;
 	private Collection<Point3> vertices;
 	private Collection<TextCoord> textures;
 	private Collection<Normal3> normals;
@@ -33,6 +33,7 @@ public class ObjLoader {
 	
 	public ObjLoader() {
 		vertices = new LinkedList<Point3>();
+		vertices.add(new Point3(0, 0, 0));
 		textures = new LinkedList<TextCoord>();
 		normals = new LinkedList<Normal3>();
 		facesSourceLine = new LinkedList<String>();
@@ -40,16 +41,19 @@ public class ObjLoader {
 		faces = new int[0][0];
 	}
 	
-	public TriangleMesh createTriangleMash(final Material material) {
-		return new TriangleMesh(
-				material, 
-				vertices.toArray(new Point3[vertices.size()]), 
-				textures.toArray(new TextCoord[textures.size()]), 
-				normals.toArray(new Normal3[normals.size()]), 
-				faces);
+	
+	public TriangleMesh load(final String filename, final Material material) {
+		read(filename);
+		try {
+			parseBasicData();
+		} catch (DataFormatException e) {
+			e.printStackTrace();
+			throw new RuntimeException("Failed loading defective *.obj file.");
+		}
+		return createTriangleMash(material);
 	}
 	
-	public void load(String filename) {
+	private void read(String filename) {
 		Scanner in = null;
 		try {
 			in = new Scanner(new File(filename));
@@ -62,11 +66,19 @@ public class ObjLoader {
 			if (in != null) {
 				in.close();
 			}
-		}
+		}		
 	}
 	
+	private TriangleMesh createTriangleMash(final Material material) {
+		return new TriangleMesh(
+				material, 
+				vertices.toArray(new Point3[vertices.size()]), 
+				textures.toArray(new TextCoord[textures.size()]), 
+				normals.toArray(new Normal3[normals.size()]), 
+				faces);
+	}
 	
-	public void parseBasicData() throws DataFormatException {
+	private void parseBasicData() throws DataFormatException {
 		vertices.add(new Point3(0, 0, 0));
 		
 		String previousType = "";
