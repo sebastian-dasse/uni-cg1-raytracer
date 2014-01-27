@@ -89,7 +89,7 @@ public class ObjLoader {
 	}
 
 	private TriangleMesh createTriangleMash(final Material material) {
-		listAll();
+//		listAll();
 		return new TriangleMesh(
 				material, 
 				vertices.toArray(new Point3[vertices.size()]), 
@@ -104,6 +104,7 @@ public class ObjLoader {
 			line = line.replaceAll("\\s+", " ");
 			String[] slots = line.split(" ");
 			String type = slots[0];
+			System.out.println(slots[0]);
 			if (type.equals(COMMENT) || type.equals(EMPTY)) {
 				continue;
 			}
@@ -120,6 +121,7 @@ public class ObjLoader {
 			if (((previousType.equals(FACE) && !type
 					.equals(FACE)) || lno == lines.size() - 1)) {
 				faces = buildFacesArray();
+//				listAll();
 //				calibrateFacesArray(faces);
 			}
 
@@ -180,6 +182,7 @@ public class ObjLoader {
 
 	private int[][] buildFacesArray() {
 		int[][] result = new int[facesSourceLine.size()][9];
+		System.out.println(facesSourceLine);
 		
 		/*
 		 * Iterate linewise
@@ -224,18 +227,18 @@ public class ObjLoader {
 	}
 
 	public void listAll() {
-		System.out.println("Vertices");
-		System.out.println("--------------------------");
-		System.out.println(vertices.toString());
-		System.out.println();
-		System.out.println("Textures");
-		System.out.println("--------------------------");
-		System.out.println(textures.toString());
-		System.out.println();
-		System.out.println("Normals");
-		System.out.println("--------------------------");
-		System.out.println(normals.toString());
-		System.out.println();
+//		System.out.println("Vertices");
+//		System.out.println("--------------------------");
+//		System.out.println(vertices.toString());
+//		System.out.println();
+//		System.out.println("Textures");
+//		System.out.println("--------------------------");
+//		System.out.println(textures.toString());
+//		System.out.println();
+//		System.out.println("Normals");
+//		System.out.println("--------------------------");
+//		System.out.println(normals.toString());
+//		System.out.println();
 		for (int[] i1 : faces) {
 			System.out.println("--");
 			for (int i2 : i1) {
