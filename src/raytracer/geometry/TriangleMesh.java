@@ -44,8 +44,7 @@ public class TriangleMesh extends Geometry {
 			final Point3 b = vertices[ face[3] ];
 			final Point3 c = vertices[ face[6] ];
 			
-			/* //-- texture -- not yet used 
-			*/
+			/* //-- texture -- not yet used
 			final TextCoord at;
 			final TextCoord bt;
 			final TextCoord ct;
@@ -56,6 +55,7 @@ public class TriangleMesh extends Geometry {
 			} else {
 				at = bt = ct = new TextCoord(0, 0);
 			}
+			*/
 			
 			final Normal3 an;
 			final Normal3 bn;

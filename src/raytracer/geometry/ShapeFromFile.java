@@ -1,28 +1,25 @@
 package raytracer.geometry;
 
-import java.io.File;
-
+import raytracer.ObjLoader;
 import raytracer.Ray;
 import raytracer.material.Material;
 
+/**
+ * TODO comment everything.
+ * 
+ * @author Sebastian Dass&eacute;
+ *
+ */
 public class ShapeFromFile extends Geometry {
-	private final File file;
-	
-	public ShapeFromFile(String filename, Material material) {
+	private Geometry geo;
+
+	public ShapeFromFile(final String filename, final Material material) {
 		super(material);
-		this.file = new File(filename);
-	}
-	
-	public ShapeFromFile(File filename, Material material) {
-		super(material);
-		this.file = filename;
+		geo = new ObjLoader().load(filename, material);
 	}
 	
 	@Override
-	public Hit hit(Ray ray) {
-		// TODO Auto-generated method stub
-		return null;
+	public Hit hit(final Ray ray) {
+		return geo.hit(ray);
 	}
-
-	
 }
