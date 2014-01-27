@@ -95,7 +95,6 @@ public class ObjLoader {
 				normals.toArray(new Normal3[normals.size()]), 
 				faces);
 	}
-
 	private void parseBasicData() throws DataFormatException {
 		String previousType = "";
 		for (int lno = 0; lno < lines.size(); lno++) {
@@ -149,89 +148,87 @@ public class ObjLoader {
 				throw new DataFormatException();
 			}
 
-//			/*
-//			 * Process faces to int array
-//			 */
 			final boolean objectEnd = ((previousType.equals(FACE) && !type
 					.equals(FACE)) || lno == lines.size() - 1);
 
 			if (objectEnd) {
-				/*
-				 * Done reading non-face data from file
-				 */
-				int[][] result = new int[facesSourceLine.size()][9];
-				int count = 0;
-				/*
-				 * Iterate linewise
-				 */
-				for (String face : facesSourceLine) {
-					/*
-					 * Split line into blocks
-					 */
-					String[] blocks = face.replaceAll(FACE, "").trim()
-							.split(BLANK);
-					StringBuilder tupelsAsString = new StringBuilder();
-					/*
-					 * Retrieve blocks: Fill them up with 0s if necessary
-					 */
-					for (int i = 0; i < blocks.length; i++) {
-						String slashFiltered = blocks[i].replace(SLASH, " ");
-						String[] atomicElements = slashFiltered.split(BLANK);
-						StringBuilder tupelFilled = new StringBuilder();
-						tupelFilled.append(atomicElements[0]);
-						for (int i2 = 1; i2 <= TUPELSIZE
-								- atomicElements.length; i2++) {
-							tupelFilled.append(" 0");
-						}
-						if (TUPELSIZE - atomicElements.length == 0) {
-							tupelsAsString.append(slashFiltered + BLANK);
-						} else {
-							tupelsAsString.append(tupelFilled + BLANK);
-						}
-					}
-					/*
-					 * Build String array with one entry per desired NINER -
-					 * tupel
-					 */
-					String[] ninerTupelsAsString = tupelsAsString.toString()
-							.split(BLANK);
-
-					/*
-					 * Convert string array into 2-Dimensional int array
-					 */
-					for (int i = 0; i < ninerTupelsAsString.length; i++) {
-						result[count][i] = Integer
-								.parseInt(ninerTupelsAsString[i]);
-					}
-
-					count++;
-				}
-
-				/*
-				 * Remap
-				 */
-
-				int minValue = Integer.MAX_VALUE;
-				// FIND MINIMUM
-				for (int i = 0; i < result.length; i++) {
-					for (int value : result[i]) {
-						if (Math.signum(value - minValue) == -1) {
-							minValue = value;
-						}
-					}
-				}
-				// THROWS ERROR ---->
-				// int compensation = (1 - minValue);
-				// //COMPENSATE
-				// for (int i = 0; i < result.length; i++) {
-				// for (int i2 = 0; i2 < result[i].length; i2++) {
-				// faces [i][i2] = result [i][i2] + compensation;
-				// }
-				// }
-				faces = result;
+				faces = buildFacesArray();
+				calibrateFacesArray(faces);
 			}
 
 		}
+	}
+
+	private void calibrateFacesArray(int[][] faces) {
+		int minValue = Integer.MAX_VALUE;
+		// FIND MINIMUM
+		for (int i = 0; i < faces.length; i++) {
+			for (int value : faces[i]) {
+				if (Math.signum(value - minValue) == -1) {
+					minValue = value;
+				}
+			}
+		}
+		// THROWS ERROR ---->
+		 int compensation = (1 - minValue);
+		 //COMPENSATE
+		 for (int i = 0; i < faces.length; i++) {
+		 for (int i2 = 0; i2 < faces[i].length; i2++) {
+		 faces [i][i2] = faces [i][i2] + compensation;
+		 }
+		 }
+	}
+
+	private int[][] buildFacesArray() {
+		int[][] result = new int[facesSourceLine.size()][9];
+		
+		/*
+		 * Iterate linewise
+		 */
+		int count = 0;
+		for (String face : facesSourceLine) {
+			/*
+			 * Split line into blocks
+			 */
+			String[] blocks = face.replaceAll(FACE, "").trim()
+					.split(BLANK);
+			StringBuilder tupelsAsString = new StringBuilder();
+			/*
+			 * Retrieve blocks: Fill them up with 0s if necessary
+			 */
+			for (int i = 0; i < blocks.length; i++) {
+				String slashFiltered = blocks[i].replace(SLASH, " ");
+				String[] atomicElements = slashFiltered.split(BLANK);
+				StringBuilder tupelFilled = new StringBuilder();
+				tupelFilled.append(atomicElements[0]);
+				for (int i2 = 1; i2 <= TUPELSIZE
+						- atomicElements.length; i2++) {
+					tupelFilled.append(" 0");
+				}
+				if (TUPELSIZE - atomicElements.length == 0) {
+					tupelsAsString.append(slashFiltered + BLANK);
+				} else {
+					tupelsAsString.append(tupelFilled + BLANK);
+				}
+			}
+			/*
+			 * Build String array with one entry per desired NINER -
+			 * tupel
+			 */
+			String[] ninerTupelsAsString = tupelsAsString.toString()
+					.split(BLANK);
+
+			/*
+			 * Convert string array into 2-Dimensional int array
+			 */
+			for (int i = 0; i < ninerTupelsAsString.length; i++) {
+				result[count][i] = Integer
+						.parseInt(ninerTupelsAsString[i]);
+			}
+
+			count++;
+		}
+		return result;
 	}
 
 	public void listAll() {

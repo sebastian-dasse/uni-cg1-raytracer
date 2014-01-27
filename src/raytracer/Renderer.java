@@ -27,7 +27,7 @@ public class Renderer {
 	/**
 	 * The maximum render time in minutes
 	 */
-	public static final int MAX_RENDER_TIME_MINUTES = 20;
+	public static final int MAX_RENDER_TIME_MINUTES = 200;
 	
 	/**
 	 * The world of this renderer.

@@ -23,7 +23,7 @@ public final class DemoSceneUE05 {
 		final Renderer[] tracers = new Renderer[]{
 //				smartieScene(), 
 //				boxScene(), 
-//				teddyScene(), 
+//				teddyScene()
 				bunnyScene()
 		};
 		for (int i = 0; i < tracers.length; i++) {
