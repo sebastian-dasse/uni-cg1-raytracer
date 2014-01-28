@@ -60,14 +60,19 @@ public class ObjLoader {
 	public TriangleMesh load(final String filename, final Material material) {
 		read(filename);
 		try {
-			parseBasicData();
+			parse();
 		} catch (DataFormatException e) {
 			e.printStackTrace();
 			throw new RuntimeException("Failed loading defective *.obj file.");
 		}
-		return createTriangleMash(material);
+		return createTriangleMesh(material);
 	}
-
+    /**
+     * Reads the basic data required to build objects for <code>TriangleMesh</code>
+     * Fills the <code>lines</list> list with data.
+     * @param filename The name of the model file
+     * 
+     */
 	private void read(final String filename) {
 		Scanner in = null;
 		try {
@@ -88,8 +93,11 @@ public class ObjLoader {
 		}
 	}
 
-	private TriangleMesh createTriangleMash(final Material material) {
-//		listAll();
+	/**
+	 * Converts the Collection structures into arrays and creates a <code> triangle mesh</code>.
+	 * @return TriangleMesh
+	 */
+	private TriangleMesh createTriangleMesh(final Material material) {
 		return new TriangleMesh(
 				material, 
 				vertices.toArray(new Point3[vertices.size()]), 
@@ -98,8 +106,13 @@ public class ObjLoader {
 				faces);
 	}
 	
-	
-	private void parseBasicData() throws DataFormatException {
+	/**
+	 * Fills the collections with the basic sections that can be found in an obj file.
+	 * Calls the <code>fillOutputLists</code> method to extract all the sections of the file
+	 * minus the faces list, which depends on the fillOutputList's data.
+	 * 
+	 */
+	private void parse() throws DataFormatException {
 		String previousType = "";
 		System.out.println(lines.size());
 		for (int lno = 0; lno < lines.size(); lno++) {
@@ -110,26 +123,31 @@ public class ObjLoader {
 			if (type.equals(COMMENT) || type.equals(EMPTY)) {
 				continue;
 			}
-//			if (type.equals(FACE) && (slots.length - 1) < 3) {
-//				throw new DataFormatException();
-//			}
-//			
-//			if (lno > 0) {
-//				previousType = lines.get(lno - 1).split(" ")[0];
-//			}
+			if (type.equals(FACE) && (slots.length - 1) < 3) {
+				throw new DataFormatException();
+			}
+			if (lno > 0) {
+				previousType = lines.get(lno - 1).split(" ")[0];
+			}
 			fillOutputLists(line, slots, type);
 			
-//
 			if (((previousType.equals(FACE) && !type
 					.equals(FACE)) || lno == lines.size() - 1)) {
 				faces = buildFacesArray();
-//				listAll();
 //				calibrateFacesArray(faces);
 			}
 
 		}
 	}
 
+	/**
+	 *  Interprets a line in the obj file - acts according to found type:
+	 *  <code> VERTICE </code> - add new Point3 object to vertices list
+	 *  <code> TEXTURE </code> - add new TextureCoord object to textures list
+	 *  <code> NORMAL </code> - add new Normal to normals list
+	 *  <code> FACE </code> - add new face to facesSourcesList - this list is later used by buildFacesArray() to 
+	 *  generate the faces.
+	 */
 	private void fillOutputLists(String line, String[] slots, String type)
 			throws DataFormatException {
 		switch (type) {
@@ -150,6 +168,10 @@ public class ObjLoader {
 		}
 	}
 
+	/**
+	 * Current under development. Should calibrate the indexes of the faces array.
+	 * @param faces
+	 */
 	private void calibrateFacesArray(int[][] faces) {
 		int minValue = Integer.MAX_VALUE;
 		// FIND MINIMUM
@@ -170,6 +192,16 @@ public class ObjLoader {
 		 }
 	}
 
+	/**
+	 *  Constructs the faces array - processes a single line element from the facesSourceLine-Collection.
+	 *  First trims the "f" prefix away, then adds zeros (fillZeros method) to the blocks if a block form the source file 
+	 *  doesn't contain 3 numbers (e.g. 1 2 3 instead of 1/1/1 2/2/2 3/3/3). 
+	 *  Then builds splits the filtered string into a new Array (still String) which is later converted
+	 *  into the [][] two dimensional required for output.
+	 *  
+	 *  @return result - A two dimensional array (TODO: describe Array here.)
+	 *  
+	 */
 	private int[][] buildFacesArray() {
 		int[][] result = new int[facesSourceLine.size()][9];
 		
@@ -195,6 +227,12 @@ public class ObjLoader {
 		return result;
 	}
 
+	/**
+	 * Format conversion: Fills up zeros of given block-Array
+	 * if single numbers are found (used for faces).
+	 * E.g. 1 2 3 to 100 200 300.
+	 * @return tupelsAsString A stringBuilder object containing the newly formated line.
+	 */
 	private StringBuilder fillZeros(String[] blocks) {
 		StringBuilder tupelsAsString = new StringBuilder();
 		for (int i = 0; i < blocks.length; i++) {
@@ -215,28 +253,28 @@ public class ObjLoader {
 		return tupelsAsString;
 	}
 
+	/**
+	 * Lists the internal data structures for debugging purposes.
+	 * Prints: vertices, textures, normals and faces.
+	 */
 	public void listAll() {
-//		System.out.println("Vertices");
-//		System.out.println("--------------------------");
-//		System.out.println(vertices.toString());
-//		System.out.println();
-//		System.out.println("Textures");
-//		System.out.println("--------------------------");
-//		System.out.println(textures.toString());
-//		System.out.println();
-//		System.out.println("Normals");
-//		System.out.println("--------------------------");
-//		System.out.println(normals.toString());
-//		System.out.println();
+		System.out.println("Vertices");
+		System.out.println("--------------------------");
+		System.out.println(vertices.toString());
+		System.out.println();
+		System.out.println("Textures");
+		System.out.println("--------------------------");
+		System.out.println(textures.toString());
+		System.out.println();
+		System.out.println("Normals");
+		System.out.println("--------------------------");
+		System.out.println(normals.toString());
+		System.out.println();
 		for (int[] i1 : faces) {
 			System.out.println("--");
 			for (int i2 : i1) {
 				System.out.println(i2);
 			}
 		}
-	}
-
-	public void buildFaces() {
-
 	}
 }
