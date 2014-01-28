@@ -203,47 +203,42 @@ public class ObjLoader {
 		int[][] result = new int[facesSourceLine.size()][9];
 		int count = 0;
 		for (String face : facesSourceLine) {
-			String[] blocks = face.replaceAll(FACE, "").trim()
+			String[] line = face.replaceAll(FACE, "").trim()
 					.split(BLANK);
+			int[] numbers = parseIntArray(line);
+			numbers = fillZeros(numbers);
 			
-			StringBuilder tupelsAsString = fillZeros(blocks);
-
-			String[] ninerTupelsAsString = tupelsAsString.toString()
-					.split(BLANK);
-			
-			for (int i = 0; i < ninerTupelsAsString.length; i++) {
-				result[count][i] = Integer
-						.parseInt(ninerTupelsAsString[i]);
+			for (int i = 0; i < numbers.length; i++) {
+				result[count][i] = numbers[i];
 			}
 			count++;
 		}
 		return result;
 	}
 
+	private int [] parseIntArray(String[] strs) {
+		int[] numbers = new int[strs.length];
+		for (int i = 0; i < strs.length; i++) {
+			numbers[i] = Integer.parseInt(strs[i]);
+		}
+		return numbers;
+	}
+	
 	/**
 	 * Format conversion: Fills up zeros of given block-Array
 	 * if single numbers are found (used for faces).
 	 * E.g. 1 2 3 to 100 200 300.
 	 * @return tupelsAsString A stringBuilder object containing the newly formated line.
 	 */
-	private StringBuilder fillZeros(String[] blocks) {
-		StringBuilder tupelsAsString = new StringBuilder();
-		for (int i = 0; i < blocks.length; i++) {
-			String slashFiltered = blocks[i].replace(SLASH, " ");
-			String[] atomicElements = slashFiltered.split(BLANK);
-			StringBuilder tupelFilled = new StringBuilder();
-			tupelFilled.append(atomicElements[0]);
-			for (int i2 = 1; i2 <= TUPELSIZE
-					- atomicElements.length; i2++) {
-				tupelFilled.append(" 0");
+	private int[] fillZeros(int[] numbers) {
+		int [] filledNumbers = new int[9];
+		if (numbers.length == 3) {
+			for (int i = 0; i < 9; i++) {
+				filledNumbers[i] = i % 3 == 0 ? numbers[i / 3] : 0;
 			}
-			if (TUPELSIZE - atomicElements.length == 0) {
-				tupelsAsString.append(slashFiltered + BLANK);
-			} else {
-				tupelsAsString.append(tupelFilled + BLANK);
-			}
+			return filledNumbers;
 		}
-		return tupelsAsString;
+			return numbers;
 	}
 
 	/**
