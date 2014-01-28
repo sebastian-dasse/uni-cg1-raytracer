@@ -74,10 +74,10 @@ public class AxisAlignedBox extends Geometry {
 			hitsOnPlane.add(leftHit);
 		}
 		for (Hit hit : hitsOnPlane) {
-			Point3 p = ray.at(hit.t);
-			 if( p.y >= lbf.y && p.y <= run.y && p.z >= lbf.z && p.z <= run.z) {
-				 hits.add(hit);
-			 }
+			final Point3 p = ray.at(hit.t);
+			if( p.y >= lbf.y && p.y <= run.y && p.z >= lbf.z && p.z <= run.z) {
+				hits.add(hit);
+			}
 		}
 		hitsOnPlane.clear();
 		
@@ -90,10 +90,10 @@ public class AxisAlignedBox extends Geometry {
 			hitsOnPlane.add(bottomHit);
 		}
 		for (Hit hit : hitsOnPlane) {
-			Point3 p = ray.at(hit.t);
-			 if( p.x >= lbf.x && p.x <= run.x && p.z >= lbf.z && p.z <= run.z ) {
-				 hits.add(hit);
-			 }
+			final Point3 p = ray.at(hit.t);
+			if( p.x >= lbf.x && p.x <= run.x && p.z >= lbf.z && p.z <= run.z ) {
+				hits.add(hit);
+			}
 		}
 		hitsOnPlane.clear();
 		
@@ -106,12 +106,12 @@ public class AxisAlignedBox extends Geometry {
 			hitsOnPlane.add(backHit);
 		}
 		for (Hit hit : hitsOnPlane) {
-			Point3 p = ray.at(hit.t);
-			 if( p.x >= lbf.x && p.x <= run.x && p.y >= lbf.y && p.y <= run.y ) {
-				 hits.add(hit);
-			 }
+			final Point3 p = ray.at(hit.t);
+			if( p.x >= lbf.x && p.x <= run.x && p.y >= lbf.y && p.y <= run.y ) {
+				hits.add(hit);
+			}
 		}
-		
+
 		Hit nearestHit = null;
 		double t = Double.POSITIVE_INFINITY;
 		for (Hit hit : hits) {

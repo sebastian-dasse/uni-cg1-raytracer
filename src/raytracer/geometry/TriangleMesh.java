@@ -158,4 +158,40 @@ public class TriangleMesh extends Geometry {
 				}
 			);
 	}
+
+	public Point3 getMins() {
+		double minX = Double.POSITIVE_INFINITY;
+		double minY = Double.POSITIVE_INFINITY;
+		double minZ = Double.POSITIVE_INFINITY;
+		for (Point3 v : vertices) {
+			if (v.x < minX) {
+				minX = v.x;
+			}
+			if (v.y < minY) {
+				minY = v.y;
+			}
+			if (v.z < minZ) {
+				minZ = v.z;
+			}
+		}
+		return new Point3(minX, minY, minZ);
+	}
+
+	public Point3 getMaxs() {
+		double maxX = Double.NEGATIVE_INFINITY;
+		double maxY = Double.NEGATIVE_INFINITY;
+		double maxZ = Double.NEGATIVE_INFINITY;
+		for (Point3 v : vertices) {
+			if (maxX < v.x) {
+				maxX = v.x;
+			}
+			if (maxY < v.y) {
+				maxY = v.y;
+			}
+			if (maxZ < v.z) {
+				maxZ = v.z;
+			}
+		}
+		return new Point3(maxX, maxY, maxZ);
+	}
 }

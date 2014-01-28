@@ -47,7 +47,7 @@ public class ObjLoader {
 
 	public ObjLoader() {
 		vertices = new ArrayList<Point3>();
-		vertices.add(new Point3(0, 0, 0));
+		vertices.add(new Point3(0, 0, 0)); // unused point at first position for easier array indexing 
 		textures = new ArrayList<TextureCoord>();
 		normals = new ArrayList<Normal3>();
 		facesSourceLine = new ArrayList<String>();
@@ -156,8 +156,7 @@ public class ObjLoader {
 	 *  <code> FACE </code> - add new face to facesSourcesList - this list is later used by buildFacesArray() to 
 	 *  generate the faces.
 	 */
-	private void fillOutputLists(String line, String[] slots, String type)
-			throws DataFormatException {
+	private void fillOutputLists(String line, String[] slots, String type) {
 		switch (type) {
 		case VERTICE:
 				vertices.add(new Point3(Double.parseDouble(slots[1]), Double.parseDouble(slots[2]), Double.parseDouble(slots[3])));
@@ -172,7 +171,7 @@ public class ObjLoader {
 			facesSourceLine.add(line);
 			break;
 		default:
-			return;
+			break;
 		}
 	}
 

@@ -10,7 +10,6 @@ import raytracer.geometry.Geometry;
 import raytracer.geometry.Node;
 import raytracer.geometry.Plane;
 import raytracer.geometry.ShapeFromFile;
-import raytracer.geometry.Sphere;
 import raytracer.light.PointLight;
 import raytracer.material.LambertMaterial;
 import raytracer.material.Material;
@@ -157,15 +156,15 @@ private static Renderer scene3() {
 //		meshMaterial = new PhongMaterial(new Color(1, 1, 1), new Color(1, 1, 1), 20);
 //		meshMaterial = new ReflectiveMaterial(new Color(1, 1, 1), new Color(1, 1, 1), 20, new Color(0.5, 0.5, 0.5));
 		
-		String path = "models/cube-v.obj";
-//		String path = "models/teddy.obj";
+//		String path = "models/cube-v.obj";
+		String path = "models/teddy.obj";
 //		String path = "models/ted.obj";
 		final Geometry mesh = new ShapeFromFile(path, meshMaterial);
 		
 //		mesh = new AxisAlignedBox(meshMaterial);
 //		box = TriangleMesh.createTestTriangleMesh(boxMaterial);
 		
-		final Transform boxTransform = new Transform()
+//		final Transform boxTransform = new Transform()
 //			.scale(1, 1, 4)
 //			.rotateX(Math.toRadians(45))
 //			.rotateX(Math.toRadians(90))
@@ -173,7 +172,7 @@ private static Renderer scene3() {
 	//		.rotateZ(Math.toRadians(270))
 	//		.rotateZ(Math.toRadians(-45))
 //			.scale(1, 1, 4)
-			;
+//			;
 		
 		world.addElements(
 //				new Node(
@@ -183,16 +182,30 @@ private static Renderer scene3() {
 //						planeMaterial
 //					), new Transform()),
 				
-				new Node(new Sphere(new LambertMaterial(new Color(1, 1, 1))), new Transform()
-					.translate(1, 1, 1)
-					.scale(0.5, 0.5, 0.5)
+//				new Node(new Sphere(new LambertMaterial(new Color(1, 1, 1))), new Transform()
+//					.translate(1, 1, 1)
+//					.scale(0.5, 0.5, 0.5)
+//				),
+				
+				new Node(new Plane(new LambertMaterial(new Color(0.5, 0.5, 0.5))), new Transform()
+//					.rotateZ(-Math.PI / 2.0)
+					.translate(0, -1, 0)
 				),
 				
-				new Node(new Plane(new LambertMaterial(new Color(1, 1, 1))), new Transform()
-//					.rotateZ(-Math.PI / 2.0)
-				)
+				new Node(mesh, new Transform()
+//						.rotateZ(Math.toRadians(180))
+						.scale(0.5, 0.5, 0.5)
+						)
 				
-//				new Node(mesh, boxTransform.rotateZ(Math.toRadians(180)))
+				// 2x teddy for performance comparison 
+//				new Node(new ShapeFromFile(path, meshMaterial), boxTransform
+////						.rotateZ(Math.toRadians(180))
+//						.scale(0.1, 0.1, 0.1)
+//						),
+//				new Node(new ShapeFromFile(path, meshMaterial), boxTransform
+//						.translate(2, 0, 0)
+//						.scale(0.1, 0.1, 0.1)
+//						)
 				
 //				new Node(new Sphere(boxMaterial), boxTransform)
 		);
