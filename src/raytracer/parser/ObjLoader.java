@@ -64,6 +64,7 @@ public class ObjLoader {
 			e.printStackTrace();
 			throw new RuntimeException("Failed loading defective *.obj file.");
 		}
+//		listAll(); // DEBUG
 		return createTriangleMesh(material);
 	}
     /**
@@ -117,7 +118,10 @@ public class ObjLoader {
 		System.out.println(lines.size());
 		for (int lno = 0; lno < lines.size(); lno++) {
 			String line = lines.get(lno);
+			
 			line = line.replaceAll("\\s+", " ");
+			line = line.replaceAll("//", "0");
+			System.out.println(line);
 			String[] slots = line.split(" ");
 			String type = slots[0];
 			if (type.equals(COMMENT) || type.equals(EMPTY)) {
@@ -133,6 +137,7 @@ public class ObjLoader {
 			
 			if (((previousType.equals(FACE) && !type
 					.equals(FACE)) || lno == lines.size() - 1)) {
+				
 				faces = buildFacesArray();
 //				calibrateFacesArray(faces);
 			}
@@ -161,6 +166,7 @@ public class ObjLoader {
 			normals.add(new Normal3(Double.parseDouble(slots[1]), Double.parseDouble(slots[2]), Double.parseDouble(slots[3])));
 			break;
 		case FACE:
+			// Gleich 'n Slot rein!
 			facesSourceLine.add(line);
 			break;
 		default:
@@ -205,6 +211,7 @@ public class ObjLoader {
 		for (String face : facesSourceLine) {
 			String[] line = face.replaceAll(FACE, "").trim()
 					.split(BLANK);
+			
 			int[] numbers = parseIntArray(line);
 			numbers = fillZeros(numbers);
 			
@@ -230,11 +237,12 @@ public class ObjLoader {
 	 * E.g. 1 2 3 to 100 200 300.
 	 * @return tupelsAsString A stringBuilder object containing the newly formated line.
 	 */
+	
 	private int[] fillZeros(int[] numbers) {
 		int [] filledNumbers = new int[9];
 		if (numbers.length == 3) {
 			for (int i = 0; i < 9; i++) {
-				filledNumbers[i] = i % 3 == 0 ? numbers[i / 3] : 0;
+				filledNumbers[i] = i / 3;
 			}
 			return filledNumbers;
 		}
