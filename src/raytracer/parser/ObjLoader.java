@@ -15,7 +15,6 @@ import raytracer.math.Point3;
 import raytracer.texture.TextureCoord;
 
 /**
- * TODO comment everything
  * 
  * @author Simon Lischka
  * @author Sebastian Dass&ecaute;
