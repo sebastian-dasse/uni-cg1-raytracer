@@ -15,7 +15,13 @@ import raytracer.math.Point3;
 import raytracer.texture.TextureCoord;
 
 /**
- * 
+ * This class is a loader for OBJ files. It can parse <code>TriangleMesh</code>es from such a file.
+ * <p>
+ * As for now, only vertices, and faces can be loaded.
+ * <p>
+ * For further information on the OBJ format 
+ * <a href="http://www.martinreddy.net/gfx/3d/OBJ.spec">check out the documentation</a>.
+ *  
  * @author Simon Lischka
  * @author Sebastian Dass&ecaute;
  *
@@ -66,9 +72,11 @@ public class ObjLoader {
 		}
 		return createTriangleMesh(material);
 	}
+	
     /**
      * Reads the basic data required to build objects for <code>TriangleMesh</code>
      * Fills the <code>lines</list> list with data.
+     * 
      * @param filename The name of the model file
      * 
      */

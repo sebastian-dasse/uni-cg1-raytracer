@@ -35,10 +35,10 @@ public final class DemoSceneUE05 {
 		
 		
 		final Renderer[] tracers = new Renderer[]{
-//				smartieScene(), 
-//				boxScene(), 
-//				teddyScene()
-				bunnyScene()
+				smartieScene(), 
+				boxScene(), 
+				teddyScene()
+//				bunnyScene()
 		};
 		for (int i = 0; i < tracers.length; i++) {
 			ShowImage.from(tracers[i], 50 * i, 25 * i);
