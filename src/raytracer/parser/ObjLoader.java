@@ -106,6 +106,7 @@ public class ObjLoader {
 	}
 	
 	/**
+	 * Main parser loop.
 	 * Fills the collections with the basic sections that can be found in an obj file.
 	 * Calls the <code>fillOutputLists</code> method to extract all the sections of the file
 	 * minus the faces list, which depends on the fillOutputList's data.
