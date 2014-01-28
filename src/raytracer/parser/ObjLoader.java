@@ -173,7 +173,6 @@ public class ObjLoader {
 	 */
 	private void calibrateFacesArray(int[][] faces) {
 		int minValue = Integer.MAX_VALUE;
-		// FIND MINIMUM
 		for (int i = 0; i < faces.length; i++) {
 			for (int value : faces[i]) {
 				if (Math.signum(value - minValue) == -1) {
@@ -181,9 +180,7 @@ public class ObjLoader {
 				}
 			}
 		}
-		// THROWS ERROR ---->
 		 int compensation = (1 - minValue);
-		 //COMPENSATE
 		 for (int i = 0; i < faces.length; i++) {
 		 for (int i2 = 0; i2 < faces[i].length; i2++) {
 		 faces [i][i2] = faces [i][i2] + compensation;
@@ -203,10 +200,6 @@ public class ObjLoader {
 	 */
 	private int[][] buildFacesArray() {
 		int[][] result = new int[facesSourceLine.size()][9];
-		
-		/*
-		 * Iterate linewise
-		 */
 		int count = 0;
 		for (String face : facesSourceLine) {
 			String[] blocks = face.replaceAll(FACE, "").trim()
