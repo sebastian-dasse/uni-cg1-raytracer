@@ -21,6 +21,10 @@ import raytracer.camera.Camera;
  */
 public class RenderTask implements Runnable {
 	/**
+	 * The increment of the progress monitor in percent.
+	 */
+	public static final int PROGRESS_INCREMENT_PERCENT = 5;
+	/**
 	 * Reference to the world used by the renderer
 	 */
 	private final World world;
@@ -49,6 +53,11 @@ public class RenderTask implements Runnable {
 	 */
 	private final int interval;
 	/**
+	 * The size of one step of the progress monitor.
+	 */
+	private int progressStep;
+	
+	/**
 	 * Creates a new RenderTask with the specified parameters.
 	 * 
 	 * @param yStart  		Start position on the y-Axis
@@ -60,7 +69,7 @@ public class RenderTask implements Runnable {
 	 * @param recursion 	Recursion depth of the tracer object.
 	 */
 	public RenderTask(final int yStart, final int interval, final Dimension size, 
-			final World world, final Camera cam,  final BufferedImage image, final int recursion) {
+			final World world, final Camera cam, final BufferedImage image, final int recursion) {
 		this.image = image;
 		this.cam = cam;
 		this.world = world;
@@ -68,6 +77,7 @@ public class RenderTask implements Runnable {
 		this.recursion = recursion;
 		this.yStart = yStart;
 		this.interval = interval;
+		progressStep = size.height * PROGRESS_INCREMENT_PERCENT / 100;
 	}
 	@Override
 	/**
@@ -83,6 +93,22 @@ public class RenderTask implements Runnable {
 				final Ray ray = cam.rayFor(size.width, size.height, x, size.height - y);
 				raster.setDataElements(x,y,Util.dataElementsFromColor(new Tracer(recursion).trace(ray, world), colorModel));
 			}
+			showProgress(y);
+		}
+	}
+	
+	/**
+	 * A very basic progress monitor.
+	 * 
+	 * @param y
+	 */
+	private void showProgress(final int y) {
+		if (y % progressStep == 0 || y == size.height) {
+			String progr = "";
+			for (int i = 0; i < y / progressStep; i++) {
+				progr = progr + "|";
+			}
+			System.out.printf("%3d%% %s%n", (y * PROGRESS_INCREMENT_PERCENT / progressStep + PROGRESS_INCREMENT_PERCENT), progr);
 		}
 	}
 }
