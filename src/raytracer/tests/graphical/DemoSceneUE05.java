@@ -37,8 +37,8 @@ public final class DemoSceneUE05 {
 		final Renderer[] tracers = new Renderer[]{
 				smartieScene(), 
 				boxScene(), 
-				teddyScene()
-//				bunnyScene()
+				teddyScene(), 
+				bunnyScene()
 		};
 		for (int i = 0; i < tracers.length; i++) {
 			ShowImage.from(tracers[i], 50 * i, 25 * i);
@@ -122,11 +122,14 @@ public final class DemoSceneUE05 {
 		
 		final World world = Factory.buildWorld(new double[][]{{0, 0, 0}, {0, 0, 0}}, Constants.INDEX_OF_REFRACTION_AIR_AT_20_DEG);
 		final Camera camera = Factory.buildPerspectiveCamera(new double[][]{
-				{10, 10, 10}, {-1, -1, -1}, {0, 1, 0}, {Math.PI / 4.0}});
+				{12.5, 12.5, 12.5}, {-1, -1, -1}, {0, 1, 0}, {Math.PI / 4.0}});
 		world.addElements(
-				new Node(new ShapeFromFile(path, material), new Transform())
+				new Node(new ShapeFromFile(path, material), new Transform()
+						.translate(0, -3, 0)
+//						.scale(0.5, 0.5, 0.5)
+						)
 		);
-		world.addLight(new PointLight(new Color(1, 1, 1), new Point3(10, 10, 10), false));
+		world.addLight(new PointLight(new Color(1, 1, 1), new Point3(12.5, 12.5, 12.5), false));
 		return new Renderer(world, camera);
 	}
 }
