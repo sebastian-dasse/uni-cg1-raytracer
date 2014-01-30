@@ -110,7 +110,7 @@ public class Renderer {
 		}
 		final long timeMillis = System.currentTimeMillis() - startTime;
 		final int timeSek = (int)(timeMillis / 1000);
-		System.out.printf("Done rendering after %02d min %02d sec", timeSek / 60, timeSek);
+		System.out.printf("Done rendering after %02d min %02d sec %02d msec%n", timeSek / 60, timeSek % 60, timeMillis % 1000);
 		return image;
 	}
 	

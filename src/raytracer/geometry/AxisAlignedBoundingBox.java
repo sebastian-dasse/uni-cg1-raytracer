@@ -3,7 +3,6 @@ package raytracer.geometry;
 import java.util.LinkedList;
 
 import raytracer.Color;
-import raytracer.Constants;
 import raytracer.Ray;
 import raytracer.material.Material;
 import raytracer.material.SingleColorMaterial;
@@ -47,8 +46,6 @@ public class AxisAlignedBoundingBox {
 	}
 	
 	public boolean isHit(final Ray ray) {
-		
-		final LinkedList<Hit> hits = new LinkedList<Hit>();
 		final LinkedList<Hit> hitsOnPlane = new LinkedList<Hit>();
 		final Hit rightHit = right.hit(ray);
 		final Hit leftHit = left.hit(ray);
@@ -61,7 +58,7 @@ public class AxisAlignedBoundingBox {
 		for (Hit hit : hitsOnPlane) {
 			final Point3 p = ray.at(hit.t);
 			if( p.y >= lbf.y && p.y <= run.y && p.z >= lbf.z && p.z <= run.z) {
-				hits.add(hit);
+				return true;
 			}
 		}
 		hitsOnPlane.clear();
@@ -77,7 +74,7 @@ public class AxisAlignedBoundingBox {
 		for (Hit hit : hitsOnPlane) {
 			final Point3 p = ray.at(hit.t);
 			if( p.x >= lbf.x && p.x <= run.x && p.z >= lbf.z && p.z <= run.z ) {
-				hits.add(hit);
+				return true;
 			}
 		}
 		hitsOnPlane.clear();
@@ -93,18 +90,16 @@ public class AxisAlignedBoundingBox {
 		for (Hit hit : hitsOnPlane) {
 			final Point3 p = ray.at(hit.t);
 			if( p.x >= lbf.x && p.x <= run.x && p.y >= lbf.y && p.y <= run.y ) {
-				hits.add(hit);
+				return true;
 			}
 		}
-
-		Hit nearestHit = null;
-		double t = Double.POSITIVE_INFINITY;
-		for (Hit hit : hits) {
-			if (hit.t > Constants.EPSILON && hit.t - t < Constants.EPSILON) {
-				t = hit.t;
-				nearestHit = hit;
-			}
-		}
-		return nearestHit != null;
+		return false;
+	}
+	
+	@Override
+	public String toString() {
+		return getClass().getSimpleName() 
+				+ "[\n\tlbf = " + lbf + "\n"
+				+ "\trun = " + run + "]";
 	}
 }

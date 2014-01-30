@@ -104,7 +104,7 @@ public class RenderTask implements Runnable {
 	 */
 	private void showProgress(final int y) {
 		if (y % progressStep == 0 || y == size.height) {
-			String progr = "";
+			String progr = "|";
 			for (int i = 0; i < y / progressStep; i++) {
 				progr = progr + "|";
 			}

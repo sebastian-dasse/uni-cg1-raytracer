@@ -115,7 +115,7 @@ public class AxisAlignedBox extends Geometry {
 		Hit nearestHit = null;
 		double t = Double.POSITIVE_INFINITY;
 		for (Hit hit : hits) {
-			if (hit.t > Constants.EPSILON && hit.t - t < Constants.EPSILON) {
+			if (hit.t < t) {
 				t = hit.t;
 				nearestHit = hit;
 			}

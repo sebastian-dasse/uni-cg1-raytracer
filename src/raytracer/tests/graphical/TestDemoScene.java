@@ -160,7 +160,6 @@ private static Renderer scene3() {
 //		String path = "models/cube-v-vt-vn-comments.obj";
 //		String path = "models/cube-v-blocks-weird-indices.obj";
 		String path = "models/teddy.obj";
-//		String path = "models/ted.obj";
 //		String path = "models/bunny.obj";
 //		final Geometry mesh = new ShapeFromFile(path, meshMaterial);
 		

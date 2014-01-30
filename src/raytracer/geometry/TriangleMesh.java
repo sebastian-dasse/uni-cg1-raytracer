@@ -11,6 +11,8 @@ import raytracer.texture.TextureCoord;
  * defined through a number of shared vertices. The triangular faces are further defined through a number of normals 
  * and coordinates for their texture.
  * 
+ * TODO add comments on bounding box
+ * 
  * @author Sebastian Dass&ecaute;
  *
  */
@@ -37,6 +39,8 @@ public class TriangleMesh extends Geometry {
 	 */
 	private final int[][] faces;
 	
+	public final AxisAlignedBoundingBox bbox;
+	
 	/**
 	 * Constructs a new <code>TriangleMesh</code> with the specified material, vertices, texture coordinates, normals 
 	 * and faces.
@@ -54,10 +58,17 @@ public class TriangleMesh extends Geometry {
 		this.textCoords = textCoords;
 		this.normals = normals;
 		this.faces = faces;
+		bbox = new AxisAlignedBoundingBox(getMins(), getMaxs());
 	}
 
+	
 	@Override
 	public Hit hit(final Ray ray) {
+		return bbox.isHit(ray) ? closestHit(ray) : null;
+	}
+	
+//	@Override
+	public Hit closestHit(final Ray ray) {
 		Hit closestHit = null;
 		double closestT = Double.POSITIVE_INFINITY;
 		for (int[] face : faces) {

@@ -14,8 +14,6 @@ import raytracer.parser.ObjLoader2;
  * For further information on the OBJ format 
  * <a href="http://www.martinreddy.net/gfx/3d/OBJ.spec">check out the documentation</a>.
  * 
- * TODO add comments on bounding box
- * 
  * @author Sebastian Dass&eacute;
  *
  */
@@ -24,8 +22,6 @@ public class ShapeFromFile extends Geometry {
 	 * The geometry that was loaded from the file.
 	 */
 	private final TriangleMesh mesh;
-	
-	private final AxisAlignedBoundingBox bbox;
 
 	/**
 	 * Constructs a new <code>ShapeFromFile</code> object from the specified with the specified material.
@@ -36,22 +32,10 @@ public class ShapeFromFile extends Geometry {
 	public ShapeFromFile(final String filename, final Material material) {
 		super(material);
 		mesh = new ObjLoader2().load(filename, material);
-		
-		final Point3 lbf = mesh.getMins();
-		final Point3 run = mesh.getMaxs();
-		bbox = new AxisAlignedBoundingBox(lbf, run);
-		
-//		System.out.println("lbf = " + lbf + "\nrun = " + run); // for debugging
 	}
 	
 	@Override
 	public Hit hit(final Ray ray) {
-		return bbox.isHit(ray) ? mesh.hit(ray) : null;
+		return mesh.hit(ray);
 	}
-	
-	//  -- without bounding box (the old way to do it)
-//	@Override
-//	public Hit hit(final Ray ray) {
-//		return mesh.hit(ray);
-//	}
 }
