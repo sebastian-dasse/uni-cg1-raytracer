@@ -92,14 +92,15 @@ public class Renderer {
 	 * @return	A <code>BufferedImage</code> of a scene.
 	 */
 	public BufferedImage render() {
+		System.out.println("Rendering...");
 		final BufferedImage image = new BufferedImage(size.width, size.height, BufferedImage.TYPE_INT_RGB);
 		final int nThreads = Runtime.getRuntime().availableProcessors();
-		long t1 = System.currentTimeMillis();
-		ExecutorService executor = Executors.newFixedThreadPool(nThreads);
+		long startTime = System.currentTimeMillis();
+		final ExecutorService executor = Executors.newFixedThreadPool(nThreads);
 		final int interval = nThreads;
-		for (int y = 0; y < size.height; y+=interval) {
-				Runnable worker = new Thread(new RenderTask(y, interval, size, world, cam, image, recursion));
-				executor.execute(worker);
+		for (int y = 0; y < size.height; y+= interval) {
+			final Runnable worker = new Thread(new RenderTask(y, interval, size, world, cam, image, recursion));
+			executor.execute(worker);
 		}
 		executor.shutdown();
 		try {
@@ -107,7 +108,9 @@ public class Renderer {
 		} catch (InterruptedException e) {
 			System.err.println("Thread was interrupted.");
 		}
-		System.out.println(System.currentTimeMillis() - t1);
+		final long timeMillis = System.currentTimeMillis() - startTime;
+		final int timeSek = (int)(timeMillis / 1000);
+		System.out.printf("Done rendering after %02d min %02d sec %02d msec%n", timeSek / 60, timeSek % 60, timeMillis % 1000);
 		return image;
 	}
 	

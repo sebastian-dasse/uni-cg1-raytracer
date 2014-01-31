@@ -11,6 +11,8 @@ import raytracer.texture.TextureCoord;
  * defined through a number of shared vertices. The triangular faces are further defined through a number of normals 
  * and coordinates for their texture.
  * 
+ * TODO add comments on bounding box
+ * 
  * @author Sebastian Dass&ecaute;
  *
  */
@@ -37,6 +39,8 @@ public class TriangleMesh extends Geometry {
 	 */
 	private final int[][] faces;
 	
+	public final AxisAlignedBoundingBox bbox;
+	
 	/**
 	 * Constructs a new <code>TriangleMesh</code> with the specified material, vertices, texture coordinates, normals 
 	 * and faces.
@@ -54,10 +58,17 @@ public class TriangleMesh extends Geometry {
 		this.textCoords = textCoords;
 		this.normals = normals;
 		this.faces = faces;
+		bbox = new AxisAlignedBoundingBox(getMins(), getMaxs());
 	}
 
+	
 	@Override
 	public Hit hit(final Ray ray) {
+		return bbox.isHit(ray) ? closestHit(ray) : null;
+	}
+	
+//	@Override
+	public Hit closestHit(final Ray ray) {
 		Hit closestHit = null;
 		double closestT = Double.POSITIVE_INFINITY;
 		for (int[] face : faces) {
@@ -157,5 +168,41 @@ public class TriangleMesh extends Geometry {
 					 5, 0, 0}
 				}
 			);
+	}
+
+	public Point3 getMins() {
+		double minX = Double.POSITIVE_INFINITY;
+		double minY = Double.POSITIVE_INFINITY;
+		double minZ = Double.POSITIVE_INFINITY;
+		for (Point3 v : vertices) {
+			if (v.x < minX) {
+				minX = v.x;
+			}
+			if (v.y < minY) {
+				minY = v.y;
+			}
+			if (v.z < minZ) {
+				minZ = v.z;
+			}
+		}
+		return new Point3(minX, minY, minZ);
+	}
+
+	public Point3 getMaxs() {
+		double maxX = Double.NEGATIVE_INFINITY;
+		double maxY = Double.NEGATIVE_INFINITY;
+		double maxZ = Double.NEGATIVE_INFINITY;
+		for (Point3 v : vertices) {
+			if (maxX < v.x) {
+				maxX = v.x;
+			}
+			if (maxY < v.y) {
+				maxY = v.y;
+			}
+			if (maxZ < v.z) {
+				maxZ = v.z;
+			}
+		}
+		return new Point3(maxX, maxY, maxZ);
 	}
 }

@@ -13,7 +13,6 @@ import raytracer.light.PointLight;
 import raytracer.material.LambertMaterial;
 import raytracer.material.Material;
 import raytracer.material.PhongMaterial;
-import raytracer.material.ReflectiveMaterial;
 import raytracer.math.Point3;
 import raytracer.math.Transform;
 import raytracer.ui.ShowImage;
@@ -157,14 +156,17 @@ private static Renderer scene3() {
 //		meshMaterial = new ReflectiveMaterial(new Color(1, 1, 1), new Color(1, 1, 1), 20, new Color(0.5, 0.5, 0.5));
 		
 //		String path = "models/cube-v.obj";
+//		String path = "models/cube-v-vt-vn.obj";
+//		String path = "models/cube-v-vt-vn-comments.obj";
+//		String path = "models/cube-v-blocks-weird-indices.obj";
 		String path = "models/teddy.obj";
-//		String path = "models/ted.obj";
-		final Geometry mesh = new ShapeFromFile(path, meshMaterial);
+//		String path = "models/bunny.obj";
+//		final Geometry mesh = new ShapeFromFile(path, meshMaterial);
 		
 //		mesh = new AxisAlignedBox(meshMaterial);
 //		box = TriangleMesh.createTestTriangleMesh(boxMaterial);
 		
-		final Transform boxTransform = new Transform()
+//		final Transform boxTransform = new Transform()
 //			.scale(1, 1, 4)
 //			.rotateX(Math.toRadians(45))
 //			.rotateX(Math.toRadians(90))
@@ -172,7 +174,7 @@ private static Renderer scene3() {
 	//		.rotateZ(Math.toRadians(270))
 	//		.rotateZ(Math.toRadians(-45))
 //			.scale(1, 1, 4)
-			;
+//			;
 		
 		world.addElements(
 //				new Node(
@@ -181,14 +183,36 @@ private static Renderer scene3() {
 //						new Normal3(0, 1, 0), 
 //						planeMaterial
 //					), new Transform()),
-				 
-				new Node(mesh, boxTransform
+				
+//				new Node(new Sphere(new LambertMaterial(new Color(1, 1, 1))), new Transform()
+//					.translate(1, 1, 1)
+//					.scale(0.5, 0.5, 0.5)
+//				),
+				
+//				new Node(new Plane(new LambertMaterial(new Color(0.5, 0.5, 0.5))), new Transform()
+////					.rotateZ(-Math.PI / 2.0)
+//					.translate(0, -1, 0)
+//				)
+//				,
+				
+//				new Node(mesh, new Transform()
+////						.rotateZ(Math.toRadians(180))
+//						.scale(0.5, 0.5, 0.5)
+//						)
+				
+				// 2x teddy for performance comparison 
+				new Node(new ShapeFromFile(path, meshMaterial), new Transform()
 //						.rotateZ(Math.toRadians(180))
+						.scale(0.3, 0.3, 0.3)
+						),
+				new Node(new ShapeFromFile(path, meshMaterial), new Transform()
+						.translate(2, 0, 0)
+						.scale(0.3, 0.3, 0.3)
 						)
 				
 //				new Node(new Sphere(boxMaterial), boxTransform)
 		);
-		world.addLight(new PointLight(new Color(1, 1, 1), new Point3(4, 3, 2), false));
+		world.addLight(new PointLight(new Color(1, 1, 1), new Point3(4, 3, 2), true));
 		return new Renderer(world, camera, 10);
 	}
 }
