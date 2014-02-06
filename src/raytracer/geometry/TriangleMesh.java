@@ -68,7 +68,7 @@ public class TriangleMesh extends Geometry {
 	}
 	
 //	@Override
-	public Hit closestHit(final Ray ray) {
+	private Hit closestHit(final Ray ray) {
 		Hit closestHit = null;
 		double closestT = Double.POSITIVE_INFINITY;
 		for (int[] face : faces) {
