@@ -70,6 +70,7 @@ public class ObjLoader {
 			e.printStackTrace();
 			throw new RuntimeException("Failed loading defective *.obj file.");
 		}
+//		listAll(); // DEBUG
 		return createTriangleMesh(material);
 	}
 	
@@ -125,7 +126,10 @@ public class ObjLoader {
 		System.out.println(lines.size());
 		for (int lno = 0; lno < lines.size(); lno++) {
 			String line = lines.get(lno);
+			
 			line = line.replaceAll("\\s+", " ");
+			line = line.replaceAll("//", "0");
+			System.out.println(line);
 			String[] slots = line.split(" ");
 			String type = slots[0];
 			if (type.equals(COMMENT) || type.equals(EMPTY)) {
@@ -141,6 +145,7 @@ public class ObjLoader {
 			
 			if (((previousType.equals(FACE) && !type
 					.equals(FACE)) || lno == lines.size() - 1)) {
+				
 				faces = buildFacesArray();
 //				calibrateFacesArray(faces);
 			}
@@ -168,6 +173,7 @@ public class ObjLoader {
 			normals.add(new Normal3(Double.parseDouble(slots[1]), Double.parseDouble(slots[2]), Double.parseDouble(slots[3])));
 			break;
 		case FACE:
+			// Gleich 'n Slot rein!
 			facesSourceLine.add(line);
 			break;
 		default:
@@ -210,47 +216,44 @@ public class ObjLoader {
 		int[][] result = new int[facesSourceLine.size()][9];
 		int count = 0;
 		for (String face : facesSourceLine) {
-			String[] blocks = face.replaceAll(FACE, "").trim()
+			String[] line = face.replaceAll(FACE, "").trim()
 					.split(BLANK);
 			
-			StringBuilder tupelsAsString = fillZeros(blocks);
-
-			String[] ninerTupelsAsString = tupelsAsString.toString()
-					.split(BLANK);
+			int[] numbers = parseIntArray(line);
+			numbers = fillZeros(numbers);
 			
-			for (int i = 0; i < ninerTupelsAsString.length; i++) {
-				result[count][i] = Integer
-						.parseInt(ninerTupelsAsString[i]);
+			for (int i = 0; i < numbers.length; i++) {
+				result[count][i] = numbers[i];
 			}
 			count++;
 		}
 		return result;
 	}
 
+	private int [] parseIntArray(String[] strs) {
+		int[] numbers = new int[strs.length];
+		for (int i = 0; i < strs.length; i++) {
+			numbers[i] = Integer.parseInt(strs[i]);
+		}
+		return numbers;
+	}
+	
 	/**
 	 * Format conversion: Fills up zeros of given block-Array
 	 * if single numbers are found (used for faces).
 	 * E.g. 1 2 3 to 100 200 300.
 	 * @return tupelsAsString A stringBuilder object containing the newly formated line.
 	 */
-	private StringBuilder fillZeros(String[] blocks) {
-		StringBuilder tupelsAsString = new StringBuilder();
-		for (int i = 0; i < blocks.length; i++) {
-			String slashFiltered = blocks[i].replace(SLASH, " ");
-			String[] atomicElements = slashFiltered.split(BLANK);
-			StringBuilder tupelFilled = new StringBuilder();
-			tupelFilled.append(atomicElements[0]);
-			for (int i2 = 1; i2 <= TUPELSIZE
-					- atomicElements.length; i2++) {
-				tupelFilled.append(" 0");
+	
+	private int[] fillZeros(int[] numbers) {
+		int [] filledNumbers = new int[9];
+		if (numbers.length == 3) {
+			for (int i = 0; i < 9; i++) {
+				filledNumbers[i] = i / 3;
 			}
-			if (TUPELSIZE - atomicElements.length == 0) {
-				tupelsAsString.append(slashFiltered + BLANK);
-			} else {
-				tupelsAsString.append(tupelFilled + BLANK);
-			}
+			return filledNumbers;
 		}
-		return tupelsAsString;
+			return numbers;
 	}
 
 	/**

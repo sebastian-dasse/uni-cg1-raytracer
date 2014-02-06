@@ -45,6 +45,21 @@ public final class DemoSceneUE05 {
 		}
 	}
 
+	private static Renderer doubleSlashScene() {
+		final String path = "models/cube-v-vn.obj";
+		final Material material = new LambertMaterial(new Color(1, 1, 1));
+		
+		final World world = Factory.buildWorld(new double[][]{{0, 0, 0}, {0, 0, 0}}, Constants.INDEX_OF_REFRACTION_AIR_AT_20_DEG);
+		final Camera camera = Factory.buildPerspectiveCamera(new double[][]{
+				{2.5, 2.5, 2.5}, {-1, -1, -1}, {0, 1, 0}, {Math.PI / 4.0}});
+		world.addElements(
+				new Node(new ShapeFromFile(path, material), new Transform())
+		);
+		world.addLight(new PointLight(new Color(1, 1, 1), new Point3(3, 3, 3), false));
+		return new Renderer(world, camera);
+	}
+
+	
 	/**
 	 * Generates figure 1 as shown in the task sheet.
 	 * 
