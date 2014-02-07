@@ -4,6 +4,7 @@ import static raytracer.math.MathUtil.isValid;
 import raytracer.Constants;
 import raytracer.Ray;
 import raytracer.math.Normal3;
+import raytracer.texture.TexCoord2;
 
 /**
  * This immutable class represents a hit of a <code>Ray</code> with a <code>Geometry</code>. Therefore it stores the 
@@ -32,6 +33,8 @@ public class Hit /*implements Comparable<Hit>*/ {
 	 */
 	public final Normal3 normal;
 	
+	public final TexCoord2 texcoord;
+	
 	/**
 	 * Constructs a new <code>Hit</code> object with the specified parameters.
 	 * 
@@ -40,20 +43,32 @@ public class Hit /*implements Comparable<Hit>*/ {
 	 * @param geo		The <code>Geometry</code> that was hit. Must not be <code>null</code>.
 	 * @param normal	The normal of the hit point. Must not be <code>null</code>.
 	 */
-	public Hit(final double t, final Ray ray, final Geometry geo, final Normal3 normal) {
+	public Hit(final double t, final Ray ray, final Geometry geo, final Normal3 normal, final TexCoord2 texcoord) {
 		// Temporarely commented out for AAB - Debug.
 //		if (t < 0 || !isValid(t)) {
 //			throw new IllegalArgumentException("The paramameter 't' must be a positive double value other than Infinity or NaN.");
 //		}
-		if (ray == null || geo == null || normal == null) {
+		if (ray == null || geo == null || normal == null || texcoord == null) {
 			throw new IllegalArgumentException("The parameters must not be null.");
 		}
 		this.t = t;
 		this.ray = ray;
 		this.geo = geo;
 		this.normal = normal;
+		this.texcoord = texcoord;
 	}
 
+	
+
+	@Override
+	public String toString() {
+		return getClass().getSimpleName() + "[\tt = " + t + ",\n" 
+										  + "\tray = " + ray + ",\n" 
+										  + "\tgeo = " + geo + ",\n" 
+										  + "\tnormal = " + normal + ",\n"  
+										  + "\ttexcoord =" + texcoord + "]";
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -64,18 +79,20 @@ public class Hit /*implements Comparable<Hit>*/ {
 		long temp;
 		temp = Double.doubleToLongBits(t);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result
+				+ ((texcoord == null) ? 0 : texcoord.hashCode());
 		return result;
 	}
 
 	@Override
-	public boolean equals(final Object obj) {
+	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
 		if (obj == null)
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		final Hit other = (Hit) obj;
+		Hit other = (Hit) obj;
 		if (geo == null) {
 			if (other.geo != null)
 				return false;
@@ -93,15 +110,12 @@ public class Hit /*implements Comparable<Hit>*/ {
 			return false;
 		if (Double.doubleToLongBits(t) != Double.doubleToLongBits(other.t))
 			return false;
+		if (texcoord == null) {
+			if (other.texcoord != null)
+				return false;
+		} else if (!texcoord.equals(other.texcoord))
+			return false;
 		return true;
-	}
-
-	@Override
-	public String toString() {
-		return getClass().getSimpleName() + "[\tt = " + t + ",\n" 
-										  + "\tray = " + ray + ",\n" 
-										  + "\tgeo = " + geo + ",\n" 
-										  + "\tnormal = " + normal + "]";
 	}
 
 //	@Override

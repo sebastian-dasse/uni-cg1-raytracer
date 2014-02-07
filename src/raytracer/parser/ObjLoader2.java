@@ -12,7 +12,7 @@ import raytracer.geometry.TriangleMesh;
 import raytracer.material.Material;
 import raytracer.math.Normal3;
 import raytracer.math.Point3;
-import raytracer.texture.TextureCoord;
+import raytracer.texture.TexCoord2;
 
 /**
  * TODO weird indices are not working yet.
@@ -56,15 +56,15 @@ public class ObjLoader2 {
 
 	private Collection<String> lines;
 	private Collection<Point3> vertices;
-	private Collection<TextureCoord> textures;
+	private Collection<TexCoord2> textures;
 	private Collection<Normal3> normals;
 	private Collection<int[]> faces;
 
 	public ObjLoader2() {
 		vertices = new ArrayList<Point3>();
 		vertices.add(new Point3(0, 0, 0));		// unused point at first position for easier array indexing 
-		textures = new ArrayList<TextureCoord>();
-		textures.add(new TextureCoord(0, 0));	// unused normal at first position for easier array indexing
+		textures = new ArrayList<TexCoord2>();
+		textures.add(new TexCoord2(0, 0));	// unused normal at first position for easier array indexing
 		normals = new ArrayList<Normal3>();
 		normals.add(new Normal3(1, 1, 1));		// unused normal at first position for easier array indexing
 		lines = new LinkedList<String>();
@@ -126,7 +126,7 @@ public class ObjLoader2 {
 		return new TriangleMesh(
 				material, 
 				vertices.toArray(new Point3[vertices.size()]), 
-				textures.toArray(new TextureCoord[textures.size()]), 
+				textures.toArray(new TexCoord2[textures.size()]), 
 				normals.toArray(new Normal3[normals.size()]), 
 				faces.toArray(new int[][]{}));
 	}
@@ -142,7 +142,7 @@ public class ObjLoader2 {
 				vertices.add(new Point3(Double.parseDouble(token[1]), Double.parseDouble(token[2]), Double.parseDouble(token[3])));
 			} else if (isTexture(line)) {
 //				System.out.println("texture: " + line);
-				textures.add(new TextureCoord(Double.parseDouble(token[1]), Double.parseDouble(token[2])));
+				textures.add(new TexCoord2(Double.parseDouble(token[1]), Double.parseDouble(token[2])));
 			} else if (isNormal(line)) {
 //				System.out.println("normal: " + line);
 				normals.add(new Normal3(Double.parseDouble(token[1]), Double.parseDouble(token[2]), Double.parseDouble(token[3])));

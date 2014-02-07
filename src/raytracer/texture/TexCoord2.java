@@ -6,7 +6,7 @@ package raytracer.texture;
  * @author Sebastian Dass&eacute;
  *
  */
-public class TextureCoord {
+public class TexCoord2 {
 	/**
 	 * The u coordinate of this texture.
 	 */
@@ -22,7 +22,7 @@ public class TextureCoord {
 	 * @param u	The u coordinate of the texture.
 	 * @param v	The v coordinate of the texture.
 	 */
-	public TextureCoord(final double u, final double v) {
+	public TexCoord2(final double u, final double v) {
 		this.u = u;
 		this.v = v;
 	}
