@@ -67,7 +67,6 @@ public class TriangleMesh extends Geometry {
 		return bbox.isHit(ray) ? closestHit(ray) : null;
 	}
 	
-//	@Override
 	private Hit closestHit(final Ray ray) {
 		Hit closestHit = null;
 		double closestT = Double.POSITIVE_INFINITY;
@@ -76,18 +75,16 @@ public class TriangleMesh extends Geometry {
 			final Point3 b = vertices[ face[3] ];
 			final Point3 c = vertices[ face[6] ];
 			
-			/* //-- texture -- not yet used
-			final TextureCoord at;
-			final TextureCoord bt;
-			final TextureCoord ct;
+			final TexCoord2 at;
+			final TexCoord2 bt;
+			final TexCoord2 ct;
 			if (face[1] != 0) {
 				at = textCoords[ face[1] ];
 				bt = textCoords[ face[4] ];
 				ct = textCoords[ face[7] ];
 			} else {
-				at = bt = ct = new TextureCoord(0, 0);
+				at = bt = ct = new TexCoord2(0, 0);
 			}
-			*/
 			
 			final Normal3 an;
 			final Normal3 bn;
@@ -100,7 +97,7 @@ public class TriangleMesh extends Geometry {
 				an = bn = cn = b.sub(a).x(c.sub(a)).asNormal();
 			}
 			
-			final Triangle tri = new Triangle(a, b, c, an, bn, cn, material);
+			final Triangle tri = new Triangle(a, b, c, an, bn, cn, material, at, bt, ct);
 			final Hit hit = tri.hit(ray);
 			
 			if (hit != null && hit.t < closestT) {
