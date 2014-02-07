@@ -513,7 +513,7 @@ texCoords : TexCoord2[] , normals : Normal3[], faces : int[][])
       <data key="d4"/>
       <data key="d6">
         <y:UMLClassNode>
-          <y:Geometry height="102.0" width="231.0" x="-141.22222222222354" y="801.8888888888869"/>
+          <y:Geometry height="102.0" width="231.0" x="-136.22222222222354" y="798.8888888888869"/>
           <y:Fill color="#FFCC00" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="123.9072265625" x="53.54638671875" y="3.0">SingleColorTexture<y:LabelModel>
@@ -543,7 +543,7 @@ texCoords : TexCoord2[] , normals : Normal3[], faces : int[][])
       <data key="d4"/>
       <data key="d6">
         <y:UMLClassNode>
-          <y:Geometry height="107.0" width="235.0" x="125.6666666666647" y="799.3333333333303"/>
+          <y:Geometry height="107.0" width="235.0" x="130.6666666666647" y="796.3333333333303"/>
           <y:Fill color="#FFCC00" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="88.53173828125" x="73.234130859375" y="3.0">ImageTexture<y:LabelModel>
@@ -573,7 +573,7 @@ texCoords : TexCoord2[] , normals : Normal3[], faces : int[][])
       <data key="d4"/>
       <data key="d6">
         <y:UMLClassNode>
-          <y:Geometry height="96.0" width="235.0" x="388.5555555555529" y="799.7777777777737"/>
+          <y:Geometry height="96.0" width="235.0" x="393.5555555555529" y="796.7777777777737"/>
           <y:Fill color="#FFCC00" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="162.92626953125" x="36.036865234375" y="3.0">InterpolatedImageTexture<y:LabelModel>
@@ -627,24 +627,6 @@ texCoords : TexCoord2[] , normals : Normal3[], faces : int[][])
 + colorFor(hit : Hit, world : World, tracer : Tracer) : Color</y:MethodLabel>
           </y:UML>
         </y:UMLClassNode>
-      </data>
-    </node>
-    <node id="n20">
-      <data key="d5"/>
-      <data key="d6">
-        <y:ShapeNode>
-          <y:Geometry height="30.0" width="30.0" x="1002.5" y="351.5"/>
-          <y:Fill color="#FFCC00" transparent="false"/>
-          <y:BorderStyle color="#000000" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.701171875" modelName="custom" textColor="#000000" visible="true" width="17.34765625" x="6.326171875" y="5.6494140625">21<y:LabelModel>
-              <y:SmartNodeLabelModel distance="4.0"/>
-            </y:LabelModel>
-            <y:ModelParameter>
-              <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
-            </y:ModelParameter>
-          </y:NodeLabel>
-          <y:Shape type="rectangle"/>
-        </y:ShapeNode>
       </data>
     </node>
     <edge id="e0" source="n2" target="n3">
@@ -704,9 +686,7 @@ texCoords : TexCoord2[] , normals : Normal3[], faces : int[][])
     <edge id="e2" source="n4" target="n3">
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="118.21509009009014" sy="20.11111111111211" tx="0.0" ty="0.0">
-            <y:Point x="402.0" y="400.0"/>
-          </y:Path>
+          <y:Path sx="118.21509009009014" sy="20.11111111111211" tx="2.8888888888888573" ty="17.52777777777851"/>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="white_delta"/>
           <y:BendStyle smoothed="false"/>
