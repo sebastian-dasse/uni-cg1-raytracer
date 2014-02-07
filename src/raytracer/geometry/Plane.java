@@ -5,6 +5,8 @@ import raytracer.Ray;
 import raytracer.material.Material;
 import raytracer.math.Normal3;
 import raytracer.math.Point3;
+import raytracer.texture.TexCoord2;
+
 
 /**
  * This immutable class represents an infinitely large plane in three-dimensional space. It is defined through its 
@@ -52,6 +54,7 @@ public class Plane extends Geometry {
 		}
 		final double t = origin.sub(ray.o).dot(n) / denominator;
 		final Normal3 normal = n.asVector().normalized().asNormal(); // normalized normal
-		return (t < Constants.EPSILON) ? null : new Hit(t, ray, this, normal, null);
+		final Point3 coord = ray.at(t); 
+		return (t < Constants.EPSILON) ? null : new Hit(t, ray, this, normal, new TexCoord2(coord.x, coord.z));
 	}
 }

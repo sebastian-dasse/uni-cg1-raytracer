@@ -18,6 +18,7 @@ import raytracer.math.Normal3;
 import raytracer.math.Point3;
 import raytracer.math.Transform;
 import raytracer.math.Vector3;
+import raytracer.texture.SingleColorTexture;
 import raytracer.ui.ShowImage;
 
 public class DemoScene3 {
@@ -38,8 +39,8 @@ public static void main(String[] args) {
 		final Camera camera = Factory.buildPerspectiveCamera(new double[][] {
 				{ 4, 4, 4 }, { -1, -1, -1 }, { 0, 1, 0 }, { Math.PI / 4.0 } });
 		world.addElements(
-//		new Node(
-//				new AxisAlignedBox(new LambertMaterial(new Color(1, 1, 0))), 
+		new Node(
+//				new AxisAlignedBox(new SingleColorMaterial(new SingleColorTexture(new Color(1,1,1)))), 
 //				new Transform()
 //		//ready transformed Box
 //				.rotateX(Math.PI/1.17)
@@ -47,13 +48,13 @@ public static void main(String[] args) {
 //				.rotateZ(Math.PI/1.15) 
 //				.scale(1.0, 0.26, 3.7)
 		//ready transformed Sphere
-		new Node(
-				new Sphere(new PhongMaterial(new Color(1, 0, 0), new Color(1, 1, 1), 64)), 
+//		new Node(
+				new Sphere(new SingleColorMaterial(new SingleColorTexture(new Color(0,1,1)))), 
 				new Transform()
-				.rotateY(Math.PI/0.2)
-				.rotateZ(Math.PI/0.9)
-				.rotateX(Math.PI/1.15)
-				.scale(2.0, 0.5, 2.0)
+//				.rotateY(Math.PI/0.2)
+//				.rotateZ(Math.PI/0.9)
+//				.rotateX(Math.PI/1.15)
+//				.scale(2.0, 0.5, 2.0)
 				
 		));
 		

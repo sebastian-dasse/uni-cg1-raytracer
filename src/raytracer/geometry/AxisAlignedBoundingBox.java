@@ -8,6 +8,7 @@ import raytracer.material.Material;
 import raytracer.material.SingleColorMaterial;
 import raytracer.math.Point3;
 import raytracer.math.Transform;
+import raytracer.texture.SingleColorTexture;
 
 /**
  * TODO comment everything!
@@ -17,7 +18,7 @@ import raytracer.math.Transform;
  */
 public class AxisAlignedBoundingBox {
 	
-	private static final Material material = new SingleColorMaterial(new Color(0, 0, 0));
+	private static final Material material = new SingleColorMaterial(new SingleColorTexture(new Color(0, 0, 0)));
 	
 	private final Point3 lbf;
 	private final Point3 run;

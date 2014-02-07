@@ -26,4 +26,6 @@ public class TexCoord2 {
 		this.u = u;
 		this.v = v;
 	}
+	
+	
 }

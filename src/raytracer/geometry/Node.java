@@ -7,6 +7,7 @@ import raytracer.Color;
 import raytracer.Ray;
 import raytracer.material.SingleColorMaterial;
 import raytracer.math.Transform;
+import raytracer.texture.SingleColorTexture;
 
 /**
  * This class represents a node in a scene graph. A node can have several other geometries. It applies a transformation 
@@ -32,7 +33,7 @@ public class Node extends Geometry {
 	 * @param transform	The transformation of the node.
 	 */
 	public Node(final Collection <Geometry> geos, final Transform transform) {
-		super(new SingleColorMaterial(new Color(0, 0, 0)));
+		super(new SingleColorMaterial(new SingleColorTexture(new Color(0, 0, 0))));
 		this.geos = geos;
 		this.transform = transform;
 	}
@@ -108,6 +109,6 @@ public class Node extends Geometry {
 		if (nearestHit == null) {
 			return null;
 		}
-		return new Hit(t, ray, nearestHit.geo, transform.mul(nearestHit.normal), null);
+		return new Hit(t, ray, nearestHit.geo, transform.mul(nearestHit.normal), nearestHit.texcoord);
 	}
 }

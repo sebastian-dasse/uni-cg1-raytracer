@@ -15,8 +15,7 @@ public class SingleColorTexture implements Texture{
 	
 	@Override
 	public Color getColor(double u, double v) {
-		// TODO Auto-generated method stub
-		return null;
+		return color;
 	}
 
 }

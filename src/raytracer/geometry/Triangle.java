@@ -7,6 +7,7 @@ import raytracer.math.Mat3x3;
 import raytracer.math.Normal3;
 import raytracer.math.Point3;
 import raytracer.math.Vector3;
+import raytracer.texture.TexCoord2;
 
 /**
  * This immutable class represents a flat triangle in three-dimensional space. It is defined through its three corner 
@@ -41,6 +42,12 @@ public class Triangle extends Geometry {
 	 */
 	public final Normal3 nc;
 	
+	public final TexCoord2 ta;
+	
+	public final TexCoord2 tb;
+	
+	public final TexCoord2 tc;
+	
 	/**
 	 * Constructs a new <code>Triangle</code> with the specified parameters.
 	 * 
@@ -53,7 +60,8 @@ public class Triangle extends Geometry {
 	 * @param material	The material of the triangle. Must not be <code>null</code>.
 	 */
 	public Triangle(final Point3 a, final Point3 b, final Point3 c,
-			final Normal3 na, final Normal3 nb, final Normal3 nc, final Material material) {
+			final Normal3 na, final Normal3 nb, final Normal3 nc, final Material material,
+			final TexCoord2 ta, final TexCoord2 tb, final TexCoord2 tc) {
 		super(material);
 		if (a == null || b == null || c == null) {
 			throw new IllegalArgumentException("The parameters must not be null.");
@@ -64,6 +72,9 @@ public class Triangle extends Geometry {
 			this.na = na;
 			this.nb = nb;
 			this.nc = nc;
+			this.ta = ta;
+			this.tb = tb;
+			this.tc = tc;
 	}
 
 	@Override

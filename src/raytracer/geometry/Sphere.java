@@ -5,6 +5,8 @@ import raytracer.Ray;
 import raytracer.material.Material;
 import raytracer.math.Normal3;
 import raytracer.math.Point3;
+import raytracer.math.Vector3;
+import raytracer.texture.TexCoord2;
 
 /**
  * This immutable class represents a sphere in three-dimensional space with a center point at (0, 0, 0) and radius 1.
@@ -79,6 +81,10 @@ public class Sphere extends Geometry {
 		
 		// Formula: normal = p - center
 		final Normal3 normal = p.sub(center).normalized().asNormal(); // normalized normal
-		return new Hit(t, ray, this, normal, null);
+
+		Vector3 d = p.asVector();
+		final double theta = Math.acos(d.y);
+		final double phi = Math.atan2(d.x, d.z);
+		return new Hit(t, ray, this, normal, new TexCoord2( phi / (Math.PI * 2), -(theta / Math.PI)));
 	}
 }
