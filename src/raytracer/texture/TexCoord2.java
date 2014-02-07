@@ -1,5 +1,7 @@
 package raytracer.texture;
 
+import static raytracer.math.MathUtil.isValid;
+
 /**
  * This immutable class represents the coordinates of a texture.
  * 
@@ -26,6 +28,4 @@ public class TexCoord2 {
 		this.u = u;
 		this.v = v;
 	}
-	
-	
 }

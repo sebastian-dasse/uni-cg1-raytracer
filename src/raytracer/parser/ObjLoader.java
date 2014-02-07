@@ -15,9 +15,11 @@ import raytracer.math.Point3;
 import raytracer.texture.TexCoord2;
 
 /**
+ * TODO weird indices are not working yet.
+ * 
  * This class is a loader for OBJ files. It can parse <code>TriangleMesh</code>es from such a file.
  * <p>
- * As for now, only vertices, and faces can be loaded.
+ * Vertices, texture coordinates, normals and faces can be loaded.
  * <p>
  * For further information on the OBJ format 
  * <a href="http://www.martinreddy.net/gfx/3d/OBJ.spec">check out the documentation</a>.
@@ -27,32 +29,46 @@ import raytracer.texture.TexCoord2;
  *
  */
 public class ObjLoader {
-	public final String VERTICE = "v";
-	public final String TEXTURE = "vt";
-	public final String NORMAL = "vn";
-	public final String FACE = "f";
-	public final String COMMENT = "#";
-	public final String SLASH = "/";
-	public final String BLANK = " ";
-	public final String EMPTY = "";
-	public final int FACELENGTH = 9;
-	public final int TUPELSIZE = 3;
+	/**
+	 * A regex for a double number like this: <code>-0.123E-3</code>
+	 */
+	public static final String DOUBLE_NUM = "([+-]?\\d+(\\.\\d+([eE][+-]\\d+)?)?)";
+	/**
+	 * A regex for a face like this: <code>f 1 2 3</code>
+	 */
+	public static final String V = "(\\s+[+-]?\\d+){3}\\s*";
+	/**
+	 * A regex for a face like this: <code>f 1/1 2/2 3/3</code>
+	 */
+	public static final String V_VT = "(\\s+[+-]?\\d+/[+-]?\\d+){3}\\s*";
+	/**
+	 * A regex for a face like this:<code>f 1//1 2//2 3//3</code>
+	 */
+	public static final String V_VN = "(\\s+[+-]?\\d+//[+-]?\\d+){3}\\s*";
+	/**
+	 * A regex for a face like this: <code>f 1/1/1 2/2/2 3/ 3/3/3</code>
+	 */
+	public static final String V_VT_VN = "(\\s+[+-]?\\d+/[+-]?\\d+/[+-]?\\d+){3}\\s*";
+	/**
+	 * A regex for a valid face.
+	 */
+	public static final String FACE = "^f(" + V + "|" + V_VT + "|" + V_VN + "|" + V_VT_VN + ")";
 
-	private LinkedList<String> lines;
+	private Collection<String> lines;
 	private Collection<Point3> vertices;
 	private Collection<TexCoord2> textures;
 	private Collection<Normal3> normals;
-	private Collection<String> facesSourceLine;
-	private int[][] faces;
+	private Collection<int[]> faces;
 
 	public ObjLoader() {
 		vertices = new ArrayList<Point3>();
-		vertices.add(new Point3(0, 0, 0)); // unused point at first position for easier array indexing 
+		vertices.add(new Point3(0, 0, 0));		// unused point at first position for easier array indexing 
 		textures = new ArrayList<TexCoord2>();
+		textures.add(new TexCoord2(0, 0));	// unused normal at first position for easier array indexing
 		normals = new ArrayList<Normal3>();
-		facesSourceLine = new ArrayList<String>();
+		normals.add(new Normal3(1, 1, 1));		// unused normal at first position for easier array indexing
 		lines = new LinkedList<String>();
-		faces = new int[0][0];
+		faces = new LinkedList<int[]>();
 	}
 
 	/**
@@ -63,6 +79,7 @@ public class ObjLoader {
 	 * @return			The loaded model as <code>TriangleMesh</code>.
 	 */
 	public TriangleMesh load(final String filename, final Material material) {
+		System.out.println("Loading...");
 		read(filename);
 		try {
 			parse();
@@ -70,7 +87,7 @@ public class ObjLoader {
 			e.printStackTrace();
 			throw new RuntimeException("Failed loading defective *.obj file.");
 		}
-//		listAll(); // DEBUG
+		System.out.println("Done loading.");
 		return createTriangleMesh(material);
 	}
 	
@@ -111,78 +128,114 @@ public class ObjLoader {
 				vertices.toArray(new Point3[vertices.size()]), 
 				textures.toArray(new TexCoord2[textures.size()]), 
 				normals.toArray(new Normal3[normals.size()]), 
-				faces);
+				faces.toArray(new int[][]{}));
 	}
 	
-	/**
-	 * Main parser loop.
-	 * Fills the collections with the basic sections that can be found in an obj file.
-	 * Calls the <code>fillOutputLists</code> method to extract all the sections of the file
-	 * minus the faces list, which depends on the fillOutputList's data.
-	 * 
-	 */
 	private void parse() throws DataFormatException {
-		String previousType = "";
-		System.out.println(lines.size());
-		for (int lno = 0; lno < lines.size(); lno++) {
-			String line = lines.get(lno);
-			
-			line = line.replaceAll("\\s+", " ");
-			line = line.replaceAll("//", "0");
-			System.out.println(line);
-			String[] slots = line.split(" ");
-			String type = slots[0];
-			if (type.equals(COMMENT) || type.equals(EMPTY)) {
-				continue;
-			}
-			if (type.equals(FACE) && (slots.length - 1) < 3) {
+		for (String line : lines) {
+			if (isNoValidLine(line)) {
 				throw new DataFormatException();
 			}
-			if (lno > 0) {
-				previousType = lines.get(lno - 1).split(" ")[0];
+			final String[] token = line.split("\\s+|/");
+			if (isVertice(line)) {
+//				System.out.println("vertice: " + line);
+				vertices.add(new Point3(Double.parseDouble(token[1]), Double.parseDouble(token[2]), Double.parseDouble(token[3])));
+			} else if (isTexture(line)) {
+//				System.out.println("texture: " + line);
+				textures.add(new TexCoord2(Double.parseDouble(token[1]), Double.parseDouble(token[2])));
+			} else if (isNormal(line)) {
+//				System.out.println("normal: " + line);
+				normals.add(new Normal3(Double.parseDouble(token[1]), Double.parseDouble(token[2]), Double.parseDouble(token[3])));
+			} else if (isFace(line)) {
+//				System.out.println("face: " + line);
+				faces.add(parseFace(line, token));
+			} else {
+//				System.out.println("comment: " + line); // -- for debugging
 			}
-			fillOutputLists(line, slots, type);
-			
-			if (((previousType.equals(FACE) && !type
-					.equals(FACE)) || lno == lines.size() - 1)) {
-				
-				faces = buildFacesArray();
-//				calibrateFacesArray(faces);
-			}
-
+			// if line is comment or blank ignore and continue
 		}
+
+		printListSizes(); // -- for debugging
 	}
 
-	/**
-	 *  Interprets a line in the obj file - acts according to found type:
-	 *  <code> VERTICE </code> - add new Point3 object to vertices list
-	 *  <code> TEXTURE </code> - add new TextureCoord object to textures list
-	 *  <code> NORMAL </code> - add new Normal to normals list
-	 *  <code> FACE </code> - add new face to facesSourcesList - this list is later used by buildFacesArray() to 
-	 *  generate the faces.
+	private int[] parseFace(final String line, final String[] tokens) throws DataFormatException {
+//		printTokens(tokens); // -- for debugging
+		
+		if (line.matches("^f" + V)) {
+			return new int[]{
+					Integer.parseInt(tokens[1]), 0, 0, 
+					Integer.parseInt(tokens[2]), 0, 0, 
+					Integer.parseInt(tokens[3]), 0, 0
+					
+			};
+		}
+		if (line.matches("^f" + V_VT)) {
+			return new int[]{
+					Integer.parseInt(tokens[1]), Integer.parseInt(tokens[2]), 0, 
+					Integer.parseInt(tokens[3]), Integer.parseInt(tokens[4]), 0, 
+					Integer.parseInt(tokens[5]), Integer.parseInt(tokens[6]), 0
+					
+			};
+		}
+		if (line.matches("^f" + V_VN)) {
+			return new int[]{
+					Integer.parseInt(tokens[1]), 0, Integer.parseInt(tokens[3]), 
+					Integer.parseInt(tokens[4]), 0, Integer.parseInt(tokens[6]), 
+					Integer.parseInt(tokens[7]), 0, Integer.parseInt(tokens[9])
+			};
+		}
+		if (line.matches("^f" + V_VT_VN)) {
+			return new int[]{
+					Integer.parseInt(tokens[1]), Integer.parseInt(tokens[2]), Integer.parseInt(tokens[3]), 
+					Integer.parseInt(tokens[4]), Integer.parseInt(tokens[5]), Integer.parseInt(tokens[6]), 
+					Integer.parseInt(tokens[7]), Integer.parseInt(tokens[8]), Integer.parseInt(tokens[9])
+			};
+		}
+		throw new DataFormatException(); // should never happen
+	}
+	
+	private boolean isNoValidLine(final String line) {
+		return !line.matches("(^\\s*$)|(^v[nt]?|f|#).*");
+	}	
+	
+	private boolean isVertice(final String line) {
+		return line.matches("^v(\\s+" + DOUBLE_NUM + "){3}\\s*");
+	}
+
+	private boolean isTexture(final String line) {
+		return line.matches("^vt(\\s+" + DOUBLE_NUM + "){3}\\s*");
+	}
+	
+	private boolean isNormal(final String line) {
+		return line.matches("^vn(\\s+" + DOUBLE_NUM + "){3}\\s*");
+	}
+	
+	private boolean isFace(final String line) {
+		return line.matches(FACE);
+	}
+	
+	/** 
+	 * Lists all tokens from an array for debugging.
 	 */
-	private void fillOutputLists(String line, String[] slots, String type) {
-		switch (type) {
-		case VERTICE:
-				vertices.add(new Point3(Double.parseDouble(slots[1]), Double.parseDouble(slots[2]), Double.parseDouble(slots[3])));
-			break;
-		case TEXTURE:
-			textures.add(new TexCoord2(Double.parseDouble(slots[1]), Double.parseDouble(slots[2])));
-			break;
-		case NORMAL:
-			normals.add(new Normal3(Double.parseDouble(slots[1]), Double.parseDouble(slots[2]), Double.parseDouble(slots[3])));
-			break;
-		case FACE:
-			// Gleich 'n Slot rein!
-			facesSourceLine.add(line);
-			break;
-		default:
-			break;
+	private void printTokens(final String[] tokens) {
+		for (String s : tokens) {
+			System.out.printf("%s ", s);
 		}
+		System.out.println();
+	}
+	
+	/** 
+	 * Prints all list sizes for development and debugging.
+	 */
+	private void printListSizes() {
+		System.out.println("number of vertices:   " + vertices.size());
+		System.out.println("number of txtrcoords: " + textures.size());
+		System.out.println("number of normals:    " + normals.size());
+		System.out.println("number of faces:      " + faces.size());
 	}
 
 	/**
-	 * Current under development. Should calibrate the indexes of the faces array.
+	 * Currently under development. Should calibrate the indexes of the faces array.
 	 * @param faces
 	 */
 	private void calibrateFacesArray(int[][] faces) {
@@ -194,66 +247,12 @@ public class ObjLoader {
 				}
 			}
 		}
-		 int compensation = (1 - minValue);
-		 for (int i = 0; i < faces.length; i++) {
-		 for (int i2 = 0; i2 < faces[i].length; i2++) {
-		 faces [i][i2] = faces [i][i2] + compensation;
-		 }
-		 }
-	}
-
-	/**
-	 *  Constructs the faces array - processes a single line element from the facesSourceLine-Collection.
-	 *  First trims the "f" prefix away, then adds zeros (fillZeros method) to the blocks if a block form the source file 
-	 *  doesn't contain 3 numbers (e.g. 1 2 3 instead of 1/1/1 2/2/2 3/3/3). 
-	 *  Then builds splits the filtered string into a new Array (still String) which is later converted
-	 *  into the [][] two dimensional required for output.
-	 *  
-	 *  @return result - A two dimensional array (TODO: describe Array here.)
-	 *  
-	 */
-	private int[][] buildFacesArray() {
-		int[][] result = new int[facesSourceLine.size()][9];
-		int count = 0;
-		for (String face : facesSourceLine) {
-			String[] line = face.replaceAll(FACE, "").trim()
-					.split(BLANK);
-			
-			int[] numbers = parseIntArray(line);
-			numbers = fillZeros(numbers);
-			
-			for (int i = 0; i < numbers.length; i++) {
-				result[count][i] = numbers[i];
+		int compensation = (1 - minValue);
+		for (int i = 0; i < faces.length; i++) {
+			for (int i2 = 0; i2 < faces[i].length; i2++) {
+				faces [i][i2] = faces [i][i2] + compensation;
 			}
-			count++;
-		}
-		return result;
-	}
-
-	private int [] parseIntArray(String[] strs) {
-		int[] numbers = new int[strs.length];
-		for (int i = 0; i < strs.length; i++) {
-			numbers[i] = Integer.parseInt(strs[i]);
-		}
-		return numbers;
-	}
-	
-	/**
-	 * Format conversion: Fills up zeros of given block-Array
-	 * if single numbers are found (used for faces).
-	 * E.g. 1 2 3 to 100 200 300.
-	 * @return tupelsAsString A stringBuilder object containing the newly formated line.
-	 */
-	
-	private int[] fillZeros(int[] numbers) {
-		int [] filledNumbers = new int[9];
-		if (numbers.length == 3) {
-			for (int i = 0; i < 9; i++) {
-				filledNumbers[i] = i / 3;
-			}
-			return filledNumbers;
-		}
-			return numbers;
+		 }
 	}
 
 	/**

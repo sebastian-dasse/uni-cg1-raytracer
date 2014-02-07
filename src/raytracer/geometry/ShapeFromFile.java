@@ -3,7 +3,7 @@ package raytracer.geometry;
 import raytracer.Ray;
 import raytracer.material.Material;
 import raytracer.math.Point3;
-import raytracer.parser.ObjLoader2;
+import raytracer.parser.ObjLoader;
 
 /**
  * This immutable class represents a geometry which is defined in an OBJ file. To be more specific, a 
@@ -31,7 +31,7 @@ public class ShapeFromFile extends Geometry {
 	 */
 	public ShapeFromFile(final String filename, final Material material) {
 		super(material);
-		mesh = new ObjLoader2().load(filename, material);
+		mesh = new ObjLoader().load(filename, material);
 	}
 	
 	@Override
