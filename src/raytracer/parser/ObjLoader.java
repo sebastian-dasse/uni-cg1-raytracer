@@ -12,7 +12,7 @@ import raytracer.geometry.TriangleMesh;
 import raytracer.material.Material;
 import raytracer.math.Normal3;
 import raytracer.math.Point3;
-import raytracer.texture.TextureCoord;
+import raytracer.texture.TexCoord2;
 
 /**
  * This class is a loader for OBJ files. It can parse <code>TriangleMesh</code>es from such a file.
@@ -40,7 +40,7 @@ public class ObjLoader {
 
 	private LinkedList<String> lines;
 	private Collection<Point3> vertices;
-	private Collection<TextureCoord> textures;
+	private Collection<TexCoord2> textures;
 	private Collection<Normal3> normals;
 	private Collection<String> facesSourceLine;
 	private int[][] faces;
@@ -48,7 +48,7 @@ public class ObjLoader {
 	public ObjLoader() {
 		vertices = new ArrayList<Point3>();
 		vertices.add(new Point3(0, 0, 0)); // unused point at first position for easier array indexing 
-		textures = new ArrayList<TextureCoord>();
+		textures = new ArrayList<TexCoord2>();
 		normals = new ArrayList<Normal3>();
 		facesSourceLine = new ArrayList<String>();
 		lines = new LinkedList<String>();
@@ -109,7 +109,7 @@ public class ObjLoader {
 		return new TriangleMesh(
 				material, 
 				vertices.toArray(new Point3[vertices.size()]), 
-				textures.toArray(new TextureCoord[textures.size()]), 
+				textures.toArray(new TexCoord2[textures.size()]), 
 				normals.toArray(new Normal3[normals.size()]), 
 				faces);
 	}
@@ -167,7 +167,7 @@ public class ObjLoader {
 				vertices.add(new Point3(Double.parseDouble(slots[1]), Double.parseDouble(slots[2]), Double.parseDouble(slots[3])));
 			break;
 		case TEXTURE:
-			textures.add(new TextureCoord(Double.parseDouble(slots[1]), Double.parseDouble(slots[2])));
+			textures.add(new TexCoord2(Double.parseDouble(slots[1]), Double.parseDouble(slots[2])));
 			break;
 		case NORMAL:
 			normals.add(new Normal3(Double.parseDouble(slots[1]), Double.parseDouble(slots[2]), Double.parseDouble(slots[3])));

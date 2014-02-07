@@ -108,6 +108,6 @@ public class Node extends Geometry {
 		if (nearestHit == null) {
 			return null;
 		}
-		return new Hit(t, ray, nearestHit.geo, transform.mul(nearestHit.normal));
+		return new Hit(t, ray, nearestHit.geo, transform.mul(nearestHit.normal), null);
 	}
 }

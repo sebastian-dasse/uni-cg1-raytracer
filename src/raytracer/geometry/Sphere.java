@@ -59,7 +59,7 @@ public class Sphere extends Geometry {
 			
 			// Formula: normal = p - center
 			final Normal3 normal = p.sub(center).normalized().asNormal(); // normalized normal
-			return (b > 0) ? null : new Hit(t, ray, this, normal);
+			return (b > 0) ? null : new Hit(t, ray, this, normal, null);
 		} // discrimant > 0  =>  2 results => 2 hits
 		final double numerator;
 		final double n1 = -b + Math.sqrt(discriminant);
@@ -79,6 +79,6 @@ public class Sphere extends Geometry {
 		
 		// Formula: normal = p - center
 		final Normal3 normal = p.sub(center).normalized().asNormal(); // normalized normal
-		return new Hit(t, ray, this, normal);
+		return new Hit(t, ray, this, normal, null);
 	}
 }

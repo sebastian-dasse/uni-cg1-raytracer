@@ -97,7 +97,7 @@ public class Triangle extends Geometry {
 		}
 		final double alpha = 1 - beta - gamma;
 		final Normal3 normal = na.mul(alpha).add(nb.mul(beta)).add(nc.mul(gamma)).asVector().normalized().asNormal(); // normalized normal
-		return new Hit(t, ray, this, normal);
+		return new Hit(t, ray, this, normal, null);
 	}
 
 	@Override

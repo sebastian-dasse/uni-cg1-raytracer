@@ -4,7 +4,7 @@ import raytracer.Ray;
 import raytracer.material.Material;
 import raytracer.math.Normal3;
 import raytracer.math.Point3;
-import raytracer.texture.TextureCoord;
+import raytracer.texture.TexCoord2;
 
 /**
  * This immutable class represents a triangle mesh, that is a polygon that comprises a set of triangles that are 
@@ -24,7 +24,7 @@ public class TriangleMesh extends Geometry {
 	/**
 	 * The texture coordinates for this triangle mesh.
 	 */
-	private final TextureCoord[] textCoords;
+	private final TexCoord2[] textCoords;
 	/**
 	 * The normals used in this triangle mesh.
 	 */
@@ -51,7 +51,7 @@ public class TriangleMesh extends Geometry {
 	 * @param normals
 	 * @param faces
 	 */
-	public TriangleMesh(final Material material, final Point3[] vertices, final TextureCoord[] textCoords, 
+	public TriangleMesh(final Material material, final Point3[] vertices, final TexCoord2[] textCoords, 
 			final Normal3[] normals, final int[][] faces) {
 		super(material);
 		this.vertices = vertices;
@@ -126,7 +126,7 @@ public class TriangleMesh extends Geometry {
 					new Point3(0.5, 0.5, -0.5), 
 					new Point3(-0.5, 0.5, -0.5)
 				}, 
-				new TextureCoord[0], 
+				new TexCoord2[0], 
 				new Normal3[]{
 					
 				}, new int[][]{
