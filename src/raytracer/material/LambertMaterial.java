@@ -8,6 +8,7 @@ import raytracer.light.Light;
 import raytracer.math.Normal3;
 import raytracer.math.Point3;
 import raytracer.math.Vector3;
+import raytracer.texture.Texture;
 
 /**
  * This immutable class implements the color of a material with a perfect diffuse reflecting surface.
@@ -21,18 +22,18 @@ public class LambertMaterial extends Material {
 	/**
 	 * The color of this material.
 	 */
-	private final Color color;
+	private final Texture texture;
 	
 	/**
 	 * Constructs a new <code>LambertMaterial</code> object with the specified surface color.
 	 * 
 	 * @param color The surface color. Must not be <code>null</code>.
 	 */
-	public LambertMaterial (final Color color) {
-		if (color == null) {
+	public LambertMaterial (final Texture texture) {
+		if (texture == null) {
 			throw new IllegalArgumentException("The parameter 'color' must not be null.");
 		}
-		this.color = color;
+		this.texture = texture;
 	}
 	
 	@Override
@@ -42,7 +43,9 @@ public class LambertMaterial extends Material {
 		}
 		
 		// Formula: c = cd[ca  +  cl * max(0, <n, l>)]
-		Color c = color.mul(world.ambientLight);
+		//Color texcolor = texture.getColor(hit.texcoord.u, hit.texcoord.v);
+		Color texcolor = texture.getColor(hit.texcoord);
+		Color c = texcolor.mul(world.ambientLight);
 		final Normal3 n = hit.normal;
 		final Point3 p = hit.ray.at(hit.t);
 		final Light[] lights = world.getLights();
@@ -50,40 +53,46 @@ public class LambertMaterial extends Material {
 			if (light.illuminates(p, world)){
 				final Vector3 l = light.directionFrom(p);
 				final double f = Math.max(0, n.dot(l));
-				final Color temp = color.mul(light.color.mul(f));
+				final Color temp = texcolor.mul(light.color.mul(f));
 				c = c.add(temp);
 			}
 		}
 		return c;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((color == null) ? 0 : color.hashCode());
+		result = prime * result + ((texture == null) ? 0 : texture.hashCode());
 		return result;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
-	public boolean equals(final Object obj) {
+	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
 		if (obj == null)
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		final LambertMaterial other = (LambertMaterial) obj;
-		if (color == null) {
-			if (other.color != null)
+		LambertMaterial other = (LambertMaterial) obj;
+		if (texture == null) {
+			if (other.texture != null)
 				return false;
-		} else if (!color.equals(other.color))
+		} else if (!texture.equals(other.texture))
 			return false;
 		return true;
 	}
-	
+
 	@Override
 	public String toString() {
-		return getClass().getSimpleName() + "[color = " + color + "]";
+		return getClass().getSimpleName() + "[texture = " + texture + "]";
 	}
 }
