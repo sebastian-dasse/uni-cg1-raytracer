@@ -14,7 +14,7 @@ public class InterpolatedImageTexture implements Texture{
 	}
 	
 	@Override
-	public Color getColor(double u, double v) {
+	public Color getColor(final double u, final double v) {
 		// TODO Auto-generated method stub
 		return null;
 	}

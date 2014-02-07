@@ -5,6 +5,7 @@ import raytracer.Tracer;
 import raytracer.World;
 import raytracer.geometry.Hit;
 import raytracer.texture.SingleColorTexture;
+import raytracer.texture.Texture;
 
 /**
  * This immutable class implements the color of a material with a simple surface.
@@ -15,14 +16,14 @@ public class SingleColorMaterial extends Material{
 	/**
 	 * The surface color of this material.
 	 */
-	private final SingleColorTexture texture;
+	private final Texture texture;
 
 	/**
 	 * Constructs a new <code>SingleColorMaterial</code> object with the specified surface color.
 	 * 
 	 * @param color The surface color. Must not be <code>null</code>.
 	 */
-	public SingleColorMaterial (final SingleColorTexture texture){
+	public SingleColorMaterial (final Texture texture){
 		if (texture == null) {
 			throw new IllegalArgumentException("The parameter 'color' must not be null.");
 		}
