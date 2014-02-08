@@ -76,6 +76,8 @@ public class DemoScene2 {
 						),
 				64)
 		);
+		
+		
 //						 
 //		world.addElements(new Geometry[] {
 //				Factory.buildPlane(new double[][] { 
