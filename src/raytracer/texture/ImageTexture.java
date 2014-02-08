@@ -43,9 +43,6 @@ public class ImageTexture implements Texture{
 	    	resultingY = mappedV;
 	    }
 	    final int[] RGBValues = image.getData().getPixel(resultingX, resultingY, new int[3]);
-	    
-//	    final long
-	    
 	    return new Color(RGBValues[0], RGBValues[1], RGBValues[2]);
 	}
 

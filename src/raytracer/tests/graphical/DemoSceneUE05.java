@@ -5,6 +5,7 @@ import raytracer.Constants;
 import raytracer.Renderer;
 import raytracer.World;
 import raytracer.camera.Camera;
+import raytracer.camera.PerspectiveCamera;
 import raytracer.geometry.AxisAlignedBox;
 import raytracer.geometry.Node;
 import raytracer.geometry.ShapeFromFile;
@@ -15,6 +16,8 @@ import raytracer.material.Material;
 import raytracer.material.PhongMaterial;
 import raytracer.math.Point3;
 import raytracer.math.Transform;
+import raytracer.math.Vector3;
+import raytracer.texture.SingleColorTexture;
 import raytracer.ui.ShowImage;
 
 /**
@@ -35,10 +38,10 @@ public final class DemoSceneUE05 {
 		
 		
 		final Renderer[] tracers = new Renderer[]{
-				smartieScene(), 
-				boxScene(), 
+//				smartieScene(), 
+//				boxScene(), 
 				teddyScene(), 
-				bunnyScene()
+//				bunnyScene()
 		};
 		for (int i = 0; i < tracers.length; i++) {
 			ShowImage.from(tracers[i], 50 * i, 25 * i);
@@ -47,6 +50,7 @@ public final class DemoSceneUE05 {
 
 	private static Renderer doubleSlashScene() {
 		final String path = "models/cube-v-vn.obj";
+		
 		final Material material = new LambertMaterial(new Color(1, 1, 1));
 		
 		final World world = Factory.buildWorld(new double[][]{{0, 0, 0}, {0, 0, 0}}, Constants.INDEX_OF_REFRACTION_AIR_AT_20_DEG);
@@ -95,7 +99,13 @@ public final class DemoSceneUE05 {
 				{ 4, 4, 4 }, { -1, -1, -1 }, { 0, 1, 0 }, { Math.PI / 4.0 } });
 		world.addElements(
 				new Node(
-					new AxisAlignedBox(new LambertMaterial(new Color(1, 1, 0))), 
+					new AxisAlignedBox(
+							new LambertMaterial(
+									new SingleColorTexture(
+											new Color(1, 1, 0)
+									)
+							)
+					), 
 					new Transform()
 						.rotateX(Math.PI/1.17)
 						.rotateY(Math.PI/0.2) 
@@ -114,15 +124,33 @@ public final class DemoSceneUE05 {
 	 */
 	private static Renderer teddyScene() {
 		final String path = "models/teddy.obj";
-		final Material material = new LambertMaterial(new Color(1, 1, 1));
+		final Material material = new LambertMaterial(
+				new SingleColorTexture(
+						new Color(1, 1, 1)
+				)
+		);
 		
-		final World world = Factory.buildWorld(new double[][]{{0, 0, 0}, {0, 0, 0}}, Constants.INDEX_OF_REFRACTION_AIR_AT_20_DEG);
-		final Camera camera = Factory.buildPerspectiveCamera(new double[][]{
-				{2.5, 2.5, 2.5}, {-1, -1, -1}, {0, 1, 0}, {Math.PI / 4.0}});
+		final World world = new World(
+				new Color(0, 0, 0),
+				new Color(0, 0, 0),
+				Constants.INDEX_OF_REFRACTION_AIR_AT_20_DEG
+	    );
+		
+		final Camera camera = new PerspectiveCamera(
+				new Point3(2.5, 2.5, 2.5),
+				new Vector3(-1, -1, -1),
+				new Vector3(0, 1, 0),
+				Math.PI / 4.0
+		);
+		
 		world.addElements(
 				new Node(new ShapeFromFile(path, material), new Transform())
 		);
-		world.addLight(new PointLight(new Color(1, 1, 1), new Point3(3, 3, 3), false));
+		world.addLight(
+				new PointLight(new Color(1, 1, 1),
+				new Point3(3, 3, 3),
+				false)
+		);
 		return new Renderer(world, camera);
 	}
 

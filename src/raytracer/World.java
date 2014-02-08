@@ -99,7 +99,6 @@ public class World {
 	 * 
 	 * @param l	The <code>Light</code> to be added to this world.
 	 */
-	@Deprecated
 	public void addLight(final Light l) {
 		lights.add(l);
 	}
