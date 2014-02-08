@@ -32,15 +32,14 @@ public class ImageTexture implements Texture{
 	public Color getColor(final double u, final double v) {
 		int height = image.getHeight() - 1;
 		int width = image.getWidth() - 1;
-		int mappedU = (int) (u * (double) width);
-	    int mappedV = (int) (v * (double) height);
+		int mappedU = (int) (u * width);
+	    int mappedV = (int) (v * height);
 	    int resultingX;
 	    int resultingY;
+	    resultingX = mappedU;
 	    if (originAtBottom) {
-			resultingX = width - mappedU;
 		    resultingY = height - mappedV;
 	    } else {
-	    	resultingX = mappedU;
 	    	resultingY = mappedV;
 	    }
 	    int[] RGBValues = image.getData().getPixel(resultingX, resultingY, new int[3]);
