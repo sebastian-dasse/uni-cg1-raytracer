@@ -10,15 +10,13 @@ import javax.imageio.ImageIO;
 import raytracer.Color;
 
 public class ImageTexture implements Texture{
-//	private final BufferedImage image;
-	private final Raster imageRaster;
-	private final int widthMinus1;
-	private final int heightMinus1;
-	private boolean originAtBottom;
+	protected final Raster imageRaster;
+	protected final int widthMinus1;
+	protected final int heightMinus1;
 	
 	public ImageTexture(final String path){
 		if (path == null) {
-			throw new IllegalArgumentException("The parameters must not be null.");
+			throw new IllegalArgumentException("The parameter 'path' must not be null.");
 		}
 		try {
 			BufferedImage image = ImageIO.read(new File(path));
@@ -29,27 +27,14 @@ public class ImageTexture implements Texture{
 			System.err.println("Problem reading file.");
 			throw new RuntimeException("Could not construct image texture from the specified path.");
 		}
-		originAtBottom = true;
-	}
-	
-	public void setOriginAtBottom(boolean originAtBottom) {
-		this.originAtBottom = originAtBottom;
 	}
 	
 	@Override
 	public Color getColor(final double u, final double v) {
 		final int mappedU = (int) (u * widthMinus1);
 	    final int mappedV = (int) (v * heightMinus1);
-	    final int resultingX = mappedU;
-	    final int resultingY;
-	    if (originAtBottom) {
-		    resultingY = heightMinus1 - mappedV;
-	    } else {
-	    	resultingY = mappedV;
-	    }
-	    
-	    final double[] RGBValues = imageRaster.getPixel(resultingX, resultingY, new double[3]);
-//	    final long
+	    final double[] RGBValues = imageRaster.getPixel(mappedU, heightMinus1 - mappedV, new double[3]);
+//	    final long // TODO try bitshifting or remove
 	    return new Color(RGBValues[0]/255, RGBValues[1]/255, RGBValues[2]/255);
 	    
 	}
@@ -59,10 +44,9 @@ public class ImageTexture implements Texture{
 		return getColor(textcoord.u, textcoord.v);
 	}
 
-	//---- Test
+	//---- Test TODO remove later
 	public static void main(String [] args) {
 		ImageTexture texture = new ImageTexture("textures/colorTest.jpg");
-		texture.setOriginAtBottom(true);
 		texture.getColor(0.1,0.1);
 		final double x = 0.5;
 		final double y = 0.1;
