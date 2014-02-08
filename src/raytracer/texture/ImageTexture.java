@@ -52,6 +52,7 @@ public class ImageTexture implements Texture{
 		return getColor(textcoord.u, textcoord.v);
 	}
 
+	//---- Test
 	public static void main(String [] args) {
 		
 		ImageTexture texture = new ImageTexture("textures/earth1.jpg");
