@@ -47,8 +47,11 @@ public class ImageTexture implements Texture{
 	    } else {
 	    	resultingY = mappedV;
 	    }
-	    final double [] RGBValues = imageRaster.getPixel(resultingX, resultingY, new double [3]);
-	    return new Color(RGBValues[0] / 255, RGBValues[1] / 255, RGBValues[2] / 255);
+	    
+	    final double[] RGBValues = imageRaster.getPixel(resultingX, resultingY, new double[3]);
+//	    final long
+	    return new Color(RGBValues[0]/255, RGBValues[1]/255, RGBValues[2]/255);
+	    
 	}
 
 	@Override
