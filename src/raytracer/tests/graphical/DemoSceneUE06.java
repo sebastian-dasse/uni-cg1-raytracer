@@ -42,10 +42,22 @@ public class DemoSceneUE06 {
 		final World world = new World(new Color(0, 0, 0), new Color(0.0, 0.0, 0.0), Constants.INDEX_OF_REFRACTION_VACUUM);
 		world.addElements(
 				new Node(
+<<<<<<< HEAD
 						new Sphere(
 //								new SingleColorMaterial(new ImageTexture(path))
 								new LambertMaterial(new ImageTexture(path))
 						), 
+=======
+//					new Plane(
+					new Sphere(
+//							new SingleColorMaterial(new SingleColorTexture(new Color(1, 0, 0)))
+//							new LambertMaterial(new SingleColorTexture(new Color(1, 0, 0)))
+							
+							new LambertMaterial(new ImageTexture("textures/earthSmall.jpg"))
+//							new SingleColorMaterial(new ImageTexture("textures/testBild.png"))
+//							new LambertMaterial(new SingleColorTexture(new Color(1, 0, 0)))
+					), 
+>>>>>>> 2133b5cdf99a8ff44fd9a30c7ba445e1e0eecce9
 						new Transform()
 				)
 		);

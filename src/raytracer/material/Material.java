@@ -4,6 +4,7 @@ import raytracer.Color;
 import raytracer.Tracer;
 import raytracer.World;
 import raytracer.geometry.Hit;
+import raytracer.texture.Texture;
 
 /**
  * This abstract base class represents the material of a <code>Geometry</code>. More specifically this means a color 
