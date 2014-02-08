@@ -30,8 +30,8 @@ public class ImageTexture implements Texture{
 	
 	@Override
 	public Color getColor(final double u, final double v) {
-		int height = image.getHeight();
-		int width = image.getWidth();
+		int height = image.getHeight() - 1;
+		int width = image.getWidth() - 1;
 		int mappedU = (int) (u * (double) width);
 	    int mappedV = (int) (v * (double) height);
 	    int resultingX;
@@ -57,8 +57,8 @@ public class ImageTexture implements Texture{
 		ImageTexture texture = new ImageTexture("textures/earth1.jpg");
 		texture.setOriginAtBottom(false);
 		texture.getColor(0.1,0.1);
-		System.out.println(texture.getColor(0.1,0.1).r);
-		System.out.println(texture.getColor(0.1,0.1).g);
-		System.out.println(texture.getColor(0.1,0.1).b);
+		System.out.println(texture.getColor(1.0, 1.0).r);
+		System.out.println(texture.getColor(1.0, 1.0).g);
+		System.out.println(texture.getColor(1.0, 1.0).b);
 	}
 }
