@@ -59,7 +59,10 @@ public class ReflectiveMaterial extends Material{
 		final Ray ray = hit.ray;
 		final Point3 p = ray.at(hit.t);
 		final Vector3 e = ray.d.mul(-1).normalized();
-		Color c = diffuseTexture.getColor(hit.texcoord).mul(world.ambientLight);
+		final Color diffuseColor = diffuseTexture.getColor(hit.texcoord);
+		final Color specularColor = specularTexture.getColor(hit.texcoord);
+		final Color reflectionColor = reflectionTexture.getColor(hit.texcoord);
+		Color c = diffuseColor.mul(world.ambientLight);
 		final Light[] lights = world.getLights();
 		for (Light light : lights) {
 			if (light.illuminates(p, world)) {
@@ -67,13 +70,13 @@ public class ReflectiveMaterial extends Material{
 				final Vector3 rl = l.reflectedOn(n);
 				final double f1 = Math.max(0, n.dot(l));
 				final double f2 = Math.max(0, e.dot(rl));
-				final Color s1 = diffuseTexture.getColor(hit.texcoord).mul(light.color).mul(f1);
-				final Color s2 = specularTexture.getColor(hit.texcoord).mul(light.color).mul(Math.pow(f2, exponent));
+				final Color s1 = diffuseColor.mul(light.color).mul(f1);
+				final Color s2 = specularColor.mul(light.color).mul(Math.pow(f2, exponent));
 				c = c.add(s1).add(s2); 
 			}
 		}
 		final Vector3 rd = ray.d.mul(-1).reflectedOn(n);
-		final Color s3 = reflectionTexture.getColor(hit.texcoord).mul(tracer.trace(new Ray(p, rd), world));
+		final Color s3 = reflectionColor.mul(tracer.trace(new Ray(p, rd), world));
 		return c.add(s3);
 	}
 

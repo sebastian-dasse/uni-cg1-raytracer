@@ -13,6 +13,7 @@ import raytracer.light.PointLight;
 import raytracer.light.SpotLight;
 import raytracer.material.LambertMaterial;
 import raytracer.material.PhongMaterial;
+import raytracer.material.ReflectiveMaterial;
 import raytracer.material.SingleColorMaterial;
 import raytracer.math.Normal3;
 import raytracer.math.Point3;
@@ -39,7 +40,14 @@ public static void main(String[] args) {
 		final Camera camera = Factory.buildPerspectiveCamera(new double[][] {
 				{ 4, 4, 4 }, { -1, -1, -1 }, { 0, 1, 0 }, { Math.PI / 4.0 } });
 		world.addElements(
-		new Node(
+				
+//				new Plane(
+//						new ReflectiveMaterial(
+//						new SingleColorTexture(new Color(0,0,1)), 
+//						new SingleColorTexture(new Color(0,0,1)), 
+//						64, 
+//						new SingleColorTexture(new Color(0,0,1)))), 
+//						new Transform()))
 //				new AxisAlignedBox(new SingleColorMaterial(new SingleColorTexture(new Color(1,1,1)))), 
 //				new Transform()
 //		//ready transformed Box
@@ -51,18 +59,49 @@ public static void main(String[] args) {
 //		new Node(
 //				new Sphere(new SingleColorMaterial(new SingleColorTexture(new Color(0,1,1)))), 
 //				new Sphere(new LambertMaterial(new SingleColorTexture(new Color(0,1,1)))), 
-				new Sphere(new PhongMaterial(
-						new SingleColorTexture(new Color(0,0,1)), 
-						new SingleColorTexture(new Color(1,0,0)), 
-						64)),
-				new Transform()
+//				new Sphere(new PhongMaterial(
+//						new SingleColorTexture(new Color(0,0,1)), 
+//						new SingleColorTexture(new Color(1,0,0)), 
+//						64)))
+				
+				
+//				new Node(
+//						new Sphere(new ReflectiveMaterial(
+//						new SingleColorTexture(new Color(0,0,1)), 
+//						new SingleColorTexture(new Color(1,0,0)), 
+//						64, 
+//						new SingleColorTexture(new Color(1,0,0)))), 
+//						new Transform()
+//						.translate(new Point3(-3.5, -1.5, 2.5))),
+//						
+//				new Node(new Sphere(new ReflectiveMaterial(
+//						new SingleColorTexture(new Color(0,0,1)), 
+//						new SingleColorTexture(new Color(1,0,0)), 
+//						64, 
+//						new SingleColorTexture(new Color(1,0,0)))), 
+//						new Transform()
+//						.translate(new Point3(0.5, 1.5, 1.5))),
+						
+				new Node(new Plane(
+//						new LambertMaterial(new SingleColorTexture(new Color(1,0,0)))),
+//						(new SingleColorMaterial(new SingleColorTexture(new Color(1,0,0)))),
+						new ReflectiveMaterial(
+								new SingleColorTexture(new Color(0,0,1)), 
+								new SingleColorTexture(new Color(0,1,0)), 
+								10, 
+								new SingleColorTexture(new Color(1,0,0)))), 
+								new Transform()
+								.translate(new Point3(0, 0, 0)
+								)));
+						
+						
 				
 //				.rotateY(Math.PI/0.2)
 //				.rotateZ(Math.PI/0.9)
 //				.rotateX(Math.PI/1.15)
 //				.scale(2.0, 0.5, 2.0)
 				
-		));
+		
 		
 		world.addLight(new PointLight(new Color(1, 1, 1), new Point3(4, 4, 4), false));
 		return new Renderer(world, camera, 10);
