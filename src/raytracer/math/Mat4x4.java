@@ -1,4 +1,7 @@
 package raytracer.math;
+
+import static raytracer.math.MathUtil.isValid;
+
 /**
  * This immutable class represents a matrix with four rows and four columns. Thus it has fields for its sixteen 
  * components, which are to be addressed as follows: the first index specifies the row, the second indicates the column 
@@ -14,6 +17,8 @@ package raytracer.math;
  * 
  * <p>Passing a <code>null</code> object to a method in this class will cause an <code>IllegalArgumentException</code> 
  * to be thrown.
+ * 
+ * @author Maxim Novichkov
  */
 public class Mat4x4 {
 	/**
@@ -100,26 +105,32 @@ public class Mat4x4 {
 	 * @param m43 The m43 component. Must be a double value other than +-Infinity or NaN.
 	 * @param m44 The m44 component. Must be a double value other than +-Infinity or NaN.
 	 */
-	public Mat4x4(final double m11, final double m12, final double m13, final double m14,
-			  final double m21, final double m22, final double m23, final double m24, 
-			  final double m31, final double m32, final double m33, final double m34,
-			  final double m41, final double m42, final double m43, final double m44) {
-	this.m11 = m11;
-	this.m12 = m12;
-	this.m13 = m13;
-	this.m14 = m14;
-	this.m21 = m21;
-	this.m22 = m22;
-	this.m23 = m23;
-	this.m24 = m24;
-	this.m31 = m31;
-	this.m32 = m32;
-	this.m33 = m33;
-	this.m34 = m34;
-	this.m41 = m41;
-	this.m42 = m42;
-	this.m43 = m43;
-	this.m44 = m44;
+	public Mat4x4(final double m11, final double m12, final double m13, final double m14, 
+			      final double m21, final double m22, final double m23, final double m24, 
+			      final double m31, final double m32, final double m33, final double m34,
+			      final double m41, final double m42, final double m43, final double m44) {
+		if (!(isValid(m11) && isValid(m12) && isValid(m13) && isValid(m14) && 
+			  isValid(m21) && isValid(m22) && isValid(m23) && isValid(m24) &&
+			  isValid(m31) && isValid(m32) && isValid(m33) && isValid(m34) &&
+			  isValid(m41) && isValid(m42) && isValid(m43) && isValid(m44))) {
+			throw new IllegalArgumentException("Only double values other than +-Infinity or NaN are allowed.");
+		}
+		this.m11 = m11;
+		this.m12 = m12;
+		this.m13 = m13;
+		this.m14 = m14;
+		this.m21 = m21;
+		this.m22 = m22;
+		this.m23 = m23;
+		this.m24 = m24;
+		this.m31 = m31;
+		this.m32 = m32;
+		this.m33 = m33;
+		this.m34 = m34;
+		this.m41 = m41;
+		this.m42 = m42;
+		this.m43 = m43;
+		this.m44 = m44;
 	}
 	
 	/**
