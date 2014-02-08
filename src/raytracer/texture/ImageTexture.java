@@ -52,7 +52,6 @@ public class ImageTexture implements Texture{
 	}
 
 	public static void main(String [] args) {
-		
 		ImageTexture texture = new ImageTexture("textures/earth1.jpg");
 		texture.setOriginAtBottom(false);
 		texture.getColor(0.1,0.1);
