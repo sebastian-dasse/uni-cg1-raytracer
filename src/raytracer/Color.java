@@ -42,6 +42,21 @@ public class Color{
 	}
 	
 	/**
+	 * Constructs a new <code>Color</code> with the RGB components specified in a double array.
+	 * 
+	 * @param rgb	The RGB components specified in a double array. The first element addresses the R component, the 
+	 * 		element the G component and the third element the B component. Must not be <code>null</code>.
+	 */
+	public Color(final double[] rgb) {
+		if (rgb == null || rgb.length < 3) {
+			throw new IllegalArgumentException("Parameter 'rgb' must not be null and the array must have length 3.");
+		}
+		this.r = rgb[0];
+		this.g = rgb[1];
+		this.b = rgb[2];
+	}
+	
+	/**
 	 * Adds the specified <code>Color</code> c to this <code>Color</code>.
 	 * 
 	 * @param c	The <code>Color</code> to be added. Must not be <code>null</code>.

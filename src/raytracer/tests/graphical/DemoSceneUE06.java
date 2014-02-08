@@ -15,7 +15,7 @@ import raytracer.math.Point3;
 import raytracer.math.Transform;
 import raytracer.math.Vector3;
 import raytracer.texture.ImageTexture;
-import raytracer.texture.Texture;
+import raytracer.texture.InterpolatedImageTexture;
 import raytracer.ui.ShowImage;
 
 public class DemoSceneUE06 {
@@ -29,8 +29,8 @@ public class DemoSceneUE06 {
 		
 		
 		final Renderer[] tracers = new Renderer[]{
-				scene1(), 
-//				scene2()
+//				scene1(), 
+				scene2()
 		};
 		for (int i = 0; i < tracers.length; i++) {
 			ShowImage.from(tracers[i], 50 * i, 25 * i);
@@ -39,13 +39,12 @@ public class DemoSceneUE06 {
 
 	private static Renderer scene1() {
 		final String path = "textures/earth1.jpg";
-		final Texture texture = new ImageTexture(path);
 		final World world = new World(new Color(0, 0, 0), new Color(0.0, 0.0, 0.0), Constants.INDEX_OF_REFRACTION_VACUUM);
 		world.addElements(
 				new Node(
 						new Sphere(
-//								new SingleColorMaterial(texture)
-								new LambertMaterial(texture)
+//								new SingleColorMaterial(new ImageTexture(path))
+								new LambertMaterial(new ImageTexture(path))
 						), 
 						new Transform()
 				)
@@ -56,13 +55,14 @@ public class DemoSceneUE06 {
 	}
 	
 	private static Renderer scene2() {
-		final String path = "textures/earth1.jpg";
-		final Texture texture = new ImageTexture(path);
+		final String path = "textures/earth1-scaled.jpg";
 		final World world = new World(new Color(0, 0, 0), new Color(0.0, 0.0, 0.0), Constants.INDEX_OF_REFRACTION_VACUUM);
 		world.addElements(
 				new Node(
 						new Sphere(
-								new SingleColorMaterial(texture)
+//								new SingleColorMaterial(new ImageTexture(path))
+//								new LambertMaterial(new ImageTexture(path))
+								new SingleColorMaterial(new InterpolatedImageTexture(path))
 						), 
 						new Transform()
 				)

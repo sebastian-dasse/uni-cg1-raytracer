@@ -32,11 +32,11 @@ public class ImageTexture implements Texture{
 	@Override
 	public Color getColor(final double u, final double v) {
 		final int mappedU = (int) (u * widthMinus1);
-	    final int mappedV = (int) (v * heightMinus1);
-	    final double[] RGBValues = imageRaster.getPixel(mappedU, heightMinus1 - mappedV, new double[3]);
+	    final int mappedV = heightMinus1 - (int) (v * heightMinus1);
+	    final double[] RGBValues = imageRaster.getPixel(mappedU, mappedV, new double[3]);
+	    
 //	    final long // TODO try bitshifting or remove
 	    return new Color(RGBValues[0]/255, RGBValues[1]/255, RGBValues[2]/255);
-	    
 	}
 
 	@Override
