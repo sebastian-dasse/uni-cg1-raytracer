@@ -13,6 +13,7 @@ import raytracer.light.PointLight;
 import raytracer.material.LambertMaterial;
 import raytracer.material.Material;
 import raytracer.material.PhongMaterial;
+import raytracer.material.SingleColorMaterial;
 import raytracer.math.Point3;
 import raytracer.math.Transform;
 import raytracer.ui.ShowImage;
@@ -66,12 +67,12 @@ public final class TestDemoScene {
 //							.rotateX(Math.toRadians(-199))
 //							.rotateZ(Math.toRadians(270))
 //							.rotateZ(Math.toRadians(-45))
-						)
+						),
 				
-//				new AxisAlignedBox( 
-////						new SingleColorMaterial(new Color(1, 0, 0))) 
+				new AxisAlignedBox( 
+						new SingleColorMaterial(new Color(1, 0, 0))) 
 //						new LambertMaterial(new Color(1, 0, 0)))
-////						new PhongMaterial(new Color(1, 0, 0), new Color(0, 0, 0), 20))
+//						new PhongMaterial(new Color(1, 0, 0), new Color(0, 0, 0), 20))
 		
 		);
 //		world.addLight(new PointLight(new Color(0.6, 0.6, 0.6), new Point3(4, 4, 4)));

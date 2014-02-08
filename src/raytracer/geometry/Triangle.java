@@ -41,11 +41,17 @@ public class Triangle extends Geometry {
 	 * The normal at vertex c.
 	 */
 	public final Normal3 nc;
-	
+	/**
+	 * The texture coordinates at vertex a.
+	 */
 	public final TexCoord2 ta;
-	
+	/**
+	 * The texture coordinates at vertex b.
+	 */
 	public final TexCoord2 tb;
-	
+	/**
+	 * The texture coordinates at vertex c.
+	 */
 	public final TexCoord2 tc;
 	
 	/**
@@ -58,12 +64,16 @@ public class Triangle extends Geometry {
 	 * @param nb		The normal at vertex b. Must not be <code>null</code>.
 	 * @param nc		The normal at vertex c. Must not be <code>null</code>.
 	 * @param material	The material of the triangle. Must not be <code>null</code>.
+	 * @param ta		The texture coordinates at vertex a. Must not be <code>null</code>.
+	 * @param tb		The texture coordinates at vertex b. Must not be <code>null</code>.
+	 * @param tc		The texture coordinates at vertex c. Must not be <code>null</code>.
 	 */
-	public Triangle(final Point3 a, final Point3 b, final Point3 c,
-			final Normal3 na, final Normal3 nb, final Normal3 nc, final Material material,
+	public Triangle(final Point3 a, final Point3 b, final Point3 c, 
+			final Normal3 na, final Normal3 nb, final Normal3 nc, final Material material, 
 			final TexCoord2 ta, final TexCoord2 tb, final TexCoord2 tc) {
 		super(material);
-		if (a == null || b == null || c == null) {
+		if (a == null || b == null || c == null || na == null || nb == null || nc == null 
+				|| ta == null || tb == null || tc == null) {
 			throw new IllegalArgumentException("The parameters must not be null.");
 		}	
 			this.a = a;
