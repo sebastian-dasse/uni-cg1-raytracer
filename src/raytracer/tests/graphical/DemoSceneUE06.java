@@ -32,13 +32,9 @@ public class DemoSceneUE06 {
 		
 		
 		final Renderer[] tracers = new Renderer[]{
-//				scene1(), 
-<<<<<<< HEAD
-				scene2()
-=======
+//				scene1(),
 //				scene2(),
 				scene3()
->>>>>>> 48a0ea13eac9991a53db4f4705ca95b03a112a8e
 		};
 		for (int i = 0; i < tracers.length; i++) {
 			ShowImage.from(tracers[i], 50 * i, 25 * i);
