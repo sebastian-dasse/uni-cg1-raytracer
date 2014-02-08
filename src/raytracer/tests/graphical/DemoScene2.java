@@ -5,19 +5,23 @@ import raytracer.Constants;
 import raytracer.Renderer;
 import raytracer.World;
 import raytracer.camera.Camera;
+import raytracer.camera.PerspectiveCamera;
 import raytracer.geometry.AxisAlignedBox;
 import raytracer.geometry.Geometry;
 import raytracer.geometry.Plane;
 import raytracer.geometry.Sphere;
+import raytracer.geometry.Triangle;
 import raytracer.light.PointLight;
 import raytracer.light.SpotLight;
 import raytracer.material.LambertMaterial;
 import raytracer.material.PhongMaterial;
 import raytracer.material.ReflectiveMaterial;
 import raytracer.material.TransparentMaterial;
+import raytracer.math.Normal3;
 import raytracer.math.Point3;
 import raytracer.math.Vector3;
 import raytracer.texture.SingleColorTexture;
+import raytracer.texture.TexCoord2;
 import raytracer.ui.ShowImage;
 
 public class DemoScene2 {
@@ -25,12 +29,12 @@ public class DemoScene2 {
 	public static void main(String[] args) {
 		
 		final Renderer[] tracers = new Renderer[]{
-//				scene1(),  
+				scene1(),  
 //				scene7(), 
 //				scene4(), 
 //				scene7b(), 
 //				scene7c(), 
-				scene8()
+//				scene8()
 		};
 		for (int i = 0; i < tracers.length; i++) {
 			ShowImage.from(tracers[i], 50 * i, 25 * i);
@@ -38,68 +42,107 @@ public class DemoScene2 {
 	}
 	
 	private static Renderer scene1() {
-//		final World world = Factory.buildWorld(new double[][] { { 0, 0, 0 }, {0.1, 0.1, 0.1} }, 1);
-//		final Camera camera = Factory.buildPerspectiveCamera(new double[][] {
-//				{ 4, 4, 4 }, { -1, -1, -1 }, { 0, 1, 0 }, { Math.PI / 4.0 } });
-//		
-		new Plane(
-				new PhongMaterial(
-						new SingleColorTexture(
-								new Color(1, 0, 0)
+		final Camera camera = new PerspectiveCamera(
+				new Point3(4, 4, 4),
+				new Vector3(-1, -1, -1),
+				new Vector3(0, 1, 0),
+				Math.PI / 4.0
+		);
+		
+		World world = new World(
+				new Color(0, 0, 0),
+				new Color(0.1, 0.1, 0.1),
+				1
+		);
+		
+		world.addElements(new Geometry[] {
+				new Plane(
+						new PhongMaterial(
+								new SingleColorTexture(
+										new Color(1, 0, 0)
+								),
+								new SingleColorTexture(
+										new Color(1, 1, 1)
+								),
+								64
+						)
+				),
+		
+		
+				new Sphere(
+						new PhongMaterial(
+								new SingleColorTexture(
+										new Color(0, 1, 0)
+								),
+								new SingleColorTexture(
+										new Color(1, 1, 1)
+								),
+								64
+						)
+				),
+		
+				new AxisAlignedBox(
+						new PhongMaterial(
+								new SingleColorTexture(
+										new Color(1, 0, 0)
+								),
+								new SingleColorTexture(
+										new Color(1, 1, 1)
+								),
+								64
+						)
+				),
+		
+				new Triangle(
+						new Point3(0, 0, -1),
+						new Point3(1, 1, 2),
+						new Point3(1, 2, 2),
+						new Normal3(0, 0, 1),
+						new Normal3(0, 0, 1),
+						new Normal3(0, 0, 1),
+						new PhongMaterial(
+							new SingleColorTexture(
+									new Color(0.3, 1, 0.3)
+							),
+							new SingleColorTexture(
+									new Color(1, 1, 1)
+							),
+							64
 						),
-						new SingleColorTexture(
-								new Color(1, 1, 1)
+						new TexCoord2(0,0),
+						new TexCoord2(0,0),
+						new TexCoord2(0,0)
+				),
+			
+				new Triangle(
+						new Point3(0, 0, -1),
+						new Point3(1, 0, -1),
+						new Point3(1, 1, -1),
+						new Normal3(0, 0, 1),
+						new Normal3(0, 0, 1),
+						new Normal3(0, 0, 1),
+						new PhongMaterial(
+							new SingleColorTexture(
+									new Color(0.3, 1, 0.3)
+							),
+							new SingleColorTexture(
+									new Color(1, 1, 1)
+							),
+							64
 						),
-						64
+						new TexCoord2(0,0),
+						new TexCoord2(0,0),
+						new TexCoord2(0,0)
+				)
+		});
+		world.addLight(
+				new SpotLight(
+						new Color(1, 1, 1),
+						new Point3(4, 4, 4),
+						new Vector3(-1, -1, -1),
+						Math.PI / 14.0
 				)
 		);
-		
-		
-		new Sphere(
-				new PhongMaterial(
-						new SingleColorTexture(
-								new Color(0, 1, 0)
-						),
-						new SingleColorTexture(
-								new Color(1, 1, 1)
-						),
-				64)
-		);
-		
-		new AxisAlignedBox(
-				new PhongMaterial(
-						new SingleColorTexture(
-								new Color(1, 0, 0)
-						),
-						new SingleColorTexture(
-								new Color(1, 1, 1)
-						),
-				64)
-		);
-		
-		
-//						 
-//		world.addElements(new Geometry[] {
-//				Factory.buildPlane(new double[][] { 
-//						{ 0, 0, 0 }, { 0, 1, 0} }, new PhongMaterial(new Color(1, 0, 0), new Color(1, 1, 1), 64), new SingleColorTexture()),
-//				Factory.buildSphere(new double[][] { 
-//						{ 0, 1, 0 }, { 0.5 } }, new PhongMaterial(new Color(0, 1, 0), new Color(1, 1, 1), 64)),
-//				Factory.buildAxisAlignedBox(new double[][] { 
-//						{ -0.5, 0, -0.5 }, { 0.5, 1, 0.5 } }, new PhongMaterial(new Color(0.3, 1, 0.3), new Color(1, 1, 1), 64)),
-//				Factory.buildTriangle(new double[][] { 
-//						{ 0.5, 1, 2 }, { 1, 1, 2 }, {1, 2, 2 }, 
-//						{ 0, 0, 1 }, { 0, 0, 1 }, { 0, 0, 1 } }, new PhongMaterial(new Color(0.3, 1, 0.3), new Color(1, 1, 1), 64)),
-//				Factory.buildTriangle(new double[][] { 
-//						{ 0, 0, -1 }, { 1, 0, -1 }, { 1, 1, -1 }, 
-//						{ 0, 0, 1 }, { 0, 0, 1 }, { 0, 0, 1 } }, new PhongMaterial(new Color(0.3, 1, 0.3), new Color(1, 1, 1), 64))
-//				}
-		
-		);
-//		world.addLight(new PointLight(new Color(0.6, 0.6, 0.6), new Point3(4, 4, 4)));
-//		world.addLight(new PointLight(new Color(0.6, 0.6, 0.6), new Point3(-5, 5, 5)));
-//		world.addLight(new PointLight(new Color(0.6, 0.6, 0.6), new Point3(4, 4, 4)));
-//		world.addLight(new DirectionalLight(new Color(0.6, 0.6, 0.6), new Vector3(-10, -10, -40)));
-		world.addLight(new SpotLight(new Color(1, 1, 1), new Point3(4, 4, 4), new Vector3(-1, -1, -1), Math.PI / 14.0));
 		return new Renderer(world, camera, 10);
 	}
 	
