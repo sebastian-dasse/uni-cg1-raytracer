@@ -38,10 +38,10 @@ public class InterpolatedImageTexture implements Texture{
 	
 	@Override
 	public Color getColor(final double u, final double v) {
-		final int mappedU = (int) (u * widthMinus1);
-	    final int mappedV = (int) (v * heightMinus1);
-	    final int resultingX = mappedU;
-	    final int resultingY;
+		final double mappedU =  (u * widthMinus1);
+	    final double mappedV =  (v * heightMinus1);
+	    final double resultingX = mappedU;
+	    final double resultingY;
 	    if (originAtBottom) {
 		    resultingY = heightMinus1 - mappedV;
 	    } else {
@@ -56,10 +56,10 @@ public class InterpolatedImageTexture implements Texture{
 //	    val c = image.getRGB(math.floor( x ).asInstanceOf[Int], math.ceil( y ).asInstanceOf[Int])
 //	    val d = image.getRGB(math.ceil( x ).asInstanceOf[Int], math.ceil( y ).asInstanceOf[Int])
 	    
-	    final double[] a = imageRaster.getPixel((int)Math.floor(resultingX), (int)Math.floor(resultingY), new double[3]);
-	    final double[] b = imageRaster.getPixel((int)Math.ceil(resultingX), (int)Math.floor(resultingY), new double[3]);
-	    final double[] c = imageRaster.getPixel((int)Math.floor(resultingX), (int)Math.ceil(resultingY), new double[3]);
-	    final double[] d = imageRaster.getPixel((int)Math.ceil(resultingX), (int)Math.ceil(resultingY), new double[3]);
+	    final int[] a = imageRaster.getPixel((int)Math.floor(resultingX), (int)Math.floor(resultingY), new int[3]);
+	    final int[] b = imageRaster.getPixel((int)Math.ceil(resultingX), (int)Math.floor(resultingY), new int[3]);
+	    final int[] c = imageRaster.getPixel((int)Math.floor(resultingX), (int)Math.ceil(resultingY), new int[3]);
+	    final int[] d = imageRaster.getPixel((int)Math.ceil(resultingX), (int)Math.ceil(resultingY), new int[3]);
 	    
 //	    val (redA,greenA,blueA) = extract( a ) extract( argb : Int ) = ((argb & 0xff0000) >> 16,(argb & 0xff00) >> 8, argb & 0xff)
 //	    val (redB,greenB,blueB) = extract( b )
@@ -81,7 +81,6 @@ public class InterpolatedImageTexture implements Texture{
 	    
 	    Color fin = new Color(a2.r*(1.0-ya) + b2.r *ya , a2.g* (1.0-ya) + b2.g * ya, a2.b*(1.0-ya) + b2.b * ya);
 
-//	    final long
 	    return new Color(fin.r/255, fin.g/255, fin.b/255);
 	    
 	}
