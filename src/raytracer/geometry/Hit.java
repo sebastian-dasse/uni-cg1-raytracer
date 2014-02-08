@@ -30,7 +30,9 @@ public class Hit /*implements Comparable<Hit>*/ {
 	 * The normal of this hit.
 	 */
 	public final Normal3 normal;
-	
+	/**
+	 * The texture coordinates of this hit.
+	 */
 	public final TexCoord2 texcoord;
 	
 	/**
@@ -40,6 +42,7 @@ public class Hit /*implements Comparable<Hit>*/ {
 	 * @param ray		The <code>Ray</code> that hit the <code>Geometry</code>. Must not be <code>null</code>.
 	 * @param geo		The <code>Geometry</code> that was hit. Must not be <code>null</code>.
 	 * @param normal	The normal of the hit point. Must not be <code>null</code>.
+	 * @param texcoord	The texture coordinates of the hit point. Most not be <code>null</code>.
 	 */
 	public Hit(final double t, final Ray ray, final Geometry geo, final Normal3 normal, final TexCoord2 texcoord) {
 		if (ray == null || geo == null || normal == null || texcoord == null) {

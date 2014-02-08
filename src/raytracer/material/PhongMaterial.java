@@ -18,11 +18,11 @@ import raytracer.texture.Texture;
  */
 public class PhongMaterial extends Material {
 	/**
-	 * The surface color of this material.
+	 * The surface texture of this material.
 	 */
 	private final Texture diffuseTexture;
 	/**
-	 * The color of the specular point of this material.
+	 * The texture of the specular point of this material.
 	 */
 	private final Texture specularTexture;
 	/**
@@ -33,8 +33,8 @@ public class PhongMaterial extends Material {
 	/**
 	 * Constructs a new <code>PhongMaterial</code> object with the specified parameters.
 	 * 
-	 * @param diffuse   The surface color. Must not be <code>null</code>.
-	 * @param specular	The color of the specular point. Must not be <code>null</code>.
+	 * @param diffuse   The surface texture. Must not be <code>null</code>.
+	 * @param specular	The texture of the specular point. Must not be <code>null</code>.
 	 * @param exponent	The scale of the specular point. Must be a positive value below 1024.
 	 */
 	public PhongMaterial(final Texture diffuseTexture, final Texture specularTexture, final int exponent) {

@@ -20,18 +20,18 @@ import raytracer.texture.Texture;
  */
 public class LambertMaterial extends Material {
 	/**
-	 * The color of this material.
+	 * The texture of this material.
 	 */
 	private final Texture texture;
 	
 	/**
-	 * Constructs a new <code>LambertMaterial</code> object with the specified surface color.
+	 * Constructs a new <code>LambertMaterial</code> object with the specified surface texture.
 	 * 
-	 * @param color The surface color. Must not be <code>null</code>.
+	 * @param texture	The surface texture. Must not be <code>null</code>.
 	 */
 	public LambertMaterial (final Texture texture) {
 		if (texture == null) {
-			throw new IllegalArgumentException("The parameter 'color' must not be null.");
+			throw new IllegalArgumentException("The parameter 'texture' must not be null.");
 		}
 		this.texture = texture;
 	}
@@ -43,8 +43,7 @@ public class LambertMaterial extends Material {
 		}
 		
 		// Formula: c = cd[ca  +  cl * max(0, <n, l>)]
-		//Color texcolor = texture.getColor(hit.texcoord.u, hit.texcoord.v);
-		Color texcolor = texture.getColor(hit.texcoord);
+		final Color texcolor = texture.getColor(hit.texcoord);
 		Color c = texcolor.mul(world.ambientLight);
 		final Normal3 n = hit.normal;
 		final Point3 p = hit.ray.at(hit.t);
