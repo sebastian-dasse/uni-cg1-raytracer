@@ -45,7 +45,7 @@ public class Plane extends Geometry {
 		}
 		final double t = origin.sub(ray.o).dot(n) / denominator;
 		final Normal3 normal = n.asVector().normalized().asNormal(); // normalized normal
-		final Point3 coord = ray.at(t); 
-		return (t < Constants.EPSILON) ? null : new Hit(t, ray, this, normal, new TexCoord2(coord.x, -coord.z));
+		final Point3 p = ray.at(t); 
+		return (t < Constants.EPSILON) ? null : new Hit(t, ray, this, normal, new TexCoord2(p.x, -p.z));
 	}
 }
