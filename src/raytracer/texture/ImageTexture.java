@@ -47,18 +47,11 @@ public class ImageTexture implements Texture{
 	    } else {
 	    	resultingY = mappedV;
 	    }
-	    	    
+	    
 	    final double[] RGBValues = imageRaster.getPixel(resultingX, resultingY, new double[3]);
-	    
 //	    final long
-	    
 	    return new Color(RGBValues[0]/255, RGBValues[1]/255, RGBValues[2]/255);
 	    
-//	    final int[] rgb = imageRaster.getPixel(resultingX, resultingY, new int[3]);
-//	    final int r = (rgb[1] & 0xff0000) >> 16;
-//	    final int g = (rgb[2] & 0xff00) >> 8;
-//	    final int b = rgb[3] & 0xff;
-//	    return new Color(r, g, b);
 	}
 
 	@Override
@@ -68,11 +61,13 @@ public class ImageTexture implements Texture{
 
 	//---- Test
 	public static void main(String [] args) {
-		ImageTexture texture = new ImageTexture("textures/earth1.jpg");
-		texture.setOriginAtBottom(false);
+		ImageTexture texture = new ImageTexture("textures/colorTest.jpg");
+		texture.setOriginAtBottom(true);
 		texture.getColor(0.1,0.1);
-		System.out.println(texture.getColor(1.0, 1.0).r);
-		System.out.println(texture.getColor(1.0, 1.0).g);
-		System.out.println(texture.getColor(1.0, 1.0).b);
+		final double x = 0.5;
+		final double y = 0.1;
+		System.out.println(texture.getColor(x, y).r);
+		System.out.println(texture.getColor(x, y).g);
+		System.out.println(texture.getColor(x, y).b);
 	}
 }
