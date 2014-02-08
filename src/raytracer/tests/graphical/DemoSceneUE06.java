@@ -36,7 +36,7 @@ public class DemoSceneUE06 {
 	}
 
 	private static Renderer testScene() {
-		final World world = new World(new Color(0, 0, 0), new Color(0.2, 0.2, 0.2), Constants.INDEX_OF_REFRACTION_AIR_AT_20_DEG);
+		final World world = new World(new Color(0, 0, 0), new Color(0.0, 0.0, 0.0), Constants.INDEX_OF_REFRACTION_AIR_AT_20_DEG);
 		world.addElements(
 				new Node(
 //					new Plane(
