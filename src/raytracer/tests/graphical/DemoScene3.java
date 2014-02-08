@@ -9,6 +9,7 @@ import raytracer.geometry.Geometry;
 import raytracer.geometry.Node;
 import raytracer.geometry.Plane;
 import raytracer.geometry.Sphere;
+import raytracer.geometry.Triangle;
 import raytracer.light.PointLight;
 import raytracer.light.SpotLight;
 import raytracer.material.LambertMaterial;
@@ -20,6 +21,7 @@ import raytracer.math.Point3;
 import raytracer.math.Transform;
 import raytracer.math.Vector3;
 import raytracer.texture.SingleColorTexture;
+import raytracer.texture.TexCoord2;
 import raytracer.ui.ShowImage;
 
 public class DemoScene3 {
@@ -92,7 +94,17 @@ public static void main(String[] args) {
 								new SingleColorTexture(new Color(1,0,0)))), 
 								new Transform()
 								.translate(new Point3(0, 0, 0)
-								)));
+								)),
+								
+				new Node(new Triangle( new Point3(0.7, 0.5, 3), new Point3(1.3, 0.5, 3), new Point3(0.7, 0.5, 4),
+						new Normal3(0, 1, 0), new Normal3(0, 1, 0), new Normal3(0, 1, 0), 
+						new SingleColorMaterial(new SingleColorTexture(new Color(1,0,1))), 
+						new TexCoord2(1,1), 
+						new TexCoord2(1,1), 
+						new TexCoord2(1,1)), 
+				new Transform()
+				.translate(new Point3(1, 2, -1)
+				)));
 						
 						
 				
