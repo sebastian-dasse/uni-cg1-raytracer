@@ -12,7 +12,7 @@ public class TexCoord2 {
 	/**
 	 * The u coordinate of this texture.
 	 */
-	public final double u;
+	public double u;
 	/**
 	 * The v coordinate of this texture.
 	 */
@@ -28,10 +28,7 @@ public class TexCoord2 {
 		if (!(isValid(u) && isValid(v))) {
 			throw new IllegalArgumentException("Only a double value other than +-Infinity or NaN is allowed.");
 		}
-		
-		this.u = u;
-		this.v = v;
+		this.u = u < 0 ? u % 1 + 1 : u % 1;
+		this.v = v < 0 ? v % 1 + 1 : v % 1;
 	}
-	
-	
 }

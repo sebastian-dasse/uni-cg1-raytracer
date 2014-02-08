@@ -9,7 +9,7 @@ import javax.imageio.ImageIO;
 import raytracer.Color;
 
 public class ImageTexture implements Texture{
-	private BufferedImage image;
+	private final BufferedImage image;
 	private boolean originAtBottom;
 	
 	public ImageTexture(final String path){
@@ -20,6 +20,7 @@ public class ImageTexture implements Texture{
 			image = ImageIO.read(new File(path));
 		} catch (IOException e) {
 			System.err.println("Problem reading file.");
+			throw new RuntimeException("Could not construct image texture from the specified path.");
 		}
 		originAtBottom = true;
 	}
@@ -30,19 +31,21 @@ public class ImageTexture implements Texture{
 	
 	@Override
 	public Color getColor(final double u, final double v) {
-		int height = image.getHeight() - 1;
-		int width = image.getWidth() - 1;
-		int mappedU = (int) (u * width);
-	    int mappedV = (int) (v * height);
-	    int resultingX;
-	    int resultingY;
-	    resultingX = mappedU;
+		final int height = image.getHeight() - 1;
+		final int width = image.getWidth() - 1;
+		final int mappedU = (int) (u * width);
+	    final int mappedV = (int) (v * height);
+	    final int resultingX = mappedU;
+	    final int resultingY;
 	    if (originAtBottom) {
 		    resultingY = height - mappedV;
 	    } else {
 	    	resultingY = mappedV;
 	    }
-	    int[] RGBValues = image.getData().getPixel(resultingX, resultingY, new int[3]);
+	    final int[] RGBValues = image.getData().getPixel(resultingX, resultingY, new int[3]);
+	    
+//	    final long
+	    
 	    return new Color(RGBValues[0], RGBValues[1], RGBValues[2]);
 	}
 
@@ -51,6 +54,7 @@ public class ImageTexture implements Texture{
 		return getColor(textcoord.u, textcoord.v);
 	}
 
+	//---- Test
 	public static void main(String [] args) {
 		ImageTexture texture = new ImageTexture("textures/earth1.jpg");
 		texture.setOriginAtBottom(false);

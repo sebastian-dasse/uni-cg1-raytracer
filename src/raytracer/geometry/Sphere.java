@@ -5,7 +5,6 @@ import raytracer.Ray;
 import raytracer.material.Material;
 import raytracer.math.Normal3;
 import raytracer.math.Point3;
-import raytracer.math.Vector3;
 import raytracer.texture.TexCoord2;
 
 /**
