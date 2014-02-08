@@ -20,12 +20,10 @@ public class Plane extends Geometry {
 	 * The origin (0, 0, 0).
 	 */
 	private static final Point3 origin = new Point3(0, 0, 0);
-//	private Point3 origin = new Point3(0, 0, 0); // TODO -- for testing -- when done --> should be static final
 	/**
 	 * The standard normal of all planes (0, 1, 0).
 	 */
 	private static final Normal3 n = new Normal3(0, 1, 0);
-//	private Normal3 n = new Normal3(0, 1, 0); // TODO -- for testing -- when done --> should be static final
 	/**
 	 * Constructs a new <code>Plane</code> with the specified material.
 	 * 
@@ -35,13 +33,6 @@ public class Plane extends Geometry {
 		super(material);
 	}
 	
-	// TODO -- for testing -- when done --> remove
-//	public Plane(final Point3 point, final Normal3 normal , final Material material) {
-//		super(material);
-//		this.origin = point;
-//		this.n= normal;
-//	}
-
 	@Override
 	public Hit hit(final Ray ray) {
 		if (ray == null) {
