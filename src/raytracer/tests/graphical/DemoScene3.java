@@ -78,25 +78,26 @@ public static void main(String[] args) {
 //						new Transform()
 //						.translate(new Point3(-3.5, -1.5, 2.5))),
 //						
-				new Node(new Sphere(new ReflectiveMaterial(
-						new ImageTexture("/raytracer-gottextures"), 
-						new SingleColorTexture(new Color(1,0,0)), 
-						64, 
-						new SingleColorTexture(new Color(1,0,0)))), 
-						new Transform()
-						.translate(new Point3(0.5, 1.5, 1.5))))
+//				new Node(new Sphere(new ReflectiveMaterial(
+//						new ImageTexture("textures/earth1.jpg"), 
+//						new SingleColorTexture(new Color(1,0,0)), 
+//						64, 
+//						new SingleColorTexture(new Color(1,0,0)))), 
+//						new Transform()
+//						.translate(new Point3(0.5, 1.5, 1.5))))
 						
-//				new Node(new Plane(
-//						new LambertMaterial(new SingleColorTexture(new Color(1,0,0)))),
+				new Node(new Plane(
+						new SingleColorMaterial(new ImageTexture("textures/earth1.jpg"))),
+						
 //						(new SingleColorMaterial(new SingleColorTexture(new Color(1,0,0)))),
 //						new ReflectiveMaterial(
 //								new SingleColorTexture(new Color(0,0,1)), 
 //								new SingleColorTexture(new Color(0,1,0)), 
 //								10, 
 //								new SingleColorTexture(new Color(1,0,0)))), 
-//								new Transform()
-//								.translate(new Point3(0, 0, 0)
-//								)),
+								new Transform()
+								//.translate(new Point3(0, 0, 0)
+								))
 								
 //				new Node(new Triangle( new Point3(0.7, 0.5, 3), new Point3(1.3, 0.5, 3), new Point3(0.7, 0.5, 4),
 //						new Normal3(0, 1, 0), new Normal3(0, 1, 0), new Normal3(0, 1, 0), 

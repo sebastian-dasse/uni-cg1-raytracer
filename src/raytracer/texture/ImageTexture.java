@@ -42,8 +42,19 @@ public class ImageTexture implements Texture{
 	    } else {
 	    	resultingY = mappedV;
 	    }
-	    int[] RGBValues = image.getData().getPixel(resultingX, resultingY, new int[3]);
-	    return new Color(RGBValues[0], RGBValues[1], RGBValues[2]);
+//	    val argb = image.getRGB(math.round( x ).asInstanceOf[Int], math.round( y ).asInstanceOf[Int])
+//	    	    val r = (argb & 0xff0000) >> 16
+//	    	    val g = (argb & 0xff00) >> 8
+//	    	    val b = argb & 0xff
+	    	    
+//	    int[] RGBValues = image.getData().getPixel(resultingX, resultingY, new int[3]);
+//	    return new Color(RGBValues[0], RGBValues[1], RGBValues[2]);
+	    
+	    final int rgb = image.getRGB(Math.round(resultingX), Math.round(resultingY));
+	    final int r = (rgb & 0xff0000) >> 16;
+	    final int g = (rgb & 0xff00) >> 8;
+	    final int b = rgb & 0xff;
+	    return new Color(r, g, b);
 	}
 
 	@Override
