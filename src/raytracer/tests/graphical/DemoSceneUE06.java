@@ -88,10 +88,9 @@ public class DemoSceneUE06 {
 		world.addElements(
 				new Node(
 						new Sphere(
-//								new SingleColorMaterial(texture)
 								new DayAndNightMaterial(
-										new SingleColorMaterial(dayTexture),
-										new SingleColorMaterial(nightTexture)
+										new LambertMaterial(dayTexture),
+										new LambertMaterial(nightTexture)
 								)
 						), 
 						new Transform()
@@ -100,14 +99,7 @@ public class DemoSceneUE06 {
 		world.addLights(
 				new PointLight(
 						new Color(1, 1, 1), 
-						new Point3(3, 3, 3), 
-						false
-				),
-				new SpotLight(
-						new Color(1, 1, 1), 
-						new Point3(3, 3, 3), 
-						new Vector3(0,0,-1),
-						1,
+						new Point3(15, 0, -4), 
 						false
 				)
 		);
