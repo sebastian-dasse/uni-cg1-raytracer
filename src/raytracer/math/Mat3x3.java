@@ -79,12 +79,11 @@ public class Mat3x3 {
 	public Mat3x3(final double m11, final double m12, final double m13, 
 				  final double m21, final double m22, final double m23, 
 				  final double m31, final double m32, final double m33) {
-		// Temporarely commented out for AAB - Debug.
-//		if (!(isValid(m11) && isValid(m12) && isValid(m13) && 
-//			  isValid(m21) && isValid(m22) && isValid(m23) && 
-//			  isValid(m31) && isValid(m32) && isValid(m33))) {
-//			throw new IllegalArgumentException("Only double values other than +-Infinity or NaN are allowed.");
-//		}
+		if (!(isValid(m11) && isValid(m12) && isValid(m13) && 
+			  isValid(m21) && isValid(m22) && isValid(m23) && 
+			  isValid(m31) && isValid(m32) && isValid(m33))) {
+			throw new IllegalArgumentException("Only double values other than +-Infinity or NaN are allowed.");
+		}
 		this.m11 = m11;
 		this.m12 = m12;
 		this.m13 = m13;
