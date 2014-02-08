@@ -25,6 +25,10 @@ public class TexCoord2 {
 	 * @param v	The v coordinate of the texture.
 	 */
 	public TexCoord2(final double u, final double v) {
+		if (!(isValid(u) && isValid(v))) {
+			throw new IllegalArgumentException("Only a double value other than +-Infinity or NaN is allowed.");
+		}
+		
 		this.u = u;
 		this.v = v;
 	}

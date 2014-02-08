@@ -1,7 +1,5 @@
 package raytracer.geometry;
 
-import static raytracer.math.MathUtil.isValid;
-import raytracer.Constants;
 import raytracer.Ray;
 import raytracer.math.Normal3;
 import raytracer.texture.TexCoord2;
@@ -32,7 +30,9 @@ public class Hit /*implements Comparable<Hit>*/ {
 	 * The normal of this hit.
 	 */
 	public final Normal3 normal;
-	
+	/**
+	 * The texture coordinates of this hit.
+	 */
 	public final TexCoord2 texcoord;
 	
 	/**
@@ -42,12 +42,9 @@ public class Hit /*implements Comparable<Hit>*/ {
 	 * @param ray		The <code>Ray</code> that hit the <code>Geometry</code>. Must not be <code>null</code>.
 	 * @param geo		The <code>Geometry</code> that was hit. Must not be <code>null</code>.
 	 * @param normal	The normal of the hit point. Must not be <code>null</code>.
+	 * @param texcoord	The texture coordinates of the hit point. Most not be <code>null</code>.
 	 */
 	public Hit(final double t, final Ray ray, final Geometry geo, final Normal3 normal, final TexCoord2 texcoord) {
-		// Temporarely commented out for AAB - Debug.
-//		if (t < 0 || !isValid(t)) {
-//			throw new IllegalArgumentException("The paramameter 't' must be a positive double value other than Infinity or NaN.");
-//		}
 		if (ray == null || geo == null || normal == null || texcoord == null) {
 			throw new IllegalArgumentException("The parameters must not be null.");
 		}

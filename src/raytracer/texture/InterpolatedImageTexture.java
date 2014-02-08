@@ -20,7 +20,7 @@ public class InterpolatedImageTexture implements Texture{
 	}
 
 	@Override
-	public Color getColor(TexCoord2 texcoord) {
+	public Color getColor(final TexCoord2 texcoord) {
 		// TODO Auto-generated method stub
 		return null;
 	}

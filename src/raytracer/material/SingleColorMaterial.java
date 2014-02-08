@@ -4,7 +4,6 @@ import raytracer.Color;
 import raytracer.Tracer;
 import raytracer.World;
 import raytracer.geometry.Hit;
-import raytracer.texture.SingleColorTexture;
 import raytracer.texture.Texture;
 
 /**
@@ -14,25 +13,25 @@ import raytracer.texture.Texture;
  */
 public class SingleColorMaterial extends Material{
 	/**
-	 * The surface color of this material.
+	 * The surface texture of this material.
 	 */
 	private final Texture texture;
 
 	/**
-	 * Constructs a new <code>SingleColorMaterial</code> object with the specified surface color.
+	 * Constructs a new <code>SingleColorMaterial</code> object with the specified surface texture.
 	 * 
-	 * @param color The surface color. Must not be <code>null</code>.
+	 * @param texture	The surface texture. Must not be <code>null</code>.
 	 */
 	public SingleColorMaterial (final Texture texture){
 		if (texture == null) {
-			throw new IllegalArgumentException("The parameter 'color' must not be null.");
+			throw new IllegalArgumentException("The parameter 'texture' must not be null.");
 		}
 		this.texture = texture;
 	}
 
 	@Override
 	public Color colorFor(final Hit hit, final World world, final Tracer tracer) {
-		return texture.getColor(hit.texcoord.u, hit.texcoord.v);
+		return texture.getColor(hit.texcoord);
 	}
 
 
