@@ -41,7 +41,6 @@ public class LambertMaterial extends Material {
 		if (hit == null || world == null) {
 			throw new IllegalArgumentException("The parameters must not be null.");
 		}
-		
 		// Formula: c = cd[ca  +  cl * max(0, <n, l>)]
 		final Color texcolor = texture.getColor(hit.texcoord);
 		Color c = texcolor.mul(world.ambientLight);

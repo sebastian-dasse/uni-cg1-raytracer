@@ -6,10 +6,10 @@ import raytracer.Renderer;
 import raytracer.World;
 import raytracer.camera.Camera;
 import raytracer.camera.PerspectiveCamera;
-import raytracer.geometry.AxisAlignedBox;
 import raytracer.geometry.Node;
-import raytracer.geometry.Plane;
+import raytracer.geometry.Sphere;
 import raytracer.light.PointLight;
+import raytracer.material.LambertMaterial;
 import raytracer.material.SingleColorMaterial;
 import raytracer.math.Point3;
 import raytracer.math.Transform;
@@ -40,13 +40,12 @@ public class DemoSceneUE06 {
 		world.addElements(
 				new Node(
 //					new Plane(
-					new AxisAlignedBox(
+					new Sphere(
 //							new SingleColorMaterial(new SingleColorTexture(new Color(1, 0, 0)))
 //							new LambertMaterial(new SingleColorTexture(new Color(1, 0, 0)))
 							
-//							new SingleColorMaterial(new ImageTexture("textures/earth1.jpg"))
+							new LambertMaterial(new ImageTexture("textures/earthSmall.jpg"))
 //							new SingleColorMaterial(new ImageTexture("textures/testBild.png"))
-							new SingleColorMaterial(new ImageTexture("textures/testBild2.jpg"))
 //							new LambertMaterial(new SingleColorTexture(new Color(1, 0, 0)))
 					), 
 					new Transform()
