@@ -103,8 +103,6 @@ public class ObjLoader {
 	}
 
 	private void parseBasicData() throws DataFormatException {
-		// vertices.add(new Point3(0, 0, 0)); // do this in the constructor
-
 		for (int lno = 0; lno < lines.size(); lno++) {
 			/*
 			 * Line processing
@@ -114,76 +112,25 @@ public class ObjLoader {
 
 			switch (slots[0]) {
 			case VERTICE:
-//				vertices.add(parseVertex(slots));
 				vertices.add(new Point3(Double.parseDouble(slots[1]), Double.parseDouble(slots[2]), Double.parseDouble(slots[3])));
 				break;
 			case TEXTURE:
-//				textures.add(parseTextureCoord(slots));
 				textures.add(new TexCoord2(Double.parseDouble(slots[1]), Double.parseDouble(slots[2])));
 				break;
 			case NORMAL:
-//				normals.add(parseNormal(slots));
 				normals.add(new Normal3(Double.parseDouble(slots[1]), Double.parseDouble(slots[2]), Double.parseDouble(slots[3])));
 				break;
 			case FACE:
 				if (slots.length < 4) {
 					throw new DataFormatException();
 				}
-//				System.out.println(faces.length + ", " + lno);
 				facesSourceLine.add(line);
-//				new int[][9]
-//				faces[lno] = new int[]{						
-//						Integer.parseInt(slots[1]), 0, 0, 
-//						Integer.parseInt(slots[2]), 0, 0, 
-//						Integer.parseInt(slots[3]), 0, 0
-//				};
 				break;
 			case COMMENT:
 				continue;
-//				break;
 			default:
 				continue;
-//				break;
 			}
-			
-			
-//			if (type.equals(FACE) && (slots.length - 1) < 3) {
-//				throw new DataFormatException();
-//			}
-
-			// FIXME replace
-//			/*
-//			 * Process faces to int array
-//			 */
-//			final boolean objectEnd = ((previousType.equals(FACE) && !type
-//					.equals(FACE)) || lno == lines.size() - 1);
-
-//			if (type.equals(FACE)) {
-//				facesSourceLine.add(line);
-//			} else {
-//				double slotsAsDouble[] = new double[slots.length - 1];
-//				for (int i = 1; i < slots.length; i++) {
-//					slotsAsDouble[i - 1] = slots[i].isEmpty() ? Double.NaN
-//							: Double.parseDouble(slots[i]);
-//				}
-//				if (type.equals(VERTICE)) {
-//					vertices.add(new Point3(Double.parseDouble(slots[1]),
-//							Double.parseDouble(slots[2]), Double
-//									.parseDouble(slots[3])));
-//				}
-//
-//				if (type.equals(TEXTURE)) {
-//					textures.add(new TextCoord(Double.parseDouble(slots[1]),
-//							Double.parseDouble(slots[2])));
-//				}
-//
-//				if (type.equals(NORMAL)) {
-//					normals.add(new Normal3(Double.parseDouble(slots[1]),
-//							Double.parseDouble(slots[2]), Double
-//									.parseDouble(slots[3])));
-//				}
-//			}
-//			if (objectEnd) {
 				/*
 				 * Done reading non-face data from file
 				 */
@@ -235,29 +182,7 @@ public class ObjLoader {
 					count++;
 				}
 
-				/*
-				 * Remap
-				 */
-
-				int minValue = Integer.MAX_VALUE;
-				// FIND MINIMUM
-				for (int i = 0; i < result.length; i++) {
-					for (int value : result[i]) {
-						if (Math.signum(value - minValue) == -1) {
-							minValue = value;
-						}
-					}
-				}
-				// THROWS ERROR ---->
-				// int compensation = (1 - minValue);
-				// //COMPENSATE
-				// for (int i = 0; i < result.length; i++) {
-				// for (int i2 = 0; i2 < result[i].length; i2++) {
-				// faces [i][i2] = result [i][i2] + compensation;
-				// }
-				// }
 				faces = result;
-//			}
 
 		}
 	}
