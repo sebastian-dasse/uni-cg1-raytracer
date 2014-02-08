@@ -22,6 +22,7 @@ import raytracer.math.Point3;
 import raytracer.math.Transform;
 import raytracer.math.Vector3;
 import raytracer.texture.ImageTexture;
+import raytracer.texture.InterpolatedImageTexture;
 import raytracer.texture.SingleColorTexture;
 import raytracer.texture.TexCoord2;
 import raytracer.ui.ShowImage;
@@ -79,7 +80,7 @@ public static void main(String[] args) {
 //						.translate(new Point3(-3.5, -1.5, 2.5))),
 //						
 				new Node(new Sphere(new ReflectiveMaterial(
-						new ImageTexture("textures/earth1.jpg"), 
+						new ImageTexture("textures/earth1-scaled2.jpg"), 
 						new SingleColorTexture(new Color(1,1,1)), 
 						64, 
 						new SingleColorTexture(new Color(1,1,1)))), 
