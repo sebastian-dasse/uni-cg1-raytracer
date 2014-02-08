@@ -82,9 +82,10 @@ public class Sphere extends Geometry {
 		// Formula: normal = p - center
 		final Normal3 normal = p.sub(center).normalized().asNormal(); // normalized normal
 
-		Vector3 d = p.asVector();
-		final double theta = Math.acos(d.y);
-		final double phi = Math.atan2(d.x, d.z);
+		// Calculation of texture coordinates
+		final double theta = Math.acos(p.y);
+		final double phi = Math.atan2(p.x, p.z);
+		
 		return new Hit(t, ray, this, normal, new TexCoord2( phi / (Math.PI * 2), -(theta / Math.PI)));
 	}
 }
