@@ -19,32 +19,32 @@ import raytracer.texture.Texture;
  */
 public class ReflectiveMaterial extends Material{
 	/**
-	 * The surface color of this material.
+	 * The surface texture of this material.
 	 */
 	private final Texture diffuseTexture;
 	/**
-	 * The color of the specular point of this material.
+	 * The texture of the specular point of this material.
 	 */
 	private final Texture specularTexture;
-	/**;
 	/**
 	 * The scale of the specular point of this material.
 	 */
 	private final int exponent;
 	/**
-	 * The reflection color of this material.
+	 * The reflection texture of this material.
 	 */
 	private final Texture reflectionTexture;
 	
 	/**
 	 * Constructs a new <code>ReflectiveMaterial</code> object with the specified parameters.
 	 * 
-	 * @param diffuseTexture    The surface color. Must not be <code>null</code>.
-	 * @param specularTexture   The color of the specular point. Must not be <code>null</code>.
-	 * @param exponent   The scale of the specular point. Must be a positive value below 1024.
-	 * @param reflectionTexture The reflection color of the surface. Must not be <code>null</code>.
+	 * @param diffuseTexture    The surface texture. Must not be <code>null</code>.
+	 * @param specularTexture   The texture of the specular point. Must not be <code>null</code>.
+	 * @param exponent   		The scale of the specular point. Must be a positive value below 1024.
+	 * @param reflectionTexture The reflection texture of the surface. Must not be <code>null</code>.
 	 */
-	public ReflectiveMaterial(final Texture diffuseTexture, final Texture specularTexture, final int exponent, final Texture reflectionTexture){
+	public ReflectiveMaterial(final Texture diffuseTexture, final Texture specularTexture, final int exponent, 
+			final Texture reflectionTexture){
 		this.diffuseTexture = diffuseTexture;
 		this.specularTexture = specularTexture;
 		this.exponent = exponent;
