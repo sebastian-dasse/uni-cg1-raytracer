@@ -1,18 +1,18 @@
 package raytracer.material;
 
 import raytracer.Color;
+import raytracer.Constants;
 import raytracer.Tracer;
 import raytracer.World;
 import raytracer.geometry.Hit;
 import raytracer.texture.SingleColorTexture;
-import raytracer.texture.Texture;
 
 public class DayAndNightMaterial extends Material {
 	
 	/**
 	 * The texture of this material.
 	 */
-	private final double THRESHOLD = 0.5;
+	private final double THRESHOLD = 0.9;
 	private Material dayMaterial;
 	private Material nightMaterial;
 	/**
@@ -30,9 +30,7 @@ public class DayAndNightMaterial extends Material {
 	
 	@Override
 	public Color colorFor(Hit hit, World world, Tracer tracer) {
-		final double startLuma = 1;
-		
-		Material testMaterial = new SingleColorMaterial(
+		Material testMaterial = new LambertMaterial(
 				new SingleColorTexture(
 						new Color(1, 1, 1)
 				)
@@ -40,9 +38,14 @@ public class DayAndNightMaterial extends Material {
 		
 		Color testColor = testMaterial.colorFor(hit, world, tracer);
 		
-		final double endLuma = testColor.r * 0.299 + testColor.g * 0.587 + testColor.b * 0.114;
 		
-		if (endLuma - startLuma > THRESHOLD) {
+		final double endLuma = testColor.r * 0.299 + testColor.g * 0.587 + testColor.b * 0.114;
+		/* No Y-Compensation
+		 * final double endLuma = (testColor.r  + testColor.g  + testColor.b) / 3;
+		 */
+		
+		
+		if (Math.abs(endLuma) > THRESHOLD) {
 			return dayMaterial.colorFor(hit, world, tracer);
 		}
 		return nightMaterial.colorFor(hit, world, tracer);		
