@@ -91,7 +91,7 @@ public class RenderTask implements Runnable {
 		for (int y = yStart; y < yStart + interval; y++) {
 			for (int x = 0; x < size.width; x++) {		
 				final Ray ray = cam.rayFor(size.width, size.height, x, size.height - y);
-				raster.setDataElements(x,y,Util.dataElementsFromColor(new Tracer(recursion).trace(ray, world), colorModel));
+				raster.setDataElements(x, y, Util.dataElementsFromColor(new Tracer(recursion).trace(ray, world), colorModel));
 			}
 			showProgress(y);
 		}
