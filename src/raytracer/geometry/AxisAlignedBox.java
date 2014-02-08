@@ -35,7 +35,6 @@ public class AxisAlignedBox extends Geometry {
 	private static final Transform bottomT = new Transform().translate(lbf).rotateX(Math.PI);
 	private static final Transform backT = new Transform().translate(lbf).rotateZ(Math.PI).rotateX(-Math.PI / 2.0);
 	
-	// TODO -- for testing -- when done --> comment back in 
 	private final Plane plane = new Plane(material);
 	private final Node top = new Node(plane, topT);
 	private final Node right = new Node(plane, rightT);
@@ -43,14 +42,6 @@ public class AxisAlignedBox extends Geometry {
 	private final Node left = new Node(plane, lefT);
 	private final Node bottom = new Node(plane, bottomT);
 	private final Node back = new Node(plane, backT);
-	
-	// TODO -- for testing -- when done --> remove
-//	private final Plane top = new Plane(run, new Normal3(0, 1, 0), material);
-//	private final Plane right = new Plane(run, new Normal3(1, 0, 0), material);
-//	private final Plane front = new Plane(run, new Normal3(0, 0, 1), material);
-//	private final Plane left = new Plane(lbf, new Normal3(-1, 0, 0), material);
-//	private final Plane bottom = new Plane(lbf, new Normal3(0, -1, 0), material);
-//	private final Plane back = new Plane(lbf, new Normal3(0, 0, -1), material);
 	
 	/**
 	 * Constructs a new <code>AxisAlignedBox</code> with the specified material.
