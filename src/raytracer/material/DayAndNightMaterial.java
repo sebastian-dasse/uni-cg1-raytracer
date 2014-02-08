@@ -34,8 +34,7 @@ public class DayAndNightMaterial extends Material {
 	
 	@Override
 	public Color colorFor(Hit hit, World world, Tracer tracer) {
-		final Color startColor = new Color(1, 1, 1);
-		final double startLuma = startColor.r * 0.299 + startColor.g * 0.587 + startColor.b * 0.114;
+		final double startLuma = 1;
 		
 		Material testMaterial = new SingleColorMaterial(
 				new SingleColorTexture(
@@ -43,9 +42,9 @@ public class DayAndNightMaterial extends Material {
 				)
 		);
 		
-		Color endColor = testMaterial.colorFor(hit, world, tracer);
+		Color testColor = testMaterial.colorFor(hit, world, tracer);
 		
-		final double endLuma = endColor.r * 0.299 + endColor.g * 0.587 + endColor.b * 0.114;
+		final double endLuma = testColor.r * 0.299 + testColor.g * 0.587 + testColor.b * 0.114;
 		
 		if (endLuma - startLuma > THRESHOLD) {
 			return dayMaterial.colorFor(hit, world, tracer);
