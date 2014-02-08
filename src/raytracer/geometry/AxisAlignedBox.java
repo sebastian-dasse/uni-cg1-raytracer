@@ -2,7 +2,6 @@ package raytracer.geometry;
 
 import java.util.LinkedList;
 
-import raytracer.Constants;
 import raytracer.Ray;
 import raytracer.material.Material;
 import raytracer.math.Point3;

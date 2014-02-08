@@ -2,7 +2,6 @@ package raytracer.geometry;
 
 import raytracer.Ray;
 import raytracer.material.Material;
-import raytracer.math.Point3;
 import raytracer.parser.ObjLoader;
 
 /**

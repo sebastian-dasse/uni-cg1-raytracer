@@ -4,7 +4,6 @@ import raytracer.Color;
 import raytracer.Tracer;
 import raytracer.World;
 import raytracer.geometry.Hit;
-import raytracer.texture.SingleColorTexture;
 import raytracer.texture.Texture;
 
 /**
