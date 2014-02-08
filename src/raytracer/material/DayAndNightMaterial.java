@@ -13,23 +13,19 @@ public class DayAndNightMaterial extends Material {
 	 * The texture of this material.
 	 */
 	private final double THRESHOLD = 0.5;
-	private final Material dayMaterial;
-	private final Material nightMaterial;
-	private Texture dayTexture;
-	private Texture nightTexture;
+	private Material dayMaterial;
+	private Material nightMaterial;
 	/**
 	 * Constructs a new <code>LambertMaterial</code> object with the specified surface texture.
 	 * 
 	 * @param texture	The surface texture. Must not be <code>null</code>.
 	 */
-	public DayAndNightMaterial (final Texture dayTexture, final Texture nightTexture) {
-		if (dayTexture == null || nightTexture == null) {
-			throw new IllegalArgumentException("The parameters 'texture' must not be null.");
+	public DayAndNightMaterial (final Material dayMaterial, final Material nightMaterial) {
+		if (dayMaterial == null || nightMaterial == null) {
+			throw new IllegalArgumentException("The parameters 'material' must not be null.");
 		}
-		this.dayTexture = dayTexture;
-		this.nightTexture = nightTexture;
-		this.dayMaterial = new SingleColorMaterial(dayTexture);
-		this.nightMaterial = new SingleColorMaterial(nightTexture);
+		this.dayMaterial = dayMaterial;
+		this.nightMaterial = nightMaterial;
 	}
 	
 	@Override
@@ -52,13 +48,12 @@ public class DayAndNightMaterial extends Material {
 		return nightMaterial.colorFor(hit, world, tracer);		
 	}
 	
-	public void setDayTexture(Texture dayTexture) {
-		this.dayTexture = dayTexture;
+	public void setDayMaterial(Material material) {
+		this.dayMaterial =  material;
 	}
 	
-	public void setNightTexture(Texture nightTexture) {
-		this.nightTexture = nightTexture;
+	public void setNightMaterial(Material nightMaterial) {
+		this.nightMaterial = nightMaterial;
 	}
-	
 
 }
