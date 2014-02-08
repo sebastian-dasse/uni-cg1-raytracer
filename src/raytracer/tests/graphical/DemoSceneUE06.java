@@ -46,7 +46,7 @@ public class DemoSceneUE06 {
 							
 //							new SingleColorMaterial(new ImageTexture("textures/earth1.jpg"))
 //							new SingleColorMaterial(new ImageTexture("textures/testBild.png"))
-							new SingleColorMaterial(new ImageTexture("textures/bunny2.jpg"))
+							new SingleColorMaterial(new ImageTexture("textures/earth1.jpg"))
 //							new LambertMaterial(new SingleColorTexture(new Color(1, 0, 0)))
 					), 
 					new Transform()
