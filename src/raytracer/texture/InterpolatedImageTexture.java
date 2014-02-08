@@ -39,48 +39,20 @@ public class InterpolatedImageTexture implements Texture{
 	    final int y1 = (int) Math.floor(y);
 	    final int y2 = (int) Math.ceil(y);
 	    
-	    final double nx = x - x1;
-	    final double ny = y - y1;
+	    double nx = x - x1;
+	    double ny = y - y1;
 	    
-//	    val a = image.getRGB(math.floor( x ).asInstanceOf[Int], math.floor( y ).asInstanceOf[Int])
-//	    val b = image.getRGB(math.ceil( x ).asInstanceOf[Int], math.floor( y ).asInstanceOf[Int])
-//	    val c = image.getRGB(math.floor( x ).asInstanceOf[Int], math.ceil( y ).asInstanceOf[Int])
-//	    val d = image.getRGB(math.ceil( x ).asInstanceOf[Int], math.ceil( y ).asInstanceOf[Int])
-	    
-	    final Color x1y1 = new Color(imageRaster.getPixel(x1, y1, new double[3]));
-	    final Color x2y1 = new Color(imageRaster.getPixel(x2, y1, new double[3]));
-	    final Color x1y2 = new Color(imageRaster.getPixel(x1, y2, new double[3]));
-	    final Color x2y2 = new Color(imageRaster.getPixel(x2, y2, new double[3]));
-	    
-//	    val (redA,greenA,blueA) = extract( a ) extract( argb : Int ) = ((argb & 0xff0000) >> 16,(argb & 0xff00) >> 8, argb & 0xff)
-//	    val (redB,greenB,blueB) = extract( b )
-//	    val (redC,greenC,blueC) = extract( c )
-//	    val (redD,greenD,blueD) = extract( d )
-	    
-//	    Color a1 = new Color(x1y1[0], x1y1[1], x1y1[2]);
-//	    Color b1 = new Color(x2y1[0], x2y1[1], x2y1[2]);
-//	    Color c1 = new Color(x1y2[0], x1y2[1], x1y2[2]);
-//	    Color d1 = new Color(x2y2[0], x2y2[1], x2y2[2]);
-	    
-//	    val (redE,greenE,blueE) = (redA*(1.0-xa) + (redB * xa), greenA*(1.0-xa) + (greenB * xa), blueA*(1.0-xa) + (blueB * xa) )
-//	    val (redF,greenF,blueF) = (redC*(1.0-xa) + (redD * xa), greenC*(1.0-xa) + (greenD * xa), blueC*(1.0-xa) + (blueD * xa) )
-	    
-//	    Color a2 = new Color (a1.r * (1.0-nx) + b1.r * nx, a1.g * (1.0-nx) + b1.g * nx, a1.b * (1.0-nx) + b1.b * nx);
-//	    Color b2 = new Color (c1.r * (1.0-nx) + d1.r * nx, c1.g * (1.0-nx) + d1.g * nx, c1.b * (1.0-nx) + d1.b * nx);
+	    Color x1y1 = new Color(imageRaster.getPixel(x1, y1, new double[3]));
+	    Color x2y1 = new Color(imageRaster.getPixel(x2, y1, new double[3]));
+	    Color x1y2 = new Color(imageRaster.getPixel(x1, y2, new double[3]));
+	    Color x2y2 = new Color(imageRaster.getPixel(x2, y2, new double[3]));
 	    
 	    final Color a = x1y1.mul(1.0 - nx).add(x2y1.mul(nx));
 	    final Color b = x1y2.mul(1.0 - nx).add(x2y2.mul(nx));
 	    
-//	    val (red,green,blue) = (redE*(1.0-ya) + redF *ya , greenE* (1.0-ya) + greenF * ya, blueE*(1.0-ya) + blueF * ya )
-	    
-//	    Color fin = new Color(a2.r*(1.0-ny) + b2.r *ny , a2.g* (1.0-ny) + b2.g * ny, a2.b*(1.0-ny) + b2.b * ny);
-	    
-	    final Color c = a.mul(1.0 - ny).mul(b.mul(ny));
+	    return a.mul(1.0 - ny).add(b.mul(ny)).mul(1.0 / 255);
 
-//	    return new Color(fin.r/255, fin.g/255, fin.b/255);
-	    
-	    return c;
-	    
+//	    return new Color(c.r/255, c.g/255, c.b/255);
 	}
 
 	@Override

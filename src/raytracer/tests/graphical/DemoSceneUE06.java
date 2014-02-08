@@ -59,7 +59,7 @@ public class DemoSceneUE06 {
 	private static Renderer scene2() {
 		final String path = "textures/earth1-scaled.jpg";
 		Texture imgTexture = new ImageTexture(path);
-		Texture intImgTexture = new ImageTexture(path);
+		Texture intImgTexture = new InterpolatedImageTexture(path);
 		final World world = new World(new Color(0, 0, 0), new Color(0.0, 0.0, 0.0), Constants.INDEX_OF_REFRACTION_VACUUM);
 		world.addElements(
 				new Node(
