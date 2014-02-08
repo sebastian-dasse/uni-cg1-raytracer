@@ -46,13 +46,13 @@ public class DemoSceneUE06 {
 							
 //							new SingleColorMaterial(new ImageTexture("textures/earth1.jpg"))
 //							new SingleColorMaterial(new ImageTexture("textures/testBild.png"))
-							new SingleColorMaterial(new ImageTexture("textures/earth1.jpg"))
+							new SingleColorMaterial(new ImageTexture("textures/testBild2.jpg"))
 //							new LambertMaterial(new SingleColorTexture(new Color(1, 0, 0)))
 					), 
 					new Transform()
 				)
 		);
-		world.addLight(new PointLight(new Color(1, 1, 1), new Point3(3, 3, 3), false));
+		world.addLights(new PointLight(new Color(1, 1, 1), new Point3(3, 3, 3), false));
 		
 		final Camera camera = new PerspectiveCamera(new Point3(2, 2, 2), new Vector3(-1, -1, -1), new Vector3(0, 1, 0), Math.PI / 4.0);
 		return new Renderer(world, camera, 10);

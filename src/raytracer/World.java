@@ -99,6 +99,7 @@ public class World {
 	 * 
 	 * @param l	The <code>Light</code> to be added to this world.
 	 */
+	@Deprecated
 	public void addLight(final Light l) {
 		lights.add(l);
 	}
@@ -108,7 +109,7 @@ public class World {
 	 * 
 	 * @param ll	The <code>Light</code> array to be added to this world.
 	 */
-	public void addLights(final Light[] ll) {
+	public void addLights(final Light... ll) {
 		for (Light l : ll) {
 			lights.add(l);
 		}
