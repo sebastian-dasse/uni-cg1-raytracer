@@ -49,8 +49,14 @@ public static void main(String[] args) {
 //				.scale(1.0, 0.26, 3.7)
 		//ready transformed Sphere
 //		new Node(
-				new Sphere(new SingleColorMaterial(new SingleColorTexture(new Color(0,1,1)))), 
+//				new Sphere(new SingleColorMaterial(new SingleColorTexture(new Color(0,1,1)))), 
+//				new Sphere(new LambertMaterial(new SingleColorTexture(new Color(0,1,1)))), 
+				new Sphere(new PhongMaterial(
+						new SingleColorTexture(new Color(0,0,1)), 
+						new SingleColorTexture(new Color(1,0,0)), 
+						64)),
 				new Transform()
+				
 //				.rotateY(Math.PI/0.2)
 //				.rotateZ(Math.PI/0.9)
 //				.rotateX(Math.PI/1.15)

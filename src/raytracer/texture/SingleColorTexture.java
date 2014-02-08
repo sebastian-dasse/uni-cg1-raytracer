@@ -6,6 +6,7 @@ public class SingleColorTexture implements Texture{
 	
 	private final Color color;
 	
+	
 	public SingleColorTexture(final Color color){
 		if (color == null) {
 			throw new IllegalArgumentException("The parameters must not be null.");
@@ -15,6 +16,10 @@ public class SingleColorTexture implements Texture{
 	
 	@Override
 	public Color getColor(final double u, final double v) {
+		return color;
+	}
+	
+	public Color getColor(TexCoord2 texcoord) {
 		return color;
 	}
 

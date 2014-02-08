@@ -9,6 +9,7 @@ import raytracer.light.Light;
 import raytracer.math.Normal3;
 import raytracer.math.Point3;
 import raytracer.math.Vector3;
+import raytracer.texture.Texture;
 
 /**
  * This immutable class implements the color of a material with a perfect reflecting surface.
@@ -20,11 +21,12 @@ public class ReflectiveMaterial extends Material{
 	/**
 	 * The surface color of this material.
 	 */
-	private final Color diffuse;
+	private final Texture diffuseTexture;
 	/**
 	 * The color of the specular point of this material.
 	 */
-	private final Color specular;
+	private final Texture specularTexture;
+	/**;
 	/**
 	 * The scale of the specular point of this material.
 	 */
@@ -32,21 +34,21 @@ public class ReflectiveMaterial extends Material{
 	/**
 	 * The reflection color of this material.
 	 */
-	private final Color reflection;
+	private final Texture reflectionTexture;
 	
 	/**
 	 * Constructs a new <code>ReflectiveMaterial</code> object with the specified parameters.
 	 * 
-	 * @param diffuse    The surface color. Must not be <code>null</code>.
-	 * @param specular   The color of the specular point. Must not be <code>null</code>.
+	 * @param diffuseTexture    The surface color. Must not be <code>null</code>.
+	 * @param specularTexture   The color of the specular point. Must not be <code>null</code>.
 	 * @param exponent   The scale of the specular point. Must be a positive value below 1024.
-	 * @param reflection The reflection color of the surface. Must not be <code>null</code>.
+	 * @param reflectionTexture The reflection color of the surface. Must not be <code>null</code>.
 	 */
-	public ReflectiveMaterial(final Color diffuse, final Color specular, final int exponent, final Color reflection){
-		this.diffuse = diffuse;
-		this.specular = specular;
+	public ReflectiveMaterial(final Texture diffuseTexture, final Texture specularTexture, final int exponent, final Texture reflectionTexture){
+		this.diffuseTexture = diffuseTexture;
+		this.specularTexture = specularTexture;
 		this.exponent = exponent;
-		this.reflection = reflection;
+		this.reflectionTexture = reflectionTexture;
 	}
 	
 	@Override
@@ -57,7 +59,7 @@ public class ReflectiveMaterial extends Material{
 		final Ray ray = hit.ray;
 		final Point3 p = ray.at(hit.t);
 		final Vector3 e = ray.d.mul(-1).normalized();
-		Color c = diffuse.mul(world.ambientLight);
+		Color c = diffuseTexture.getColor(hit.texcoord).mul(world.ambientLight);
 		final Light[] lights = world.getLights();
 		for (Light light : lights) {
 			if (light.illuminates(p, world)) {
@@ -65,13 +67,13 @@ public class ReflectiveMaterial extends Material{
 				final Vector3 rl = l.reflectedOn(n);
 				final double f1 = Math.max(0, n.dot(l));
 				final double f2 = Math.max(0, e.dot(rl));
-				final Color s1 = diffuse.mul(light.color).mul(f1);
-				final Color s2 = specular.mul(light.color).mul(Math.pow(f2, exponent));
+				final Color s1 = diffuseTexture.getColor(hit.texcoord).mul(light.color).mul(f1);
+				final Color s2 = specularTexture.getColor(hit.texcoord).mul(light.color).mul(Math.pow(f2, exponent));
 				c = c.add(s1).add(s2); 
 			}
 		}
 		final Vector3 rd = ray.d.mul(-1).reflectedOn(n);
-		final Color s3 = reflection.mul(tracer.trace(new Ray(p, rd), world));
+		final Color s3 = reflectionTexture.getColor(hit.texcoord).mul(tracer.trace(new Ray(p, rd), world));
 		return c.add(s3);
 	}
 
@@ -79,12 +81,12 @@ public class ReflectiveMaterial extends Material{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((diffuse == null) ? 0 : diffuse.hashCode());
+		result = prime * result + ((diffuseTexture == null) ? 0 : diffuseTexture.hashCode());
 		result = prime * result + exponent;
 		result = prime * result
-				+ ((reflection == null) ? 0 : reflection.hashCode());
+				+ ((reflectionTexture == null) ? 0 : reflectionTexture.hashCode());
 		result = prime * result
-				+ ((specular == null) ? 0 : specular.hashCode());
+				+ ((specularTexture == null) ? 0 : specularTexture.hashCode());
 		return result;
 	}
 
@@ -97,31 +99,31 @@ public class ReflectiveMaterial extends Material{
 		if (getClass() != obj.getClass())
 			return false;
 		final ReflectiveMaterial other = (ReflectiveMaterial) obj;
-		if (diffuse == null) {
-			if (other.diffuse != null)
+		if (diffuseTexture == null) {
+			if (other.diffuseTexture != null)
 				return false;
-		} else if (!diffuse.equals(other.diffuse))
+		} else if (!diffuseTexture.equals(other.diffuseTexture))
 			return false;
 		if (exponent != other.exponent)
 			return false;
-		if (reflection == null) {
-			if (other.reflection != null)
+		if (reflectionTexture == null) {
+			if (other.reflectionTexture != null)
 				return false;
-		} else if (!reflection.equals(other.reflection))
+		} else if (!reflectionTexture.equals(other.reflectionTexture))
 			return false;
-		if (specular == null) {
-			if (other.specular != null)
+		if (specularTexture == null) {
+			if (other.specularTexture != null)
 				return false;
-		} else if (!specular.equals(other.specular))
+		} else if (!specularTexture.equals(other.specularTexture))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return getClass().getSimpleName() + "[diffuse = " + diffuse + ",\n" 
-						+ "\tspecular = " + specular + ",\n" 
+		return getClass().getSimpleName() + "[diffuseTexture = " + diffuseTexture + ",\n" 
+						+ "\tspecularTexture = " + specularTexture + ",\n" 
 						+ "\texponent = " + exponent + ",\n" 
-						+ "\treflection = " + reflection + "]";
+						+ "\treflectionTexture = " + reflectionTexture + "]";
 	}
 }
