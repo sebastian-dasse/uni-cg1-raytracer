@@ -83,7 +83,6 @@ public class DemoSceneUE06 {
 	private static Renderer scene3() {
 		final Texture dayTexture = new ImageTexture("textures/earthDay.jpg");
 		final Texture nightTexture = new ImageTexture("textures/earthNight.jpg");
-		final Texture texture = new ImageTexture("textures/earthDay.jpg");
 		final World world = new World(new Color(0, 0, 0), new Color(0.0, 0.0, 0.0), Constants.INDEX_OF_REFRACTION_VACUUM);
 		world.addElements(
 				new Node(
