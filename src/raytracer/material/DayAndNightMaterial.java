@@ -1,22 +1,23 @@
 package raytracer.material;
 
 import raytracer.Color;
-import raytracer.Constants;
 import raytracer.Tracer;
 import raytracer.World;
 import raytracer.geometry.Hit;
 import raytracer.texture.SingleColorTexture;
 
+/**
+ * This immutable class implements ...
+ *
+ */
 public class DayAndNightMaterial extends Material {
+
+	private final double THRESHOLD = 0.5;
+	private final Material dayMaterial;
+	private final Material nightMaterial;
 	
 	/**
-	 * The texture of this material.
-	 */
-	private final double THRESHOLD = 0.9;
-	private Material dayMaterial;
-	private Material nightMaterial;
-	/**
-	 * Constructs a new <code>LambertMaterial</code> object with the specified surface texture.
+	 * Constructs a new <code>DayAndNightMaterial</code> object ...
 	 * 
 	 * @param texture	The surface texture. Must not be <code>null</code>.
 	 */
@@ -29,34 +30,18 @@ public class DayAndNightMaterial extends Material {
 	}
 	
 	@Override
-	public Color colorFor(Hit hit, World world, Tracer tracer) {
-		Material testMaterial = new LambertMaterial(
-				new SingleColorTexture(
-						new Color(1, 1, 1)
-				)
-		);
+	public Color colorFor(final Hit hit, final World world, final Tracer tracer) {
+		final Material testMaterial = new LambertMaterial(new SingleColorTexture(new Color(1, 1, 1)));
+		final Color resulting = testMaterial.colorFor(hit, world, tracer);
 		
-		Color testColor = testMaterial.colorFor(hit, world, tracer);
-		
-		
-		final double endLuma = testColor.r * 0.299 + testColor.g * 0.587 + testColor.b * 0.114;
-		/* No Y-Compensation
-		 * final double endLuma = (testColor.r  + testColor.g  + testColor.b) / 3;
+		final double luma = resulting.r * 0.299 + resulting.g * 0.587 + resulting.b * 0.114;
+		/* No Y-Compensation --> seems to yield the same result
+		 * final double luma = (resulting.r + resulting.g + resulting.b) / 3;
 		 */
 		
-		
-		if (Math.abs(endLuma) > THRESHOLD) {
+		if (luma > THRESHOLD) {
 			return dayMaterial.colorFor(hit, world, tracer);
 		}
 		return nightMaterial.colorFor(hit, world, tracer);		
 	}
-	
-	public void setDayMaterial(Material material) {
-		this.dayMaterial =  material;
-	}
-	
-	public void setNightMaterial(Material nightMaterial) {
-		this.nightMaterial = nightMaterial;
-	}
-
 }

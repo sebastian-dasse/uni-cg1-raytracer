@@ -1,32 +1,11 @@
 package raytracer.texture;
 
-import java.awt.image.BufferedImage;
-import java.awt.image.Raster;
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
-
 import raytracer.Color;
 
-public class InterpolatedImageTexture implements Texture{
-	private final Raster imageRaster;
-	private final int widthMinus1;
-	private final int heightMinus1;
+public class InterpolatedImageTexture extends AbstractImageTexture {
 	
 	public InterpolatedImageTexture(final String path){
-		if (path == null) {
-			throw new IllegalArgumentException("The parameters must not be null.");
-		}
-		try {
-			BufferedImage image = ImageIO.read(new File(path));
-			imageRaster = image.getData();
-			heightMinus1 = imageRaster.getHeight() - 1;
-			widthMinus1 = image.getWidth() - 1;
-		} catch (IOException e) {
-			System.err.println("Problem reading file.");
-			throw new RuntimeException("Could not construct image texture from the specified path.");
-		}
+		super(path);
 	}
 	
 	@Override
@@ -39,6 +18,14 @@ public class InterpolatedImageTexture implements Texture{
 	    final int y1 = (int) Math.floor(y);
 	    final int y2 = (int) Math.ceil(y);
 	    
+	    /*
+	     * Formulas:
+	     * 		nx = x - x1
+	     * 		ny = y - y1
+	     * 		a = I(x1, y1)(1 - nx) + I(x2, y1)nx
+	     * 		b = I(x2, y1)(1 - nx) + I(x2, y2)nx
+	     * 		c = a(1 - nx) + b ny
+	     */
 	    double nx = x - x1;
 	    double ny = y - y1;
 	    
@@ -51,8 +38,6 @@ public class InterpolatedImageTexture implements Texture{
 	    final Color b = x1y2.mul(1.0 - nx).add(x2y2.mul(nx));
 	    
 	    return a.mul(1.0 - ny).add(b.mul(ny)).mul(1.0 / 255);
-
-//	    return new Color(c.r/255, c.g/255, c.b/255);
 	}
 
 	@Override
