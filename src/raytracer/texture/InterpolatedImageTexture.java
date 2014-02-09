@@ -3,13 +3,14 @@ package raytracer.texture;
 import raytracer.Color;
 
 public class InterpolatedImageTexture extends AbstractImageTexture {
-	
+
 	public InterpolatedImageTexture(final String path){
 		super(path);
 	}
 	
 	@Override
 	public Color getColor(final double u, final double v) {
+
 		final double x = u * widthMinus1;
 	    final double y = heightMinus1 - v * heightMinus1;
 	    
