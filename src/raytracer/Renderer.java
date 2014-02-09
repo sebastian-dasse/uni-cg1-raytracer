@@ -94,7 +94,9 @@ public class Renderer {
 	 */
 	public BufferedImage render() {
 		System.out.println("Rendering...");
+		
 		final BufferedImage image = new BufferedImage(size.width, size.height, BufferedImage.TYPE_INT_RGB);
+		
 		final int nThreads = Runtime.getRuntime().availableProcessors();
 		long startTime = System.currentTimeMillis();
 		final ExecutorService executor = Executors.newFixedThreadPool(nThreads);
@@ -102,8 +104,20 @@ public class Renderer {
 		
 		for (int y = 0; y < size.height; y+= interval) {
 			
-			final Runnable worker = new Thread(new RenderTask(new RenderTaskParameter(y, interval, size, world,
-					cam, image, recursion)));
+			final Runnable worker = new Thread(
+					new RenderTask(
+							new RenderTaskParameter(
+									y,
+									interval,
+									size,
+									world,
+									cam, 
+									image, 
+									recursion
+							)
+					)
+			);
+			
 			executor.execute(worker);
 		
 		}
