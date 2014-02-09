@@ -18,9 +18,9 @@ public class Client {
 			PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
 			BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			String serverResponse;
-			while (!(serverResponse = in.readLine()).equals(States.DONE_READING_RENDER_RESULT.toString())) {
-				currentState.execute(serverResponse);
+			while (!(serverResponse = in.readLine()).equals(Phrases.DONE_READING_RENDER_RESULT.toString())) {
 				out.println(currentState.talk());
+				currentState.execute(serverResponse);
 			}
 		}
 		catch (UnknownHostException e) {

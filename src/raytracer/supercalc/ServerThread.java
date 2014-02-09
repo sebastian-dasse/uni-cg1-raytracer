@@ -21,13 +21,13 @@ public class ServerThread implements Callable<Object> {
 			BufferedReader in = new BufferedReader(
 					new InputStreamReader(
 							socket.getInputStream()));
-			String inputLine = States.NOT_STARTED_JET.toString();
-			while (!(inputLine = in.readLine()).equals(States.DONE_RENDERING.toString())) {
+			String inputLine = Phrases.NOT_STARTED_JET.toString();
+			while (!(inputLine = in.readLine()).equals(Phrases.DONE_RENDERING.toString())) {
 				result = inputLine;
 				
 				System.out.println("Client says: >" + inputLine);
 			}
-			out.println(States.DONE_READING_RENDER_RESULT.toString());
+			out.println(Phrases.DONE_READING_RENDER_RESULT.toString());
 		} catch (IOException e) {
 			System.err.println("Error with Server communication");
 		}
