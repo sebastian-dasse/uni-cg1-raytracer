@@ -1,0 +1,105 @@
+\documentclass[11pt]{amsart}
+\usepackage{ngerman}
+\usepackage{geometry}                % See geometry.pdf to learn the layout options. There are lots.
+\geometry{a4paper}             
+
+%\usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{epstopdf}
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+\title{CGI: Bericht zu Aufgabe 6, Raytracer}
+\author{von Sebastian Dass\'{e}, Max Novichkov, Simon Lischka }
+\date{10.02.2014}
+
+\begin{document}
+
+\maketitle
+
+\section{Aufgabenstellung}
+Implementierung der Texturierung.
+
+\subsection{}
+Dazu sollte zun\"achst ein UML-Diagramm des Raytracers mit allen geplanten \"Anderungen angefertigt werden.
+
+\subsection{}
+Dann sollte im ersten Schritt eine Klasse \texttt{TexCoord2} f\"ur die Texturkoordinaten  und die Berechnung der 
+Texturkoordinaten f\"ur die Geometrieklassen implementiert werden.
+
+\subsection{}
+Nun sollten drei verschiedene Texturklassen implementiert werden, die alle auf dem zu definierenden Interface 
+\texttt{Texture} basieren sollten: \texttt{SingleColorTexture} f\"ur einfarbige Oberfl\"achen, \texttt{ImageTexture} 
+f\"ur eine Textur auf der Grundlage eines Bildes und \texttt{InterpolatedImageTexture} f\"ur eine Textur mit einem 
+bilinear interpolierten, im Original gering aufgel\"osten Bild.
+
+\subsection{}
+Zus\"atzlich sollte ein Material implementiert werden, dass in Anh\"angigkeit von der St\"arke der Beleuchtung eines 
+Punktes eine von zwei alternativen Texturen anzeigt.
+
+\subsection{}
+Nach all diesen Modifikationen waren vier vorgegebene Szenen zu rendern. Au\ss{}erdem sollte unter Verwendung der 
+meisten implementierten Techniken eine freie Szene erstellt werden.
+
+
+
+\section{L\"osungsstrategien}
+\subsection{}
+Zun\"achst wurden alle rein "`formalen"' \"Anderungen der Methodenheader usw. umgesetzt und die neuen Klassen nach 
+bew\"ahrtem Schema als leere Vorlagen generiert.
+
+\subsection{}
+Die aus der Vorlesung bekannten Formeln wurden nach M\"oglichkeit an passender Stelle direkt in Code umgesetzt und das 
+Ergebnis an kleinen Testszenen ausprobiert.
+
+\subsection{}
+Das UML-Klassendiagramm erwies sich als hilfreiches Werkzeug zur Planung und um den \"Uberblick \"uber die 
+Zusammenh\"ange zwischen den Klassen im Raytracer zu behalten.
+
+
+
+\section{Besondere Probleme}
+\subsection{}
+Bei der \texttt{ImageTexture} dauerte das Rendering bei der ersten Implementierung aussergew\"ohnlich lange. Das 
+lie\ss{} sich dadurch l\"osen, dass in der \texttt{getColor}-Methode die Breite und H\"ohe des Bildes nicht mehr \"uber 
+Methodenaufrufe an das \texttt{BufferedImage} ermittelt wurde sondern, sich diese Werte in Instanzvariablen gemerkt 
+werden. Au\ss{}erdem wurden alle Variablen \texttt{final} gesetzt.
+
+\subsection{}
+Eine weitere kleine Schwierigkeit bei der \texttt{ImageTexture} war es, die Konvertierung von Farben vom 
+\texttt{BufferedImage} in unser eigenes \texttt{Color}-Format korrekt umzusetzen.
+
+
+
+\section{Implementierung}
+\subsection{Texturkoordinaten und deren Berechnung}
+In der Klasse \texttt{TexCoord2} werden im Konstruktor die als Parameter \"ubergebenen Werte u und v in positive Werte 
+umgewandelt und Modulo 1 gerechnet. Auf diese Weise werden alle Texturen "`gekachelt"'. \\
+Die Berechnung der Texturkoordinaten in den einzelnen Geometrien wurden nach den Formeln, die in der Aufgabe vorgegeben 
+wurden, implementiert.
+
+
+\subsection{Texturen}
+F\"ur die beiden Bild-Texturen wurde eine abstrakte Superklasse \\ \texttt{AbstractImageTexture} definiert, in der das 
+eigentliche Laden des Bildes implementiert ist und Instanzvariablen f\"ur das Bild, dessen Raster und dessen Breite und 
+H\"ohe existieren. \\
+In der \texttt{ImageTexture} wurde die Umrechnung der Texturkoordinaten auf die Bildkoordinaten durch einfache 
+Multiplikation mit der Breite und Umwandlung in ganzzahlige Werte gel\"ost. \\
+In der \texttt{InterpolatedImageTexture} wurde die Koordinatenumrechnung nach den Formeln, die in der Aufgabe 
+vorgegeben wurden, implementiert.
+
+
+\subsection{Material f\"ur Tag und Nacht}
+Das \texttt{DayAndNightMaterial} wurde so implementiert, dass im Konstruktor zwei Materialien \"ubergeben werden. In 
+der \texttt{colorFor}-Methode wird zum Testen der Beleuchtungsintensit\"at f\"ur einen Punkt ein 
+\texttt{LambertMaterial} mit der Farbe wei\ss{} gepr\"uft und der entprechende Farbwert in einen Helligkeitswert 
+umgerechnet. Je nachdem ob dieser nun einen festgelegten Schwellenwert \"uber- oder unterschreitet wird das Material 
+f\"ur den Tag oder f\"ur die Nacht angezeigt.
+
+
+
+\section{Zeitbedarf}
+\subsection{}
+Der Zeitbedarf wurde bei allen Teammitgliedern mit jeweils 15 Stunden angegeben.
+
+
+\end{document} 
