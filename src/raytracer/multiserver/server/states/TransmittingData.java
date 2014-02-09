@@ -15,6 +15,7 @@ public class TransmittingData implements IState {
 	
 	@Override
 	public void talk(PrintWriter out) {
+		// serialize Data store
 //		 out.println(serializedDataStore)
 	}
 

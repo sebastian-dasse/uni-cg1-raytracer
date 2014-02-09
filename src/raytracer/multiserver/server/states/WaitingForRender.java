@@ -21,7 +21,7 @@ public class WaitingForRender implements IState {
 	
 	@Override
 	public void talk(PrintWriter out) {
-		
+
 	}
 	
 	public WaitingForRender(DataStore dataStore) {
