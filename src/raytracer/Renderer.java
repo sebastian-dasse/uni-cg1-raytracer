@@ -108,7 +108,7 @@ public class Renderer {
 					new RenderTask(
 							new RenderTaskParameter(
 									y,
-									interval,
+									y + interval,
 									size,
 									world,
 									cam, 

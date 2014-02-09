@@ -49,10 +49,8 @@ public class RenderTask implements Runnable {
 	 * Start position of the fragment that should be rendered
 	 */
 	private final int yStart;
-	/**
-	 * Number of pixels until the end of the fragment 
-	 */
-	private final int interval;
+	
+	private final int yEnd;
 	/**
 	 * The size of one step of the progress monitor.
 	 */
@@ -69,7 +67,7 @@ public class RenderTask implements Runnable {
 		this.size = parameterObject.size;
 		this.recursion = parameterObject.recursion;
 		this.yStart = parameterObject.yStart;
-		this.interval = parameterObject.interval;
+		this.yEnd = parameterObject.yEnd;
 		progressStep = parameterObject.size.height * PROGRESS_INCREMENT_PERCENT / 100;
 	}
 	@Override
@@ -81,7 +79,7 @@ public class RenderTask implements Runnable {
 	public void run() {
 		final WritableRaster raster = image.getRaster();
 		final ColorModel colorModel = image.getColorModel();
-		for (int y = yStart; y < yStart + interval; y++) {
+		for (int y = yStart; y < yEnd; y++) {
 			for (int x = 0; x < size.width; x++) {		
 				final Ray ray = cam.rayFor(size.width, size.height, x, size.height - y);
 				raster.setDataElements(x, y, Util.dataElementsFromColor(new Tracer(recursion).trace(ray, world), colorModel));

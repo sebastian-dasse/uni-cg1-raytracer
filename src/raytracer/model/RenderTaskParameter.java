@@ -8,17 +8,17 @@ import raytracer.camera.Camera;
 
 public class RenderTaskParameter {
 	public int yStart;
-	public int interval;
+	public int yEnd;
 	public Dimension size;
 	public World world;
 	public Camera cam;
 	public BufferedImage image;
 	public int recursion;
 
-	public RenderTaskParameter(int yStart, int interval, Dimension size,
+	public RenderTaskParameter(int yStart, int yEnd, Dimension size,
 			World world, Camera cam, BufferedImage image, int recursion) {
 		this.yStart = yStart;
-		this.interval = interval;
+		this.yEnd = yEnd;
 		this.size = size;
 		this.world = world;
 		this.cam = cam;
