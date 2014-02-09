@@ -21,7 +21,7 @@ import raytracer.texture.SingleColorTexture;
 import raytracer.ui.ShowImage;
 
 /**
-* Generates and displays <code>Renderer</code> objects for demo scenes as demanded in task 6.
+* Generates and displays <code>Renderer</code> objects for demo scenes as demanded in task 5.
 * 
 * @author Maxim Novichkov
 * @author Sebastian Dass&eacute;
