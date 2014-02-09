@@ -11,20 +11,21 @@ import raytracer.RenderTask;
 import raytracer.model.DataStore;
 import raytracer.model.RenderBlock;
 import raytracer.multiserver.Client;
-import raytracer.multiserver.enums.Phrases;
+import raytracer.multiserver.IState;
+import raytracer.multiserver.enums.States;
 
-public class StartedRendering implements IState {
+public class ExecutingRender implements IState {
 	private DataStore dataStore;
 	
-	public StartedRendering() {
+	public ExecutingRender() {
 	}
 	
 	@Override
 	public void talk(PrintWriter out) {
-		out.println(Phrases.STARTED_RENDERING.toString());
+		out.println(States.EXECUTING_RENDER.toString());
 	}
 	
-	public StartedRendering(DataStore dataStore) {
+	public ExecutingRender(DataStore dataStore) {
 		this.dataStore = dataStore;
 	}
 	
@@ -53,7 +54,7 @@ public class StartedRendering implements IState {
 	    if (result.getSize() > 0) {
 	    	 Client.setState(new TransmittingData(result));
 	    } else {
-	    	Client.setState(new Error(Phrases.NO_RENDER_RESULT.toString()));
+	    	Client.setState(new Error(States.NO_RENDER_RESULT.toString()));
 	    }
 	}
 	

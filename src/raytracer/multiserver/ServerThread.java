@@ -7,7 +7,7 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.concurrent.Callable;
 
-import raytracer.multiserver.enums.Phrases;
+import raytracer.multiserver.enums.States;
 
 public class ServerThread implements Callable<Object> {
 	private Socket socket;
@@ -23,13 +23,13 @@ public class ServerThread implements Callable<Object> {
 			BufferedReader in = new BufferedReader(
 					new InputStreamReader(
 							socket.getInputStream()));
-			String inputLine = Phrases.NULL.toString();
-			while (!(inputLine = in.readLine()).equals(Phrases.CLOSING_CONNECTION.toString())) {
+			String inputLine = States.NULL.toString();
+			while (!(inputLine = in.readLine()).equals(States.CLOSING_CONNECTION.toString())) {
 				result = inputLine;
 				
 				System.out.println("Client says: >" + inputLine);
 			}
-			out.println(Phrases.DONE_READING_RENDER_RESULT.toString());
+			out.println(States.DONE_READING_RENDER_RESULT.toString());
 		} catch (IOException e) {
 			System.err.println("Error with Server communication");
 		}

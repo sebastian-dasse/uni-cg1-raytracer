@@ -1,4 +1,4 @@
-package raytracer.multiserver.server.states;
+package raytracer.multiserver;
 
 import java.io.PrintWriter;
 

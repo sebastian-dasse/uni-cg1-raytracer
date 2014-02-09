@@ -2,9 +2,9 @@ package raytracer.multiserver;
 
 import java.io.IOException;
 import java.net.ServerSocket;
-import java.net.Socket;
 
 import raytracer.multiserver.enums.Config;
+import raytracer.multiserver.enums.ErrorMessage;
 
 public class Server {
 	public static boolean start () {
@@ -14,8 +14,7 @@ public class Server {
 				new ServerThread(serverSocket.accept()).call();
 			}
 		} catch (IOException e) {
-			System.err.println("Error starting Server. Using Portnumber " + Config.PORTNUMBER.getIntValue()
-					+ ".\nMake sure no other service is using this port.");
+			System.err.println(ErrorMessage.STARTING_SERVER.getValue());
 			return false;
 		}
 //		return true;

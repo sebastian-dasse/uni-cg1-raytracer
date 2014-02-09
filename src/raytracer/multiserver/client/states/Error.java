@@ -2,6 +2,8 @@ package raytracer.multiserver.client.states;
 
 import java.io.PrintWriter;
 
+import raytracer.multiserver.IState;
+
 public class Error implements IState {
 	private String error;
 	

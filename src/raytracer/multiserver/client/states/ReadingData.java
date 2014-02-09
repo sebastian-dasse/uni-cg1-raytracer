@@ -4,13 +4,14 @@ import java.io.PrintWriter;
 
 import raytracer.model.DataStore;
 import raytracer.multiserver.Client;
-import raytracer.multiserver.enums.Phrases;
+import raytracer.multiserver.IState;
+import raytracer.multiserver.enums.States;
 
 public class ReadingData implements IState {
 	
 	@Override
 	public void talk(PrintWriter out) {
-		out.println(Phrases.READING_DATA.toString());
+		out.println(States.READING_DATA.toString());
 	}
 
 	
@@ -27,11 +28,11 @@ public class ReadingData implements IState {
 			DataStore dataStore = new DataStore();
 	    
 		// if (success) {
-			Client.setState(new StartedRendering(dataStore));
+			Client.setState(new ExecutingRender(dataStore));
 		// 	
 			
 	    // if (error) {
-			Client.setState(new Error(Phrases.DATA_ERROR.toString()));
+			Client.setState(new Error(States.DATA_ERROR.toString()));
 			
 	}
 	

@@ -2,14 +2,15 @@ package raytracer.multiserver.client.states;
 
 import java.io.PrintWriter;
 
-import raytracer.multiserver.enums.Phrases;
+import raytracer.multiserver.IState;
+import raytracer.multiserver.enums.States;
 
 
 public class ClosingConnection implements IState {
 
 	@Override
 	public void talk(PrintWriter out) {
-		out.println(Phrases.CLOSING_CONNECTION.toString());
+		out.println(States.CLOSING_CONNECTION.toString());
 	}
 
 	@Override
