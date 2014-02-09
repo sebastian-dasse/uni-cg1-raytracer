@@ -6,6 +6,7 @@ import java.awt.image.ColorModel;
 import java.awt.image.WritableRaster;
 
 import raytracer.camera.Camera;
+import raytracer.model.RenderTaskParameter;
 /**
  * This class represents a Runnable object which can be used by the
  * ExecutorService to generate a thread. It is a fragment of the image to be rendered and
@@ -59,25 +60,17 @@ public class RenderTask implements Runnable {
 	
 	/**
 	 * Creates a new RenderTask with the specified parameters.
-	 * 
-	 * @param yStart  		Start position on the y-Axis
-	 * @param interval		Number of lines to be rendered
-	 * @param size	   		Size of the canvas
-	 * @param world	  		World used by the renderer
-	 * @param cam	  		Cam used by the renderer
-	 * @param image	   		Image used by the renderer (used for output)
-	 * @param recursion 	Recursion depth of the tracer object.
+	 * @param parameterObject TODO
 	 */
-	public RenderTask(final int yStart, final int interval, final Dimension size, 
-			final World world, final Camera cam, final BufferedImage image, final int recursion) {
-		this.image = image;
-		this.cam = cam;
-		this.world = world;
-		this.size = size;
-		this.recursion = recursion;
-		this.yStart = yStart;
-		this.interval = interval;
-		progressStep = size.height * PROGRESS_INCREMENT_PERCENT / 100;
+	public RenderTask(RenderTaskParameter parameterObject) {
+		this.image = parameterObject.image;
+		this.cam = parameterObject.cam;
+		this.world = parameterObject.world;
+		this.size = parameterObject.size;
+		this.recursion = parameterObject.recursion;
+		this.yStart = parameterObject.yStart;
+		this.interval = parameterObject.interval;
+		progressStep = parameterObject.size.height * PROGRESS_INCREMENT_PERCENT / 100;
 	}
 	@Override
 	/**

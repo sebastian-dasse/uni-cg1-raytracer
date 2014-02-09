@@ -7,6 +7,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 import raytracer.camera.Camera;
+import raytracer.model.RenderTaskParameter;
 
 /**
  * This class represents a renderer. It has a world, containing all the objects in a specific scene, a camera, a screen 
@@ -98,10 +99,15 @@ public class Renderer {
 		long startTime = System.currentTimeMillis();
 		final ExecutorService executor = Executors.newFixedThreadPool(nThreads);
 		final int interval = nThreads;
+		
 		for (int y = 0; y < size.height; y+= interval) {
-			final Runnable worker = new Thread(new RenderTask(y, interval, size, world, cam, image, recursion));
+			
+			final Runnable worker = new Thread(new RenderTask(new RenderTaskParameter(y, interval, size, world,
+					cam, image, recursion)));
 			executor.execute(worker);
+		
 		}
+		
 		executor.shutdown();
 		try {
 			executor.awaitTermination(MAX_RENDER_TIME_MINUTES, TimeUnit.MINUTES);
