@@ -17,6 +17,7 @@ import raytracer.math.Point3;
 import raytracer.math.Transform;
 import raytracer.math.Vector3;
 import raytracer.texture.ImageTexture;
+import raytracer.texture.InterpolatedImageTexture;
 import raytracer.texture.Texture;
 import raytracer.ui.ShowImage;
 
@@ -31,7 +32,7 @@ public class DemoSceneUE06 {
 		
 		
 		final Renderer[] tracers = new Renderer[]{
-//				scene1(), 
+//				scene1(),
 //				scene2(),
 				scene3()
 		};
@@ -42,19 +43,14 @@ public class DemoSceneUE06 {
 
 	private static Renderer scene1() {
 		final String path = "textures/earth1.jpg";
-		final Texture texture = new ImageTexture(path);
+		Texture imgTexture = new ImageTexture(path);
 		final World world = new World(new Color(0, 0, 0), new Color(0.0, 0.0, 0.0), Constants.INDEX_OF_REFRACTION_VACUUM);
 		world.addElements(
 				new Node(
-//					new Plane(
-					new Sphere(
-//							new SingleColorMaterial(new SingleColorTexture(new Color(1, 0, 0)))
-//							new LambertMaterial(new SingleColorTexture(new Color(1, 0, 0)))
-							
-							new LambertMaterial(new ImageTexture("textures/earthSmall.jpg"))
-//							new SingleColorMaterial(new ImageTexture("textures/testBild.png"))
-//							new LambertMaterial(new SingleColorTexture(new Color(1, 0, 0)))
-					), 
+						new Sphere(
+//								new SingleColorMaterial(imgTexture)
+								new LambertMaterial(imgTexture)
+						), 
 						new Transform()
 				)
 		);
@@ -64,13 +60,16 @@ public class DemoSceneUE06 {
 	}
 	
 	private static Renderer scene2() {
-		final String path = "textures/earth1.jpg";
-		final Texture texture = new ImageTexture(path);
+		final String path = "textures/earth1-scaled.jpg";
+		Texture imgTexture = new ImageTexture(path);
+		Texture intImgTexture = new InterpolatedImageTexture(path);
 		final World world = new World(new Color(0, 0, 0), new Color(0.0, 0.0, 0.0), Constants.INDEX_OF_REFRACTION_VACUUM);
 		world.addElements(
 				new Node(
 						new Sphere(
-								new SingleColorMaterial(texture)
+//								new SingleColorMaterial(imgTexture)
+//								new LambertMaterial(imgTexture)
+								new SingleColorMaterial(intImgTexture)
 						), 
 						new Transform()
 				)
@@ -83,7 +82,6 @@ public class DemoSceneUE06 {
 	private static Renderer scene3() {
 		final Texture dayTexture = new ImageTexture("textures/earthDay.jpg");
 		final Texture nightTexture = new ImageTexture("textures/earthNight.jpg");
-		final Texture texture = new ImageTexture("textures/earthDay.jpg");
 		final World world = new World(new Color(0, 0, 0), new Color(0.0, 0.0, 0.0), Constants.INDEX_OF_REFRACTION_VACUUM);
 		world.addElements(
 				new Node(
