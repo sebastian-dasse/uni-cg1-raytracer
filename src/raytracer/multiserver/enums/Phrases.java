@@ -1,4 +1,4 @@
-package raytracer.supercalc;
+package raytracer.multiserver.enums;
 
 public enum Phrases {
 	NULL,

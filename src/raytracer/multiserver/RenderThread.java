@@ -1,4 +1,4 @@
-package raytracer.supercalc;
+package raytracer.multiserver;
 
 import java.util.concurrent.Callable;
 

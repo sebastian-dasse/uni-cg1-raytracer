@@ -1,8 +1,8 @@
-package raytracer.supercalc.protocol.client.states;
+package raytracer.multiserver.server.states;
 
 import java.io.PrintWriter;
 
-import raytracer.supercalc.Phrases;
+import raytracer.multiserver.enums.Phrases;
 
 
 public class ClosingConnection implements IState {

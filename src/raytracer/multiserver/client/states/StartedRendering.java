@@ -1,4 +1,4 @@
-package raytracer.supercalc.protocol.client.states;
+package raytracer.multiserver.client.states;
 
 import java.io.PrintWriter;
 import java.util.HashSet;
@@ -10,8 +10,8 @@ import java.util.concurrent.Future;
 import raytracer.RenderTask;
 import raytracer.model.DataStore;
 import raytracer.model.RenderBlock;
-import raytracer.supercalc.Client;
-import raytracer.supercalc.Phrases;
+import raytracer.multiserver.Client;
+import raytracer.multiserver.enums.Phrases;
 
 public class StartedRendering implements IState {
 	private DataStore dataStore;

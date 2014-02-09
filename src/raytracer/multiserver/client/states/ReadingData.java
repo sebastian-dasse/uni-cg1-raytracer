@@ -1,10 +1,10 @@
-package raytracer.supercalc.protocol.client.states;
+package raytracer.multiserver.client.states;
 
 import java.io.PrintWriter;
 
 import raytracer.model.DataStore;
-import raytracer.supercalc.Client;
-import raytracer.supercalc.Phrases;
+import raytracer.multiserver.Client;
+import raytracer.multiserver.enums.Phrases;
 
 public class ReadingData implements IState {
 	

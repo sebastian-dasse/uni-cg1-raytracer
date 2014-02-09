@@ -1,4 +1,4 @@
-package raytracer.supercalc.protocol.client.states;
+package raytracer.multiserver.server.states;
 
 import java.io.PrintWriter;
 

@@ -1,9 +1,9 @@
-package raytracer.supercalc.protocol.client.states;
+package raytracer.multiserver.server.states;
 
 import java.io.PrintWriter;
 
 import raytracer.model.DataStore;
-import raytracer.supercalc.Client;
+import raytracer.multiserver.Client;
 
 public class TransmittingData implements IState {
 	private DataStore dataStore;

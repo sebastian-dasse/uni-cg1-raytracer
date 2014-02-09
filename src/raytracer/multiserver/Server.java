@@ -1,8 +1,10 @@
-package raytracer.supercalc;
+package raytracer.multiserver;
 
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+
+import raytracer.multiserver.enums.Config;
 
 public class Server {
 	public static boolean start () {

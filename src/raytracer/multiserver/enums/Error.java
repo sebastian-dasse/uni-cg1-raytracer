@@ -1,12 +1,12 @@
-package raytracer.supercalc;
+package raytracer.multiserver.enums;
 
-public enum Config {
-	PORTNUMBER("4442"),
-	HOSTNAME("localhost");
+public enum Error {
+    HOST_UNKNOWN("ERROR: Host unknown."),
+    IO("IO ERROR.");
 	
 	String value;
 	
-	Config(String value) {
+	Error(String value) {
 		this.value = value;
 	}
 	
@@ -17,5 +17,4 @@ public enum Config {
 	public int getIntValue() {
 		return Integer.parseInt(value);
 	}
-	
 }
