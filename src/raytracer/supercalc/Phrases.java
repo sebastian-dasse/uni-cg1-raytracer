@@ -1,6 +1,7 @@
 package raytracer.supercalc;
 
 public enum Phrases {
+	NULL,
 	/*
 	 * Server States
 	 */
@@ -10,7 +11,7 @@ public enum Phrases {
 	 * Client States
 	 */
 	READING_DATA,
-	WRITING_DATA,
+	TRANSMITTING_DATA,
 	STARTED_RENDERING,
 	CLOSING_CONNECTION,
 	
@@ -18,6 +19,7 @@ public enum Phrases {
 	 * Errors
 	 */
 	
-	DATA_ERROR;
+	DATA_ERROR,
+	NO_RENDER_RESULT;
 	
 }

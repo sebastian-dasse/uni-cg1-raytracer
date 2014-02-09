@@ -21,8 +21,8 @@ public class ServerThread implements Callable<Object> {
 			BufferedReader in = new BufferedReader(
 					new InputStreamReader(
 							socket.getInputStream()));
-			String inputLine = Phrases.NOT_STARTED_JET.toString();
-			while (!(inputLine = in.readLine()).equals(Phrases.DONE_RENDERING.toString())) {
+			String inputLine = Phrases.NULL.toString();
+			while (!(inputLine = in.readLine()).equals(Phrases.CLOSING_CONNECTION.toString())) {
 				result = inputLine;
 				
 				System.out.println("Client says: >" + inputLine);
