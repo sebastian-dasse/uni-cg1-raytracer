@@ -1,15 +1,16 @@
 package raytracer.supercalc.protocol.client.states;
 
+import java.io.PrintWriter;
+
 import raytracer.model.DataStore;
 import raytracer.supercalc.Client;
 import raytracer.supercalc.Phrases;
-import raytracer.supercalc.protocol.IState;
 
 public class ReadingData implements IState {
 	
 	@Override
-	public String talk() {
-		return Phrases.READING_DATA.toString();
+	public void talk(PrintWriter out) {
+		out.println(Phrases.READING_DATA.toString());
 	}
 
 	

@@ -1,25 +1,26 @@
 package raytracer.supercalc.protocol.client.states;
 
+import java.io.PrintWriter;
+
 import raytracer.model.DataStore;
-import raytracer.supercalc.protocol.IState;
+import raytracer.supercalc.Client;
 
 public class TransmittingData implements IState {
 	private DataStore dataStore;
-	
 	public TransmittingData(DataStore dataStore) {
 		this.dataStore = dataStore;
 	}
 	
 	@Override
-	public String talk() {
-		// TODO Auto-generated method stub
-		return null;
+	public void talk(PrintWriter out) {
+		
+		// out.println(serializedDataStore)
+		
 	}
 
 	@Override
 	public void execute(String serverResponse) {
-		// TODO Auto-generated method stub
-		
+		Client.setState(new ClosingConnection());
 	}
 
 }

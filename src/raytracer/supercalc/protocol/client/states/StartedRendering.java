@@ -1,16 +1,17 @@
 package raytracer.supercalc.protocol.client.states;
 
+import java.io.PrintWriter;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
+import raytracer.RenderTask;
 import raytracer.model.DataStore;
 import raytracer.model.RenderBlock;
 import raytracer.supercalc.Client;
 import raytracer.supercalc.Phrases;
-import raytracer.supercalc.protocol.IState;
 
 public class StartedRendering implements IState {
 	private DataStore dataStore;
@@ -19,8 +20,8 @@ public class StartedRendering implements IState {
 	}
 	
 	@Override
-	public String talk() {
-		return Phrases.STARTED_RENDERING.toString();
+	public void talk(PrintWriter out) {
+		out.println(Phrases.STARTED_RENDERING.toString());
 	}
 	
 	public StartedRendering(DataStore dataStore) {

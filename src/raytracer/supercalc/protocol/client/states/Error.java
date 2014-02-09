@@ -1,7 +1,6 @@
 package raytracer.supercalc.protocol.client.states;
 
-import raytracer.supercalc.Phrases;
-import raytracer.supercalc.protocol.IState;
+import java.io.PrintWriter;
 
 public class Error implements IState {
 	private String error;
@@ -11,8 +10,8 @@ public class Error implements IState {
 	}
 	
 	@Override
-	public String talk() {
-		return error;
+	public void talk(PrintWriter out) {
+		out.println(error);
 	}
 
 	@Override

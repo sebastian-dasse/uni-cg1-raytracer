@@ -7,7 +7,7 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-import raytracer.supercalc.protocol.IState;
+import raytracer.supercalc.protocol.client.states.IState;
 
 public class Client {
 	private static IState currentState;
@@ -19,7 +19,7 @@ public class Client {
 			BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			String serverResponse;
 			while (!(serverResponse = in.readLine()).equals(Phrases.DONE_READING_RENDER_RESULT.toString())) {
-				out.println(currentState.talk());
+				currentState.talk(out);
 				currentState.execute(serverResponse);
 			}
 		}
