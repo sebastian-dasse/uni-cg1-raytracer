@@ -93,16 +93,14 @@ public class Renderer {
 	 * @return	A <code>BufferedImage</code> of a scene.
 	 */
 	public BufferedImage render() {
-		System.out.println("Rendering...");
-		
 		final BufferedImage image = new BufferedImage(size.width, size.height, BufferedImage.TYPE_INT_RGB);
 		
 		final int nThreads = Runtime.getRuntime().availableProcessors();
-		long startTime = System.currentTimeMillis();
+		
 		final ExecutorService executor = Executors.newFixedThreadPool(nThreads);
 		final int interval = nThreads;
 		
-		ProgressMonitor progressMonitor = new ProgressMonitor(size.height, 5);
+		final ProgressMonitor progressMonitor = new ProgressMonitor(size.height, 5);
 		
 		for (int y = 0; y < size.height; y+= interval) {
 			
@@ -131,9 +129,6 @@ public class Renderer {
 		} catch (InterruptedException e) {
 			System.err.println("Thread was interrupted.");
 		}
-		final long timeMillis = System.currentTimeMillis() - startTime;
-		final int timeSek = (int)(timeMillis / 1000);
-		System.out.printf("Done rendering after %02d min %02d sec %02d msec%n", timeSek / 60, timeSek % 60, timeMillis % 1000);
 		return image;
 	}
 	
