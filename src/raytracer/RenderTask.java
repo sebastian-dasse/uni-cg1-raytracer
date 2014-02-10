@@ -2,7 +2,6 @@ package raytracer;
 
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
-import java.awt.image.ColorModel;
 import java.awt.image.WritableRaster;
 
 import raytracer.camera.Camera;
@@ -29,9 +28,8 @@ public class RenderTask implements Runnable {
 	 * Reference to the camera used by the renderer
 	 */
 	private final Camera cam;
-	/**
-	 * Reference to the BufferedImage used by the renderer for render output
-	 */
+
+	
 	private final BufferedImage image;
 	/**
 	 * The size of the canvas to be drawn to
@@ -59,10 +57,10 @@ public class RenderTask implements Runnable {
 		this.image = parameterObject.image;
 		this.cam = parameterObject.cam;
 		this.world = parameterObject.world;
-		this.size = parameterObject.size;
+		this.size = parameterObject.screenSize;
 		this.recursion = parameterObject.recursion;
-		this.yStart = parameterObject.yStart;
-		this.yEnd = parameterObject.yEnd;
+		this.yStart = parameterObject.yStartOffset;
+		this.yEnd = parameterObject.yEndOffset;
 		this.progressMonitor = progressMonitor;
 	}
 	@Override
@@ -73,7 +71,6 @@ public class RenderTask implements Runnable {
 	 */
 	public void run() {
 		final WritableRaster raster = image.getRaster();
-		final ColorModel colorModel = image.getColorModel();
 		for (int y = yStart; y < yEnd; y++) {
 			for (int x = 0; x < size.width; x++) {		
 				final Ray ray = cam.rayFor(size.width, size.height, x, size.height - y);
@@ -82,7 +79,7 @@ public class RenderTask implements Runnable {
 						y,
 						Util.dataElementsFromColor(
 								new Tracer(recursion).trace(ray, world), // Color value
-								colorModel
+								image.getColorModel()
 						)
 				);
 			}
