@@ -8,21 +8,29 @@ import raytracer.texture.SingleColorTexture;
 
 /**
  * This immutable class implements a material that switches between two
- * textures depending on the amount of light that is generated 
- * by the world's light setup.
- *
+ * materials depending on the amount of light thrown at a specific point.
+ * 
+ * @author Simon Lischka
  */
 public class DayAndNightMaterial extends Material {
-
+	/**
+	 * The threshold for the day/night switch.
+	 */
 	private final double THRESHOLD = 0.5;
+	/**
+	 * The material for highly illuminated zones.
+	 */
 	private final Material dayMaterial;
+	/**
+	 * The material for poorly illuminated zones.
+	 */
 	private final Material nightMaterial;
 	
 	/**
-	 * Constructs a new <code>DayAndNightMaterial</code> object with the two materials specified
-	 * by the user.
-	 * @param dayMaterial The material used for highly illuminated zones. Must not be <code>null</code>.
-	 * @param nightMaterial The material used for poorly illuminated zones. Must not be <code>null</code>.
+	 * Constructs a new <code>DayAndNightMaterial</code> object with the two specified materials.
+	 * 
+	 * @param dayMaterial 	The material used for highly illuminated zones. Must not be <code>null</code>.
+	 * @param nightMaterial	The material used for poorly illuminated zones. Must not be <code>null</code>.
 	 */
 	public DayAndNightMaterial (final Material dayMaterial, final Material nightMaterial) {
 		if (dayMaterial == null || nightMaterial == null) {

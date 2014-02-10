@@ -15,15 +15,16 @@ import raytracer.texture.TexCoord2;
  */
 public class Sphere extends Geometry {
 	/**
-	 * The center point of this sphere.
+	 * The standard center point (0, 0, 0) of all spheres.
 	 */
 	private static final Point3 center = new Point3(0, 0, 0);
 	/**
-      * The radius of this sphere.
+      * The standard radius 1 of all spheres.
       */
 	private static final double r = 1;
 	/**
-	 * Constructs a new <code>Sphere</code> with the specified material.
+	 * Constructs a new <code>Sphere</code> with the specified material. This plane is centered around the origin 
+	 * (0, 0, 0) and has the standard radius 1.
 	 * 
 	 * @param material	The material of the sphere. Must not be <code>null</code>.
 	 */

@@ -98,6 +98,79 @@ public class AxisAlignedBoundingBox {
 	}
 	
 	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((back == null) ? 0 : back.hashCode());
+		result = prime * result + ((bottom == null) ? 0 : bottom.hashCode());
+		result = prime * result + ((front == null) ? 0 : front.hashCode());
+		result = prime * result + ((lbf == null) ? 0 : lbf.hashCode());
+		result = prime * result + ((left == null) ? 0 : left.hashCode());
+		result = prime * result + ((plane == null) ? 0 : plane.hashCode());
+		result = prime * result + ((right == null) ? 0 : right.hashCode());
+		result = prime * result + ((run == null) ? 0 : run.hashCode());
+		result = prime * result + ((top == null) ? 0 : top.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(final Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		final AxisAlignedBoundingBox other = (AxisAlignedBoundingBox) obj;
+		if (back == null) {
+			if (other.back != null)
+				return false;
+		} else if (!back.equals(other.back))
+			return false;
+		if (bottom == null) {
+			if (other.bottom != null)
+				return false;
+		} else if (!bottom.equals(other.bottom))
+			return false;
+		if (front == null) {
+			if (other.front != null)
+				return false;
+		} else if (!front.equals(other.front))
+			return false;
+		if (lbf == null) {
+			if (other.lbf != null)
+				return false;
+		} else if (!lbf.equals(other.lbf))
+			return false;
+		if (left == null) {
+			if (other.left != null)
+				return false;
+		} else if (!left.equals(other.left))
+			return false;
+		if (plane == null) {
+			if (other.plane != null)
+				return false;
+		} else if (!plane.equals(other.plane))
+			return false;
+		if (right == null) {
+			if (other.right != null)
+				return false;
+		} else if (!right.equals(other.right))
+			return false;
+		if (run == null) {
+			if (other.run != null)
+				return false;
+		} else if (!run.equals(other.run))
+			return false;
+		if (top == null) {
+			if (other.top != null)
+				return false;
+		} else if (!top.equals(other.top))
+			return false;
+		return true;
+	}
+
+	@Override
 	public String toString() {
 		return getClass().getSimpleName() 
 				+ "[\n\tlbf = " + lbf + "\n"

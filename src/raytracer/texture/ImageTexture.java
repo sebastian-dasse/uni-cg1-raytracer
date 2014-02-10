@@ -2,22 +2,22 @@ package raytracer.texture;
 
 import raytracer.Color;
 /**
- *	This class represents a concrete image texture. It 
+ *	This immutable class represents a concrete image texture. It 
  *  provides the texture data by loading a user specified file.
+ *  
+ *  @author Simon Lischka
  */
 public class ImageTexture extends AbstractImageTexture {
+	
 	/**
-	 * Constructor of the texture. Loads file when instantiated. 
-	 * @param path The path used to load the file used in the texture
+	 * Constructor of the texture. Loads file when instantiated.
+	 *  
+	 * @param path The path used to load the file used in the texture.
 	 */
 	public ImageTexture(final String path){
 		super(path);
 	}
 	
-	/**
-	 * @ param The u coordinate of this texture.
-	 * @ param The v coordinate of this texture.
-	 */
 	@Override
 	public Color getColor(final double u, final double v) {
 		final int x = (int) (u * widthMinus1);
@@ -27,9 +27,6 @@ public class ImageTexture extends AbstractImageTexture {
 	    return new Color(RGBValues[0]/255, RGBValues[1]/255, RGBValues[2]/255);
 	}
 	
-	/**
-	 * @ param Coordinate of this texture.
-	 */
 	@Override
 	public Color getColor(final TexCoord2 textcoord) {
 		return getColor(textcoord.u, textcoord.v);

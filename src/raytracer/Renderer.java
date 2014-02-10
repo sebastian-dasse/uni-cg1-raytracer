@@ -2,7 +2,6 @@ package raytracer;
 
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
-import java.awt.image.PixelGrabber;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;

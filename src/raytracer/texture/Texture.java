@@ -1,23 +1,30 @@
 package raytracer.texture;
 
 import raytracer.Color;
+
 /**
- * This abstract class represents a specified color of the texture. 
- * @author Maxim Novichkov
+ * This interface represents a texture for a material. It declares a method that returns a <code>Color</code> for 
+ * any given texture coordinates.
+ * 
+ * @author Sebastian Dass&eacute;
  *
  */
 public interface Texture {
+	
 	/**
-	 * This method calculate the color of a pixel from specified separated texture coordinates.
+	 * Calculates the color for the specified texture coordinates u and v.
 	 * 
-	 *  
-	 * @ param The u coordinate of this texture.
-	 * @ param The v coordinate of this texture.
+	 * @param u	The u coordinate of the texture. Must be in the range [0, 1] to avoid errors.
+	 * @param v	The v coordinate of the texture. Must be in the range [0, 1] to avoid errors.
+	 * @return	The color.
 	 */
 	public Color getColor(final double u, final double v);
+
 	/**
-	 * This method calculate the color of a pixel from specified texture coordinate.
-	 * @ param Coordinate of this texture.
+	 * Calculates the color for the specified <code>TexCoord2</code>.
+	 * 
+	 * @param texcoord	The texture coordinates as <code>TexCoord2</code>.
+	 * @return			The color.
 	 */
 	public Color getColor(final TexCoord2 texcoord);
 }

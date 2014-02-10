@@ -6,7 +6,7 @@ import static raytracer.math.MathUtil.isValid;
  * This immutable class represents a color in RGB color space.
  * <p>
  * A <code>Color</code> can be added to, subtracted from and multiplied with another one. Also a <code>Color</code> 
- * can be multiplied with a scalar.
+ * can be multiplied with a scalar. Color values should be in a range from 0 to 1.
  * 
  * @author Sebastian Dass&eacute;
  *
@@ -26,7 +26,8 @@ public class Color{
 	public final double b;
 	
 	/**
-	 * Constructs a new <code>Color</code> with the specified RGB components.
+	 * Constructs a new <code>Color</code> with the specified RGB components. Color values should be in a range from 0 
+	 * to 1.
 	 * 
 	 * @param r	The red component. Must be a positive double value other than Infinity or NaN.
 	 * @param g	The green component. Must be a positive double value other than Infinity or NaN.

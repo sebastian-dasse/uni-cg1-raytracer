@@ -43,7 +43,8 @@ public class AxisAlignedBox extends Geometry {
 	private final Node back = new Node(plane, backT);
 	
 	/**
-	 * Constructs a new <code>AxisAlignedBox</code> with the specified material.
+	 * Constructs a new <code>AxisAlignedBox</code> with the specified material. It is by default defined through the 
+	 * two points (-0.5, -0.5, -0.5) and (0.5, 0.5, 0.5).
 	 * 
 	 * @param material	The material of the <code>AxisAlignedBox</code>. Must not be <code>null</code>.
 	 */
