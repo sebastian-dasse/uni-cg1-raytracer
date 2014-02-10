@@ -95,8 +95,7 @@ public class Renderer {
 	 */
 	public BufferedImage render() {
 		final BufferedImage image = new BufferedImage(size.width, size.height, BufferedImage.TYPE_INT_RGB);
-		//PixelGrabber grabber = new PixelGrabber(image, 0, 0, size.width, size.height, true);
-		
+//		PixelGrabber grabber = new PixelGrabber(image, 0, 0, size.width, size.height, true);
 		final int nThreads = Runtime.getRuntime().availableProcessors();
 		
 		final ExecutorService executor = Executors.newFixedThreadPool(nThreads);
