@@ -1,12 +1,10 @@
 package raytracer;
 
 public class ProgressMonitor {
-
 	/**
 	 * The increment of the progress monitor in percent.
 	 */
 	public static final int PROGRESS_INCREMENT_PERCENT = 5;
-	
 	/**
 	 * The size of one step of the progress monitor.
 	 */
@@ -37,9 +35,11 @@ public class ProgressMonitor {
 	}
 	
 	/**
-	 * A very basic progress monitor.
+	 * Displays the current progress according to the specified 
+	 * value in a simple text progress bar.
 	 * 
-	 * @param y
+	 * @param value Current value e.g. of a loop. Used together with the specified <code>maximumValue</code>
+	 * to generate percentage of the ProgressBar.
 	 */
 	public void showProgress(final int value) {
 		if (value > 0 && startTime == -1) {
@@ -62,10 +62,19 @@ public class ProgressMonitor {
 		}
 	}
 
+	/**
+	 * Time when progressBar receives first value > 0. 
+	 * 
+	 * @return startTime Time stamp in milliseconds
+	 */
 	public long getStartTime() {
 		return startTime;
 	}
 
+	/**
+	 * Time when progressBar reaches specified maximumValue.
+	 * @return endTime Time stamp in milliseconds.
+	 */
 	public long getEndTime() {
 		return endTime;
 	}
