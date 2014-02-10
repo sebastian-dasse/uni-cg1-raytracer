@@ -31,4 +31,38 @@ public class TexCoord2 {
 		this.u = u < 0 ? u % 1 + 1 : u % 1;
 		this.v = v < 0 ? v % 1 + 1 : v % 1;
 	}
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		long temp;
+		temp = Double.doubleToLongBits(u);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(v);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		return result;
+	}
+
+	@Override
+	public boolean equals(final Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		final TexCoord2 other = (TexCoord2) obj;
+		if (Double.doubleToLongBits(u) != Double.doubleToLongBits(other.u))
+			return false;
+		if (Double.doubleToLongBits(v) != Double.doubleToLongBits(other.v))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return getClass().getSimpleName() + "[\tu = " + u + ",\n"  
+										  + "\tv =" + v + "]";
+	}
 }

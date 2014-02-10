@@ -6,9 +6,9 @@ import raytracer.texture.TexCoord2;
 
 /**
  * This immutable class represents a hit of a <code>Ray</code> with a <code>Geometry</code>. Therefore it stores the 
- * value t, which parameterizes the hit point, the normal of the hit point, the <code>Ray</code> itself and the 
- * <code>Geometry</code> that was hit. The parameter t may never be negative, because a hit of the ray with an object 
- * lies always in the direction d of the ray.
+ * value t, which parameterizes the hit point, the <code>Ray</code> itself, the <code>Geometry</code> that was hit, 
+ * the normal and the texture coordinates of the hit point. The parameter t may never be negative, because a hit of 
+ * the ray with an object lies always in the direction d of the ray. 
  * 
  * @author Sebastian Dass&eacute;
  *
@@ -53,17 +53,6 @@ public class Hit /*implements Comparable<Hit>*/ {
 		this.geo = geo;
 		this.normal = normal;
 		this.texcoord = texcoord;
-	}
-
-	
-
-	@Override
-	public String toString() {
-		return getClass().getSimpleName() + "[\tt = " + t + ",\n" 
-										  + "\tray = " + ray + ",\n" 
-										  + "\tgeo = " + geo + ",\n" 
-										  + "\tnormal = " + normal + ",\n"  
-										  + "\ttexcoord =" + texcoord + "]";
 	}
 	
 	@Override
@@ -113,6 +102,15 @@ public class Hit /*implements Comparable<Hit>*/ {
 		} else if (!texcoord.equals(other.texcoord))
 			return false;
 		return true;
+	}
+	
+	@Override
+	public String toString() {
+		return getClass().getSimpleName() + "[\tt = " + t + ",\n" 
+				+ "\tray = " + ray + ",\n" 
+				+ "\tgeo = " + geo + ",\n" 
+				+ "\tnormal = " + normal + ",\n" 
+				+ "\ttexcoord =" + texcoord + "]";
 	}
 
 //	@Override

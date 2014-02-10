@@ -18,13 +18,13 @@ import raytracer.texture.SingleColorTexture;
  */
 public class Node extends Geometry {
 	/**
-	 * The transformation of this node.
-	 */
-	private final Transform transform;
-	/**
 	 * The geometries of this node.
 	 */
 	private final Collection <Geometry> geos;
+	/**
+	 * The transformation of this node.
+	 */
+	private final Transform transform;
 
 	/**
 	 * Constructs a new <code>Node</code> comprising the specified geometries with the specified transformation.
@@ -110,5 +110,43 @@ public class Node extends Geometry {
 			return null;
 		}
 		return new Hit(t, ray, nearestHit.geo, transform.mul(nearestHit.normal), nearestHit.texcoord);
+	}
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((geos == null) ? 0 : geos.hashCode());
+		result = prime * result
+				+ ((transform == null) ? 0 : transform.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(final Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		final Node other = (Node) obj;
+		if (geos == null) {
+			if (other.geos != null)
+				return false;
+		} else if (!geos.equals(other.geos))
+			return false;
+		if (transform == null) {
+			if (other.transform != null)
+				return false;
+		} else if (!transform.equals(other.transform))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return getClass().getSimpleName() + "[\tgeos = " + geos + ",\n"
+										  + "\ttransform = " + transform + "]";
 	}
 }

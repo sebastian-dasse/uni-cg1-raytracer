@@ -41,8 +41,10 @@ import java.net.*;
 public class KnockKnockClient {
     public static void main(String[] args) throws IOException {
     	args = new String[2];
-        args[0] =  "localhost";
+//        args[0] =  "localhost";
+    	args[0] =  "141.64.172.164";
         args[1] =  "4446";
+//    	args[1] =  "587";
         if (args.length != 2) {
             System.err.println(
                 "Usage: java EchoClient <host name> <port number>");

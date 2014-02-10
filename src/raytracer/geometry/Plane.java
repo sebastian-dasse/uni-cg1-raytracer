@@ -7,7 +7,6 @@ import raytracer.math.Normal3;
 import raytracer.math.Point3;
 import raytracer.texture.TexCoord2;
 
-
 /**
  * This immutable class represents an infinitely large plane in three-dimensional space. It is defined through its 
  * normal (0, 1, 0) and runs through the origin (0, 0, 0).
@@ -25,7 +24,8 @@ public class Plane extends Geometry {
 	 */
 	private static final Normal3 n = new Normal3(0, 1, 0);
 	/**
-	 * Constructs a new <code>Plane</code> with the specified material.
+	 * Constructs a new <code>Plane</code> with the specified material. This plane runs through the origin (0, 0, 0) 
+	 * and has the standard normal (0, 1, 0).
 	 * 
 	 * @param material	The material of the plane. Must not be <code>null</code>.
 	 */

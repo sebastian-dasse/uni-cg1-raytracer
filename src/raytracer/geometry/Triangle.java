@@ -11,7 +11,7 @@ import raytracer.texture.TexCoord2;
 
 /**
  * This immutable class represents a flat triangle in three-dimensional space. It is defined through its three corner 
- * points (vertices).
+ * points (vertices). Each of those vertices has its own normal and texture coordinates.
  * 
  * @author Maxim Novichkov
  * @author Sebastian Dass&eacute;
@@ -121,6 +121,79 @@ public class Triangle extends Geometry {
 		final double u = ta.u * alpha + tb.u * beta + tc.u * gamma;
 		final double v = ta.v * alpha + tb.v * beta + tc.v * gamma;
 		return new Hit(t, ray, this, normal, new TexCoord2(u, v));
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((a == null) ? 0 : a.hashCode());
+		result = prime * result + ((b == null) ? 0 : b.hashCode());
+		result = prime * result + ((c == null) ? 0 : c.hashCode());
+		result = prime * result + ((na == null) ? 0 : na.hashCode());
+		result = prime * result + ((nb == null) ? 0 : nb.hashCode());
+		result = prime * result + ((nc == null) ? 0 : nc.hashCode());
+		result = prime * result + ((ta == null) ? 0 : ta.hashCode());
+		result = prime * result + ((tb == null) ? 0 : tb.hashCode());
+		result = prime * result + ((tc == null) ? 0 : tc.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		final Triangle other = (Triangle) obj;
+		if (a == null) {
+			if (other.a != null)
+				return false;
+		} else if (!a.equals(other.a))
+			return false;
+		if (b == null) {
+			if (other.b != null)
+				return false;
+		} else if (!b.equals(other.b))
+			return false;
+		if (c == null) {
+			if (other.c != null)
+				return false;
+		} else if (!c.equals(other.c))
+			return false;
+		if (na == null) {
+			if (other.na != null)
+				return false;
+		} else if (!na.equals(other.na))
+			return false;
+		if (nb == null) {
+			if (other.nb != null)
+				return false;
+		} else if (!nb.equals(other.nb))
+			return false;
+		if (nc == null) {
+			if (other.nc != null)
+				return false;
+		} else if (!nc.equals(other.nc))
+			return false;
+		if (ta == null) {
+			if (other.ta != null)
+				return false;
+		} else if (!ta.equals(other.ta))
+			return false;
+		if (tb == null) {
+			if (other.tb != null)
+				return false;
+		} else if (!tb.equals(other.tb))
+			return false;
+		if (tc == null) {
+			if (other.tc != null)
+				return false;
+		} else if (!tc.equals(other.tc))
+			return false;
+		return true;
 	}
 
 	@Override

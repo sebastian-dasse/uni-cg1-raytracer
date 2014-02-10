@@ -64,7 +64,7 @@ public class ObjLoader {
 		vertices = new ArrayList<Point3>();
 		vertices.add(new Point3(0, 0, 0));		// unused point at first position for easier array indexing 
 		textures = new ArrayList<TexCoord2>();
-		textures.add(new TexCoord2(0, 0));	// unused normal at first position for easier array indexing
+		textures.add(new TexCoord2(0, 0));		// unused normal at first position for easier array indexing
 		normals = new ArrayList<Normal3>();
 		normals.add(new Normal3(1, 1, 1));		// unused normal at first position for easier array indexing
 		lines = new LinkedList<String>();

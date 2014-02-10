@@ -1,5 +1,7 @@
 package raytracer.geometry;
 
+import java.util.Arrays;
+
 import raytracer.Ray;
 import raytracer.material.Material;
 import raytracer.math.Normal3;
@@ -10,13 +12,17 @@ import raytracer.texture.TexCoord2;
  * This immutable class represents a triangle mesh, that is a polygon that comprises a set of triangles that are 
  * defined through a number of shared vertices. The triangular faces are further defined through a number of normals 
  * and coordinates for their texture.
- * 
- * TODO add comments on bounding box
+ * <p>
+ * A triangle mesh is automatically placed inside a bounding box for faster rendering.
  * 
  * @author Sebastian Dass&ecaute;
  *
  */
 public class TriangleMesh extends Geometry {
+	/**
+	 * The bounding box enclosing this triangle mesh.
+	 */
+	public final AxisAlignedBoundingBox bbox;
 	/**
 	 * The vertices of this triangle mesh.
 	 */
@@ -38,8 +44,6 @@ public class TriangleMesh extends Geometry {
 	 * </pre>
 	 */
 	private final int[][] faces;
-	
-	public final AxisAlignedBoundingBox bbox;
 	
 	/**
 	 * Constructs a new <code>TriangleMesh</code> with the specified material, vertices, texture coordinates, normals 
@@ -202,4 +206,41 @@ public class TriangleMesh extends Geometry {
 		}
 		return new Point3(maxX, maxY, maxZ);
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((bbox == null) ? 0 : bbox.hashCode());
+		result = prime * result + Arrays.hashCode(faces);
+		result = prime * result + Arrays.hashCode(normals);
+		result = prime * result + Arrays.hashCode(textCoords);
+		result = prime * result + Arrays.hashCode(vertices);
+		return result;
+	}
+
+	@Override
+	public boolean equals(final Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		final TriangleMesh other = (TriangleMesh) obj;
+		if (bbox == null) {
+			if (other.bbox != null)
+				return false;
+		} else if (!bbox.equals(other.bbox))
+			return false;
+		if (!Arrays.deepEquals(faces, other.faces))
+			return false;
+		if (!Arrays.equals(normals, other.normals))
+			return false;
+		if (!Arrays.equals(textCoords, other.textCoords))
+			return false;
+		if (!Arrays.equals(vertices, other.vertices))
+			return false;
+		return true;
+	}	
 }

@@ -8,7 +8,7 @@ import raytracer.parser.ObjLoader;
  * This immutable class represents a geometry which is defined in an OBJ file. To be more specific, a 
  * <code>ShapeFromFile</code> object wraps a <code>TriangleMesh</code> as specified in the OBJ file.
  * <p>
- * As for now, only vertices, and faces can be loaded.
+ * Vertices, texture coordinates, normals and faces can be loaded.
  * <p>
  * For further information on the OBJ format 
  * <a href="http://www.martinreddy.net/gfx/3d/OBJ.spec">check out the documentation</a>.
@@ -36,5 +36,30 @@ public class ShapeFromFile extends Geometry {
 	@Override
 	public Hit hit(final Ray ray) {
 		return mesh.hit(ray);
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((mesh == null) ? 0 : mesh.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(final Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		final ShapeFromFile other = (ShapeFromFile) obj;
+		if (mesh == null) {
+			if (other.mesh != null)
+				return false;
+		} else if (!mesh.equals(other.mesh))
+			return false;
+		return true;
 	}
 }
