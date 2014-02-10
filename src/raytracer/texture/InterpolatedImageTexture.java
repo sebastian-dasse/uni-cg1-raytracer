@@ -5,7 +5,7 @@ import raytracer.Color;
  * This immutable class represents a color of the image texture that
  * provides the texture data from loaded by user specified file.
  * This class supply ability to improve the texture quality by the interpolating of the
- * source data.
+ * pixel data.
  * 
  * @author Maxim Novichkov
  * @author Sebastian Dass&eacute;

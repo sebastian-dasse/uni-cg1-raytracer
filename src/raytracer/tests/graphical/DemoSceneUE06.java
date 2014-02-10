@@ -215,108 +215,108 @@ public class DemoSceneUE06 {
 		world.addElements(
 						
 			//////////////////////////////// --yyyyyyyyyy
-						new Node(		
-						new Sphere(
-								new SingleColorMaterial(new SingleColorTexture(new Color(1,0,0)))
-						), 
-						new Transform()
-						.translate(0, 0.5, 0)
-						.scale(0.15, 0.15, 0.15)
-						),
-						
-						new Node(		
-						new Sphere(
-								new SingleColorMaterial(new SingleColorTexture(new Color(1,0,0)))
-						), 
-						new Transform()
-						.translate(0, 4, 0)
-						.scale(0.15, 0.15, 0.15)
-						),
-						
-						new Node(		
-						new Sphere(
-								new SingleColorMaterial(new SingleColorTexture(new Color(1,0,0)))
-						), 
-						new Transform()
-						.translate(0, 8, 0)
-						.scale(0.15, 0.15, 0.15)
-						),
-						
-						new Node(		
-								new Sphere(
-										new SingleColorMaterial(new SingleColorTexture(new Color(1,0,0)))
-								), 
-								new Transform()
-								.translate(0, 10, 0)
-								.scale(0.15, 0.15, 0.15)
-								),
-						
-						//////////////////////////////// --zzzzzzzzzzz
-						new Node(		
-						new Sphere(
-								new SingleColorMaterial(new SingleColorTexture(new Color(0,0,1)))
-						), 
-						new Transform()
-						.translate(0, 0, 0.5)
-						.scale(0.15, 0.15, 0.15)
-						),
-						
-						new Node(		
-						new Sphere(
-								new SingleColorMaterial(new SingleColorTexture(new Color(0,0,1)))
-						), 
-						new Transform()
-						.translate(0, 0, 4)
-						.scale(0.15, 0.15, 0.15)
-						),
-						
-						new Node(		
-						new Sphere(
-								new SingleColorMaterial(new SingleColorTexture(new Color(0,0,1)))
-						), 
-						new Transform()
-						.translate(0, 0, 8)
-						.scale(0.15, 0.15, 0.15)
-						),
-						
-						//////////xxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-						new Node(		
-								new Sphere(
-										new SingleColorMaterial(new SingleColorTexture(new Color(0,1,0)))
-								), 
-								new Transform()
-								.translate(0.5, 0, 0)
-								.scale(0.15, 0.15, 0.15)
-								),
-								
-								new Node(		
-								new Sphere(
-										new SingleColorMaterial(new SingleColorTexture(new Color(0,1,0)))
-								), 
-								new Transform()
-								.translate(4, 0, 0)
-								.scale(0.15, 0.15, 0.15)
-								),
-								
-								new Node(		
-								new Sphere(
-										new SingleColorMaterial(new SingleColorTexture(new Color(0,1,0)))
-								), 
-								new Transform()
-								.translate(8, 0, 0)
-								.scale(0.15, 0.15, 0.15)
-								),
+//						new Node(		
+//						new Sphere(
+//								new SingleColorMaterial(new SingleColorTexture(new Color(1,0,0)))
+//						), 
+//						new Transform()
+//						.translate(0, 0.5, 0)
+//						.scale(0.15, 0.15, 0.15)
+//						),
+//						
+//						new Node(		
+//						new Sphere(
+//								new SingleColorMaterial(new SingleColorTexture(new Color(1,0,0)))
+//						), 
+//						new Transform()
+//						.translate(0, 4, 0)
+//						.scale(0.15, 0.15, 0.15)
+//						),
+//						
+//						new Node(		
+//						new Sphere(
+//								new SingleColorMaterial(new SingleColorTexture(new Color(1,0,0)))
+//						), 
+//						new Transform()
+//						.translate(0, 8, 0)
+//						.scale(0.15, 0.15, 0.15)
+//						),
+//						
+//						new Node(		
+//								new Sphere(
+//										new SingleColorMaterial(new SingleColorTexture(new Color(1,0,0)))
+//								), 
+//								new Transform()
+//								.translate(0, 10, 0)
+//								.scale(0.15, 0.15, 0.15)
+//								),
+//						
+//						//////////////////////////////// --zzzzzzzzzzz
+//						new Node(		
+//						new Sphere(
+//								new SingleColorMaterial(new SingleColorTexture(new Color(0,0,1)))
+//						), 
+//						new Transform()
+//						.translate(0, 0, 0.5)
+//						.scale(0.15, 0.15, 0.15)
+//						),
+//						
+//						new Node(		
+//						new Sphere(
+//								new SingleColorMaterial(new SingleColorTexture(new Color(0,0,1)))
+//						), 
+//						new Transform()
+//						.translate(0, 0, 4)
+//						.scale(0.15, 0.15, 0.15)
+//						),
+//						
+//						new Node(		
+//						new Sphere(
+//								new SingleColorMaterial(new SingleColorTexture(new Color(0,0,1)))
+//						), 
+//						new Transform()
+//						.translate(0, 0, 8)
+//						.scale(0.15, 0.15, 0.15)
+//						),
+//						
+//						//////////xxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+//						new Node(		
+//								new Sphere(
+//										new SingleColorMaterial(new SingleColorTexture(new Color(0,1,0)))
+//								), 
+//								new Transform()
+//								.translate(0.5, 0, 0)
+//								.scale(0.15, 0.15, 0.15)
+//								),
+//								
+//								new Node(		
+//								new Sphere(
+//										new SingleColorMaterial(new SingleColorTexture(new Color(0,1,0)))
+//								), 
+//								new Transform()
+//								.translate(4, 0, 0)
+//								.scale(0.15, 0.15, 0.15)
+//								),
+//								
+//								new Node(		
+//								new Sphere(
+//										new SingleColorMaterial(new SingleColorTexture(new Color(0,1,0)))
+//								), 
+//								new Transform()
+//								.translate(8, 0, 0)
+//								.scale(0.15, 0.15, 0.15)
+//								),
 								
 								
 			////	//////////////////////////////////////////////	
-								new Node(new Plane(new ReflectiveMaterial(
-										new SingleColorTexture(new Color(1, 1, 1)), 
+								new Node(new Plane(
+										new ReflectiveMaterial(
+										new SingleColorTexture(new Color(0.8, 0.8, 0.8)), 
 										new SingleColorTexture(new Color(1, 1, 1)), 
 										10, 
 										new SingleColorTexture(new Color(1, 1, 1)))), 
 										new Transform()
 										.translate(0, 0, 0)
-										.scale(1000, 1000, 1000)
 										),
 								
 								new Node(		
@@ -365,83 +365,92 @@ public class DemoSceneUE06 {
 										.scale(2, 2, 2)
 										),
 								
-								//////////////small inside balls	
-										new Node(		
-												new Sphere(
-														sphereReflective
-												), 
-												new Transform()
-												.translate(4.5, 2, 2.7)
-												.scale(0.15, 0.15, 0.15)
-												),
+								//small inside balls	
+								new Node(		
+										new Sphere(
+										sphereReflective
+										), 
+										new Transform()
+										.translate(4.5, 2, 2.7)
+										.scale(0.15, 0.15, 0.15)
+										),
 												
-										new Node(		
-												new Sphere(
-														sphereReflective
-												), 
-												new Transform()
-												.translate(4.5, 2, 6.4)
-												.scale(0.15, 0.15, 0.15)
-												),
+								new Node(		
+										new Sphere(
+										sphereReflective
+										), 
+										new Transform()
+										.translate(4.5, 2, 6.4)
+										.scale(0.15, 0.15, 0.15)
+										),
 												
-										new Node(		
-												new Sphere(
-														sphereReflective
-												), 
-												new Transform()
-												.translate(2.7, 2, 4.5)
-												.scale(0.15, 0.15, 0.15)
-												),
+								new Node(		
+										new Sphere(
+										sphereReflective
+										), 
+										new Transform()
+										.translate(2.7, 2, 4.5)
+										.scale(0.15, 0.15, 0.15)
+										),
 												
-										new Node(		
-												new Sphere(
-														sphereReflective
-												), 
-												new Transform()
-												.translate(6.5, 2, 4.5)
-												.scale(0.15, 0.15, 0.15)
-												),	
+								new Node(		
+										new Sphere(
+										sphereReflective
+										), 
+										new Transform()
+										.translate(6.5, 2, 4.5)
+										.scale(0.15, 0.15, 0.15)
+										),	
 										
 										
 									//Teddy
-//								new Node(teddyShape, 
-//										new Transform()
-//										.translate(3.5, 2.9, 5.1)
-//										.scale(1, 1, 1)
-//										.rotateY(0.6)
-//										),
-//								
-//								new Node(teddyShape, 
-//										new Transform()
-//										.translate(4.9, 2.9, 3.5)
-//										.scale(1, 1, 1)
-//										.rotateY(Math.PI+0.8)
-//										),
+								new Node(teddyShape, 
+										new Transform()
+										.translate(3.5, 2.9, 5.1)
+										.scale(1, 1, 1)
+										.rotateY(0.6)
+										),
+								
+								new Node(teddyShape, 
+										new Transform()
+										.translate(4.9, 2.9, 3.5)
+										.scale(1, 1, 1)
+										.rotateY(Math.PI+0.8)
+										),
 				
-//							    new Node(teddyShape, 
-//							    		new Transform()
-//							    		.translate(5.0, 2.9, 5.0)
-//							    		.scale(1, 1, 1)
-//							    		.rotateY(Math.PI+2.3)
-//							    		),
+							    new Node(teddyShape, 
+							    		new Transform()
+							    		.translate(5.0, 2.9, 5.0)
+							    		.scale(1, 1, 1)
+							    		.rotateY(Math.PI+2.3)
+							    		),
 							    
-//							    new Node(teddyShape, 
-//							    		new Transform()
-//							    		.translate(3.5, 2.9, 3.5)
-//							    		.scale(1, 1, 1)
-//							    		.rotateY(Math.PI-0.8)
-//							    		),
+							    new Node(teddyShape, 
+							    		new Transform()
+							    		.translate(3.5, 2.9, 3.5)
+							    		.scale(1, 1, 1)
+							    		.rotateY(Math.PI-0.8)
+							    		),
 								
 							  //  smarties
 							    new Node(		
 							    		new Sphere(
-							    		smarties
+							    			sphereTransparent
 							    		), 
 							    		new Transform()
 							    		.translate(4.5, 4, 4.5)
 							    		.scale(1.6, 0.1, 1.6)
 							    		),
 							    		
+							    new Node(		
+								   		new Sphere(
+								   		sphereReflective
+								   		), 
+							    		new Transform()
+							    		.translate(4.5, 4, 4.5)
+							    		.scale(1.28, 0.05, 1.28)
+							    		),
+
 							    //world		
 								new Node(		
 										new Sphere(
@@ -449,6 +458,7 @@ public class DemoSceneUE06 {
 										), 
 										new Transform()
 										.translate(4.5, 5.2, 4.5)
+										.rotateY(Math.PI)
 										.scale(1, 1, 1)
 										)
 												
@@ -458,8 +468,8 @@ public class DemoSceneUE06 {
 						new PointLight(new Color(0.3, 0.3, 0.3), new Point3(5, 5, -10), true),
 						new PointLight(new Color(0.3, 0.3, 0.3), new Point3(5, 5, 10), true), 
 						new DirectionalLight(new Color(0.1, 0.1, 0.1), new Vector3(1, -1, 0)));
-//		final Camera camera = new PerspectiveCamera(new Point3(2, 12, 2), new Vector3(0, -1, 0), new Vector3(0.1, 2, 0.1), Math.PI / 2.0);
-		final Camera camera = new PerspectiveCamera(new Point3(8, 6.5, 8), new Vector3(-1, -1, -1), new Vector3(0, 1, 0), Math.PI / 2.0);
+//		final Camera camera = new PerspectiveCamera(new Point3(4.5, 12, 4.5), new Vector3(0, -1, 0), new Vector3(0.1, 2, 0.1), Math.PI / 2.0);
+		final Camera camera = new PerspectiveCamera(new Point3(8, 6.5, 8), new Vector3(-1, -1.5, -1), new Vector3(0, 1, 0), Math.PI / 2.0);
 //		final Camera camera = new PerspectiveCamera(new Point3(8, 5, 8), new Vector3(-1, -1, -1), new Vector3(0, 1, 0), Math.PI / 2.0);
 
 		return new Renderer(world, camera, 10);
