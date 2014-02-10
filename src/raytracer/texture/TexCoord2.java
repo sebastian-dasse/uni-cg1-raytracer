@@ -3,23 +3,24 @@ package raytracer.texture;
 import static raytracer.math.MathUtil.isValid;
 
 /**
- * This immutable class represents the coordinates of a texture.
+ * This immutable class represents the coordinates of a texture. Textures using this class will be repeated as tiles.
  * 
  * @author Sebastian Dass&eacute;
  *
  */
 public class TexCoord2 {
 	/**
-	 * The u coordinate of this texture.
+	 * The u coordinate of this texture. Always in the range [0, 1].
 	 */
 	public double u;
 	/**
-	 * The v coordinate of this texture.
+	 * The v coordinate of this texture. Always in the range [0, 1].
 	 */
 	public final double v;
 	
 	/**
-	 * Constructs a new <code>TextureCoord</code> object.
+	 * Constructs a new <code>TexCoord2</code> object. The coordinates u and v will automatically be normalized to 
+	 * values in the range from 0 to 1 by modulo operation. This results in a tiled repetition of the texture.
 	 * 
 	 * @param u	The u coordinate of the texture.
 	 * @param v	The v coordinate of the texture.

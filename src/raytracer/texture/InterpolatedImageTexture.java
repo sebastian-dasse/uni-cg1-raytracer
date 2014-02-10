@@ -11,6 +11,11 @@ import raytracer.Color;
  */
 public class InterpolatedImageTexture extends AbstractImageTexture {
 
+	/**
+	 * 
+	 * 
+	 * @param path
+	 */
 	public InterpolatedImageTexture(final String path){
 		super(path);
 	}

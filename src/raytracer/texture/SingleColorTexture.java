@@ -9,10 +9,16 @@ import raytracer.Color;
  *
  */
 public class SingleColorTexture implements Texture{
-	
+	/**
+	 * 
+	 */
 	private final Color color;
 	
-	
+	/**
+	 * 
+	 * 
+	 * @param color
+	 */
 	public SingleColorTexture(final Color color){
 		if (color == null) {
 			throw new IllegalArgumentException("The parameters must not be null.");
@@ -25,6 +31,7 @@ public class SingleColorTexture implements Texture{
 		return color;
 	}
 	
+	@Override
 	public Color getColor(TexCoord2 texcoord) {
 		return color;
 	}
