@@ -172,7 +172,7 @@ public class TriangleMesh extends Geometry {
 	}
 
 	/**
-	 * Calculates the minimum x, y, z coordinates, which can be used as <em>low bottom far point</em> (lbf) of an axis 
+	 * Calculates the minimum x, y, z coordinates, which can be used as <em>left bottom far point</em> (lbf) of an axis 
 	 * aligned box.
 	 * 
 	 * @return	The minimum x, y, z coordinates as <code>Point3</code>.

@@ -9,7 +9,7 @@ import raytracer.math.Transform;
 
 /**
  * This immutable class represents an axis aligned box in three-dimensional space. It has a default width, height and 
- * depth of 1. It is defined through its <em>low bottom far point</em> (lbf) at (-0.5, -0.5, -0.5) and its <em>right 
+ * depth of 1. It is defined through its <em>left bottom far point</em> (lbf) at (-0.5, -0.5, -0.5) and its <em>right 
  * upper near point</em> (run) at (0.5, 0.5, 0.5).
  * 
  * @author Sebastian Dass&eacute;
@@ -17,7 +17,7 @@ import raytracer.math.Transform;
  */
 public class AxisAlignedBox extends Geometry {
 	/**
-	 * The default low bottom far point of this <code>AxisAlignedBox</code>.
+	 * The default left bottom far point of this <code>AxisAlignedBox</code>.
 	 * Is part of the left, the back and the bottom plane.
 	 */
 	private static final Point3 lbf = new Point3(-0.5, -0.5, -0.5);

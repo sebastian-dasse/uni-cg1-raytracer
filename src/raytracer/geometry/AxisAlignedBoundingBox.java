@@ -12,7 +12,7 @@ import raytracer.texture.SingleColorTexture;
 
 /**
  * This immutable class represents an axis aligned bounding box which is used for faster rendering of complex 
- * geometries such as triangle meshes. It is defined through its <em>low bottom far point</em> (lbf) and its 
+ * geometries such as triangle meshes. It is defined through its <em>left bottom far point</em> (lbf) and its 
  * <em>right upper near point</em> (run).
  * 
  * @author Sebastian Dass&eacute;
@@ -25,7 +25,7 @@ public class AxisAlignedBoundingBox {
 	private static final Material material = new SingleColorMaterial(new SingleColorTexture(new Color(0, 0, 0)));
 	
 	/**
-	 * The default low bottom far point of this <code>AxisAlignedBox</code>.
+	 * The default left bottom far point of this <code>AxisAlignedBox</code>.
 	 * Is part of the left, the back and the bottom plane.
 	 */
 	private final Point3 lbf;
@@ -46,7 +46,7 @@ public class AxisAlignedBoundingBox {
 	/**
 	 * Constructs a new <code>AxisAlignedBoundingBox</code> with the specified lbf and run.
 	 * 
-	 * @param lbf	The <em>low bottom far point</em> of the bounding box.
+	 * @param lbf	The <em>left bottom far point</em> of the bounding box.
 	 * @param run	The <em>right upper near point</em> of the bounding box.
 	 */
 	public AxisAlignedBoundingBox(final Point3 lbf, final Point3 run) {
