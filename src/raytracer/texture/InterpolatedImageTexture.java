@@ -1,13 +1,25 @@
 package raytracer.texture;
 
 import raytracer.Color;
-
+/**
+ * This immutable class represents a color of the image texture that
+ * provides the texture data from loaded by user specified file.
+ * This class provide ability to improve the texture quality by the interpolating of the
+ * source data. 
+ */
 public class InterpolatedImageTexture extends AbstractImageTexture {
-
+	/**
+	 * Constructor of the texture. Loads file when instantiated. 
+	 * @param path The path used to load the file used in the texture.
+	 */
 	public InterpolatedImageTexture(final String path){
 		super(path);
 	}
 	
+	/**
+	 * @ param The u coordinate of this texture.
+	 * @ param The v coordinate of this texture.
+	 */
 	@Override
 	public Color getColor(final double u, final double v) {
 
@@ -40,7 +52,9 @@ public class InterpolatedImageTexture extends AbstractImageTexture {
 	    
 	    return a.mul(1.0 - ny).add(b.mul(ny)).mul(1.0 / 255);
 	}
-
+	/**
+	 * @ param Coordinate of this texture.
+	 */
 	@Override
 	public Color getColor(final TexCoord2 textcoord) {
 		return getColor(textcoord.u, textcoord.v);

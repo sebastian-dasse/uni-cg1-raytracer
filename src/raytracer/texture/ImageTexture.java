@@ -14,6 +14,10 @@ public class ImageTexture extends AbstractImageTexture {
 		super(path);
 	}
 	
+	/**
+	 * @ param The u coordinate of this texture.
+	 * @ param The v coordinate of this texture.
+	 */
 	@Override
 	public Color getColor(final double u, final double v) {
 		final int x = (int) (u * widthMinus1);
@@ -22,7 +26,10 @@ public class ImageTexture extends AbstractImageTexture {
 	    final double[] RGBValues = imageRaster.getPixel(x, y, new double[3]);
 	    return new Color(RGBValues[0]/255, RGBValues[1]/255, RGBValues[2]/255);
 	}
-
+	
+	/**
+	 * @ param Coordinate of this texture.
+	 */
 	@Override
 	public Color getColor(final TexCoord2 textcoord) {
 		return getColor(textcoord.u, textcoord.v);
