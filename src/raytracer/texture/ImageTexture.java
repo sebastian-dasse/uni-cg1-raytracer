@@ -1,9 +1,15 @@
 package raytracer.texture;
 
 import raytracer.Color;
-
+/**
+ *	This class represents a concrete image texture. It 
+ *  provides the texture data by loading a user specified file.
+ */
 public class ImageTexture extends AbstractImageTexture {
-	
+	/**
+	 * Constructor of the texture. Loads file when instantiated. 
+	 * @param path The path used to load the file used in the texture
+	 */
 	public ImageTexture(final String path){
 		super(path);
 	}
