@@ -8,13 +8,32 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import raytracer.Color;
-
+/**
+ *	This abstract class represents an image texture that
+ *  provides the texture data by loading a user specified file.
+ */
 public abstract class AbstractImageTexture implements Texture {
+	/**
+	 * The BufferedImage that contains the pixel data of this texture
+	 */
 	private final BufferedImage image;
+	/**
+	 * The raster extracted from the BufferedImage
+	 */
 	protected final Raster imageRaster;
+	/**
+	 * Width in suitable form for looping arrays
+	 */
 	protected final int widthMinus1;
+	/**
+	 * Height in suitable form for looping arrays
+	 */
 	protected final int heightMinus1;
 	
+	/**
+	 * Constructor of the texture. Loads file when instantiated. 
+	 * @param path The path used to load the file used in the texture
+	 */
 	public AbstractImageTexture(final String path){
 		if (path == null) {
 			throw new IllegalArgumentException("The parameters must not be null.");
