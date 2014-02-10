@@ -102,6 +102,8 @@ public class Renderer {
 		final ExecutorService executor = Executors.newFixedThreadPool(nThreads);
 		final int interval = nThreads;
 		
+		ProgressMonitor progressMonitor = new ProgressMonitor(size.height, 5);
+		
 		for (int y = 0; y < size.height; y+= interval) {
 			
 			final Runnable worker = new Thread(
@@ -114,7 +116,8 @@ public class Renderer {
 									cam, 
 									image, 
 									recursion
-							)
+							),
+							progressMonitor
 					)
 			);
 			

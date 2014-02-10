@@ -22,10 +22,6 @@ import raytracer.model.RenderTaskParameter;
  */
 public class RenderTask implements Runnable {
 	/**
-	 * The increment of the progress monitor in percent.
-	 */
-	public static final int PROGRESS_INCREMENT_PERCENT = 5;
-	/**
 	 * Reference to the world used by the renderer
 	 */
 	private final World world;
@@ -49,18 +45,17 @@ public class RenderTask implements Runnable {
 	 * Start position of the fragment that should be rendered
 	 */
 	private final int yStart;
-	
-	private final int yEnd;
 	/**
-	 * The size of one step of the progress monitor.
+	 * End position of the fragment that should be rendered
 	 */
-	private int progressStep;
-	
+	private final int yEnd;
 	/**
 	 * Creates a new RenderTask with the specified parameters.
 	 * @param parameterObject TODO
 	 */
-	public RenderTask(RenderTaskParameter parameterObject) {
+	private ProgressMonitor progressMonitor;
+	
+	public RenderTask(RenderTaskParameter parameterObject, ProgressMonitor progressMonitor) {
 		this.image = parameterObject.image;
 		this.cam = parameterObject.cam;
 		this.world = parameterObject.world;
@@ -68,15 +63,16 @@ public class RenderTask implements Runnable {
 		this.recursion = parameterObject.recursion;
 		this.yStart = parameterObject.yStart;
 		this.yEnd = parameterObject.yEnd;
-		progressStep = parameterObject.size.height * PROGRESS_INCREMENT_PERCENT / 100;
+		this.progressMonitor = progressMonitor;
 	}
 	@Override
 	/**
 	 * Renders the given interval, uses a tracer to render recursively.
 	 * The method renders the x-Axis completely, only the y-Axis is fragmented to
-	 * enable various simultanious threads.
+	 * enable various simultaneous threads.
 	 */
 	public void run() {
+		
 		final WritableRaster raster = image.getRaster();
 		final ColorModel colorModel = image.getColorModel();
 		for (int y = yStart; y < yEnd; y++) {
@@ -84,22 +80,7 @@ public class RenderTask implements Runnable {
 				final Ray ray = cam.rayFor(size.width, size.height, x, size.height - y);
 				raster.setDataElements(x, y, Util.dataElementsFromColor(new Tracer(recursion).trace(ray, world), colorModel));
 			}
-			showProgress(y);
-		}
-	}
-	
-	/**
-	 * A very basic progress monitor.
-	 * 
-	 * @param y
-	 */
-	private void showProgress(final int y) {
-		if (y % progressStep == 0 || y == size.height) {
-			String progr = "|";
-			for (int i = 0; i < y / progressStep; i++) {
-				progr = progr + "|";
-			}
-			System.out.printf("%3d%% %s%n", (y * PROGRESS_INCREMENT_PERCENT / progressStep + PROGRESS_INCREMENT_PERCENT), progr);
+			progressMonitor.showProgress(y);
 		}
 	}
 }
