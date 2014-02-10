@@ -2,8 +2,10 @@ package raytracer.texture;
 
 import raytracer.Color;
 /**
- *	This class represents a concrete image texture. It 
+ *	This immutable class represents a concrete image texture. It 
  *  provides the texture data by loading a user specified file.
+ *  
+ *  @author Simon Lischka
  */
 public class ImageTexture extends AbstractImageTexture {
 	/**

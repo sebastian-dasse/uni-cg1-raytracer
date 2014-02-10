@@ -2,6 +2,12 @@ package raytracer.texture;
 
 import raytracer.Color;
 
+/**
+ * This immutable class ...
+ * 
+ * @author Maxim Novichkov
+ *
+ */
 public class SingleColorTexture implements Texture{
 	
 	private final Color color;

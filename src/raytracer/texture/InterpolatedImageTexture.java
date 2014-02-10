@@ -2,6 +2,13 @@ package raytracer.texture;
 
 import raytracer.Color;
 
+/**
+ * This immutable class ...
+ * 
+ * @author Maxim Novichkov
+ * @author Sebastian Dass&eacute;
+ *
+ */
 public class InterpolatedImageTexture extends AbstractImageTexture {
 
 	public InterpolatedImageTexture(final String path){
