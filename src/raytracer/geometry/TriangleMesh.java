@@ -171,6 +171,12 @@ public class TriangleMesh extends Geometry {
 			);
 	}
 
+	/**
+	 * Calculates the minimum x, y, z coordinates, which can be used as <em>low bottom far point</em> (lbf) of an axis 
+	 * aligned box.
+	 * 
+	 * @return	The minimum x, y, z coordinates as <code>Point3</code>.
+	 */
 	public Point3 getMins() {
 		double minX = Double.POSITIVE_INFINITY;
 		double minY = Double.POSITIVE_INFINITY;
@@ -189,6 +195,12 @@ public class TriangleMesh extends Geometry {
 		return new Point3(minX, minY, minZ);
 	}
 
+	/**
+	 * Calculates the maximum x, y, z coordinates, which can be used as <em>right upper near point</em> (run) of an 
+	 * axis aligned box.
+	 * 
+	 * @return	The maximum x, y, z coordinates as <code>Point3</code>.
+	 */
 	public Point3 getMaxs() {
 		double maxX = Double.NEGATIVE_INFINITY;
 		double maxY = Double.NEGATIVE_INFINITY;
