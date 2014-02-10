@@ -2,6 +2,7 @@ package raytracer;
 
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
+import java.awt.image.PixelGrabber;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -94,6 +95,7 @@ public class Renderer {
 	 */
 	public BufferedImage render() {
 		final BufferedImage image = new BufferedImage(size.width, size.height, BufferedImage.TYPE_INT_RGB);
+		//PixelGrabber grabber = new PixelGrabber(image, 0, 0, size.width, size.height, true);
 		
 		final int nThreads = Runtime.getRuntime().availableProcessors();
 		
