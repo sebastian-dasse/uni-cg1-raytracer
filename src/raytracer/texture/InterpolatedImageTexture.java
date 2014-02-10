@@ -2,29 +2,17 @@ package raytracer.texture;
 
 import raytracer.Color;
 /**
-<<<<<<< HEAD
- * This immutable class represents an image texture which is interpolated using bilinear interpolation. The image is 
- * loaded from a user specified file.
-=======
- * This immutable class represents a color of the image texture that
- * provides the texture data from loaded by user specified file.
- * This class supply ability to improve the texture quality by the interpolating of the
- * source data.
->>>>>>> 56f5eb6eb178cb2cdb725cca5ae2fa48b673ee02
+ * This immutable class represents an image texture which is interpolated using bilinear interpolation for improved 
+ * quality. The image is loaded from a user specified file.
  * 
  * @author Maxim Novichkov
  * @author Sebastian Dass&eacute;
  */
 public class InterpolatedImageTexture extends AbstractImageTexture {
 	/**
-<<<<<<< HEAD
 	 * Constructs a new <code>InterpolatedImageTexture</code>. Loads the specified image file when instantiated.
 	 * 
 	 * @param path	The path of the image. Must not be <code>null</code>.
-=======
-	 * Constructor of the texture. Loads file when instantiated. 
-	 * @param path The path used to load the file used in the texture.
->>>>>>> 56f5eb6eb178cb2cdb725cca5ae2fa48b673ee02
 	 */
 	public InterpolatedImageTexture(final String path){
 		super(path);
