@@ -11,20 +11,31 @@ import raytracer.math.Transform;
 import raytracer.texture.SingleColorTexture;
 
 /**
- * TODO comment everything!
+ * This immutable class represents an axis aligned bounding box which is used for faster rendering of complex 
+ * geometries such as triangle meshes. It is defined through its <em>left bottom far point</em> (lbf) and its 
+ * <em>right upper near point</em> (run).
  * 
  * @author Sebastian Dass&eacute;
  *
  */
 public class AxisAlignedBoundingBox {
-	
+	/**
+	 * A dummy material for all bounding boxes.
+	 */
 	private static final Material material = new SingleColorMaterial(new SingleColorTexture(new Color(0, 0, 0)));
 	
+	/**
+	 * The default left bottom far point of this <code>AxisAlignedBox</code>.
+	 * Is part of the left, the back and the bottom plane.
+	 */
 	private final Point3 lbf;
+	/**
+	 * The default right upper near point of this <code>AxisAlignedBox</code>.
+	 * Is part of the top, the front and the right plane.
+	 */
 	private final Point3 run;
 	
 	private final Plane plane;
-	
 	private final Node top;
 	private final Node right;
 	private final Node front;
@@ -32,12 +43,17 @@ public class AxisAlignedBoundingBox {
 	private final Node bottom;
 	private final Node back;
 	
+	/**
+	 * Constructs a new <code>AxisAlignedBoundingBox</code> with the specified lbf and run.
+	 * 
+	 * @param lbf	The <em>left bottom far point</em> of the bounding box.
+	 * @param run	The <em>right upper near point</em> of the bounding box.
+	 */
 	public AxisAlignedBoundingBox(final Point3 lbf, final Point3 run) {
 		this.lbf = lbf;
 		this.run = run;
 		
 		plane = new Plane(material);
-		
 		top = new Node(plane, new Transform().translate(run));
 		right = new Node(plane, new Transform().translate(run).rotateZ(-Math.PI / 2.0));
 		front = new Node(plane, new Transform().translate(run).rotateZ(Math.PI).rotateX(Math.PI / 2.0));
@@ -46,6 +62,12 @@ public class AxisAlignedBoundingBox {
 		back = new Node(plane, new Transform().translate(lbf).rotateZ(Math.PI).rotateX(-Math.PI / 2.0));
 	}
 	
+	/**
+	 * Checks if this bounding box is hit by the specified ray.
+	 * 
+	 * @param ray	The ray for which the hit with this bounding box shall be tested. Must not be <code>null</code>.
+	 * @return		<code>true</code> if the bounding box was hit, otherwise <code>false</code>.
+	 */
 	public boolean isHit(final Ray ray) {
 		final LinkedList<Hit> hitsOnPlane = new LinkedList<Hit>();
 		final Hit rightHit = right.hit(ray);

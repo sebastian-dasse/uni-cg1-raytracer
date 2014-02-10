@@ -2,7 +2,8 @@ package raytracer.texture;
 
 import raytracer.Color;
 /**
- * This immutable class represents a color of the simple color texture. 
+ * This immutable class represents a texture showing a single color.
+ * 
  * @author Maxim Novichkov
  *
  */
@@ -12,8 +13,9 @@ public class SingleColorTexture implements Texture{
 	 */
 	private final Color color;
 	/**
-	 * Construct a texture with only one color.
-	 * @param color The specified color of this texture.
+	 * Constructs a new <code>SingleColorTexture</code> with the specified color.
+	 * 
+	 * @param color	The color of the texture.
 	 */
 	public SingleColorTexture(final Color color){
 		if (color == null) {
