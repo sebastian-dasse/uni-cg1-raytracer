@@ -2,6 +2,7 @@ package raytracer;
 
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
+import java.awt.image.Raster;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -56,9 +57,9 @@ public class Renderer {
 	 * @param recursion	The depth of recursion of the <code>Renderer</code>.
 	 */
 	public Renderer(final World world, final Camera cam, final Dimension size, final int recursion) {
-		if (world == null || cam == null || size == null) {
-			throw new IllegalArgumentException("The parameters must not be null.");
-		}
+//		if (world == null || cam == null || size == null) {
+//			throw new IllegalArgumentException("The parameters must not be null.");
+//		}
 		this.world = world;
 		this.cam = cam;
 		this.size = size;
@@ -94,6 +95,7 @@ public class Renderer {
 	 */
 	public BufferedImage render() {
 		final BufferedImage image = new BufferedImage(size.width, size.height, BufferedImage.TYPE_INT_RGB);
+		final Raster raster = image.getRaster();
 		
 		final int nThreads = Runtime.getRuntime().availableProcessors();
 		
@@ -112,7 +114,7 @@ public class Renderer {
 									size,
 									world,
 									cam, 
-									image, 
+									raster, 
 									recursion
 							),
 							progressMonitor

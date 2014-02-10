@@ -59,10 +59,10 @@ public class RenderTask implements Runnable {
 		this.image = parameterObject.image;
 		this.cam = parameterObject.cam;
 		this.world = parameterObject.world;
-		this.size = parameterObject.size;
+		this.size = parameterObject.screenSize;
 		this.recursion = parameterObject.recursion;
-		this.yStart = parameterObject.yStart;
-		this.yEnd = parameterObject.yEnd;
+		this.yStart = parameterObject.yStartOffset;
+		this.yEnd = parameterObject.yEndOffset;
 		this.progressMonitor = progressMonitor;
 	}
 	@Override
