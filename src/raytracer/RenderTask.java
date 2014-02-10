@@ -72,13 +72,19 @@ public class RenderTask implements Runnable {
 	 * enable various simultaneous threads.
 	 */
 	public void run() {
-		
 		final WritableRaster raster = image.getRaster();
 		final ColorModel colorModel = image.getColorModel();
 		for (int y = yStart; y < yEnd; y++) {
 			for (int x = 0; x < size.width; x++) {		
 				final Ray ray = cam.rayFor(size.width, size.height, x, size.height - y);
-				raster.setDataElements(x, y, Util.dataElementsFromColor(new Tracer(recursion).trace(ray, world), colorModel));
+				raster.setDataElements(
+						x,
+						y,
+						Util.dataElementsFromColor(
+								new Tracer(recursion).trace(ray, world), // Color value
+								colorModel
+						)
+				);
 			}
 			progressMonitor.showProgress(y);
 		}

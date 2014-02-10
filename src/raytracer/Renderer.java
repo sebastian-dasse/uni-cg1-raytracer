@@ -100,7 +100,7 @@ public class Renderer {
 		final ExecutorService executor = Executors.newFixedThreadPool(nThreads);
 		final int interval = nThreads;
 		
-		final ProgressMonitor progressMonitor = new ProgressMonitor(size.height, 5);
+		final ProgressMonitor progressMonitor = new ProgressMonitor("Rendering", size.height, 5);
 		
 		for (int y = 0; y < size.height; y+= interval) {
 			
