@@ -2,11 +2,13 @@ package raytracer;
 
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
+import java.awt.image.PixelGrabber;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 import raytracer.camera.Camera;
+import raytracer.model.RenderTaskParameter;
 
 /**
  * This class represents a renderer. It has a world, containing all the objects in a specific scene, a camera, a screen 
@@ -92,25 +94,42 @@ public class Renderer {
 	 * @return	A <code>BufferedImage</code> of a scene.
 	 */
 	public BufferedImage render() {
-		System.out.println("Rendering...");
 		final BufferedImage image = new BufferedImage(size.width, size.height, BufferedImage.TYPE_INT_RGB);
+//		PixelGrabber grabber = new PixelGrabber(image, 0, 0, size.width, size.height, true);
 		final int nThreads = Runtime.getRuntime().availableProcessors();
-		long startTime = System.currentTimeMillis();
+		
 		final ExecutorService executor = Executors.newFixedThreadPool(nThreads);
 		final int interval = nThreads;
+		
+		final ProgressMonitor progressMonitor = new ProgressMonitor("Rendering", size.height, 5);
+		
 		for (int y = 0; y < size.height; y+= interval) {
-			final Runnable worker = new Thread(new RenderTask(y, interval, size, world, cam, image, recursion));
+			
+			final Runnable worker = new Thread(
+					new RenderTask(
+							new RenderTaskParameter(
+									y,
+									y + interval,
+									size,
+									world,
+									cam, 
+									image, 
+									recursion
+							),
+							progressMonitor
+					)
+			);
+			
 			executor.execute(worker);
+		
 		}
+		
 		executor.shutdown();
 		try {
 			executor.awaitTermination(MAX_RENDER_TIME_MINUTES, TimeUnit.MINUTES);
 		} catch (InterruptedException e) {
 			System.err.println("Thread was interrupted.");
 		}
-		final long timeMillis = System.currentTimeMillis() - startTime;
-		final int timeSek = (int)(timeMillis / 1000);
-		System.out.printf("Done rendering after %02d min %02d sec %02d msec%n", timeSek / 60, timeSek % 60, timeMillis % 1000);
 		return image;
 	}
 	
