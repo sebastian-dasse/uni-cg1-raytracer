@@ -47,7 +47,7 @@ public class KnockKnockServer {
         }
 
         int portNumber = Integer.parseInt(args[0]);
-
+        System.out.println("Server running.");
         try ( 
             ServerSocket serverSocket = new ServerSocket(portNumber);
             Socket clientSocket = serverSocket.accept();
