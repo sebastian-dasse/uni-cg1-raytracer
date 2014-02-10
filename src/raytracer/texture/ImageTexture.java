@@ -25,7 +25,7 @@ public class ImageTexture extends AbstractImageTexture {
 	    final double[] RGBValues = imageRaster.getPixel(x, y, new double[3]);
 	    return new Color(RGBValues[0]/255, RGBValues[1]/255, RGBValues[2]/255);
 	}
-
+	
 	@Override
 	public Color getColor(final TexCoord2 textcoord) {
 		return getColor(textcoord.u, textcoord.v);

@@ -48,11 +48,11 @@ public class DemoSceneUE06 {
 		
 		
 		final Renderer[] tracers = new Renderer[]{
-				scene1(), 
+//				scene1(), 
 //				scene2(), 
 //				scene3(), 
 //				scene4(), 
-//				scene5()
+				scene5()
 		};
 		for (int i = 0; i < tracers.length; i++) {
 			ShowImage.from(tracers[i], 50 * i, 25 * i);
@@ -208,7 +208,6 @@ public class DemoSceneUE06 {
 		
 		
 		final Material earth = new LambertMaterial(new ImageTexture("textures/earthDay.jpg"));
-		
 		
 		
 		final World world = new World(new Color(0, 0, 0), new Color(0.3, 0.3, 0.3), Constants.INDEX_OF_REFRACTION_VACUUM);
