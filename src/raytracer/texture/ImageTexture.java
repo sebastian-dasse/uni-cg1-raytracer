@@ -2,17 +2,16 @@ package raytracer.texture;
 
 import raytracer.Color;
 /**
- *	This immutable class represents a concrete image texture. It 
- *  provides the texture data by loading a user specified file.
- *  
- *  @author Simon Lischka
+ * This immutable class represents an image texture. The image is loaded from a user specified file.
+ * 
+ * @author Simon Lischka
  */
 public class ImageTexture extends AbstractImageTexture {
 	
 	/**
-	 * Constructor of the texture. Loads file when instantiated.
+	 * Constructs a new <code>ImageTexture</code>. Loads the specified image file when instantiated.
 	 *  
-	 * @param path The path used to load the file used in the texture.
+	 * @param path	The path of the image. Must not be <code>null</code>.
 	 */
 	public ImageTexture(final String path){
 		super(path);

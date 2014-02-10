@@ -16,7 +16,7 @@ public interface Texture {
 	 * 
 	 * @param u	The u coordinate of the texture. Must be in the range [0, 1] to avoid errors.
 	 * @param v	The v coordinate of the texture. Must be in the range [0, 1] to avoid errors.
-	 * @return	The color.
+	 * @return	The <code>Color</code>.
 	 */
 	public Color getColor(final double u, final double v);
 
@@ -24,7 +24,7 @@ public interface Texture {
 	 * Calculates the color for the specified <code>TexCoord2</code>.
 	 * 
 	 * @param texcoord	The texture coordinates as <code>TexCoord2</code>.
-	 * @return			The color.
+	 * @return			The <code>Color</code>.
 	 */
 	public Color getColor(final TexCoord2 texcoord);
 }

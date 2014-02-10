@@ -9,9 +9,8 @@ import javax.imageio.ImageIO;
 
 import raytracer.Color;
 /**
- *	This abstract immutable class represents an image texture that
- *  provides the texture data by loading a user specified file.
- *
+ * This abstract immutable class represents an image texture. The image is loaded from a user specified file.
+ * 
  * @author Simon Lischka
  * @author Sebastian Dass&eacute;
  *
@@ -35,9 +34,9 @@ public abstract class AbstractImageTexture implements Texture {
 	protected final int heightMinus1;
 	
 	/**
-	 * Constructor of the texture. Loads file when instantiated. 
+	 * Constructs an <code>AbstractImageTexture</code>. Loads the specified image file when instantiated.
 	 * 
-	 * @param path The path used to load the file used in the texture
+	 * @param path	The path of the image. Must not be <code>null</code>.
 	 */
 	public AbstractImageTexture(final String path){
 		if (path == null) {
