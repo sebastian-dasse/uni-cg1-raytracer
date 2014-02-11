@@ -2,6 +2,13 @@ package raytracer;
 
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
+import java.awt.image.ColorModel;
+import java.awt.image.DataBuffer;
+import java.awt.image.DataBufferInt;
+import java.awt.image.PixelGrabber;
+import java.awt.image.Raster;
+import java.awt.image.SinglePixelPackedSampleModel;
+import java.awt.image.WritableRaster;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -94,7 +101,7 @@ public class Renderer {
 	 */
 	public BufferedImage render() {
 		final BufferedImage image = new BufferedImage(size.width, size.height, BufferedImage.TYPE_INT_RGB);
-//		PixelGrabber grabber = new PixelGrabber(image, 0, 0, size.width, size.height, true);
+		
 		final int nThreads = Runtime.getRuntime().availableProcessors();
 		
 		final ExecutorService executor = Executors.newFixedThreadPool(nThreads);
@@ -103,22 +110,11 @@ public class Renderer {
 		final ProgressMonitor progressMonitor = new ProgressMonitor("Rendering", size.height, 5);
 		
 		for (int y = 0; y < size.height; y+= interval) {
-			
-			final Runnable worker = new Thread(
-					new RenderTask(
-							new RenderTaskParameter(
-									y,
-									y + interval,
-									size,
-									world,
-									cam, 
-									image, 
-									recursion
-							),
-							progressMonitor
-					)
-			);
-			
+
+			final Runnable worker = new Thread(new RenderTask(
+					new RenderTaskParameter(y, y + interval, size, world, cam,
+							image, recursion), progressMonitor));
+
 			executor.execute(worker);
 		
 		}
@@ -129,7 +125,33 @@ public class Renderer {
 		} catch (InterruptedException e) {
 			System.err.println("Thread was interrupted.");
 		}
-		return image;
+		
+		final int[] pixels = new int[size.width * size.height]; 
+		// source, start width, start height, output array, line size begin, line size end
+		PixelGrabber grabber = new PixelGrabber(image, 0, 0, size.width / 2, size.height, pixels, 0, size.width);
+		try {
+			grabber.grabPixels();
+		} catch (InterruptedException e1) {
+			System.err.println("Error with your biatch");
+		}
+		System.out.println(pixels[1113]);
+		
+		final DataBufferInt dataBuffer = new DataBufferInt(pixels, size.width * size.height);
+		final int[] bitMask = new int[] {
+				0xff0000,
+				0xff00, 
+				0xff,
+				0xff000000
+		};
+		final SinglePixelPackedSampleModel sampleModel = new SinglePixelPackedSampleModel(
+				DataBuffer.TYPE_INT, size.width, size.height, bitMask);
+		
+		final WritableRaster raster = Raster.createWritableRaster(sampleModel, dataBuffer, null);
+		
+		final BufferedImage img = new BufferedImage(ColorModel.getRGBdefault(), raster, false, null);
+		
+		
+		return img;
 	}
 	
 	public Dimension getSize() {
