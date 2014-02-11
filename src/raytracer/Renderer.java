@@ -126,30 +126,52 @@ public class Renderer {
 			System.err.println("Thread was interrupted.");
 		}
 		
-		final int[] pixels = new int[size.width * size.height]; 
-		// source, start width, start height, output array, line size begin, line size end
-		PixelGrabber grabber = new PixelGrabber(image, 0, 0, size.width, size.height, pixels, 0, size.width);
+		final int numberOfFragments = 4;
+		
+		final int fragmentHeight = size.height / numberOfFragments;
+		
+		final int[] pixels1 = new int[size.width * fragmentHeight]; 
+		final int[] pixels2 = new int[size.width * fragmentHeight]; 
+		final int[] pixels3 = new int[size.width * fragmentHeight]; 
+		final int[] pixels4 = new int[size.width * fragmentHeight]; 
+
+		PixelGrabber grabber = new PixelGrabber(image, 0, 0, size.width, size.height, pixels1, 0, size.width);
+		
+		PixelGrabber grabber1 = new PixelGrabber(image, 0, 0, size.width, fragmentHeight, pixels1, 0, size.width);
+		PixelGrabber grabber2 = new PixelGrabber(image, 0, fragmentHeight * 2, size.width, fragmentHeight, pixels2, 0, size.width);
+		PixelGrabber grabber3 = new PixelGrabber(image, 0, fragmentHeight * 3, size.width, fragmentHeight, pixels3, 0, size.width);
+		PixelGrabber grabber4 = new PixelGrabber(image, 0, fragmentHeight * 4, size.width, fragmentHeight, pixels4, 0, size.width);
+		
 		try {
-			grabber.grabPixels();
+			grabber1.grabPixels();
+			grabber2.grabPixels();
+			grabber3.grabPixels();
+			grabber4.grabPixels();
 		} catch (InterruptedException e1) {
 			System.err.println("Error with your biatch");
 		}
-		System.out.println(pixels[1113]);
 		
-		final DataBufferInt dataBuffer = new DataBufferInt(pixels, size.width * size.height);
+		final int[] composedPixels = new int[size.width * size.height];
+		//void java.lang.System.arraycopy(Object src, int srcPos, Object dest, int destPos, int length)
+		System.arraycopy(pixels2, 0, composedPixels, 0, size.width * fragmentHeight);
+		System.arraycopy(pixels2, 0, composedPixels, fragmentHeight * size.width * 1, size.width * fragmentHeight);
+		System.arraycopy(pixels3, 0, composedPixels, fragmentHeight * size.width * 2, size.width * fragmentHeight);
+		System.arraycopy(pixels4, 0, composedPixels, fragmentHeight * size.width * 3, size.width * fragmentHeight);
+		
+		final DataBufferInt dataBuffer = new DataBufferInt(composedPixels, size.width * size.height);
+
 		final int[] bitMask = new int[] {
 				0xff0000,
 				0xff00, 
 				0xff,
 				0xff000000
 		};
+		
 		final SinglePixelPackedSampleModel sampleModel = new SinglePixelPackedSampleModel(
 				DataBuffer.TYPE_INT, size.width, size.height, bitMask);
-		
 		final WritableRaster raster = Raster.createWritableRaster(sampleModel, dataBuffer, null);
 		
 		final BufferedImage img = new BufferedImage(ColorModel.getRGBdefault(), raster, false, null);
-		
 		
 		return img;
 	}
