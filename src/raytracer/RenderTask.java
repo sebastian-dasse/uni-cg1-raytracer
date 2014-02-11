@@ -77,10 +77,7 @@ public class RenderTask implements Runnable {
 				raster.setDataElements(
 						x,
 						y,
-						Util.dataElementsFromColor(
-								new Tracer(recursion).trace(ray, world), // Color value
-								image.getColorModel()
-						)
+						new Tracer(recursion).trace(ray, world).createDataElements(image.getColorModel()) // Color value
 				);
 			}
 			progressMonitor.showProgress(y);

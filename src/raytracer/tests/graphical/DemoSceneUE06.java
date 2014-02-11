@@ -30,6 +30,7 @@ import raytracer.texture.Texture;
 import raytracer.ui.ShowImage;
 
 /**
+ * 
 * Generates and displays <code>Renderer</code> objects for demo scenes as demanded in task 6.
 * 
 * @author Maxim Novichkov
@@ -48,11 +49,11 @@ public class DemoSceneUE06 {
 		
 		
 		final Renderer[] tracers = new Renderer[]{
-//				scene1(), 
-//				scene2(), 
-//				scene3(), 
-//				scene4(), 
-				scene5()
+				scene1(), 
+				scene2(), 
+				scene3(), 
+				scene4(), 
+//				scene5()
 		};
 		for (int i = 0; i < tracers.length; i++) {
 			ShowImage.from(tracers[i], 50 * i, 25 * i);
@@ -468,8 +469,8 @@ public class DemoSceneUE06 {
 						new PointLight(new Color(0.3, 0.3, 0.3), new Point3(5, 5, 10), true), 
 						new DirectionalLight(new Color(0.1, 0.1, 0.1), new Vector3(1, -1, 0)));
 //		final Camera camera = new PerspectiveCamera(new Point3(4.5, 12, 4.5), new Vector3(0, -1, 0), new Vector3(0.1, 2, 0.1), Math.PI / 2.0);
-		final Camera camera = new PerspectiveCamera(new Point3(8, 6.5, 8), new Vector3(-1, -1.5, -1), new Vector3(0, 1, 0), Math.PI / 2.0);
-//		final Camera camera = new PerspectiveCamera(new Point3(8, 5, 8), new Vector3(-1, -1, -1), new Vector3(0, 1, 0), Math.PI / 2.0);
+//		final Camera camera = new PerspectiveCamera(new Point3(8, 6.5, 8), new Vector3(-1, -1.5, -1), new Vector3(0, 1, 0), Math.PI / 2.0);
+		final Camera camera = new PerspectiveCamera(new Point3(10, 5, 8), new Vector3(-1, -1, -1), new Vector3(0, 1, 0), Math.PI / 2.0);
 
 		return new Renderer(world, camera, 10);
 	}
