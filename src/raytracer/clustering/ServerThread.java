@@ -1,4 +1,4 @@
-package raytracer.multiserver;
+package raytracer.clustering;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,7 +7,7 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.concurrent.Callable;
 
-import raytracer.multiserver.enums.States;
+import raytracer.clustering.enums.States;
 
 public class ServerThread implements Callable<Object> {
 	private Socket socket;

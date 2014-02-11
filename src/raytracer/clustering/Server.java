@@ -1,10 +1,10 @@
-package raytracer.multiserver;
+package raytracer.clustering;
 
 import java.io.IOException;
 import java.net.ServerSocket;
 
-import raytracer.multiserver.enums.Config;
-import raytracer.multiserver.enums.ErrorMessage;
+import raytracer.clustering.enums.Config;
+import raytracer.clustering.enums.ErrorMessage;
 
 public class Server {
 	public static boolean start () {

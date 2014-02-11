@@ -1,4 +1,4 @@
-package raytracer.multiserver;
+package raytracer.clustering;
 
 import java.util.concurrent.Callable;
 

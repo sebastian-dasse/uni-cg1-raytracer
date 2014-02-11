@@ -1,4 +1,4 @@
-package raytracer.multiserver.enums;
+package raytracer.clustering.enums;
 
 public enum Config {
 	PORTNUMBER("4442"),

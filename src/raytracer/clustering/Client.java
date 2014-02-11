@@ -1,4 +1,4 @@
-package raytracer.multiserver;
+package raytracer.clustering;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,10 +7,10 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-import raytracer.multiserver.client.states.IState;
-import raytracer.multiserver.enums.Config;
-import raytracer.multiserver.enums.ErrorMessage;
-import raytracer.multiserver.enums.States;
+import raytracer.clustering.client.states.IState;
+import raytracer.clustering.enums.Config;
+import raytracer.clustering.enums.ErrorMessage;
+import raytracer.clustering.enums.States;
 
 public class Client {
 	private static IState currentState;

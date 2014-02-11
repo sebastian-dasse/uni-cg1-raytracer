@@ -128,7 +128,7 @@ public class Renderer {
 		
 		final int[] pixels = new int[size.width * size.height]; 
 		// source, start width, start height, output array, line size begin, line size end
-		PixelGrabber grabber = new PixelGrabber(image, 0, 0, size.width / 2, size.height, pixels, 0, size.width);
+		PixelGrabber grabber = new PixelGrabber(image, 0, 0, size.width, size.height, pixels, 0, size.width);
 		try {
 			grabber.grabPixels();
 		} catch (InterruptedException e1) {

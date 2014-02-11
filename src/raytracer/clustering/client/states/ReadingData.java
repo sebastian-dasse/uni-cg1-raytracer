@@ -1,11 +1,11 @@
-package raytracer.multiserver.server.states;
+package raytracer.clustering.client.states;
 
 import java.io.PrintWriter;
 
+import raytracer.clustering.Client;
+import raytracer.clustering.IState;
+import raytracer.clustering.enums.States;
 import raytracer.model.DataStore;
-import raytracer.multiserver.Client;
-import raytracer.multiserver.IState;
-import raytracer.multiserver.enums.States;
 
 public class ReadingData implements IState {
 	
@@ -28,7 +28,7 @@ public class ReadingData implements IState {
 			DataStore dataStore = new DataStore();
 	    
 		// if (success) {
-			Client.setState(new ClosingConnection(dataStore));
+			Client.setState(new ExecutingRender(dataStore));
 		// 	
 			
 	    // if (error) {

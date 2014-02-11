@@ -1,4 +1,4 @@
-package raytracer.multiserver.enums;
+package raytracer.clustering.enums;
 
 public enum States {
 	/*

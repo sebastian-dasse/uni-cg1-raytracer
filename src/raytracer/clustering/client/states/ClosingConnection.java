@@ -1,9 +1,9 @@
-package raytracer.multiserver.client.states;
+package raytracer.clustering.client.states;
 
 import java.io.PrintWriter;
 
-import raytracer.multiserver.IState;
-import raytracer.multiserver.enums.States;
+import raytracer.clustering.IState;
+import raytracer.clustering.enums.States;
 
 
 public class ClosingConnection implements IState {

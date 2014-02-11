@@ -1,8 +1,8 @@
-package raytracer.multiserver.server.states;
+package raytracer.clustering.server.states;
 
 import java.io.PrintWriter;
 
-import raytracer.multiserver.IState;
+import raytracer.clustering.IState;
 
 public class Error implements IState {
 	private String error;
