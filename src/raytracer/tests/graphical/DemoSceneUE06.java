@@ -143,7 +143,7 @@ public class DemoSceneUE06 {
 				new Node(
 						new Sphere(
 								new DayAndNightMaterial(
-										new LambertMaterial(dayTexture),
+										new LambertMaterial(dayTexture), 
 										new LambertMaterial(nightTexture)
 								)
 						), 
