@@ -138,9 +138,9 @@ public class Renderer {
 		PixelGrabber grabber = new PixelGrabber(image, 0, 0, size.width, size.height, pixels1, 0, size.width);
 		
 		PixelGrabber grabber1 = new PixelGrabber(image, 0, 0, size.width, fragmentHeight, pixels1, 0, size.width);
-		PixelGrabber grabber2 = new PixelGrabber(image, 0, fragmentHeight * 2, size.width, fragmentHeight, pixels2, 0, size.width);
-		PixelGrabber grabber3 = new PixelGrabber(image, 0, fragmentHeight * 3, size.width, fragmentHeight, pixels3, 0, size.width);
-		PixelGrabber grabber4 = new PixelGrabber(image, 0, fragmentHeight * 4, size.width, fragmentHeight, pixels4, 0, size.width);
+		PixelGrabber grabber2 = new PixelGrabber(image, 0, fragmentHeight, size.width, fragmentHeight, pixels2, 0, size.width);
+		PixelGrabber grabber3 = new PixelGrabber(image, 0, fragmentHeight * 2, size.width, fragmentHeight, pixels3, 0, size.width);
+		PixelGrabber grabber4 = new PixelGrabber(image, 0, fragmentHeight * 3, size.width, fragmentHeight, pixels4, 0, size.width);
 		
 		try {
 			grabber1.grabPixels();
@@ -153,7 +153,7 @@ public class Renderer {
 		
 		final int[] composedPixels = new int[size.width * size.height];
 		//void java.lang.System.arraycopy(Object src, int srcPos, Object dest, int destPos, int length)
-		System.arraycopy(pixels2, 0, composedPixels, 0, size.width * fragmentHeight);
+		System.arraycopy(pixels1, 0, composedPixels, 0, size.width * fragmentHeight);
 		System.arraycopy(pixels2, 0, composedPixels, fragmentHeight * size.width * 1, size.width * fragmentHeight);
 		System.arraycopy(pixels3, 0, composedPixels, fragmentHeight * size.width * 2, size.width * fragmentHeight);
 		System.arraycopy(pixels4, 0, composedPixels, fragmentHeight * size.width * 3, size.width * fragmentHeight);
