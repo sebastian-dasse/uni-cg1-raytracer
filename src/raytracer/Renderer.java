@@ -13,6 +13,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
+import javax.imageio.ImageIO;
+import javax.imageio.ImageReader;
+
 import raytracer.camera.Camera;
 import raytracer.model.RenderTaskParameter;
 
@@ -173,7 +176,15 @@ public class Renderer {
 		
 		final BufferedImage img = new BufferedImage(ColorModel.getRGBdefault(), raster, false, null);
 		
-		return img;
+		BufferedImage img1 = img.getSubimage(0, 0, size.width, fragmentHeight);
+		BufferedImage img2 = img.getSubimage(0, fragmentHeight, size.width, fragmentHeight);
+		BufferedImage img3 = img.getSubimage(0, fragmentHeight * 2, size.width, fragmentHeight);
+		BufferedImage img4 = img.getSubimage(0, fragmentHeight * 3, size.width, fragmentHeight);
+		final BufferedImage imgc = new BufferedImage(size.width, size.height, BufferedImage.TYPE_INT_ARGB);
+		imgc.setData(img2.getRaster().getParent());
+		
+		
+		return imgc;
 	}
 	
 	public Dimension getSize() {
