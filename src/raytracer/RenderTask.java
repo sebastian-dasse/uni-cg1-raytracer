@@ -28,9 +28,6 @@ public class RenderTask implements Runnable {
 	 * Reference to the camera used by the renderer
 	 */
 	private final Camera cam;
-
-	
-	private final BufferedImage image;
 	/**
 	 * The size of the canvas to be drawn to
 	 */
@@ -54,7 +51,6 @@ public class RenderTask implements Runnable {
 	private ProgressMonitor progressMonitor;
 	
 	public RenderTask(RenderTaskParameter parameterObject, ProgressMonitor progressMonitor) {
-		this.image = parameterObject.image;
 		this.cam = parameterObject.cam;
 		this.world = parameterObject.world;
 		this.size = parameterObject.screenSize;
@@ -77,10 +73,7 @@ public class RenderTask implements Runnable {
 				raster.setDataElements(
 						x,
 						y,
-						Util.dataElementsFromColor(
-								new Tracer(recursion).trace(ray, world), // Color value
-								image.getColorModel()
-						)
+						new Tracer(recursion).trace(ray, world).createDataElements(image.getColorModel()) // Color value
 				);
 			}
 			progressMonitor.showProgress(y);

@@ -14,32 +14,29 @@ public class RenderTaskParameter {
 	final public Dimension screenSize;
 	final public World world;
 	final public Camera cam;
-	final public BufferedImage image;
 	final public int recursion;
 	private LinkedList<RenderTaskParameter> children;
 	private int index;
 
 	public RenderTaskParameter(int yStartOffset, int yEndOffset, Dimension screenSize,
-			World world, Camera cam, BufferedImage image, int recursion) {
+			World world, Camera cam, int recursion) {
 		this.yStartOffset = yStartOffset;
 		this.yEndOffset = yEndOffset;
 		this.screenSize = screenSize;
 		this.world = world;
 		this.cam = cam;
-		this.image = image;
 		this.recursion = recursion;
 		this.children = new LinkedList<RenderTaskParameter>();
 		this.index = 0;
 	}
 	
 	public RenderTaskParameter(Dimension screenSize,
-			World world, Camera cam, BufferedImage image, int recursion) {
+			World world, Camera cam, int recursion) {
 		this.yStartOffset = 0;
 		this.yEndOffset = screenSize.height;
 		this.screenSize = screenSize;
 		this.world = world;
 		this.cam = cam;
-		this.image = image;
 		this.recursion = recursion;
 		this.children = new LinkedList<RenderTaskParameter>();
 		this.index = 0;
@@ -56,7 +53,7 @@ public class RenderTaskParameter {
 			children.add(new RenderTaskParameter(yStartOffset
 					+ (fragmentSize * i), yStartOffset
 					+ (fragmentSize * (i + 1) + compensation), screenSize,
-					world, cam, image, recursion));
+					world, cam, recursion));
 		}
 	}
 	
