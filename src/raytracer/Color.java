@@ -2,11 +2,16 @@ package raytracer;
 
 import static raytracer.math.MathUtil.isValid;
 
+import java.awt.image.ColorModel;
+
 /**
  * This immutable class represents a color in RGB color space.
  * <p>
  * A <code>Color</code> can be added to, subtracted from and multiplied with another one. Also a <code>Color</code> 
  * can be multiplied with a scalar. Color values should be in a range from 0 to 1.
+ * <p>
+ * There are also utility methods for normalizing a color and for creating a data element from a color for the 
+ * <code>Raster</code> used in the <code>BufferedImage</code>.
  * 
  * @author Sebastian Dass&eacute;
  *
@@ -100,6 +105,41 @@ public class Color{
 		return new Color(r * v, 
 						 g * v, 
 						 b * v);
+	}
+	
+	/**
+	 * Returns a data element array representation of this color in the specified <code>ColorModel</code>.
+	 * 
+	 * @param colorModel	The specified <code>ColorModel</code>.
+	 * @return				An Object which is a primitive data array representation of a color.
+	 */
+	public Object createDataElements(final ColorModel colorModel) {
+		return colorModel.getDataElements(new float[] {
+					createNormalizedColorComponent(r),
+					createNormalizedColorComponent(g),
+					createNormalizedColorComponent(b)
+				}, 0, null);
+	}
+	
+	/**
+	 * Converts a color component from a specified double value to a normalized float value between 0 and 1 (including).
+	 * 
+	 * @param colorComponent	The double value to be normalized.
+	 * @return					The normalized float value between 0 and 1 (including).
+	 */
+	public static float createNormalizedColorComponent(double colorComponent) {
+		return (colorComponent > 1) ?  1 : (float) colorComponent;
+	}
+	
+	/**
+	 * Returns the normalized version of this color with values between 0 and 1.
+	 * 
+	 * @return	The normalized color.
+	 */
+	public Color normalized() {
+		return new Color(createNormalizedColorComponent(r), 
+						 createNormalizedColorComponent(g), 
+						 createNormalizedColorComponent(b));
 	}
 	
 	@Override
