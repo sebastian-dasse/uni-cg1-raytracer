@@ -50,7 +50,7 @@ public class RenderTaskParameter {
 	}
 	
 	public void splitBy(int frags) {
-	    int fragmentSize = yEndOffset / frags;
+	    final int fragmentSize = yEndOffset / frags;
 		final int remainder = yEndOffset % frags;
 		int compensation = 0;
 		for (int i = 0; i < frags; i++) {
@@ -73,7 +73,7 @@ public class RenderTaskParameter {
 	}
 	
 	public Collection<RenderTaskParameter> getAllChildren() {
-		LinkedList<RenderTaskParameter> retrievedChildren = new LinkedList<RenderTaskParameter>();
+		final LinkedList<RenderTaskParameter> retrievedChildren = new LinkedList<RenderTaskParameter>();
 		while (hasNextChild()) {
 			RenderTaskParameter child = getNextChild();
 			if (child.hasChild()) {
@@ -81,6 +81,14 @@ public class RenderTaskParameter {
 			} else {
 				retrievedChildren.add(child);
 			}
+		}
+		return retrievedChildren;
+	}
+	
+	public Collection<RenderTaskParameter> getChildren() {
+		final LinkedList<RenderTaskParameter> retrievedChildren = new LinkedList<RenderTaskParameter>();
+		while (hasNextChild()) {
+			retrievedChildren.add(getNextChild());
 		}
 		return retrievedChildren;
 	}
