@@ -33,20 +33,13 @@ public class RenderTaskParameter {
 	}
 	
 	public void split() {
-		children.clear();
-		children.add(new RenderTaskParameter(yStartOffset, yEndOffset / 2, screenSize, world, cam, image, recursion));
-		children.add(new RenderTaskParameter((yEndOffset / 2) + 1, yEndOffset, screenSize, world, cam, image, recursion));
+		splitBy(2);
 	}
 	
 	public void splitBy(int frags) {
-		if (frags < 3) {
-			throw new IllegalArgumentException("Specify a frag number bigger than 3 or refrain to the split() method.");
-		}
-		
 	    int fragmentSize = yEndOffset / frags;
 		final int remainder = yEndOffset % frags;
 		int compensation = 0;
-		
 		for (int i = 0; i < frags; i++) {
 			if (i == frags - 1) {
 				compensation = remainder;
@@ -84,10 +77,10 @@ public class RenderTaskParameter {
 	}
 	
 	public boolean hasNextChild() {
-		System.out.println(children.size() + ">" + index);
-		return children.size() > index;
+		final boolean hasNextChild = children.size() > index;
+		if (!hasNextChild) {
+			index = 0;
+		}
+		return hasNextChild;
 	}
-	
-	
-	
 }
