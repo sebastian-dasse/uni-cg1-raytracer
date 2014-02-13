@@ -45,10 +45,6 @@ public class RenderTaskParameter {
 		this.index = 0;
 	}
 	
-	public void split() {
-		splitBy(2);
-	}
-	
 	public void splitBy(int frags) {
 	    final int fragmentSize = yEndOffset / frags;
 		final int remainder = yEndOffset % frags;
@@ -62,6 +58,10 @@ public class RenderTaskParameter {
 					+ (fragmentSize * (i + 1) + compensation), screenSize,
 					world, cam, image, recursion));
 		}
+	}
+	
+	public void split() {
+		splitBy(2);
 	}
 	
 	public RenderTaskParameter getNextChild() {
