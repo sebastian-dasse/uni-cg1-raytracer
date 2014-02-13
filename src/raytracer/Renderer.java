@@ -107,12 +107,12 @@ public class Renderer {
 		
 		final int nThreads = Runtime.getRuntime().availableProcessors();
 		
-		final ExecutorService executor = Executors.newFixedThreadPool(nThreads * 20);
+		final ExecutorService executor = Executors.newFixedThreadPool(nThreads);
 		
 		final ProgressMonitor progressMonitor = new ProgressMonitor("Rendering", size.height, 5);
 		
 		final RenderTaskParameter taskPar = new RenderTaskParameter(0, size.height, size, world, cam, image, recursion);
-		taskPar.splitBy(nThreads * 20);
+		taskPar.splitBy(nThreads);
 		
 		while (taskPar.hasNextChild()) {
 			final Runnable worker = new Thread(new RenderTask(taskPar.getNextChild(), progressMonitor));
@@ -120,6 +120,7 @@ public class Renderer {
 		}
 		
 		executor.shutdown();
+		
 		try {
 			executor.awaitTermination(MAX_RENDER_TIME_MINUTES, TimeUnit.MINUTES);
 		} catch (InterruptedException e) {
