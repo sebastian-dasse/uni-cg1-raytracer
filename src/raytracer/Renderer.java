@@ -107,20 +107,30 @@ public class Renderer {
 		
 		final int nThreads = Runtime.getRuntime().availableProcessors();
 		
-		final ExecutorService executor = Executors.newFixedThreadPool(nThreads);
-		final int interval = nThreads;
+		final ExecutorService executor = Executors.newFixedThreadPool(nThreads * 20);
+//		final int interval = nThreads;
 		
 		final ProgressMonitor progressMonitor = new ProgressMonitor("Rendering", size.height, 5);
 		
-		for (int y = 0; y < size.height; y+= interval) {
-
-			final Runnable worker = new Thread(new RenderTask(
-					new RenderTaskParameter(y, y + interval, size, world, cam,
-							image, recursion), progressMonitor));
-
-			executor.execute(worker);
+		final RenderTaskParameter taskPar = new RenderTaskParameter(0, size.height, size, world, cam, image, recursion);
+		taskPar.splitBy(nThreads * 20);
 		
+		for (RenderTaskParameter par : taskPar.getAllChildren()) {
+			final Runnable worker = new Thread(new RenderTask(par, progressMonitor));
+			System.out.println(par.yStartOffset + ">" + par.yEndOffset);
+			executor.execute(worker);
 		}
+		
+//		
+//		for (int y = 0; y < size.height; y+= interval) {
+//
+//			final Runnable worker = new Thread(new RenderTask(
+//					new RenderTaskParameter(y, y + interval, size, world, cam,
+//							image, recursion), progressMonitor));
+//
+//			executor.execute(worker);
+//		
+//		}
 		
 		executor.shutdown();
 		try {

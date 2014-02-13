@@ -29,18 +29,13 @@ public class RenderTaskParameter {
 		this.image = image;
 		this.recursion = recursion;
 		this.children = new LinkedList<RenderTaskParameter>();
-		this.index = -1;
+		this.index = 0;
 	}
 	
 	public void split() {
 		children.clear();
 		children.add(new RenderTaskParameter(yStartOffset, yEndOffset / 2, screenSize, world, cam, image, recursion));
 		children.add(new RenderTaskParameter((yEndOffset / 2) + 1, yEndOffset, screenSize, world, cam, image, recursion));
-	}
-	
-	public static void main (String[] args) {
-		System.out.println(321 / 4);
-		System.out.println(321 % 4);
 	}
 	
 	public void splitBy(int frags) {
@@ -50,13 +45,16 @@ public class RenderTaskParameter {
 		
 	    int fragmentSize = yEndOffset / frags;
 		final int remainder = yEndOffset % frags;
+		int compensation = 0;
 		
 		for (int i = 0; i < frags; i++) {
 			if (i == frags - 1) {
-				fragmentSize += remainder * frags;
+				compensation = remainder;
 			}
-			children.add(new RenderTaskParameter(yStartOffset + (fragmentSize * i), yStartOffset + (fragmentSize * (i + 1)),
-					screenSize, world, cam, image, recursion));
+			children.add(new RenderTaskParameter(yStartOffset
+					+ (fragmentSize * i), yStartOffset
+					+ (fragmentSize * (i + 1) + compensation), screenSize,
+					world, cam, image, recursion));
 		}
 	}
 	
@@ -86,6 +84,7 @@ public class RenderTaskParameter {
 	}
 	
 	public boolean hasNextChild() {
+		System.out.println(children.size() + ">" + index);
 		return children.size() > index;
 	}
 	
