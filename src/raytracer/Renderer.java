@@ -9,12 +9,13 @@ import java.awt.image.PixelGrabber;
 import java.awt.image.Raster;
 import java.awt.image.SinglePixelPackedSampleModel;
 import java.awt.image.WritableRaster;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
-
-import javax.imageio.ImageIO;
-import javax.imageio.ImageReader;
+import java.util.concurrent.Future;
 
 import raytracer.camera.Camera;
 import raytracer.model.RenderTaskParameter;
@@ -111,22 +112,33 @@ public class Renderer {
 		
 		final ProgressMonitor progressMonitor = new ProgressMonitor("Rendering", size.height, 5);
 		
-		final RenderTaskParameter taskPar = new RenderTaskParameter(0, size.height, size, world, cam, image, recursion);
+		final RenderTaskParameter taskPar = new RenderTaskParameter(0, size.height, size, world, cam, recursion);
 		taskPar.splitBy(nThreads);
 		
+		final List<Future<Object>> renderList = new ArrayList<Future<Object>>();
+		
 		while (taskPar.hasNextChild()) {
-			final Runnable worker = new Thread(new RenderTask(taskPar.getNextChild(), progressMonitor));
-			executor.execute(worker);
+			final Callable<Object> renderTask = new RenderTask(taskPar.getNextChild(), progressMonitor);
+			Future<Object> executedTask = executor.submit(renderTask);  
+			renderList.add(executedTask);
 		}
-		
+
+		for (Future<Object> future : renderList) {
+			try {
+				future.get();
+			} catch (InterruptedException | ExecutionException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		executor.shutdown();
-		
-		try {
-			executor.awaitTermination(MAX_RENDER_TIME_MINUTES, TimeUnit.MINUTES);
-		} catch (InterruptedException e) {
-			System.err.println("Thread was interrupted.");
-		}
-		
+//		
+//		try {
+//			executor.awaitTermination(MAX_RENDER_TIME_MINUTES, TimeUnit.MINUTES);
+//		} catch (InterruptedException e) {
+//			System.err.println("Thread was interrupted.");
+//		}
+//		
 		final int numberOfFragments = 4;
 		
 		final int fragmentHeight = size.height / numberOfFragments;

@@ -1,8 +1,13 @@
 package raytracer;
 
 import java.awt.Dimension;
-import java.awt.image.BufferedImage;
+import java.awt.image.ColorModel;
+import java.awt.image.DataBuffer;
+import java.awt.image.DataBufferInt;
+import java.awt.image.Raster;
+import java.awt.image.SinglePixelPackedSampleModel;
 import java.awt.image.WritableRaster;
+import java.util.concurrent.Callable;
 
 import raytracer.camera.Camera;
 import raytracer.model.RenderTaskParameter;
@@ -19,7 +24,7 @@ import raytracer.model.RenderTaskParameter;
  * @author Simon Lischka
  *
  */
-public class RenderTask implements Runnable {
+public class RenderTask implements Callable<Object> {
 	/**
 	 * Reference to the world used by the renderer
 	 */
@@ -65,18 +70,29 @@ public class RenderTask implements Runnable {
 	 * The method renders the x-Axis completely, only the y-Axis is fragmented to
 	 * enable various simultaneous threads.
 	 */
-	public void run() {
-		final WritableRaster raster = image.getRaster();
+	public Object call() throws Exception {
+		final int[] composedPixels = new int[size.width * size.height];
+		final DataBufferInt dataBuffer = new DataBufferInt(composedPixels, size.width * size.height);
+		final int[] bitMask = new int[] {
+				0xff0000,
+				0xff00, 
+				0xff,
+				0xff000000
+		};
+		final SinglePixelPackedSampleModel sampleModel = new SinglePixelPackedSampleModel(
+				DataBuffer.TYPE_INT, size.width, size.height, bitMask);
+		final WritableRaster raster = Raster.createWritableRaster(sampleModel, dataBuffer, null);
 		for (int y = yStart; y < yEnd; y++) {
 			for (int x = 0; x < size.width; x++) {		
 				final Ray ray = cam.rayFor(size.width, size.height, x, size.height - y);
-				raster.setDataElements(
-						x,
-						y,
-						new Tracer(recursion).trace(ray, world).createDataElements(image.getColorModel()) // Color value
-				);
+//				raster.setDataElements(
+//						x,
+//						y,
+//						new Tracer(recursion).trace(ray, world).createDataElements(ColorModel.getRGBdefault()) // Color value
+//				);
 			}
 			progressMonitor.showProgress(y);
 		}
+		return raster;
 	}
 }
