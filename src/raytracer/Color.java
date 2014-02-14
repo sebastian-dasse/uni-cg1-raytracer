@@ -131,6 +131,11 @@ public class Color{
 		return (colorComponent > 1) ?  1 : (float) colorComponent;
 	}
 	
+	public static int toInt(double colorComponent) {
+		return (int) Math.round(colorComponent * 255);
+	}
+	
+
 	/**
 	 * Returns the normalized version of this color with values between 0 and 1.
 	 * 

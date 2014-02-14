@@ -71,21 +71,25 @@ public class RenderTask implements Callable<Object> {
 	 * enable various simultaneous threads.
 	 */
 	public Object call() throws Exception {
-		final int[] composedPixels = new int[size.width * size.height];
-		final DataBufferInt dataBuffer = new DataBufferInt(composedPixels, size.width * size.height);
-		final int[] bitMask = new int[] {
-				0xff0000,
-				0xff00, 
-				0xff,
-				0xff000000
-		};
-		final SinglePixelPackedSampleModel sampleModel = new SinglePixelPackedSampleModel(
-				DataBuffer.TYPE_INT, size.width, size.height, bitMask);
-		final WritableRaster raster = Raster.createWritableRaster(sampleModel, dataBuffer, null);
+		final int[] renderedPixels = new int[size.width * size.height];
+//		final DataBufferInt dataBuffer = new DataBufferInt(composedPixels, size.width * size.height);
+//		final int[] bitMask = new int[] {
+//				0xff0000,
+//				0xff00, 
+//				0xff,
+//				0xff000000
+//		};
+//		final SinglePixelPackedSampleModel sampleModel = new SinglePixelPackedSampleModel(
+//				DataBuffer.TYPE_INT, size.width, size.height, bitMask);
+//		
+//		final WritableRaster raster = Raster.createWritableRaster(sampleModel, dataBuffer, null);
 		for (int y = yStart; y < yEnd; y++) {
 			for (int x = 0; x < size.width; x++) {		
 				final Ray ray = cam.rayFor(size.width, size.height, x, size.height - y);
-//				raster.setDataElements(
+				final Color renderedColor = new Tracer(recursion).trace(ray, world).normalized();
+				int c = (Color.toInt(renderedColor.r) << 16) | (Color.toInt(renderedColor.g) << 8) | Color.toInt(renderedColor.b);
+				renderedPixels[x*y] = c;
+				//				raster.setDataElements(
 //						x,
 //						y,
 //						new Tracer(recursion).trace(ray, world).createDataElements(ColorModel.getRGBdefault()) // Color value
@@ -93,6 +97,6 @@ public class RenderTask implements Callable<Object> {
 			}
 			progressMonitor.showProgress(y);
 		}
-		return raster;
+		return renderedPixels;
 	}
 }
