@@ -112,26 +112,31 @@ public class Renderer {
 		
 		final ProgressMonitor progressMonitor = new ProgressMonitor("Rendering", size.height, 5);
 		
-		final RenderTaskParameter taskPar = new RenderTaskParameter(0, size.height, size, world, cam, recursion);
-		taskPar.splitBy(nThreads);
+		final RenderTaskParameter parameter = new RenderTaskParameter(0, size.height, size, world, cam, recursion);
+		parameter.splitBy(nThreads);
 		
 		final List<Future<Object>> renderList = new ArrayList<Future<Object>>();
 		
-		while (taskPar.hasNextChild()) {
-			final Callable<Object> renderTask = new RenderTask(taskPar.getNextChild(), progressMonitor);
+		while (parameter.hasNextChild()) {
+			final Callable<Object> renderTask = new RenderTask(parameter.getNextChild(), progressMonitor);
 			Future<Object> executedTask = executor.submit(renderTask);  
 			renderList.add(executedTask);
 		}
 
 		for (Future<Object> future : renderList) {
 			try {
-				future.get();
+				int[] renderedPixels = (int[]) future.get();
+				final DataBufferInt dataBuffer = new DataBufferInt(renderedPixels, size.width * size.height);
+				dataBuffer.getData();
 			} catch (InterruptedException | ExecutionException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 		executor.shutdown();
+		
+		
+		
 //		
 //		try {
 //			executor.awaitTermination(MAX_RENDER_TIME_MINUTES, TimeUnit.MINUTES);
